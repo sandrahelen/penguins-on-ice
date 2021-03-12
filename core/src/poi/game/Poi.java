@@ -13,7 +13,7 @@ public class Poi extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		img = new Texture("p1-skli-bak.png");
 	}
 
 	@Override
