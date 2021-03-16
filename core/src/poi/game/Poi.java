@@ -28,13 +28,13 @@ public class Poi extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		//batch.draw(img, 0, 0);
-		//view.render(batch);
+		view.render(batch);
 
-		batch.draw(playButton, 50, 50);
+		//batch.draw(playButton, 50, 50);
 		batch.end();
 		//view.render(dt);
 	}
