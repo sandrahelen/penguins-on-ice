@@ -10,23 +10,20 @@ public class Player extends PenguinTemplate {
 
     private int MOVEMENT = 0;
 
-
-    private SpriteAnimation Animation;
+    /*
+    private SpriteAnimation animation;
     private Texture textures;
+     */
     private Rectangle bounds;
 
-    protected Player(float x, float y) {
-        super(x, y);
+    public Player(float x, float y, String texture, int rows, int columns) {
+        super(x, y, texture, rows, columns);
+        //animation = new Animation(textures, rows, columns);
     }
 
     @Override
     public void update(float dt) {
-
-    }
-
-    @Override
-    public Texture getTextureSheet() {
-        return null;
+        animation.update(dt);
     }
 
     @Override

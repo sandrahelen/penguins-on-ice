@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Poi extends ApplicationAdapter {
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
+
 	SpriteBatch batch;
 	Texture img;
 	
