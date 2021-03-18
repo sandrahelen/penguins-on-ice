@@ -6,24 +6,32 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+
 import poi.game.controllers.MenuController;
 import poi.game.views.MenuView;
+import poi.game.views.View;
 
 public class Poi extends ApplicationAdapter {
+
 	private SpriteBatch batch;
 	//Texture img;
-	private MenuView view;
+	private View view;
 	private Texture playButton;
+	private MenuController controller;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		view = new MenuView();
-		view.create();
+		controller = new MenuController();
+
+		//view = new MenuView();
+		//view.create();
 		//img = new Texture("badlogic.jpg");
 		//MenuController menuController = new MenuController();
 		//menuController.navigateToView("MENU");
-		playButton = new Texture("button.png");
+		//playButton = new Texture("button.png");
+		Gdx.app.log("Poi Create", "Poi created");
+
 	}
 
 	@Override
@@ -31,8 +39,11 @@ public class Poi extends ApplicationAdapter {
 		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+		Gdx.app.log("Poi render", "batch begin");
+		controller.navigateToView("MENU", batch);
+		Gdx.app.log("Poi render", "after navigate");
 		//batch.draw(img, 0, 0);
-		view.render(batch);
+		//view.render(batch);	// MenuView
 
 		//batch.draw(playButton, 50, 50);
 		batch.end();
@@ -43,6 +54,10 @@ public class Poi extends ApplicationAdapter {
 	public void dispose () {
 		/*batch.dispose();
 		img.dispose();*/
-		view.dispose();
+		//view.dispose();
 	}
+
+	/*public void setView(View view) {
+		this.view = view;
+	}*/
 }
