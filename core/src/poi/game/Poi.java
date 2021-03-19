@@ -17,12 +17,12 @@ public class Poi extends ApplicationAdapter {
 	//Texture img;
 	private View view;
 	private Texture playButton;
-	private MenuController controller;
+	private MenuController controller = new MenuController();
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		controller = new MenuController();
+		//controller = new MenuController();
 
 		//view = new MenuView();
 		//view.create();
@@ -30,7 +30,7 @@ public class Poi extends ApplicationAdapter {
 		//MenuController menuController = new MenuController();
 		//menuController.navigateToView("MENU");
 		//playButton = new Texture("button.png");
-		Gdx.app.log("Poi Create", "Poi created");
+		//Gdx.app.log("Poi Create", "Poi created");
 
 	}
 
@@ -39,9 +39,12 @@ public class Poi extends ApplicationAdapter {
 		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		Gdx.app.log("Poi render", "batch begin");
-		controller.navigateToView("MENU", batch);
-		Gdx.app.log("Poi render", "after navigate");
+		//Gdx.app.log("Poi render", "batch begin");
+		//controller.navigateToView("MENU", batch); // Går alltid til menu..
+		Gdx.app.log("Poi", "Destination: " + controller.getDestination());
+
+		controller.navigateToView(batch);
+		//Gdx.app.log("Poi render", "after navigate");
 		//batch.draw(img, 0, 0);
 		//view.render(batch);	// MenuView
 

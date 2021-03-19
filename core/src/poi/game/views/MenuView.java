@@ -20,6 +20,7 @@ public class MenuView implements ViewFactory {
     private Rectangle boundsPlay;
     private Rectangle boundsHighscore;
     private Rectangle boundsSettings;
+    private String destination;
     //private Vector2 position;
 
     public void create() {
@@ -32,36 +33,43 @@ public class MenuView implements ViewFactory {
         boundsPlay = new Rectangle(50, 50, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsHighscore = new Rectangle(50, 150, buttonHighscore.getWidth(), buttonHighscore.getHeight());
         boundsSettings = new Rectangle(50, 250, buttonSettings.getWidth(), buttonSettings.getHeight());
-
     }
 
     @Override
     public void render(SpriteBatch sb) { // sb virker ikke
-        Gdx.app.log("MenuView render", "render start");
+        Gdx.app.log("MenuView", "render");
+
         text.setColor(0,0,0,1);
         text.draw(sb, "HEI", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/3);
-        //sb.draw(buttonPlay, boundsPlay.x,Gdx.graphics.getHeight() - boundsPlay.y - buttonPlay.getHeight());
-        //sb.draw(buttonHighscore, boundsHighscore.x,Gdx.graphics.getHeight() - boundsHighscore.y - buttonHighscore.getHeight());
-        //sb.draw(buttonSettings, boundsSettings.x,Gdx.graphics.getHeight() - boundsSettings.y - buttonSettings.getHeight());
-        Gdx.app.log("MenuController render", "After draw buttons");
+        sb.draw(buttonPlay, boundsPlay.x,Gdx.graphics.getHeight() - boundsPlay.y - buttonPlay.getHeight());
+        sb.draw(buttonHighscore, boundsHighscore.x,Gdx.graphics.getHeight() - boundsHighscore.y - buttonHighscore.getHeight());
+        sb.draw(buttonSettings, boundsSettings.x,Gdx.graphics.getHeight() - boundsSettings.y - buttonSettings.getHeight());
+        //Gdx.app.log("MenuController render", "After draw buttons");
 
         //text.draw(sb, "MENU", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
         //text.draw(sb, "Bounds (" + bounds.x + ", " + bounds.y + ")", Gdx.graphics.getWidth()*2/3,Gdx.graphics.getHeight()/2);
-        if (Gdx.input.isTouched()) {
+        if (Gdx.input.justTouched()) {
 
             //text.draw(sb, "Trykket (" + Gdx.input.getX() + ", " + Gdx.input.getY() + ")" , Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2);
             if (boundsPlay.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 text.draw(sb, "Play", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/3);
-                controller.navigateToView("GAME", sb);
+                //controller.navigateToView("GAME", sb);
+                controller.updateDestination("GAME");
+                controller.navigateToView(sb);
+                controller.changeView("GAME", sb);
+                //destination = "GAME";
             }
             else if (boundsHighscore.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 text.draw(sb, "Highscore", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/3);
+                //controller.navigateToView("HIGHSCORE", sb);
+                controller.updateDestination("HIGHSCORE");
             }
             else if (boundsSettings.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 text.draw(sb, "Settings", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/3);
             }
 
         }
+        //controller.navigateToView(destination, sb);
         //update(Gdx.graphics.getDeltaTime());
 
     }
@@ -73,6 +81,9 @@ public class MenuView implements ViewFactory {
     }
 
     public void dispose() {
-
+        buttonPlay.dispose();
+        buttonHighscore.dispose();
+        buttonSettings.dispose();
+        text.dispose();
     }
 }
