@@ -1,6 +1,7 @@
 package poi.game.models.templates;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import poi.game.models.entityComponents.Sprite;
@@ -15,20 +16,29 @@ import poi.game.models.entityComponents.SpriteAnimation;
 public abstract class PenguinTemplate{
         protected Vector2 position;
         protected Vector2 velocity;
-        protected Texture textures;
+        protected Texture texture;
         protected SpriteAnimation animation;
+        protected int rows, columns;
+        protected Sprite sprite;
 
         protected PenguinTemplate(float x, float y, String textures, int rows, int columns) {
                 this.position = new Vector2(x, y);
-                this.textures = new Texture(textures);
-                animation = new SpriteAnimation(this.textures, rows, columns);
+                this.texture = new Texture(textures);
+                this.sprite = new Sprite(this.texture);
+                this.rows = rows;
+                this.columns = columns;
+                //animation = new SpriteAnimation(this.texture, rows, columns);
         }
 
         public abstract void update(float dt);
         public abstract Vector2 setVelocity();
 
-        public Texture getTextureSheet(){
-                return this.textures;
+        /*public Texture getTexture(){
+                return this.texture;
+        }*/
+
+        public Sprite getSprite() {
+                return this.sprite;
         }
 
         public Vector2 getPosition() {

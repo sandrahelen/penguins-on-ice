@@ -10,10 +10,6 @@ public class Player extends PenguinTemplate {
 
     private int MOVEMENT = 0;
 
-    /*
-    private SpriteAnimation animation;
-    private Texture textures;
-     */
     private Rectangle bounds;
 
     public Player(float x, float y, String texture, int rows, int columns) {
@@ -22,9 +18,11 @@ public class Player extends PenguinTemplate {
     }
 
     @Override
-    public void update(float dt) {
+    /*public void update(float dt) {
         animation.update(dt);
     }
+    */
+    public void update(float dt) {}
 
     @Override
     public Vector2 setVelocity() {
