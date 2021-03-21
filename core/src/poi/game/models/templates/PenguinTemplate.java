@@ -1,11 +1,11 @@
 package poi.game.models.templates;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import poi.game.models.entityComponents.Sprite;
-import poi.game.models.entityComponents.SpriteAnimation;
+
 //position
 //Velocity
 //Sprite
@@ -17,28 +17,33 @@ public abstract class PenguinTemplate{
         protected Vector2 position;
         protected Vector2 velocity;
         protected Texture texture;
-        protected SpriteAnimation animation;
         protected int rows, columns;
-        protected Sprite sprite;
+        protected float stateTime;
 
         protected PenguinTemplate(float x, float y, String textures, int rows, int columns) {
                 this.position = new Vector2(x, y);
+                this.velocity = new Vector2(0,0);
                 this.texture = new Texture(textures);
-                this.sprite = new Sprite(this.texture);
                 this.rows = rows;
                 this.columns = columns;
-                //animation = new SpriteAnimation(this.texture, rows, columns);
+                this.stateTime = 0f;
         }
 
         public abstract void update(float dt);
-        public abstract Vector2 setVelocity();
+        public abstract void setVelocity();
+        public abstract Animation<TextureRegion> getAnimation();
+        public abstract void checkBorder();
 
-        /*public Texture getTexture(){
+        public Texture getTexture(){
                 return this.texture;
-        }*/
+        }
 
-        public Sprite getSprite() {
-                return this.sprite;
+        public void setStateTime(float time) {
+                this.stateTime += time;
+        }
+
+        public float getStateTime() {
+                return this.stateTime;
         }
 
         public Vector2 getPosition() {
@@ -52,5 +57,11 @@ public abstract class PenguinTemplate{
         public void setPosition(float x, float y) {
                 this.position.x = x;
                 this.position.y = y;
+        }
+
+        //Setup for sprite and frames
+        public TextureRegion setupSprite() {
+                this.setStateTime(Gdx.graphics.getDeltaTime());
+                return this.getAnimation().getKeyFrame(this.getStateTime(), true);
         }
 }

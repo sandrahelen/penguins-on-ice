@@ -3,12 +3,8 @@ package poi.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.utils.Array;
-import poi.game.models.entities.Player;
 import poi.game.views.GameView;
 
 public class Poi extends ApplicationAdapter {
@@ -17,24 +13,19 @@ public class Poi extends ApplicationAdapter {
 
 	private SpriteBatch batch;
 	private GameView gv;
-	//private Array<TextureRegion> currentFrames = new Array<TextureRegion>();
 	private BitmapFont text;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		gv = new GameView();
-		//text = new BitmapFont();
 		//gv.create();
-
-
-		//img = new Texture("p1-skli-bak.png");
 
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(220/255f, 243/255f, 255/255f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//batch.begin();
 		//text.draw(batch, "Play", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
@@ -48,6 +39,6 @@ public class Poi extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		//img.dispose();
+		gv.dispose();
 	}
 }
