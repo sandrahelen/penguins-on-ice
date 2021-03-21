@@ -1,4 +1,5 @@
 package poi.game.models.entityComponents;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,6 +10,7 @@ public class SpriteAnimation {
     private float currentFrameTime;
     private int frameCount; //antall frames
     private int frame; // current frame
+    private float stateTime;
 
     public SpriteAnimation(Texture texture, int rows, int columns) {
         //sheet = new Texture("heliAnim.png"); Definer i Player!
@@ -18,6 +20,7 @@ public class SpriteAnimation {
         this.FRAME_COL = FRAME_COL;*/
         //this.frameCount = frameCount;
         //this.maxFrameTime = maxFrameTime; //0.5f
+        this.stateTime = 0f;
         this.animate(texture, rows, columns);
     }
 
@@ -55,6 +58,20 @@ public class SpriteAnimation {
 
 
     public Animation<TextureRegion> getAnimation() {
-    return this.spriteAnimation;
+        return this.spriteAnimation;
+    }
+
+    public void setStateTime(float time) {
+        this.stateTime += time;
+    }
+
+    public float getStateTime() {
+        return this.stateTime;
+    }
+
+    //Setup for sprite and frames
+    public TextureRegion setupSprite() {
+        this.setStateTime(Gdx.graphics.getDeltaTime());
+        return this.getAnimation().getKeyFrame(this.getStateTime(), true);
     }
 }

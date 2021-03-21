@@ -1,5 +1,6 @@
 package poi.game.models.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -24,7 +25,8 @@ public class Player extends PenguinTemplate {
     }
 
     @Override
-    /*public void update(float dt) {
+    /*
+    public void update(float dt) {
         animation.update(dt);
     }
     */
@@ -32,18 +34,40 @@ public class Player extends PenguinTemplate {
 
     @Override
     public void setVelocity() {
-        this.velocity.x = (float) Math.random() * 50 + 50;
-        this.velocity.y = (float) Math.random() * 50 + 50;
+        this.velocity.x = 100;
+        this.velocity.y = 0;
     }
 
     @Override
-    public Animation<TextureRegion> getAnimation() {
-        return this.animation.getAnimation();
+    public TextureRegion getAnimation() {
+        return this.animation.setupSprite();
     }
 
     @Override
     public void checkBorder() {
+        //Collision at left border
+        if (this.getPosition().x <= 0) {
+            this.getPosition().x = 0;
+            this.setVelocity();
+        }
 
+        //Collision at right border
+        else if (this.getPosition().x >= Gdx.graphics.getWidth() - WIDTH) {
+            this.getPosition().x = Gdx.graphics.getWidth() - WIDTH;
+            this.setVelocity();
+        }
+
+        //Collision at bottom
+        if (this.getPosition().y <= 0) {
+            this.getPosition().y = 0;
+            this.setVelocity();
+        }
+
+        //Collision at top
+        else if (this.getPosition().y >= Gdx.graphics.getHeight() - HEIGHT ) {
+            this.getPosition().y = Gdx.graphics.getHeight() - HEIGHT;
+            this.setVelocity();
+        }
     }
 
 

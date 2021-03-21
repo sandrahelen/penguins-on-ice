@@ -2,6 +2,7 @@ package poi.game.models.templates;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class ObstacleTemplate {
@@ -10,12 +11,13 @@ public abstract class ObstacleTemplate {
     protected Vector2 velocity;
     protected Texture texture;
     protected int rows, columns;
-    protected Sprite sprite;
+    //protected Sprite sprite;
 
     protected ObstacleTemplate(float x, float y, String textures, int rows, int columns) {
         this.position = new Vector2(x, y);
+        this.velocity = new Vector2(0, 0);
         this.texture = new Texture(textures);
-        this.sprite = new Sprite(this.texture);
+        //this.sprite = new Sprite(this.texture);
         this.rows = rows;
         this.columns = columns;
     }
@@ -28,10 +30,17 @@ public abstract class ObstacleTemplate {
     */
 
     public abstract void update(float dt);
-    public abstract Vector2 setVelocity();
+    public abstract void setVelocity();
+    public abstract TextureRegion getAnimation();
 
+    /*
     public Sprite getSprite() {
         return this.sprite;
+    }
+     */
+
+    public Texture getTexture() {
+        return this.texture;
     }
     public Vector2 getPosition() {
         return this.position;
