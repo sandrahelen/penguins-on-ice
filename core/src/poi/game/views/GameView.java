@@ -28,14 +28,22 @@ public class GameView {
             obstacles.add(new Obstacle((float)((Math.random() * (Poi.WIDTH - 0)) + 0),(float)((Math.random() * (Poi.HEIGHT - 0)) + 0), "ice-sprites.png", 4, 3));
         }
         players.add(new Player(400, 250, "p1-bak.png", 1, 3));
-        players.add(new Player(250, 250, "p1-bak.png", 1, 3));
+        players.add(new Player(250, 100, "p1-bak.png", 1, 3));
     }
 
-    /*public void update(float dt){
-        obstacle.update(dt);
-        player.update(dt);
+    public void update(float dt){
+        if (players.get(0).getPosition().y < players.get(1).getPosition().y){
+            cam.position.y = players.get(0).getPosition().y + 100;
+        }
+        else if(players.get(1).getPosition().y < players.get(0).getPosition().y){
+            cam.position.y = players.get(1).getPosition().y + 100;
+        }
         cam.update();
-    }*/
+        /*obstacle.update(dt);*/
+        players.get(0).update(dt, cam);
+        players.get(1).update(dt, cam);
+
+    }
 
     /*public void create() {
         text = new BitmapFont();
@@ -50,6 +58,8 @@ public class GameView {
             TextureRegion obstacleFrame = obstacle.getAnimation();
             obstacleFrames.add(obstacleFrame);
         }
+
+        this.update(Gdx.graphics.getDeltaTime());
 
         //Player 1
         if(Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT))

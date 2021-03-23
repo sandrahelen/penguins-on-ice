@@ -1,6 +1,7 @@
 package poi.game.models.templates;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -28,10 +29,10 @@ public abstract class PenguinTemplate{
                 //this.stateTime = 0f;
         }
 
-        public abstract void update(float dt);
+        public abstract void update(float dt, OrthographicCamera cam);
         public abstract void setVelocity();
         public abstract TextureRegion getAnimation();
-        public abstract void checkBorder();
+        public abstract boolean checkBorder(OrthographicCamera cam);
 
         public Texture getTexture(){
                 return this.texture;
