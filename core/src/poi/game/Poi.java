@@ -12,8 +12,8 @@ import poi.game.views.View;
 
 public class Poi extends ApplicationAdapter {
 
-	public static final int WIDTH = 480;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 360;
+	public static final int HEIGHT = 640;
 
 	private SpriteBatch batch;
 	//Texture img;

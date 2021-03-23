@@ -22,7 +22,6 @@ public class GameView extends View {
 
     @Override
     protected void handleInput() {
-
     }
 
     @Override
