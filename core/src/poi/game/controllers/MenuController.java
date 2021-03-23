@@ -4,26 +4,58 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import poi.game.Poi;
+import poi.game.views.View;
 import poi.game.views.GameView;
 import poi.game.views.HighscoreView;
 import poi.game.views.MenuView;
 
+import java.util.Stack;
+
 public class MenuController {
 
     //private final Poi game;
+    /*
     private GameView gameView = new GameView();
     private MenuView menuView = new MenuView();
     private HighscoreView scoreView = new HighscoreView();
     //private Poi poi = new Poi();
     private String prevDestination;
     private String currDestination = "MENU";
+    */
+    private Stack<View> views;
+
+    public MenuController(){
+        views = new Stack<View>();
+    }
+
+    public void push(View view){
+        views.push(view);
+    }
+
+    public void pop(){
+        views.pop().dispose();
+    }
+
+    public void set(View view){
+        views.pop().dispose();
+        views.push(view);
+    }
+
+    public void update(float dt){
+        views.peek().update(dt);
+    }
+
+    public void render(SpriteBatch sb){
+        views.peek().render(sb);
+    }
+
     /*
     public MenuController(Poi game) {
         this.game = game;
     }
     */
 
-    public String getDestination() {
+    /*public String getDestination() {
         return currDestination;
     }
 
@@ -67,9 +99,9 @@ public class MenuController {
             prevDestination = currDestination;
             scoreView.render(sb);
         }
-    }
+    }*/
 
-    public void changeView(String destination, SpriteBatch sb) {
+    /*public void changeView(String destination, SpriteBatch sb) {
         Gdx.app.log("MenuController", "changeView " + destination);
 
         if (destination.equals("GAME")) {
@@ -100,7 +132,7 @@ public class MenuController {
             }
             scoreView.render(sb);
             prevDestination = "HIGHSCORE";
-        }
+        }*/
         /*else if (destination.eqauls("SETTINGS")) {
             goToSettings();
         }
@@ -108,7 +140,7 @@ public class MenuController {
             game.setView(new MenuView(sb));
         }*/
 
-    }
+    //}
     /*public void goToMenu(SpriteBatch sb) {
         Gdx.app.log("MenuController", "GoToMenu");
         if (prevDestination != "MENU") {
