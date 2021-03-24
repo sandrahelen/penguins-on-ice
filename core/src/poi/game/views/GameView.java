@@ -1,8 +1,5 @@
 package poi.game.views;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -10,7 +7,7 @@ import poi.game.controllers.MenuController;
 import poi.game.models.factories.ViewFactory;
 import poi.game.Poi;
 
-public class GameView extends View {
+public class GameView extends View implements ViewFactory {
 
     private BitmapFont text;
 
@@ -21,7 +18,7 @@ public class GameView extends View {
     }
 
     @Override
-    protected void handleInput() {
+    public void handleInput() {
     }
 
     @Override
@@ -31,7 +28,7 @@ public class GameView extends View {
 
     @Override
     public void render(SpriteBatch sb) {
-        Gdx.app.log("GameView", "render");
+        //Gdx.app.log("GameView", "render");
         sb.begin();
         text.draw(sb, "Play", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
         sb.end();

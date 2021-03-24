@@ -1,23 +1,46 @@
 package poi.game.views;
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import poi.game.Poi;
 import poi.game.controllers.MenuController;
+import poi.game.models.factories.ViewFactory;
 
-public class SettingsView extends View {
+public class SettingsView extends View implements ViewFactory {
 
-    private BitmapFont text;
+    private Texture titleSettings;
+    private Texture buttonSound;
+    private Texture buttonColor;
+    private Texture buttonMenu;
+    private Rectangle boundsSound;
+    private Rectangle boundsColor;
+    private Rectangle boundsMenu;
 
     public SettingsView (MenuController controller) {
         super(controller);
-        text = new BitmapFont();
-        cam.setToOrtho(false, Poi.WIDTH/2, Poi.HEIGHT/2);
+        cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
+        titleSettings = new Texture("titleSettings.png");
+        buttonSound = new Texture("buttonSound.png");
+        buttonColor = new Texture("buttonColor.png");
+        buttonMenu = new Texture("buttonMenu.png");
+        boundsSound = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonSound.getHeight())*3/6 - buttonSound.getHeight()/2, buttonSound.getWidth(), buttonSound.getHeight());
+        boundsColor = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonColor.getHeight()/2)*4/6 - buttonColor.getHeight()/2, buttonColor.getWidth(), buttonColor.getHeight());
+        boundsMenu = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonMenu.getHeight()/2)*5/6 - buttonMenu.getHeight()/2, buttonMenu.getWidth(), buttonMenu.getHeight());
     }
 
     @Override
-    protected void handleInput() {
+    public void handleInput() {
+        if(Gdx.input.justTouched()){
+            if (boundsMenu.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                controller.set(new MenuView(controller));
+            }
+        }
+
+        /*if (boundsMenu.contains(Gdx.input.getX(), Gdx.input.getY())) {
+            Gdx.app.log("MENU", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
+        }*/
     }
 
     @Override
@@ -27,13 +50,20 @@ public class SettingsView extends View {
 
     @Override
     public void render(SpriteBatch sb) {
-        Gdx.app.log("SettingsView", "render");
+        //Gdx.app.log("SettingsView", "render");
+        sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        text.draw(sb, "Settings", Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/2);
+        sb.draw(titleSettings, Poi.WIDTH*5/16, Poi.HEIGHT - titleSettings.getHeight()*3);
+        sb.draw(buttonSound, Poi.WIDTH/4, Poi.HEIGHT*3/6);
+        sb.draw(buttonColor, Poi.WIDTH/4,Poi.HEIGHT*2/6);
+        sb.draw(buttonMenu, Poi.WIDTH/4,Poi.HEIGHT/6);
         sb.end();
     }
 
     public void dispose() {
-        text.dispose();
+        titleSettings.dispose();
+        buttonSound.dispose();
+        buttonColor.dispose();
+        buttonMenu.dispose();
     }
 }
