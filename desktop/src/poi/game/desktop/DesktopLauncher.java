@@ -7,6 +7,8 @@ import poi.game.Poi;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.width = Poi.WIDTH;
+		config.height = Poi.HEIGHT;
 		new LwjglApplication(new Poi(), config);
 	}
 }
