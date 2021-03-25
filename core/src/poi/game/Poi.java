@@ -21,6 +21,12 @@ public class Poi extends ApplicationAdapter {
 	private Texture playButton;
 	private MenuController controller;
 
+	private final Leaderboard leaderboard;
+
+	public Poi(Leaderboard leaderboard) {
+		this.leaderboard = leaderboard;
+	}
+
 	public void create () {
 		batch = new SpriteBatch();
 		controller = new MenuController();

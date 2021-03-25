@@ -3,12 +3,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import poi.game.Leaderboard;
 import poi.game.Poi;
 import poi.game.controllers.MenuController;
 import poi.game.models.factories.ViewFactory;
 
 
-public class HighscoreView extends View implements ViewFactory {
+public class HighscoreView extends View implements ViewFactory, Leaderboard {
 
     private Texture titleHighscore;
     private Texture boardHighscore;
@@ -23,6 +24,9 @@ public class HighscoreView extends View implements ViewFactory {
         buttonMenu = new Texture("buttonMenu.png");
         boundsMenu = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonMenu.getHeight()/2)*15/16 - buttonMenu.getHeight()/2, buttonMenu.getWidth(), buttonMenu.getHeight());
 
+    }
+    public void submitScore(String user, int score) {
+        Gdx.app.log("Html5Leaderboard", "would have submitted score for user " + user + ": " + score);
     }
 
     @Override
@@ -48,6 +52,7 @@ public class HighscoreView extends View implements ViewFactory {
     public void render(SpriteBatch sb) {
         //Gdx.app.log("Highscore", "render");
         sb.setProjectionMatrix(cam.combined);
+        submitScore("user1", 50);
         sb.begin();
         sb.draw(titleHighscore, Poi.WIDTH/4, Poi.HEIGHT - titleHighscore.getHeight()*2);
         sb.draw(boardHighscore, Poi.WIDTH/10,Poi.HEIGHT*3/16);
