@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:963543885275:android:23647dfcf0ae77167173fe",
         "android_client_info": {
-          "package_name": "com.poi.game"
+          "package_name": "poi.game"
         }
       },
       "oauth_client": [
