@@ -32,6 +32,7 @@ public class Poi extends ApplicationAdapter {
 		controller = new MenuController();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		controller.push(new MenuView(controller));
+		leaderboard.FirstFireBaseTest();
 	}
 
 	@Override

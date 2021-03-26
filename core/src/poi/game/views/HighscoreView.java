@@ -28,6 +28,9 @@ public class HighscoreView extends View implements ViewFactory, Leaderboard {
     public void submitScore(String user, int score) {
         Gdx.app.log("Html5Leaderboard", "would have submitted score for user " + user + ": " + score);
     }
+    @Override
+    public void FirstFireBaseTest() {
+    }
 
     @Override
     public void handleInput() {

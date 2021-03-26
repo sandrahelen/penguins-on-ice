@@ -19,4 +19,14 @@ public class AndroidLeaderboard implements Leaderboard {
     public void submitScore(String user, int score) {
         service.submitScore(user, score);
     }
+
+    @Override
+    public void FirstFireBaseTest() {
+        if(myRef != null){
+            myRef.setValue("Hello, World!");
+        }
+        else{
+            System.out.println("Databasereference was not set -> therefore could not write to DB");
+        }
+    }
 }
