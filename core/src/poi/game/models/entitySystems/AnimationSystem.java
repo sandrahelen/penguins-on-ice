@@ -1,4 +1,4 @@
 package poi.game.models.entitySystems;
 
-public class AnimationSystem {
+public class AnimationSystem  {
 }
