@@ -34,7 +34,8 @@ public class Player extends PenguinTemplate {
     */
     public void update(float dt, OrthographicCamera cam) {
         if(!this.checkBorder(cam)){
-            this.position.add(0, MOVEMENT * dt);
+            //this.position.add(0, MOVEMENT * dt);
+            this.setPosition(0, this.velocity.y * dt);
         }
         //this.position.add(0, MOVEMENT * dt);
         //this.velocity.y = MOVEMENT * dt;
@@ -43,7 +44,8 @@ public class Player extends PenguinTemplate {
     @Override
     public void setVelocity() {
         this.velocity.x = 100;
-        this.velocity.y = (float) Math.random() * 50;
+        //this.velocity.y = (float) Math.random() * 50;
+        this.velocity.y = 50;
     }
 
     @Override
@@ -74,9 +76,9 @@ public class Player extends PenguinTemplate {
         }
 
         //Collision at top
-        else if (this.getPosition().y >= Gdx.graphics.getHeight() + cam.position.y /*+ cam.viewportHeight*/ - HEIGHT ) {
-            this.getPosition().y = Gdx.graphics.getHeight() /*+ cam.position.y + cam.viewportHeight*/ - HEIGHT;
-            this.position.add(0, -MOVEMENT);
+        else if (this.getPosition().y >= /*Gdx.graphics.getHeight() +*/ 200 + cam.position.y /*+ cam.viewportHeight*/ - HEIGHT ) {
+            this.getPosition().y = /*Gdx.graphics.getHeight()*/ 200 + cam.position.y /*+ cam.viewportHeight*/ - HEIGHT;
+            this.position.add(0, 0);
             return true;
         }
         return false;
