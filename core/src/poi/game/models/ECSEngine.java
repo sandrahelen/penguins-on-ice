@@ -47,12 +47,12 @@ public class ECSEngine extends PooledEngine implements ComponentFactory {
     }
 
     @Override
-    public void createPlayer(){
+    public void createPlayer(int posX, int posY){
         Entity entity = this.createEntity();
 
 
         final BodyComponent body = this.createComponent(BodyComponent.class);
-        bodyDef.position.set(400,450);
+        bodyDef.position.set(posX,posY);
         bodyDef.fixedRotation = true;
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body.body = world.createBody(bodyDef);

@@ -20,7 +20,8 @@ public class Test implements Screen {
 
     public Test(final Poi context){
         viewport = context.getViewport();
-        context.getEcsEngine().createPlayer();
+        context.getEcsEngine().createPlayer(400, 250);
+        context.getEcsEngine().createPlayer(250, 100);
         context.getEcsEngine().createObstacle(200,200);
         context.getEcsEngine().createObstacle(300,400);
         context.getEcsEngine().createObstacle(600,600);
