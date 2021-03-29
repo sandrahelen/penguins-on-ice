@@ -1,39 +1,86 @@
 package poi.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2D;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.reflect.ClassReflection;
+import com.badlogic.gdx.utils.reflect.ReflectionException;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import poi.game.controllers.MenuController;
 import poi.game.views.MenuView;
 import poi.game.views.View;
 
-public class Poi extends ApplicationAdapter {
+import java.util.EnumMap;
 
-	public static final int WIDTH = 360;
-	public static final int HEIGHT = 640;
+import poi.game.models.ECSEngine;
+import poi.game.views.GameRenderer;
+import poi.game.views.ScreenType;
 
-	private SpriteBatch batch;
-	//Texture img;
+public class Poi extends Game {
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
+
+	private static final String TAG = Poi.class.getSimpleName();
+	private EnumMap<ScreenType, Screen> screenCache;
+	private World world;
+
+	private ECSEngine ecsEngine;
+	private SpriteBatch spriteBatch;
+	private GameRenderer gameRenderer;
+	private OrthographicCamera camera;
+	FitViewport viewport;
+
 	private View view;
 	private Texture playButton;
 	private MenuController controller;
 
+	@Override
 	public void create () {
-		batch = new SpriteBatch();
+		screenCache = new EnumMap<ScreenType, Screen>(ScreenType.class);
+		spriteBatch = new SpriteBatch();
+
 		controller = new MenuController();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		controller.push(new MenuView(controller));
+
+		Box2D.init();
+		world = new World(new Vector2(0,-9.81f), true);
+
+		camera = new OrthographicCamera();
+		viewport = new FitViewport(WIDTH, HEIGHT, camera);
+
+
+		ecsEngine = new ECSEngine(this);
+		gameRenderer = new GameRenderer(this);
+
+		setScreen(ScreenType.TEST);
+
 	}
 
 	@Override
-	public void render () {
+	public void render(){
 		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		controller.update(Gdx.graphics.getDeltaTime());
-		controller.render(batch);
+		controller.render(spriteBatch);
+		super.render();
+		viewport.apply(false);
+
+		gameRenderer.render(Gdx.graphics.getDeltaTime());
+		ecsEngine.update(Gdx.graphics.getDeltaTime());
+
 	}
 
 	@Override
@@ -41,50 +88,49 @@ public class Poi extends ApplicationAdapter {
 		super.dispose();
 	}
 
-	/*
-	
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		//controller = new MenuController();
-
-		//view = new MenuView();
-		//view.create();
-		//img = new Texture("badlogic.jpg");
-		//MenuController menuController = new MenuController();
-		//menuController.navigateToView("MENU");
-		//playButton = new Texture("button.png");
-		//Gdx.app.log("Poi Create", "Poi created");
-
+	public void resize(final int width, final int height){
+		viewport.update(width, height, true);
 	}
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		//Gdx.app.log("Poi render", "batch begin");
-		//controller.navigateToView("MENU", batch); // Går alltid til menu..
-		//Gdx.app.log("Poi", "Destination: " + controller.getDestination());
-
-		//controller.navigateToView(batch);
-		//Gdx.app.log("Poi render", "after navigate");
-		//batch.draw(img, 0, 0);
-		//view.render(batch);	// MenuView
-
-		//batch.draw(playButton, 50, 50);
-		batch.end();
-		//view.render(dt);
+	public void setScreen(final ScreenType screenType){
+		final Screen screen = screenCache.get(screenType);
+		if(screen == null){
+			try {
+				Gdx.app.debug(TAG, "Creating new Screen"+ screenType);
+				final Screen newScreen = (Screen) ClassReflection.getConstructor(screenType.getScreenClass(), Poi.class).newInstance(this);
+				screenCache.put(screenType, newScreen);
+				setScreen(newScreen);
+			} catch (ReflectionException e) {
+				throw new GdxRuntimeException("Screen" + screenType + "could not be created", e);
+			}
+		} else{
+			Gdx.app.debug(TAG, "Switching to screen"+ screenType);
+			setScreen(screen);
+		}
 	}
-	
-	@Override
-	public void dispose () {
-		/*batch.dispose();
-		img.dispose();*/
-		//view.dispose();
-	//}
 
-	/*public void setView(View view) {
-		this.view = view;
-	}*/
+	public ECSEngine getEcsEngine() {
+		return ecsEngine;
+	}
+
+	public World getWorld() {
+		return world;
+	}
+
+	public SpriteBatch getSpriteBatch(){
+		return spriteBatch;
+	}
+
+	public GameRenderer getRenderSystem(){
+		return gameRenderer;
+	}
+
+
+	public OrthographicCamera getCamera(){return camera;}
+
+	public FitViewport getViewport() {
+		return viewport;
+	}
 }
+
