@@ -96,8 +96,8 @@ public class ECSEngine extends PooledEngine implements ComponentFactory {
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body.body = world.createBody(bodyDef);
         body.body.setUserData("OBSTACLE");
-        body.width = 50;
-        body.height = 50;
+        body.width = 20;
+        body.height = 27;
 
 
         fixtureDef.filter.categoryBits = 10;
@@ -117,7 +117,7 @@ public class ECSEngine extends PooledEngine implements ComponentFactory {
         entity.add(obstacleComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
-        textureComponent.textureAnimation = textureComponent.animate("badlogic.jpg", 1, 1);
+        textureComponent.textureAnimation = textureComponent.animate("ice-sprites.png", 4, 3);
         entity.add(textureComponent);
 
         this.addEntity(entity);
