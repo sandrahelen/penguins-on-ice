@@ -18,13 +18,13 @@ import poi.game.models.entityComponents.PlayerComponent;
 import poi.game.models.entityComponents.TextureComponent;
 import poi.game.models.entitySystems.CameraSystem;
 import poi.game.models.entitySystems.MovementSystem;
-import poi.game.models.entitySystems.RenderSystem;
+import poi.game.models.factories.ComponentFactory;
 
-public class ECSEngine extends PooledEngine {
+public class ECSEngine extends PooledEngine implements ComponentFactory {
     private final World world;
     private final BodyDef bodyDef;
     private final FixtureDef fixtureDef;
-    private final Array<RenderSystem> renderSystems;
+
 
     public static final ComponentMapper<BodyComponent> bodyMapper = ComponentMapper.getFor(BodyComponent.class);
     public static final ComponentMapper<PlayerComponent> playerMapper = ComponentMapper.getFor(PlayerComponent.class);
@@ -40,24 +40,25 @@ public class ECSEngine extends PooledEngine {
         bodyDef = new BodyDef();
         fixtureDef = new FixtureDef();
 
-        this.renderSystems = new Array<>();
+
         this.addSystem(new MovementSystem(context));
         this.addSystem(new CameraSystem(context));
 
     }
 
+    @Override
     public void createPlayer(){
         Entity entity = this.createEntity();
 
 
         final BodyComponent body = this.createComponent(BodyComponent.class);
-        bodyDef.position.set(50,50);
+        bodyDef.position.set(400,450);
         bodyDef.fixedRotation = true;
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body.body = world.createBody(bodyDef);
         body.body.setUserData("PLAYER");
-        body.width = 30;
-        body.height = 50;
+        body.width = 48;
+        body.height = 48;
 
 
         fixtureDef.filter.categoryBits = 10;
@@ -77,13 +78,14 @@ public class ECSEngine extends PooledEngine {
         entity.add(playerComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
-        textureComponent.texture = new Texture("p1-bak.png");
+        textureComponent.textureAnimation = textureComponent.animate("p1-bak.png", 1,3);
         entity.add(textureComponent);
 
         this.addEntity(entity);
 
     }
 
+    @Override
     public void createObstacle(int posX, int posY) {
         Entity entity = this.createEntity();
 
@@ -93,9 +95,9 @@ public class ECSEngine extends PooledEngine {
         bodyDef.fixedRotation = true;
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body.body = world.createBody(bodyDef);
-        body.body.setUserData("Obstacle");
-        body.width = 100;
-        body.height = 30;
+        body.body.setUserData("OBSTACLE");
+        body.width = 50;
+        body.height = 50;
 
 
         fixtureDef.filter.categoryBits = 10;
@@ -115,7 +117,7 @@ public class ECSEngine extends PooledEngine {
         entity.add(obstacleComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
-        textureComponent.texture = new Texture("badlogic.jpg");
+        textureComponent.textureAnimation = textureComponent.animate("badlogic.jpg", 1, 1);
         entity.add(textureComponent);
 
         this.addEntity(entity);

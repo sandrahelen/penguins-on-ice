@@ -23,7 +23,7 @@ import poi.game.models.entityComponents.TextureComponent;
 
 public class GameRenderer implements Disposable {
 
-    public static final String TAG = poi.game.models.entitySystems.RenderSystem.class.getSimpleName();
+    //public static final String TAG = poi.game.models.entitySystems.RenderSystem.class.getSimpleName();
 
     private final ImmutableArray<Entity> animatedEntities;
 
@@ -64,7 +64,7 @@ public class GameRenderer implements Disposable {
         final TextureComponent textureComponent = ECSEngine.textureMapper.get(entity);
         spriteBatch.begin();
         bodyComponent.renderPosition.lerp(bodyComponent.body.getPosition(), alpha);
-        spriteBatch.draw(textureComponent.texture, bodyComponent.body.getPosition().x,bodyComponent.body.getPosition().y, bodyComponent.width,bodyComponent.height );
+        spriteBatch.draw(textureComponent.setupSprite(), bodyComponent.body.getPosition().x,bodyComponent.body.getPosition().y, bodyComponent.width,bodyComponent.height );
         spriteBatch.end();
     }
 

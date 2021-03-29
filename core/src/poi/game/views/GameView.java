@@ -27,7 +27,7 @@ public class GameView {
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
 
         for (int i = 0; i < 10; i ++) {
-            obstacles.add(new Obstacle((float)((Math.random() * (Poi.WIDTH - 0)) + 0),(float)((Math.random() * (Poi.HEIGHT - 0)) + 0), "ice-sprites.png", 4, 3));
+            obstacles.add(new Obstacle((float)((Math.random() * Poi.WIDTH)),(float)((Math.random() * Poi.HEIGHT)), "ice-sprites.png", 4, 3));
         }
         players.add(new Player(400, 250, "p1-bak.png", 1, 3));
         players.add(new Player(250, 100, "p1-bak.png", 1, 3));

@@ -23,6 +23,9 @@ import poi.game.views.GameRenderer;
 import poi.game.views.ScreenType;
 
 public class Poi extends Game {
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
+
 	private static final String TAG = Poi.class.getSimpleName();
 
 	private EnumMap<ScreenType, Screen> screenCache;
@@ -49,7 +52,7 @@ public class Poi extends Game {
 		world = new World(new Vector2(0,-9.81f), true);
 
 		camera = new OrthographicCamera();
-		viewport = new FitViewport(800,450, camera);
+		viewport = new FitViewport(WIDTH, HEIGHT, camera);
 
 
 		ecsEngine = new ECSEngine(this);

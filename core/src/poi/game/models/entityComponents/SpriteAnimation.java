@@ -13,15 +13,8 @@ public class SpriteAnimation {
     private float stateTime;
 
     public SpriteAnimation(Texture texture, int rows, int columns) {
-        //sheet = new Texture("heliAnim.png"); Definer i Player!
-        /*this.spriteSheet = spriteSheet;
-        this.frame = 0;
-        this.FRAME_ROW = FRAME_ROW;
-        this.FRAME_COL = FRAME_COL;*/
-        //this.frameCount = frameCount;
-        //this.maxFrameTime = maxFrameTime; //0.5f
-        this.stateTime = 0f;
-        this.animate(texture, rows, columns);
+        //this.stateTime = 0f;
+        //this.animate(texture, rows, columns);
     }
 
     public void update(float dt) {
@@ -61,17 +54,18 @@ public class SpriteAnimation {
         return this.spriteAnimation;
     }
 
-    public void setStateTime(float time) {
-        this.stateTime += time;
-    }
-
-    public float getStateTime() {
-        return this.stateTime;
-    }
-
     //Setup for sprite and frames
     public TextureRegion setupSprite() {
         this.setStateTime(Gdx.graphics.getDeltaTime());
         return this.getAnimation().getKeyFrame(this.getStateTime(), true);
     }
+
+    public void setStateTime(float time) {
+        stateTime += time;
+    }
+
+    public float getStateTime() {
+        return stateTime;
+    }
+
 }
