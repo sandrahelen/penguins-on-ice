@@ -32,7 +32,9 @@ public class Poi extends ApplicationAdapter {
 		controller = new MenuController();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		controller.push(new MenuView(controller));
-		leaderboard.FirstFireBaseTest();
+
+		leaderboard.FirstFireBaseTest();	// Testing Firebase database
+		leaderboard.submitScore("Royce", 20);	// Submitting score to database
 	}
 
 	@Override
