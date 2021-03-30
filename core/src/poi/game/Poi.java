@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import poi.game.controllers.MenuController;
@@ -17,8 +18,9 @@ public class Poi extends ApplicationAdapter {
 
 	private SpriteBatch batch;
 	//Texture img;
-	private View view;
-	private Texture playButton;
+	//private View view;
+	//private Texture playButton;
+	private BitmapFont text;
 	private MenuController controller;
 
 	private final Leaderboard leaderboard;
@@ -34,15 +36,21 @@ public class Poi extends ApplicationAdapter {
 		controller.push(new MenuView(controller));
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database
-		leaderboard.submitScore("Royce", 20);	// Submitting score to database
-		leaderboard.submitScore("Marit", 10);
-		leaderboard.setOnValueChangedListener();
+		leaderboard.submitScore("Royce", 50);	// Submitting score to database
+		leaderboard.submitScore("Moira", 600);
+		leaderboard.submitScore("Marit", 30);
+		leaderboard.submitScore("Sandra", 0);
+		leaderboard.submitScore("Endre", 700);	// Not displaying when printed, ok
+		leaderboard.submitScore("Rose", 3);
+		leaderboard.setOnValueChangedListener();	// Limited database to display the 5 lowest scores
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+		batch.end();
 		controller.update(Gdx.graphics.getDeltaTime());
 		controller.render(batch);
 	}
