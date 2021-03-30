@@ -11,4 +11,9 @@ public class DesktopLeaderboard implements Leaderboard {
     public void FirstFireBaseTest() {
 
     }
+
+    @Override
+    public void setOnValueChangedListener() {
+        Gdx.app.log("DesktopLauncher", "would have read from database");
+    }
 }

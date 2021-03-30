@@ -10,4 +10,9 @@ public class CoreLeaderboard implements Leaderboard {
     public void FirstFireBaseTest() {
 
     }
+
+    @Override
+    public void setOnValueChangedListener() {
+
+    }
 }

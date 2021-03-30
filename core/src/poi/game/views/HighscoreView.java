@@ -33,6 +33,11 @@ public class HighscoreView extends View implements ViewFactory, Leaderboard {
     }
 
     @Override
+    public void setOnValueChangedListener() {
+
+    }
+
+    @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
             if (boundsMenu.contains(Gdx.input.getX(), Gdx.input.getY())) {

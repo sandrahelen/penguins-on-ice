@@ -35,6 +35,8 @@ public class Poi extends ApplicationAdapter {
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database
 		leaderboard.submitScore("Royce", 20);	// Submitting score to database
+		leaderboard.submitScore("Marit", 10);
+		leaderboard.setOnValueChangedListener();
 	}
 
 	@Override
