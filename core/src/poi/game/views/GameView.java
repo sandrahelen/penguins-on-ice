@@ -1,9 +1,9 @@
 package poi.game.views;
-
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -36,13 +37,12 @@ public class GameView extends View {
 
     private ECSEngine ecsEngine;
     private World world;
-
     private final ImmutableArray<Entity> animatedEntities;
-
     private final OrthographicCamera camera;
     private final GLProfiler profiler;
     private final Box2DDebugRenderer box2DDebugRenderer;
-
+    private Texture buttonPause;
+    private Rectangle boundsPause;
 
     public GameView(MenuController controller) {
         super(controller);
@@ -50,10 +50,13 @@ public class GameView extends View {
         world.setContactListener(new WorldContactListener());
         camera = new OrthographicCamera(WIDTH, HEIGHT);
 
+        buttonPause = new Texture("buttonPause.png");
+        boundsPause = new Rectangle(20, 30, buttonPause.getWidth(), buttonPause.getHeight());
+
+
         Box2D.init();
         //Setup Engine
         ecsEngine = new ECSEngine(world, camera);
-
 
         //Create Entities
         ecsEngine.createPlayer(400, 120, world);
@@ -96,7 +99,14 @@ public class GameView extends View {
 
     @Override
     protected void handleInput() {
-
+        if(Gdx.input.justTouched()) {
+            if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                controller.set(new SettingsView(controller));
+            }
+        }
+        if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
+            Gdx.app.log("PAUSE", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() + "]");
+        }
     }
 
     @Override
@@ -104,6 +114,7 @@ public class GameView extends View {
         ecsEngine.update(dt);
         camera.update();
         world.step(dt, 6, 2);
+        handleInput();
 
     }
 
@@ -113,11 +124,12 @@ public class GameView extends View {
         Gdx.gl.glClearColor(0, 0, 1, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.setProjectionMatrix(camera.combined);
-
+        sb.begin();
+        sb.draw(buttonPause, camera.position.x - 300, camera.position.y + 200);
+        sb.end();
         for (final Entity entity : animatedEntities) {
             renderEntity(entity, sb);
         }
-
     }
 
     @Override

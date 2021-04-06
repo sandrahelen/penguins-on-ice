@@ -14,9 +14,11 @@ public class SettingsView extends View implements ViewFactory {
     private Texture buttonSound;
     private Texture buttonColor;
     private Texture buttonMenu;
+    private Texture buttonResume;
     private Rectangle boundsSound;
     private Rectangle boundsColor;
     private Rectangle boundsMenu;
+    private Rectangle boundsResume;
 
     public SettingsView (MenuController controller) {
         super(controller);
@@ -25,10 +27,12 @@ public class SettingsView extends View implements ViewFactory {
         buttonSound = new Texture("buttonSound.png");
         buttonColor = new Texture("buttonColor.png");
         buttonMenu = new Texture("buttonMenu.png");
+        buttonResume = new Texture("buttonResume.png");
         boundsSound = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonSound.getHeight())*3/6 - buttonSound.getHeight()/2, buttonSound.getWidth(), buttonSound.getHeight());
         boundsColor = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonColor.getHeight()/2)*4/6 - buttonColor.getHeight()/2, buttonColor.getWidth(), buttonColor.getHeight());
         boundsMenu = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonMenu.getHeight()/2)*5/6 - buttonMenu.getHeight()/2, buttonMenu.getWidth(), buttonMenu.getHeight());
-    }
+        boundsResume = new Rectangle(20, 30, buttonResume.getWidth(), buttonResume.getHeight());
+}
 
     @Override
     public void handleInput() {
@@ -36,11 +40,14 @@ public class SettingsView extends View implements ViewFactory {
             if (boundsMenu.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 controller.set(new MenuView(controller));
             }
+            else if (boundsResume.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                controller.set(new GameView(controller));
+            }
         }
 
-        /*if (boundsMenu.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("MENU", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
-        }*/
+        if (boundsResume.contains(Gdx.input.getX(), Gdx.input.getY())) {
+            Gdx.app.log("GAME", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
+        }
     }
 
     @Override
@@ -57,6 +64,7 @@ public class SettingsView extends View implements ViewFactory {
         sb.draw(buttonSound, Poi.WIDTH/4, Poi.HEIGHT*3/6);
         sb.draw(buttonColor, Poi.WIDTH/4,Poi.HEIGHT*2/6);
         sb.draw(buttonMenu, Poi.WIDTH/4,Poi.HEIGHT/6);
+        sb.draw(buttonResume, 20,Poi.HEIGHT - 30 - buttonResume.getHeight());
         sb.end();
     }
 
