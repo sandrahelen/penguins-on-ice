@@ -53,8 +53,6 @@ public class Poi extends Game {
 	public void render(){
 		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.end();
 		controller.update(Gdx.graphics.getDeltaTime());
 		controller.render(spriteBatch);
 		super.render();
