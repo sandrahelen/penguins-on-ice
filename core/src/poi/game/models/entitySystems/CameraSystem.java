@@ -15,16 +15,16 @@ import poi.game.models.entityComponents.PlayerComponent;
 public class CameraSystem extends IteratingSystem {
     private final OrthographicCamera camera;
 
-    public CameraSystem(final Poi context){
+    public CameraSystem(OrthographicCamera camera){
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
-        camera = context.getCamera();
+        this.camera = camera;
     }
 
     @Override
     protected void processEntity(final Entity entity, final float deltaTime){
-        final Vector2 pos = new Vector2(400, ECSEngine.bodyMapper.get(entity).body.getPosition().y);
+        //Gdx.app.log("Debug", String.valueOf(ECSEngine.bodyMapper.get(entity).body.getPosition().y));
+        final Vector2 pos = new Vector2(Poi.WIDTH/2, ECSEngine.bodyMapper.get(entity).body.getPosition().y);
         camera.position.set(pos,0);
 
-        //Gdx.app.log("MyTag", String.valueOf(camera.position));
     }
 }
