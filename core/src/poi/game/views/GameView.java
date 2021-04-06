@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import poi.game.Poi;
 import poi.game.WorldContactListener;
+import poi.game.controllers.GameController;
 import poi.game.controllers.MenuController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
@@ -84,12 +85,16 @@ public class GameView extends View {
     private void renderEntity(Entity entity, SpriteBatch sb) {
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
         final TextureComponent textureComponent = ECSEngine.textureMapper.get(entity);
+        final GameController gameController = new GameController(camera.position.x, camera.position.y);
         if (profiler.isEnabled()) {
             box2DDebugRenderer.render(world, camera.combined);
         }
         sb.begin();
         bodyComponent.renderPosition.lerp(bodyComponent.body.getPosition(), Gdx.graphics.getDeltaTime());
         sb.draw(textureComponent.setupSprite(), bodyComponent.body.getPosition().x - bodyComponent.width * 0.5f, bodyComponent.body.getPosition().y - bodyComponent.height * 0.5f, bodyComponent.width, bodyComponent.height);
+        sb.draw(gameController.base, camera.position.x - 300, camera.position.y - 200, 100, 100);
+        sb.draw(gameController.background, camera.position.x - 300, camera.position.y - 200, 95, 95);
+        sb.draw(gameController.joystick, camera.position.x - 275, camera.position.y - 175, 50, 50);
         sb.end();
     }
 

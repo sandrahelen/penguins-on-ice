@@ -126,7 +126,7 @@ public class ECSEngine extends PooledEngine {
         obstacle.add(obstacleComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
-        textureComponent.textureAnimation = textureComponent.animate("ice-sprites.png", 4, 3);
+        textureComponent.textureAnimation = textureComponent.animate("obstacles/ice.png", 12, 1);
         obstacle.add(textureComponent);
 
         this.addEntity(obstacle);
