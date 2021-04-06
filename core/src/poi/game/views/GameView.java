@@ -56,8 +56,8 @@ public class GameView extends View {
 
 
         //Create Entities
-        ecsEngine.createPlayer(400, 120, world);
-        ecsEngine.createPlayer(250, 100, world);
+        ecsEngine.createPlayer(400, 120, world, 1);
+        ecsEngine.createPlayer(250, 100, world, 2);
         ecsEngine.createObstacle(200, 200, world);
         ecsEngine.createObstacle(300, 400, world);
         ecsEngine.createObstacle(600, 600, world);

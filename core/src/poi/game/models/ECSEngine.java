@@ -44,7 +44,7 @@ public class ECSEngine extends PooledEngine {
     }
 
 
-    public void createPlayer(int posX, int posY, World world){
+    public void createPlayer(int posX, int posY, World world, int id){
         Entity player = this.createEntity();
 
         //Body component
@@ -80,6 +80,7 @@ public class ECSEngine extends PooledEngine {
         player.add(animationComponent);
 
         final PlayerComponent playerComponent = this.createComponent(PlayerComponent.class);
+        playerComponent.id = id;
         player.add(playerComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
