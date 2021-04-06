@@ -1,6 +1,4 @@
 buildscript {
-
-
     repositories {
         mavenLocal()
         mavenCentral()
@@ -12,10 +10,9 @@ buildscript {
     dependencies {
         classpath 'org.wisepersist:gwt-gradle-plugin:1.0.13'
         classpath 'org.gretty:gretty:3.0.2'
-        classpath 'com.android.tools.build:gradle:3.5.4'
+        classpath 'com.android.tools.build:gradle:4.1.2'
         classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.12'
-
-
+        classpath 'com.google.gms:google-services:4.3.5'
     }
 }
 
@@ -52,13 +49,13 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
-
-
     }
 }
 
 project(":android") {
     apply plugin: "com.android.application"
+    apply plugin: 'com.android.application'
+    apply plugin: 'com.google.gms.google-services'
 
     configurations { natives }
 
@@ -76,6 +73,18 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-arm64-v8a"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
+
+        // Import the Firebase BoM
+        implementation platform('com.google.firebase:firebase-bom:26.7.0')
+
+        // Add the dependency for the Firebase SDK for Google Analytics
+        // When using the BoM, don't specify versions in Firebase dependencies
+        implementation 'com.google.firebase:firebase-analytics'
+        implementation 'com.google.firebase:firebase-database'
+
+        // Add the dependencies for any other desired Firebase products
+        // https://firebase.google.com/docs/android/setup#available-libraries
+
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
 
     }
@@ -111,6 +120,7 @@ project(":html") {
         api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources"
         api "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"
+
         api "com.badlogicgames.ashley:ashley:$ashleyVersion:sources"
 
     }
@@ -119,11 +129,11 @@ project(":html") {
 project(":core") {
     apply plugin: "java-library"
 
-
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        api "com.badlogicgames.ashley:ashley:$ashleyVersion"
 
+        api "com.badlogicgames.ashley:ashley:$ashleyVersion"
     }
 }
+

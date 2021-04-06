@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "963543885275",
+    "project_id": "poigame-6d1ab",
+    "storage_bucket": "poigame-6d1ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963543885275:android:23647dfcf0ae77167173fe",
+        "android_client_info": {
+          "package_name": "poi.game"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963543885275-esvdottcjclb597jck51787op8lls4ak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDVdsyZ0jinuD2WlCphADTOe9S6VSHD1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963543885275-esvdottcjclb597jck51787op8lls4ak.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
