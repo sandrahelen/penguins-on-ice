@@ -21,9 +21,18 @@ public class CameraSystem extends IteratingSystem {
     }
 
     @Override
-    protected void processEntity(final Entity entity, final float deltaTime){
-        //Gdx.app.log("Debug", String.valueOf(ECSEngine.bodyMapper.get(entity).body.getPosition().y));
-        final Vector2 pos = new Vector2(Poi.WIDTH/2, ECSEngine.bodyMapper.get(entity).body.getPosition().y);
+    protected void processEntity(final Entity player1, final Entity player2, final float deltaTime){
+        Gdx.app.log("Debug", String.valueOf(ECSEngine.bodyMapper.get(entity).body.getPosition().y));
+        //Gdx.app.log("1", String.valueOf(ECSEngine.bodyMapper.get(entity).body.getPosition().y[0]));
+        final Vector2 posPlayer1 = new Vector2(Poi.WIDTH/2, ECSEngine.bodyMapper.get(player1).body.getPosition().y);
+        final Vector2 posPlayer2 = new Vector2(Poi.WIDTH/2, ECSEngine.bodyMapper.get(player2).body.getPosition().y);
+        if (posPlayer1.y < posPlayer2.y){
+            camera.position.y = posPlayer1.y;
+        }
+        if (posPlayer2.y < posPlayer1.y){
+            camera.position.y = posPlayer2.y;
+        }
+
         camera.position.set(pos,0);
 
     }
