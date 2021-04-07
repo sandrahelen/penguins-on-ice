@@ -28,6 +28,7 @@ import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.TextureComponent;
+import poi.game.models.entitySystems.TimerSystem;
 
 import static poi.game.Poi.HEIGHT;
 import static poi.game.Poi.WIDTH;
@@ -56,8 +57,8 @@ public class GameView extends View {
 
 
         //Create Entities
-        ecsEngine.createPlayer(400, 120, world, 1);
-        ecsEngine.createPlayer(250, 100, world, 2);
+        ecsEngine.createPlayer(200, 100, world, 1);
+        ecsEngine.createPlayer(400, 100, world, 2);
         ecsEngine.createObstacle(200, 200, world);
         ecsEngine.createObstacle(300, 400, world);
         ecsEngine.createObstacle(600, 600, world);

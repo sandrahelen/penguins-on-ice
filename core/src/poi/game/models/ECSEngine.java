@@ -19,6 +19,7 @@ import poi.game.models.entityComponents.PlayerComponent;
 import poi.game.models.entityComponents.TextureComponent;
 import poi.game.models.entitySystems.CameraSystem;
 import poi.game.models.entitySystems.MovementSystem;
+import poi.game.models.entitySystems.TimerSystem;
 import poi.game.models.factories.ComponentFactory;
 
 public class ECSEngine extends PooledEngine {
@@ -40,6 +41,7 @@ public class ECSEngine extends PooledEngine {
         //Iterating systems
         addSystem(new MovementSystem());
         addSystem(new CameraSystem(orthographicCamera));
+        addSystem(new TimerSystem());
 
     }
 
@@ -132,5 +134,6 @@ public class ECSEngine extends PooledEngine {
 
         this.addEntity(obstacle);
     }
+
 
 }

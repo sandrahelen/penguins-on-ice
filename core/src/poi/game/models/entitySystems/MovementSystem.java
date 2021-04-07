@@ -16,36 +16,44 @@ import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.PlayerComponent;
 
 
-public class MovementSystem extends IteratingSystem{
+public class MovementSystem extends IteratingSystem {
     private Vector2 xFactor;
     private Vector3 touchPos;
 
 
-    public MovementSystem(){
+    public MovementSystem() {
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
-        xFactor = new Vector2(10,0);
+        xFactor = new Vector2(10, 0);
         touchPos = new Vector3();
     }
 
     @Override
-    public void processEntity(final Entity entity, final float deltaTime){
+    public void processEntity(final Entity entity, final float deltaTime) {
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
         //bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,bodyComponent.body.getPosition().y+1, 0);
-        if(Gdx.input.isTouched()){
-            touchPos.set(Gdx.input.getX(),Gdx.input.getY(),0);
-            if(touchPos.x > bodyComponent.body.getPosition().x+50) {
-                bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
-                //bodyComponent.body.applyLinearImpulse(100, 0, bodyComponent.body.getWorldCenter().x, bodyComponent.body.getWorldCenter().y, true);
+        if (Gdx.input.isTouched()) {
+            touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            if (Poi.WIDTH / 3 > touchPos.x && touchPos.x > 0) {
+                if (ECSEngine.playerMapper.get(entity).id == 1) {
+                    bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
+                }
             }
-            else {
-                bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
-                //bodyComponent.body.applyLinearImpulse(-100, 0, bodyComponent.body.getWorldCenter().x, bodyComponent.body.getWorldCenter().y, true);
-                //Gdx.app.log("MyTag", String.valueOf(bodyComponent.body.getPosition().x));
+            if (Poi.WIDTH / 2 > touchPos.x && touchPos.x > Poi.WIDTH / 3) {
+                if (ECSEngine.playerMapper.get(entity).id == 1) {
+                    bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
+                }
             }
-
+            if (Poi.WIDTH / 2 + Poi.WIDTH / 4 > touchPos.x && touchPos.x > Poi.WIDTH / 2) {
+                if (ECSEngine.playerMapper.get(entity).id == 2) {
+                    bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
+                }
+            }
+            if (Poi.WIDTH > touchPos.x && touchPos.x > Poi.WIDTH / 2 + Poi.WIDTH / 4) {
+                if (ECSEngine.playerMapper.get(entity).id == 2) {
+                    bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
+                }
+            }
         }
     }
-
-
 }
 
