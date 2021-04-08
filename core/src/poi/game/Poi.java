@@ -3,13 +3,10 @@ package poi.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import poi.game.controllers.MenuController;
 import poi.game.views.MenuView;
-import poi.game.views.View;
 
 
 public class Poi extends Game {
@@ -18,12 +15,7 @@ public class Poi extends Game {
 
 	private static final String TAG = Poi.class.getSimpleName();
 	private SpriteBatch spriteBatch;
-	private SpriteBatch batch;
-	//Texture img;
-	private BitmapFont text;
 	private MenuController controller;
-	private View view;
-	private Texture playButton;
 
 	private final Leaderboard leaderboard;
 
@@ -37,6 +29,7 @@ public class Poi extends Game {
 		spriteBatch = new SpriteBatch();
 		controller = new MenuController();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
+		// Sett MenuView as first view when opening the app
 		controller.push(new MenuView(controller));
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database

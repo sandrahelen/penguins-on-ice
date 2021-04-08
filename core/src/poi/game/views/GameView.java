@@ -43,6 +43,7 @@ public class GameView extends View {
     private final Box2DDebugRenderer box2DDebugRenderer;
     private Texture buttonPause;
     private Rectangle boundsPause;
+    private boolean isPaused;
 
     public GameView(MenuController controller) {
         super(controller);
@@ -51,8 +52,9 @@ public class GameView extends View {
         camera = new OrthographicCamera(WIDTH, HEIGHT);
 
         buttonPause = new Texture("buttonPause.png");
-        boundsPause = new Rectangle(20, 30, buttonPause.getWidth(), buttonPause.getHeight());
+        boundsPause = new Rectangle(20, 30 - buttonPause.getHeight()/2, buttonPause.getWidth(), buttonPause.getHeight());
 
+        isPaused = false;
 
         Box2D.init();
         //Setup Engine
@@ -101,11 +103,10 @@ public class GameView extends View {
     protected void handleInput() {
         if(Gdx.input.justTouched()) {
             if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                controller.set(new SettingsView(controller));
+                setIsPaused(true);
+                // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
+                controller.set(new SettingsView(controller, this));
             }
-        }
-        if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("PAUSE", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() + "]");
         }
     }
 
@@ -134,7 +135,14 @@ public class GameView extends View {
 
     @Override
     public void dispose() {
-
+        buttonPause.dispose();
     }
 
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setIsPaused(boolean bool) {
+        isPaused = bool;
+    }
 }
