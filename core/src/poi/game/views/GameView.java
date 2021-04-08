@@ -12,14 +12,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.TimerTask;
 
 import poi.game.Poi;
 import poi.game.WorldContactListener;
@@ -43,12 +47,24 @@ public class GameView extends View {
     private final GLProfiler profiler;
     private final Box2DDebugRenderer box2DDebugRenderer;
 
+    private Texture boostButton;
+    private Rectangle boundsBoost;
+    private Timer boostTimer;
+    private int secondsLeft;
+    private final int boostSeconds = 10; //seconds for boost to recharge
+    private boolean gameOver = false;
 
     public GameView(MenuController controller) {
         super(controller);
         world = new World(new Vector2(0, 200.0f), true);
         world.setContactListener(new WorldContactListener());
         camera = new OrthographicCamera(WIDTH, HEIGHT);
+
+        boostButton = new Texture("buttonPlay.png");
+        boundsBoost = new Rectangle(camera.position.x-70, camera.position.y-200, boostButton.getWidth(), boostButton.getHeight());
+        boostTimer = new Timer();
+
+
 
         Box2D.init();
         //Setup Engine
@@ -80,6 +96,19 @@ public class GameView extends View {
 
     }
 
+    /*private void startTimer()
+    {
+        secondsLeft = boostSeconds;
+        boostTimer.scheduleAtFixedRate(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                if(!gameOver)
+                    secondsLeft--;
+            }
+        }, 0, 1000);
+    }*/
 
     private void renderEntity(Entity entity, SpriteBatch sb) {
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
@@ -96,13 +125,23 @@ public class GameView extends View {
 
     @Override
     protected void handleInput() {
+        if(Gdx.input.justTouched()){
+            if (boundsBoost.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                //startTimer();
+                System.out.println("Button touched");
+            }
 
+        }
     }
 
     @Override
     public void update(float dt) {
+        boundsBoost.x = camera.position.x-70;
+        boundsBoost.y = camera.position.y-200;
+        handleInput();
         ecsEngine.update(dt);
         camera.update();
+        //vector2 = camera.position
         world.step(dt, 6, 2);
 
     }
@@ -118,11 +157,18 @@ public class GameView extends View {
             renderEntity(entity, sb);
         }
 
+        sb.begin();
+        sb.draw(boostButton, camera.position.x-70, camera.position.y-200);
+        sb.end();
+
     }
 
     @Override
     public void dispose() {
-
+        boostButton.dispose();
+        /*for (final Entity entity : animatedEntities){
+            entity.dispose(); // må lage en dispose funksjon for disse(?)
+        }*/
     }
 
 }
