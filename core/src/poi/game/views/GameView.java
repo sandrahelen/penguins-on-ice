@@ -49,11 +49,12 @@ public class GameView extends View {
     private final Box2DDebugRenderer box2DDebugRenderer;
 
     private Texture boostButton;
+    private Texture boostButtonUnCharged;
     private Rectangle boundsBoost;
     private BitmapFont boostFont;
     //private Timer boostTimer;
-    private float secondsLeft = 1000f;
-    private float period = 1f;
+    private float charge = 100;
+    private double period = 0.1;
     //private final int boostSeconds = 10; //seconds for boost to recharge
     private boolean buttonClicked = false;
 
@@ -63,11 +64,12 @@ public class GameView extends View {
         world.setContactListener(new WorldContactListener());
         camera = new OrthographicCamera(WIDTH, HEIGHT);
 
-        boostButton = new Texture("buttonPlay.png");
+        boostButton = new Texture("shadedDark49.png");
+        boostButtonUnCharged = new Texture("transparentDark47.png");
         //boundsBoost = new Rectangle(camera.position.x-70, camera.position.y-200, boostButton.getWidth(), boostButton.getHeight());
         boundsBoost = new Rectangle(250, 405 - boostButton.getHeight()/2, boostButton.getWidth(), boostButton.getHeight());
         boostFont = new BitmapFont();
-        boostTimer = new Timer();
+        //boostTimer = new Timer();
 
 
 
@@ -115,14 +117,15 @@ public class GameView extends View {
         }, 0, 1000);
     }*/
     private void startTimer(){
-        secondsLeft += Gdx.graphics.getRawDeltaTime();
-        if(secondsLeft > period){
-            secondsLeft -= period;
+        charge += Gdx.graphics.getRawDeltaTime();
+        if(charge < 100){
+            charge += period;
             //boostFont.draw(sb, "Seconds left:" + secondsLeft, camera.position.x-30, camera.position.y-180);
         }
     }
 
     private void boost(){
+        //Denne blir kanskje unødvendig hvis vi har controller i movementsystem?
         //velocity += 10;
     }
 
@@ -145,7 +148,11 @@ public class GameView extends View {
         if(Gdx.input.justTouched()){
             if (boundsBoost.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 //startTimer();
-                buttonClicked = true;
+                if(charge == 100) {
+                    boost();
+                    buttonClicked = true;
+                    charge = 0;
+                }
                 System.out.println("Button touched");
 
             }
@@ -171,16 +178,20 @@ public class GameView extends View {
 
         if(buttonClicked){
             startTimer();
-            boost();
-
         }
-        if(secondsLeft < 1){
+        if(charge > 99){
             buttonClicked = false;
-            secondsLeft = 1000f;
+            charge = 100;
         }
         sb.begin();
-        sb.draw(boostButton, camera.position.x-70, camera.position.y-200);
-        boostFont.draw(sb, "Recharging:" + secondsLeft, camera.position.x-30, camera.position.y-180);
+        if(buttonClicked){
+            sb.draw(boostButtonUnCharged, camera.position.x-70, camera.position.y-200);
+        }
+        else{
+            sb.draw(boostButton, camera.position.x-70, camera.position.y-200);
+        }
+
+        boostFont.draw(sb, (int)charge + "%", camera.position.x-30, camera.position.y-180);
         sb.end();
 
         for (final Entity entity : animatedEntities) {
