@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import poi.game.Poi;
+import poi.game.controllers.GameController;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.ObstacleComponent;
@@ -24,6 +25,8 @@ import poi.game.models.factories.ComponentFactory;
 public class ECSEngine extends PooledEngine {
     private final BodyDef bodyDef;
     private final FixtureDef fixtureDef;
+    private final GameController gameController1;
+    private final GameController gameController2;
 
     //Mappers for components
     public static final ComponentMapper<BodyComponent> bodyMapper = ComponentMapper.getFor(BodyComponent.class);
@@ -38,13 +41,24 @@ public class ECSEngine extends PooledEngine {
         fixtureDef = new FixtureDef();
 
         //Iterating systems
-        addSystem(new MovementSystem());
+        gameController1 = new GameController(orthographicCamera, 1);
+        gameController2 = new GameController(orthographicCamera, 2);
+        addSystem(new MovementSystem(gameController1, gameController2));
         addSystem(new CameraSystem(orthographicCamera));
 
     }
 
+    public GameController getGameController() {
+        if (gameController1.getId() == 1) {
+            return gameController1;
+        }
+        else {
+            return gameController2;
+        }
+    }
 
-    public void createPlayer(int posX, int posY, World world){
+
+    public void createPlayer(int posX, int posY, World world, int id){
         Entity player = this.createEntity();
 
         //Body component
@@ -80,6 +94,7 @@ public class ECSEngine extends PooledEngine {
         player.add(animationComponent);
 
         final PlayerComponent playerComponent = this.createComponent(PlayerComponent.class);
+        playerComponent.id = id;
         player.add(playerComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
