@@ -1,9 +1,9 @@
 package poi.game.views;
-
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -41,9 +41,7 @@ public class GameView extends View {
 
     private ECSEngine ecsEngine;
     private World world;
-
     private final ImmutableArray<Entity> animatedEntities;
-
     private final OrthographicCamera camera;
     private final GLProfiler profiler;
     private final Box2DDebugRenderer box2DDebugRenderer;
@@ -58,11 +56,17 @@ public class GameView extends View {
     //private final int boostSeconds = 10; //seconds for boost to recharge
     private boolean buttonClicked = false;
 
+    private Texture buttonPause;
+    private Rectangle boundsPause;
+    private boolean isPaused;
+
+
     public GameView(MenuController controller) {
         super(controller);
         world = new World(new Vector2(0, 200.0f), true);
         world.setContactListener(new WorldContactListener());
         camera = new OrthographicCamera(WIDTH, HEIGHT);
+
 
         boostButton = new Texture("shadedDark49.png");
         boostButtonUnCharged = new Texture("transparentDark47.png");
@@ -73,14 +77,19 @@ public class GameView extends View {
 
 
 
+        buttonPause = new Texture("buttonPause.png");
+        boundsPause = new Rectangle(20, 30 - buttonPause.getHeight()/2, buttonPause.getWidth(), buttonPause.getHeight());
+
+        isPaused = false;
+
+
         Box2D.init();
         //Setup Engine
         ecsEngine = new ECSEngine(world, camera);
 
-
         //Create Entities
-        ecsEngine.createPlayer(400, 120, world);
-        ecsEngine.createPlayer(250, 100, world);
+        ecsEngine.createPlayer(400, 120, world, 1);
+        ecsEngine.createPlayer(250, 100, world, 2);
         ecsEngine.createObstacle(200, 200, world);
         ecsEngine.createObstacle(300, 400, world);
         ecsEngine.createObstacle(600, 600, world);
@@ -154,10 +163,13 @@ public class GameView extends View {
                     charge = 0;
                 }
                 System.out.println("Button touched");
-
+            }
+            if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                setIsPaused(true);
+                // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
+                controller.set(new SettingsView(controller, this));
             }
 
-        }
     }
 
     @Override
@@ -176,6 +188,7 @@ public class GameView extends View {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.setProjectionMatrix(camera.combined);
 
+
         if(buttonClicked){
             startTimer();
         }
@@ -184,6 +197,7 @@ public class GameView extends View {
             charge = 100;
         }
         sb.begin();
+        sb.draw(buttonPause, camera.position.x - 300, camera.position.y + 200);
         if(buttonClicked){
             sb.draw(boostButtonUnCharged, camera.position.x-70, camera.position.y-200);
         }
@@ -197,9 +211,6 @@ public class GameView extends View {
         for (final Entity entity : animatedEntities) {
             renderEntity(entity, sb);
         }
-
-
-
     }
 
     @Override
@@ -208,6 +219,14 @@ public class GameView extends View {
         /*for (final Entity entity : animatedEntities){
             entity.dispose(); // må lage en dispose funksjon for disse(?)
         }*/
+        buttonPause.dispose();
     }
 
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setIsPaused(boolean bool) {
+        isPaused = bool;
+    }
 }
