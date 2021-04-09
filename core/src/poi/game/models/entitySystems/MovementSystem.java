@@ -28,9 +28,11 @@ public class MovementSystem extends IteratingSystem{
     }
 
     @Override
-    public void processEntity(final Entity entity, final float deltaTime){
+    public void processEntity(final Entity entity, final float deltaTime/*, boolean buttonClicked*/){
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
-        //bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,bodyComponent.body.getPosition().y+1, 0);
+        /*if(buttonClicked){
+            bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,bodyComponent.body.getPosition().y+1, 0);
+        }*/
         if(Gdx.input.isTouched()){
             touchPos.set(Gdx.input.getX(),Gdx.input.getY(),0);
             if(touchPos.x > bodyComponent.body.getPosition().x+50) {

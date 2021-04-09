@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.maps.MapRenderer;
@@ -19,8 +20,11 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.TimerTask;
 
 import poi.game.Poi;
 import poi.game.WorldContactListener;
@@ -41,9 +45,21 @@ public class GameView extends View {
     private final OrthographicCamera camera;
     private final GLProfiler profiler;
     private final Box2DDebugRenderer box2DDebugRenderer;
+
+    private Texture boostButton;
+    private Texture boostButtonUnCharged;
+    private Rectangle boundsBoost;
+    private BitmapFont boostFont;
+    //private Timer boostTimer;
+    private float charge = 100;
+    private double period = 0.1;
+    //private final int boostSeconds = 10; //seconds for boost to recharge
+    private boolean buttonClicked = false;
+
     private Texture buttonPause;
     private Rectangle boundsPause;
     private boolean isPaused;
+
 
     public GameView(MenuController controller) {
         super(controller);
@@ -51,10 +67,21 @@ public class GameView extends View {
         world.setContactListener(new WorldContactListener());
         camera = new OrthographicCamera(WIDTH, HEIGHT);
 
+
+        boostButton = new Texture("shadedDark49.png");
+        boostButtonUnCharged = new Texture("transparentDark47.png");
+        //boundsBoost = new Rectangle(camera.position.x-70, camera.position.y-200, boostButton.getWidth(), boostButton.getHeight());
+        boundsBoost = new Rectangle(250, 405 - boostButton.getHeight()/2, boostButton.getWidth(), boostButton.getHeight());
+        boostFont = new BitmapFont();
+        //boostTimer = new Timer();
+
+
+
         buttonPause = new Texture("buttonPause.png");
         boundsPause = new Rectangle(20, 30 - buttonPause.getHeight()/2, buttonPause.getWidth(), buttonPause.getHeight());
 
         isPaused = false;
+
 
         Box2D.init();
         //Setup Engine
@@ -85,6 +112,31 @@ public class GameView extends View {
 
     }
 
+    /*private void startTimer()
+    {
+        secondsLeft = boostSeconds;
+        boostTimer.scheduleAtFixedRate(new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                if(!gameOver)
+                    secondsLeft--;
+            }
+        }, 0, 1000);
+    }*/
+    private void startTimer(){
+        charge += Gdx.graphics.getRawDeltaTime();
+        if(charge < 100){
+            charge += period;
+            //boostFont.draw(sb, "Seconds left:" + secondsLeft, camera.position.x-30, camera.position.y-180);
+        }
+    }
+
+    private void boost(){
+        //Denne blir kanskje unødvendig hvis vi har controller i movementsystem?
+        //velocity += 10;
+    }
 
     private void renderEntity(Entity entity, SpriteBatch sb) {
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
@@ -95,19 +147,29 @@ public class GameView extends View {
         sb.begin();
         bodyComponent.renderPosition.lerp(bodyComponent.body.getPosition(), Gdx.graphics.getDeltaTime());
         sb.draw(textureComponent.setupSprite(), bodyComponent.body.getPosition().x - bodyComponent.width * 0.5f, bodyComponent.body.getPosition().y - bodyComponent.height * 0.5f, bodyComponent.width, bodyComponent.height);
+
         sb.end();
     }
 
 
     @Override
     protected void handleInput() {
-        if(Gdx.input.justTouched()) {
+        if(Gdx.input.justTouched()){
+            if (boundsBoost.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                //startTimer();
+                if(charge == 100) {
+                    boost();
+                    buttonClicked = true;
+                    charge = 0;
+                }
+                System.out.println("Button touched");
+            }
             if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 setIsPaused(true);
                 // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
                 controller.set(new SettingsView(controller, this));
             }
-        }
+
     }
 
     @Override
@@ -125,9 +187,27 @@ public class GameView extends View {
         Gdx.gl.glClearColor(0, 0, 1, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.setProjectionMatrix(camera.combined);
+
+
+        if(buttonClicked){
+            startTimer();
+        }
+        if(charge > 99){
+            buttonClicked = false;
+            charge = 100;
+        }
         sb.begin();
         sb.draw(buttonPause, camera.position.x - 300, camera.position.y + 200);
+        if(buttonClicked){
+            sb.draw(boostButtonUnCharged, camera.position.x-70, camera.position.y-200);
+        }
+        else{
+            sb.draw(boostButton, camera.position.x-70, camera.position.y-200);
+        }
+
+        boostFont.draw(sb, (int)charge + "%", camera.position.x-30, camera.position.y-180);
         sb.end();
+
         for (final Entity entity : animatedEntities) {
             renderEntity(entity, sb);
         }
@@ -135,6 +215,10 @@ public class GameView extends View {
 
     @Override
     public void dispose() {
+        boostButton.dispose();
+        /*for (final Entity entity : animatedEntities){
+            entity.dispose(); // må lage en dispose funksjon for disse(?)
+        }*/
         buttonPause.dispose();
     }
 
