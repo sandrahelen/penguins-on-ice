@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.maps.MapRenderer;
@@ -49,10 +50,12 @@ public class GameView extends View {
 
     private Texture boostButton;
     private Rectangle boundsBoost;
-    private Timer boostTimer;
-    private int secondsLeft;
-    private final int boostSeconds = 10; //seconds for boost to recharge
-    private boolean gameOver = false;
+    private BitmapFont boostFont;
+    //private Timer boostTimer;
+    private float secondsLeft = 1000f;
+    private float period = 1f;
+    //private final int boostSeconds = 10; //seconds for boost to recharge
+    private boolean buttonClicked = false;
 
     public GameView(MenuController controller) {
         super(controller);
@@ -61,7 +64,9 @@ public class GameView extends View {
         camera = new OrthographicCamera(WIDTH, HEIGHT);
 
         boostButton = new Texture("buttonPlay.png");
-        boundsBoost = new Rectangle(camera.position.x-70, camera.position.y-200, boostButton.getWidth(), boostButton.getHeight());
+        //boundsBoost = new Rectangle(camera.position.x-70, camera.position.y-200, boostButton.getWidth(), boostButton.getHeight());
+        boundsBoost = new Rectangle(250, 405 - boostButton.getHeight()/2, boostButton.getWidth(), boostButton.getHeight());
+        boostFont = new BitmapFont();
         boostTimer = new Timer();
 
 
@@ -109,6 +114,17 @@ public class GameView extends View {
             }
         }, 0, 1000);
     }*/
+    private void startTimer(){
+        secondsLeft += Gdx.graphics.getRawDeltaTime();
+        if(secondsLeft > period){
+            secondsLeft -= period;
+            //boostFont.draw(sb, "Seconds left:" + secondsLeft, camera.position.x-30, camera.position.y-180);
+        }
+    }
+
+    private void boost(){
+        //velocity += 10;
+    }
 
     private void renderEntity(Entity entity, SpriteBatch sb) {
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
@@ -119,6 +135,7 @@ public class GameView extends View {
         sb.begin();
         bodyComponent.renderPosition.lerp(bodyComponent.body.getPosition(), Gdx.graphics.getDeltaTime());
         sb.draw(textureComponent.setupSprite(), bodyComponent.body.getPosition().x - bodyComponent.width * 0.5f, bodyComponent.body.getPosition().y - bodyComponent.height * 0.5f, bodyComponent.width, bodyComponent.height);
+
         sb.end();
     }
 
@@ -128,7 +145,9 @@ public class GameView extends View {
         if(Gdx.input.justTouched()){
             if (boundsBoost.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 //startTimer();
+                buttonClicked = true;
                 System.out.println("Button touched");
+
             }
 
         }
@@ -136,13 +155,10 @@ public class GameView extends View {
 
     @Override
     public void update(float dt) {
-        boundsBoost.x = camera.position.x-70;
-        boundsBoost.y = camera.position.y-200;
-        handleInput();
         ecsEngine.update(dt);
         camera.update();
-        //vector2 = camera.position
         world.step(dt, 6, 2);
+        handleInput();
 
     }
 
@@ -153,13 +169,25 @@ public class GameView extends View {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.setProjectionMatrix(camera.combined);
 
+        if(buttonClicked){
+            startTimer();
+            boost();
+
+        }
+        if(secondsLeft < 1){
+            buttonClicked = false;
+            secondsLeft = 1000f;
+        }
+        sb.begin();
+        sb.draw(boostButton, camera.position.x-70, camera.position.y-200);
+        boostFont.draw(sb, "Recharging:" + secondsLeft, camera.position.x-30, camera.position.y-180);
+        sb.end();
+
         for (final Entity entity : animatedEntities) {
             renderEntity(entity, sb);
         }
 
-        sb.begin();
-        sb.draw(boostButton, camera.position.x-70, camera.position.y-200);
-        sb.end();
+
 
     }
 
