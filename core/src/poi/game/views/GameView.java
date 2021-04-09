@@ -154,10 +154,10 @@ public class GameView extends View {
 
     @Override
     protected void handleInput() {
-        if(Gdx.input.justTouched()){
+        if (Gdx.input.justTouched()) {
             if (boundsBoost.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 //startTimer();
-                if(charge == 100) {
+                if (charge == 100) {
                     boost();
                     buttonClicked = true;
                     charge = 0;
@@ -170,10 +170,11 @@ public class GameView extends View {
                 controller.set(new SettingsView(controller, this));
             }
 
+        }
     }
 
     @Override
-    public void update(float dt) {
+    public void update(float dt){
         ecsEngine.update(dt);
         camera.update();
         world.step(dt, 6, 2);
