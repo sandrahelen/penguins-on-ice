@@ -21,11 +21,11 @@ public class MenuView extends View implements ViewFactory{
     public MenuView(MenuController controller) {
         super(controller);
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
-        titlePoI = new Texture("titlePoI.png");
-        penguin = new Texture("pingvin.png");
-        buttonPlay = new Texture("buttonPlay.png");
-        buttonHighscore = new Texture("buttonHighscore.png");
-        buttonSettings = new Texture("buttonSettings.png");
+        titlePoI = new Texture("general/titlePoI.png");
+        penguin = new Texture("general/pingvin.png");
+        buttonPlay = new Texture("general/buttonPlay.png");
+        buttonHighscore = new Texture("general/buttonHighscore.png");
+        buttonSettings = new Texture("general/buttonSettings.png");
         boundsPlay = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonPlay.getHeight())*3/6 - buttonPlay.getHeight()/2, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsHighscore = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonHighscore.getHeight()/2)*4/6 - buttonHighscore.getHeight()/2, buttonHighscore.getWidth(), buttonHighscore.getHeight());
         boundsSettings = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonSettings.getHeight()/2)*5/6 - buttonSettings.getHeight()/2, buttonSettings.getWidth(), buttonSettings.getHeight());

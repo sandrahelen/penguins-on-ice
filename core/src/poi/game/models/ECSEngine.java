@@ -49,8 +49,8 @@ public class ECSEngine extends PooledEngine {
 
         //Body component
         final BodyComponent body = this.createComponent(BodyComponent.class);
-        body.width = 48;
-        body.height = 48;
+        body.width = 19;
+        body.height = 32;
         bodyDef.gravityScale = 1;
         bodyDef.fixedRotation = true;
         bodyDef.position.set(posX,posY);
@@ -83,7 +83,7 @@ public class ECSEngine extends PooledEngine {
         player.add(playerComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
-        textureComponent.textureAnimation = textureComponent.animate("p1-bak.png", 1,3);
+        textureComponent.textureAnimation = textureComponent.animate("players/p1-bak.png", 1,3);
         player.add(textureComponent);
 
 
