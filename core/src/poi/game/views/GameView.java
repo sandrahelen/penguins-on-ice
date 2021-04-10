@@ -68,8 +68,8 @@ public class GameView extends View {
         camera = new OrthographicCamera(WIDTH, HEIGHT);
 
 
-        boostButton = new Texture("shadedDark49.png");
-        boostButtonUnCharged = new Texture("transparentDark47.png");
+        boostButton = new Texture("boost/shadedDark49.png");
+        boostButtonUnCharged = new Texture("boost/transparentDark47.png");
         //boundsBoost = new Rectangle(camera.position.x-70, camera.position.y-200, boostButton.getWidth(), boostButton.getHeight());
         boundsBoost = new Rectangle(250, 405 - boostButton.getHeight()/2, boostButton.getWidth(), boostButton.getHeight());
         boostFont = new BitmapFont();
@@ -77,7 +77,7 @@ public class GameView extends View {
 
 
 
-        buttonPause = new Texture("buttonPause.png");
+        buttonPause = new Texture("general/buttonPause.png");
         boundsPause = new Rectangle(20, 30 - buttonPause.getHeight()/2, buttonPause.getWidth(), buttonPause.getHeight());
 
         isPaused = false;

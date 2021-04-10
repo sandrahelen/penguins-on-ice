@@ -24,11 +24,11 @@ public class SettingsView extends View implements ViewFactory {
         super(controller);
         this.gameView = gameView;
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
-        titleSettings = new Texture("titleSettings.png");
-        buttonSound = new Texture("buttonSound.png");
-        buttonColor = new Texture("buttonColor.png");
-        buttonMenu = new Texture("buttonMenu.png");
-        buttonResume = new Texture("buttonResume.png");
+        titleSettings = new Texture("general/titleSettings.png");
+        buttonSound = new Texture("general/buttonSound.png");
+        buttonColor = new Texture("general/buttonColor.png");
+        buttonMenu = new Texture("general/buttonMenu.png");
+        buttonResume = new Texture("general/buttonResume.png");
         boundsSound = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonSound.getHeight())*3/6 - buttonSound.getHeight()/2, buttonSound.getWidth(), buttonSound.getHeight());
         boundsColor = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonColor.getHeight()/2)*4/6 - buttonColor.getHeight()/2, buttonColor.getWidth(), buttonColor.getHeight());
         boundsMenu = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonMenu.getHeight()/2)*5/6 - buttonMenu.getHeight()/2, buttonMenu.getWidth(), buttonMenu.getHeight());

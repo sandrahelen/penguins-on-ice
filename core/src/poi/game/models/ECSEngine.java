@@ -102,8 +102,8 @@ public class ECSEngine extends PooledEngine {
     public void createObstacle(int posX, int posY, World world) {
         Entity obstacle = this.createEntity();
         final BodyComponent body = this.createComponent(BodyComponent.class);
-        body.width = 20;
-        body.height = 27;
+        body.width = 36;
+        body.height = 29;
 
         bodyDef.gravityScale = 0;
         bodyDef.position.set(posX, posY);
@@ -132,7 +132,7 @@ public class ECSEngine extends PooledEngine {
         obstacle.add(obstacleComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
-        textureComponent.textureAnimation = textureComponent.animate("obstacles/ice.png", 12, 1);
+        textureComponent.textureAnimation = textureComponent.animate("obstacles/ice-2.png", 12, 1);
         obstacle.add(textureComponent);
 
         this.addEntity(obstacle);
