@@ -21,11 +21,11 @@ public class MenuView extends View implements ViewFactory{
     public MenuView(MenuController controller) {
         super(controller);
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
-        titlePoI = new Texture("titlePoI.png");
-        penguin = new Texture("pingvin.png");
-        buttonPlay = new Texture("buttonPlay.png");
-        buttonHighscore = new Texture("buttonHighscore.png");
-        buttonSettings = new Texture("buttonSettings.png");
+        titlePoI = new Texture("general/titlePoI.png");
+        penguin = new Texture("general/pingvin.png");
+        buttonPlay = new Texture("general/buttonPlay.png");
+        buttonHighscore = new Texture("general/buttonHighscore.png");
+        buttonSettings = new Texture("general/buttonSettings.png");
         boundsPlay = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonPlay.getHeight())*3/6 - buttonPlay.getHeight()/2, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsHighscore = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonHighscore.getHeight()/2)*4/6 - buttonHighscore.getHeight()/2, buttonHighscore.getWidth(), buttonHighscore.getHeight());
         boundsSettings = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonSettings.getHeight()/2)*5/6 - buttonSettings.getHeight()/2, buttonSettings.getWidth(), buttonSettings.getHeight());
@@ -34,6 +34,7 @@ public class MenuView extends View implements ViewFactory{
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
+            // Checks if buttons are pressed before changing view
             if (boundsPlay.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 controller.set(new GameView(controller));
             }
@@ -41,19 +42,9 @@ public class MenuView extends View implements ViewFactory{
                 controller.set(new HighscoreView(controller));
             }
             else if (boundsSettings.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                controller.set(new SettingsView(controller));
+                controller.set(new SettingsView(controller, new GameView(controller)));
             }
         }
-
-        /*if (boundsPlay.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("GAME", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
-        }
-        else if (boundsHighscore.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("HIGHSCORE", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
-        }
-        else if (boundsSettings.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("SETTINGS", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
-        }*/
     }
 
     @Override
@@ -63,7 +54,6 @@ public class MenuView extends View implements ViewFactory{
 
     @Override
     public void render(SpriteBatch sb) {
-        //Gdx.app.log("MenuView", "render");
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
         sb.draw(titlePoI, Poi.WIDTH/8, Poi.HEIGHT - titlePoI.getHeight()*2);
