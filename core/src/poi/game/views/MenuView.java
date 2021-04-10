@@ -34,6 +34,7 @@ public class MenuView extends View implements ViewFactory{
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
+            // Checks if buttons are pressed before changing view
             if (boundsPlay.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 controller.set(new GameView(controller));
             }
@@ -41,19 +42,9 @@ public class MenuView extends View implements ViewFactory{
                 controller.set(new HighscoreView(controller));
             }
             else if (boundsSettings.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                controller.set(new SettingsView(controller));
+                controller.set(new SettingsView(controller, new GameView(controller)));
             }
         }
-
-        /*if (boundsPlay.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("GAME", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
-        }
-        else if (boundsHighscore.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("HIGHSCORE", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
-        }
-        else if (boundsSettings.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("SETTINGS", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
-        }*/
     }
 
     @Override
@@ -63,7 +54,6 @@ public class MenuView extends View implements ViewFactory{
 
     @Override
     public void render(SpriteBatch sb) {
-        //Gdx.app.log("MenuView", "render");
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
         sb.draw(titlePoI, Poi.WIDTH/8, Poi.HEIGHT - titlePoI.getHeight()*2);
