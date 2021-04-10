@@ -83,7 +83,12 @@ public class ECSEngine extends PooledEngine {
         player.add(playerComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
+        //Animation walk
         textureComponent.textureAnimation = textureComponent.animate("players/p1-bak.png", 1,3);
+        //Animation for boost
+        //textureComponent.textureAnimation = textureComponent.animate("players/p1-skli-bak.png", 1,3);
+        //Animation for finishline
+        //textureComponent.textureAnimation = textureComponent.animate("players/p1-finish.png", 6,3);
         player.add(textureComponent);
 
 
