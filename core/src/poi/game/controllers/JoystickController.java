@@ -2,9 +2,11 @@ package poi.game.controllers;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
-public class GameController {
+public class JoystickController {
     private final int MAX_POS = 25;
     public Texture background;
     public Texture base;
@@ -14,14 +16,16 @@ public class GameController {
     private Vector2 position;
     private OrthographicCamera cam;
     private final int id;
+    private Rectangle boundsJoystick;
 
-    public GameController (OrthographicCamera cam, int id) {
+    public JoystickController(OrthographicCamera cam, int id) {
         this.cam = cam;
         this.id = id;
         background = new Texture("joystick/background.png");
         base = new Texture("joystick/base.png");
         joystick = new Texture("joystick/joystick.png");
         setStartPosition();
+        boundsJoystick = new Rectangle(45, 392 - ((joystick.getHeight()/2)/2), joystick.getWidth()/2, joystick.getHeight()/2);
     }
 
     private void setStartPosition() {
@@ -35,6 +39,10 @@ public class GameController {
             startPosY = 175 - this.cam.position.y;
             position = new Vector2(startPosX, startPosY);
         }
+    }
+
+    public Rectangle getBounds() {
+        return boundsJoystick;
     }
 
     public Vector2 getPosition() {
