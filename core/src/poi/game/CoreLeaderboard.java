@@ -12,7 +12,7 @@ public class CoreLeaderboard implements Leaderboard {
     }
 
     @Override
-    public void setOnValueChangedListener() {
+    public void setOnValueChangedListener(Datahandler datahandler) {
 
     }
 }

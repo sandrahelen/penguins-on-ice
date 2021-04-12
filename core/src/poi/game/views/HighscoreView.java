@@ -1,20 +1,25 @@
 package poi.game.views;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import poi.game.Leaderboard;
+import com.badlogic.gdx.math.Vector3;
+
+import poi.game.Datahandler;
 import poi.game.Poi;
 import poi.game.controllers.MenuController;
 import poi.game.models.factories.ViewFactory;
 
 
-public class HighscoreView extends View implements ViewFactory, Leaderboard {
+public class HighscoreView extends View implements ViewFactory {
 
     private Texture titleHighscore;
     private Texture boardHighscore;
     private Texture buttonMenu;
     private Rectangle boundsMenu;
+    private BitmapFont text;
+    private Datahandler datahandler;
 
     public HighscoreView (MenuController controller) {
         super(controller);
@@ -22,49 +27,48 @@ public class HighscoreView extends View implements ViewFactory, Leaderboard {
         titleHighscore = new Texture("titleHighscore.png");
         boardHighscore = new Texture("boardHighscore.png");
         buttonMenu = new Texture("buttonMenu.png");
-        boundsMenu = new Rectangle(Poi.WIDTH/4, (Poi.HEIGHT - buttonMenu.getHeight()/2)*15/16 - buttonMenu.getHeight()/2, buttonMenu.getWidth(), buttonMenu.getHeight());
+        boundsMenu = new Rectangle(Poi.WIDTH/2-buttonMenu.getWidth()/2,Poi.HEIGHT/16, buttonMenu.getWidth(), buttonMenu.getHeight());
+        text = new BitmapFont();
 
-    }
-    public void submitScore(String user, int score) {
-        Gdx.app.log("Html5Leaderboard", "would have submitted score for user " + user + ": " + score);
-    }
-    @Override
-    public void FirstFireBaseTest() {
-    }
-
-    @Override
-    public void setOnValueChangedListener() {
-
+        datahandler = controller.getDatahandler();
+        controller.getLeaderboard().setOnValueChangedListener(datahandler);
     }
 
     @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
-            if (boundsMenu.contains(Gdx.input.getX(), Gdx.input.getY())) {
+            Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+            if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
                 controller.set(new MenuView(controller));
             }
         }
-
-        if (boundsMenu.contains(Gdx.input.getX(), Gdx.input.getY())) {
-            Gdx.app.log("MENU", "[" + Gdx.input.getX() + ", " + Gdx.input.getY() +"]");
-        }
-
     }
 
     @Override
     public void update(float dt) {
         handleInput();
+        controller.getLeaderboard().setOnValueChangedListener(datahandler);
+        //System.out.println("Highscore " + datahandler.getScores());
     }
 
     @Override
     public void render(SpriteBatch sb) {
         //Gdx.app.log("Highscore", "render");
         sb.setProjectionMatrix(cam.combined);
-        submitScore("user1", 50);
         sb.begin();
-        sb.draw(titleHighscore, Poi.WIDTH/4, Poi.HEIGHT - titleHighscore.getHeight()*2);
-        sb.draw(boardHighscore, Poi.WIDTH/10,Poi.HEIGHT*3/16);
-        sb.draw(buttonMenu, Poi.WIDTH/4,Poi.HEIGHT/16);
+        sb.draw(titleHighscore, Poi.WIDTH/2-titleHighscore.getWidth()/2, Poi.HEIGHT - titleHighscore.getHeight()*2);
+        sb.draw(boardHighscore, Poi.WIDTH/2-boardHighscore.getWidth()/2/*/10*/,Poi.HEIGHT*3/16);
+        sb.draw(buttonMenu, Poi.WIDTH/2-buttonMenu.getWidth()/2,Poi.HEIGHT/16);
+        text.draw(sb, "Name", Poi.WIDTH/10, Poi.HEIGHT-Poi.HEIGHT*3/16);
+        text.draw(sb, "Time", Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16);
+
+        // Printing out scores from Firebase database on to the scoreboard
+        int i = Poi.HEIGHT*3/16;
+        for (String score : controller.getDatahandler().getScores().keySet()) {
+            text.draw(sb, score, Poi.WIDTH/10, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
+            text.draw(sb, String.valueOf(controller.getDatahandler().getScores().get(score)), Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
+            i += 20;
+        }
         sb.end();
     }
 
@@ -72,6 +76,6 @@ public class HighscoreView extends View implements ViewFactory, Leaderboard {
         titleHighscore.dispose();
         boardHighscore.dispose();
         buttonMenu.dispose();
+        text.dispose();
     }
-
 }
