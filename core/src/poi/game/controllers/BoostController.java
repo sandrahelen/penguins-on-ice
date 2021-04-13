@@ -16,6 +16,7 @@ public class BoostController {
     private float charge = 100;
     private double period = 0.1;
 
+
     public BoostController(float startPosX, float startPosY) {
         boostButton = new Texture("boost/transparentDark47.png");
         boostButtonUnCharged = new Texture("boost/shadedDark49.png");
