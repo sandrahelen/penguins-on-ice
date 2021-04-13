@@ -1,63 +1,72 @@
 package poi.game.controllers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
+
+import poi.game.models.entityComponents.BoostComponent;
+import poi.game.views.SettingsView;
+
 
 public class BoostController {
 
-    public Texture boostButton;
-    public Texture boostButtonUnCharged;
-    private Rectangle boundsBoost;
-    private BitmapFont boostFont;
-    private float charge = 100;
-    private double period = 0.1;
-    private boolean buttonClicked = false;
+    public BoostComponent boostComponent1;
+    public BoostComponent boostComponent2;
 
-
-    public BoostController(float startPosX, float startPosY) {
-        boostButton = new Texture("boost/transparentDark47.png");
-        boostButtonUnCharged = new Texture("boost/shadedDark49.png");
-        boundsBoost = new Rectangle(startPosX, startPosY, boostButton.getWidth(), boostButton.getHeight());
-        boostFont = new BitmapFont();
+    public BoostController(){
+        boostComponent1 = new BoostComponent(220, 200);
+        boostComponent2 = new BoostComponent(320, 200);
     }
-
-
-    public Rectangle getBoundsBoost(){return boundsBoost;}
-
-    public Texture getBoostButton(){return boostButton;}
-
-    public Texture getBoostButtonUnCharged(){return boostButtonUnCharged;}
-
-
-    public BitmapFont getBoostFont() {
-        return boostFont;
-    }
-
-    public boolean getButtonClicked(){return buttonClicked;}
-
-    public void setButtonClicked(boolean buttonClicked){
-        this.buttonClicked = buttonClicked;
-    }
-
-    public float getCharge() {
-        return charge;
-    }
-    public void setCharge(float charge){
-        this.charge = charge;
-    }
-
-
-    public void startTimer(){
-        charge += Gdx.graphics.getRawDeltaTime();
-        if(charge < 100){
-            charge += period;
+    public void handleInput() {
+        if (Gdx.input.justTouched()) {
+            if (boostComponent1.getBoundsBoost().contains(Gdx.input.getX(), Gdx.input.getY())) {
+                if (boostComponent1.getCharge() == 100) {
+                    boostComponent1.setButtonClicked(true);
+                    boostComponent1.setCharge(0);
+                    boostComponent1.setBoost(true);
+                }
+                System.out.println("Button1 touched");
+            }
+            if (boostComponent2.getBoundsBoost().contains(Gdx.input.getX(), Gdx.input.getY())) {
+                if (boostComponent2.getCharge() == 100) {
+                    boostComponent2.setButtonClicked(true);
+                    boostComponent2.setCharge(0);
+                    boostComponent2.setBoost(true);
+                }
+                System.out.println("Button2 touched");
+            }
         }
     }
 
+    public BoostComponent getBoostComponent1() {
+        return boostComponent1;
+    }
 
+    public BoostComponent getBoostComponent2() {
+        return boostComponent2;
+    }
 
+    public void setValues(){
+        if (boostComponent1.getCharge() > 10){
+            boostComponent1.setBoost(false);
+        }
+        if (boostComponent2.getCharge() > 10){
+            boostComponent2.setBoost(false);
+        }
+        if(boostComponent1.getCharge() > 99){
+            boostComponent1.setButtonClicked(false);
+            boostComponent1.setCharge(100);
+        }
+        if(boostComponent2.getCharge() > 99){
+            boostComponent2.setButtonClicked(false);
+            boostComponent2.setCharge(100);
+        }
+    }
+
+    public void startTimer(){
+        if(boostComponent1.getButtonClicked()){
+            boostComponent1.startTimer();
+        }
+        if(boostComponent2.getButtonClicked()){
+            boostComponent2.startTimer();
+        }
+    }
 }
