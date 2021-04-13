@@ -4,11 +4,14 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 
+import poi.game.Poi;
 import poi.game.controllers.BoostController;
 import poi.game.controllers.JoystickController;
 import poi.game.models.entityComponents.AnimationComponent;
@@ -18,6 +21,8 @@ import poi.game.models.entityComponents.PlayerComponent;
 import poi.game.models.entityComponents.TextureComponent;
 import poi.game.models.entitySystems.CameraSystem;
 import poi.game.models.entitySystems.MovementSystem;
+import poi.game.models.entitySystems.TimerSystem;
+import poi.game.models.factories.ComponentFactory;
 
 public class ECSEngine extends PooledEngine {
     private final BodyDef bodyDef;
@@ -46,6 +51,7 @@ public class ECSEngine extends PooledEngine {
         boostController2 = new BoostController(230, 390);
         //addSystem(new MovementSystem(joystickController1, joystickController2, boostController));
         addSystem(new CameraSystem(orthographicCamera));
+        addSystem(new TimerSystem());
 
     }
 

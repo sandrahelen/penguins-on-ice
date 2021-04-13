@@ -1,5 +1,6 @@
 package poi.game.models.entitySystems;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -9,13 +10,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import poi.game.Poi;
 import poi.game.controllers.BoostController;
 import poi.game.controllers.JoystickController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.PlayerComponent;
+import poi.game.views.GameView;
 
 
 public class MovementSystem extends IteratingSystem {
