@@ -61,10 +61,6 @@ public class GameView extends View {
     private ObjectCreator objectCreator;
     private BitmapFont timeFont;
 
-
-    private boolean button1Clicked = false;
-    private boolean button2Clicked = false;
-
     private Texture buttonPause;
     private Rectangle boundsPause;
     private boolean isPaused;
@@ -164,14 +160,14 @@ public class GameView extends View {
                 // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
                 controller.set(new SettingsView(controller, this));
             }
-            if (joystickController1.getBounds().contains(Gdx.input.getX(), Gdx.input.getY())) {
+            /*if (joystickController1.getBounds().contains(Gdx.input.getX(), Gdx.input.getY())) {
                 System.out.println("Joystick touched");
             }
             else {
                 System.out.println("NOT touched");
-            }
+            }*/
 
-        }
+       }
     }
 
     @Override
@@ -179,6 +175,7 @@ public class GameView extends View {
         ecsEngine.update(dt);
         camera.update();
         world.step(dt, 6, 2);
+        gamecontroller.handleinput();
         handleInput();
 
     }
@@ -220,21 +217,21 @@ public class GameView extends View {
         sb.draw(joystickController2.joystick, camera.position.x - joystickController2.getPosition().x, camera.position.y - joystickController2.getPosition().y, 50, 50);
         if(boostController1.getButtonClicked()){
             boostController1.startTimer();
-            sb.draw(boostController1.getBoostButton(), camera.position.x-70, camera.position.y-200);
+            sb.draw(boostController1.getBoostButton(), camera.position.x-100, camera.position.y-100);
         }
         else{
-            sb.draw(boostController1.getBoostButtonUnCharged(), camera.position.x-70, camera.position.y-200);
+            sb.draw(boostController1.getBoostButtonUnCharged(), camera.position.x-100, camera.position.y-100);
         }
         if(boostController2.getButtonClicked()){
             boostController2.startTimer();
-            sb.draw(boostController2.getBoostButton(), camera.position.x-50, camera.position.y-200);
+            sb.draw(boostController2.getBoostButton(), camera.position.x, camera.position.y-100);
         }
         else{
-            sb.draw(boostController2.getBoostButtonUnCharged(), camera.position.x-50, camera.position.y-200);
+            sb.draw(boostController2.getBoostButtonUnCharged(), camera.position.x, camera.position.y-100);
         }
 
-        boostController1.getBoostFont().draw(sb, (int)boostController1.getCharge() + "%", camera.position.x-30, camera.position.y-180);
-        boostController2.getBoostFont().draw(sb, (int)boostController2.getCharge() + "%", camera.position.x-50, camera.position.y-180);
+        boostController1.getBoostFont().draw(sb, (int)boostController1.getCharge() + "%", camera.position.x-100, camera.position.y-100);
+        boostController2.getBoostFont().draw(sb, (int)boostController2.getCharge() + "%", camera.position.x, camera.position.y-100);
         sb.end();
 
         for (final Entity entity : animatedEntities) {

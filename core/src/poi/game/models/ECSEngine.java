@@ -47,8 +47,8 @@ public class ECSEngine extends PooledEngine {
         //Iterating systems
         joystickController1 = new JoystickController(orthographicCamera, 1);
         joystickController2 = new JoystickController(orthographicCamera, 2);
-        boostController1 = new BoostController(250, 390);
-        boostController2 = new BoostController(230, 390);
+        boostController1 = new BoostController(220, 200);
+        boostController2 = new BoostController(320, 200);
         //addSystem(new MovementSystem(joystickController1, joystickController2, boostController));
         addSystem(new CameraSystem(orthographicCamera));
         addSystem(new TimerSystem());
