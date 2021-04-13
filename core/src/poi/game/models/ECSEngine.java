@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import poi.game.Poi;
 import poi.game.models.entityComponents.AnimationComponent;
@@ -17,7 +18,9 @@ import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.ObstacleComponent;
 import poi.game.models.entityComponents.PlayerComponent;
 import poi.game.models.entityComponents.TextureComponent;
+import poi.game.models.entitySystems.CameraBoundsCollisionSystem;
 import poi.game.models.entitySystems.CameraSystem;
+import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.MovementSystem;
 import poi.game.models.entitySystems.TimerSystem;
 import poi.game.models.factories.ComponentFactory;
@@ -32,7 +35,7 @@ public class ECSEngine extends PooledEngine {
     public static final ComponentMapper<TextureComponent> textureMapper = ComponentMapper.getFor(TextureComponent.class);
 
 
-    public ECSEngine(final World world, final OrthographicCamera orthographicCamera) {
+    public ECSEngine(final World world, final OrthographicCamera orthographicCamera, TiledMap tiledMap) {
         super();
 
         bodyDef = new BodyDef();
@@ -42,6 +45,8 @@ public class ECSEngine extends PooledEngine {
         addSystem(new MovementSystem(orthographicCamera));
         addSystem(new CameraSystem(orthographicCamera));
         addSystem(new TimerSystem());
+        addSystem(new CameraBoundsCollisionSystem(orthographicCamera));
+        addSystem(new GoalSystem(tiledMap));
 
     }
 

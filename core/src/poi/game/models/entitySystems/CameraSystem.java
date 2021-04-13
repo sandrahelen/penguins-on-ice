@@ -32,10 +32,10 @@ public class CameraSystem extends IteratingSystem {
         }
         if(pos1 != null && pos2 != null ) {
             if (pos1.y < pos2.y) {
-                camera.position.set(Poi.WIDTH/2, pos1.y, 0);
+                camera.position.set(Poi.WIDTH/2, pos1.y+Poi.HEIGHT/4, 0);
             }
             else{
-                camera.position.set(Poi.WIDTH/2,pos2.y, 0);
+                camera.position.set(Poi.WIDTH/2,pos2.y+Poi.HEIGHT/4, 0);
             }
         }
         }
