@@ -26,7 +26,6 @@ public class SettingsView extends View implements ViewFactory {
         super(controller);
         this.gameView = gameView;
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
-<<<<<<< core/src/poi/game/views/SettingsView.java
         titleSettings = new Texture("general/titleSettings.png");
         buttonSound = new Texture("general/buttonSound.png");
         buttonColor = new Texture("general/buttonColor.png");
