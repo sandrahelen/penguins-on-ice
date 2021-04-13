@@ -1,5 +1,7 @@
 package poi.game.desktop;
 import com.badlogic.gdx.Gdx;
+
+import poi.game.Datahandler;
 import poi.game.Leaderboard;
 
 public class DesktopLeaderboard implements Leaderboard {
@@ -13,7 +15,7 @@ public class DesktopLeaderboard implements Leaderboard {
     }
 
     @Override
-    public void setOnValueChangedListener() {
+    public void setOnValueChangedListener(Datahandler data) {
         Gdx.app.log("DesktopLauncher", "would have read from database");
     }
 }

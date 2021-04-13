@@ -3,7 +3,6 @@ package poi.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapRenderer;
@@ -11,45 +10,35 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import poi.game.controllers.MenuController;
 import poi.game.views.MenuView;
-import poi.game.views.View;
 
 
 public class Poi extends Game {
 	public static final int WIDTH = 640;
-	public static final int HEIGHT = 480;
+	public static final int HEIGHT = 360;
 
 	private static final String TAG = Poi.class.getSimpleName();
 	private SpriteBatch spriteBatch;
-	private SpriteBatch batch;
-	//Texture img;
-	private BitmapFont text;
 	private MenuController controller;
-	private View view;
-	private Texture playButton;
 
-
-	private final Leaderboard leaderboard;
+	private Leaderboard leaderboard;
+	private Datahandler datahandler;
 
 	public Poi(Leaderboard leaderboard) {
 		this.leaderboard = leaderboard;
+		datahandler = new Datahandler();
 	}
 
 
 	@Override
 	public void create () {
-		spriteBatch = new SpriteBatch();
-		controller = new MenuController();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
+		spriteBatch = new SpriteBatch();
+		controller = new MenuController(leaderboard, datahandler);
+		// Sett MenuView as first view when opening the app
 		controller.push(new MenuView(controller));
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database
-		leaderboard.submitScore("Royce", 50);	// Submitting score to database
-		leaderboard.submitScore("Moira", 600);
-		leaderboard.submitScore("Marit", 30);
-		leaderboard.submitScore("Sandra", 0);
-		leaderboard.submitScore("Endre", 700);	// Not displaying when printed, ok
-		leaderboard.submitScore("Rose", 3);
-		leaderboard.setOnValueChangedListener();	// Limited database to display the 5 lowest scores
+		leaderboard.submitScore("R", 25);
 	}
 
 	@Override
@@ -69,6 +58,5 @@ public class Poi extends Game {
 	public SpriteBatch getSpriteBatch(){
 		return spriteBatch;
 	}
-
 }
 

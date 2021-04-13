@@ -11,12 +11,16 @@ import com.badlogic.gdx.math.Vector3;
 
 
 import poi.game.Poi;
+import poi.game.controllers.GameController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.PlayerComponent;
+import poi.game.views.GameView;
 
 
-public class MovementSystem extends IteratingSystem {
+
+public class MovementSystem extends IteratingSystem{
+    public static int touch = 0;
     private Vector2 xFactor;
     private Vector3 touchPos;
 
@@ -52,7 +56,7 @@ public class MovementSystem extends IteratingSystem {
                 if (ECSEngine.playerMapper.get(entity).id == 2) {
                     bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
                 }
-            }
+}
         }
     }
 }
