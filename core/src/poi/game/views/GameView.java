@@ -175,7 +175,7 @@ public class GameView extends View {
         ecsEngine.update(dt);
         camera.update();
         world.step(dt, 6, 2);
-        gamecontroller.handleinput();
+        //gamecontroller.handleinput();
         handleInput();
 
     }
