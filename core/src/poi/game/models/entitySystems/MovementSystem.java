@@ -11,12 +11,15 @@ import com.badlogic.gdx.math.Vector3;
 
 
 import poi.game.Poi;
+import poi.game.controllers.GameController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.PlayerComponent;
+import poi.game.views.GameView;
 
 
 public class MovementSystem extends IteratingSystem{
+    public static int touch = 0;
     private Vector2 xFactor;
     private Vector3 touchPos;
 
@@ -28,16 +31,18 @@ public class MovementSystem extends IteratingSystem{
     }
 
     @Override
-    public void processEntity(final Entity entity, final float deltaTime){
+    public void processEntity(final Entity entity, final float deltaTime/*, boolean buttonClicked*/){
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
-        //bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,bodyComponent.body.getPosition().y+1, 0);
+        /*if(buttonClicked){
+            bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,bodyComponent.body.getPosition().y+1, 0);
+        }*/
         if(Gdx.input.isTouched()){
             touchPos.set(Gdx.input.getX(),Gdx.input.getY(),0);
             if(touchPos.x > bodyComponent.body.getPosition().x+50) {
                 bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
                 //bodyComponent.body.applyLinearImpulse(100, 0, bodyComponent.body.getWorldCenter().x, bodyComponent.body.getWorldCenter().y, true);
             }
-            else {
+            else if (touchPos.x < bodyComponent.body.getPosition().x - 50) {
                 bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
                 //bodyComponent.body.applyLinearImpulse(-100, 0, bodyComponent.body.getWorldCenter().x, bodyComponent.body.getWorldCenter().y, true);
                 //Gdx.app.log("MyTag", String.valueOf(bodyComponent.body.getPosition().x));

@@ -44,13 +44,13 @@ public class ECSEngine extends PooledEngine {
     }
 
 
-    public void createPlayer(int posX, int posY, World world){
+    public void createPlayer(int posX, int posY, World world, int id){
         Entity player = this.createEntity();
 
         //Body component
         final BodyComponent body = this.createComponent(BodyComponent.class);
-        body.width = 48;
-        body.height = 48;
+        body.width = 19;
+        body.height = 32;
         bodyDef.gravityScale = 1;
         bodyDef.fixedRotation = true;
         bodyDef.position.set(posX,posY);
@@ -80,10 +80,16 @@ public class ECSEngine extends PooledEngine {
         player.add(animationComponent);
 
         final PlayerComponent playerComponent = this.createComponent(PlayerComponent.class);
+        playerComponent.id = id;
         player.add(playerComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
-        textureComponent.textureAnimation = textureComponent.animate("p1-bak.png", 1,3);
+        //Animation walk
+        textureComponent.textureAnimation = textureComponent.animate("players/p1-bak.png", 1,3);
+        //Animation for boost
+        //textureComponent.textureAnimation = textureComponent.animate("players/p1-skli-bak.png", 1,3);
+        //Animation for finishline
+        //textureComponent.textureAnimation = textureComponent.animate("players/p1-finish.png", 6,3);
         player.add(textureComponent);
 
 
@@ -96,8 +102,8 @@ public class ECSEngine extends PooledEngine {
     public void createObstacle(int posX, int posY, World world) {
         Entity obstacle = this.createEntity();
         final BodyComponent body = this.createComponent(BodyComponent.class);
-        body.width = 20;
-        body.height = 27;
+        body.width = 36;
+        body.height = 29;
 
         bodyDef.gravityScale = 0;
         bodyDef.position.set(posX, posY);
@@ -126,7 +132,7 @@ public class ECSEngine extends PooledEngine {
         obstacle.add(obstacleComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
-        textureComponent.textureAnimation = textureComponent.animate("ice-sprites.png", 4, 3);
+        textureComponent.textureAnimation = textureComponent.animate("obstacles/ice-2.png", 12, 1);
         obstacle.add(textureComponent);
 
         this.addEntity(obstacle);

@@ -32,6 +32,7 @@ public class Poi extends Game {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		spriteBatch = new SpriteBatch();
 		controller = new MenuController(leaderboard, datahandler);
+		// Sett MenuView as first view when opening the app
 		controller.push(new MenuView(controller));
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database
