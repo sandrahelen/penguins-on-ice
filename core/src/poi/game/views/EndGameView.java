@@ -13,7 +13,7 @@ import java.util.Random;
 
 import poi.game.Datahandler;
 import poi.game.Poi;
-import poi.game.controllers.MenuController;
+import poi.game.controllers.ChangeViewController;
 import poi.game.models.factories.ViewFactory;
 
 public class EndGameView extends View implements ViewFactory {
@@ -31,7 +31,7 @@ public class EndGameView extends View implements ViewFactory {
     private int endTime = 0;
     private String username = "";
 
-    public EndGameView(MenuController controller) {
+    public EndGameView(ChangeViewController controller) {
         super(controller);
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
         text = new BitmapFont();

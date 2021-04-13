@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
+import poi.game.controllers.ChangeViewController;
 import poi.game.controllers.MenuController;
 import poi.game.Poi;
 import poi.game.models.factories.ViewFactory;
@@ -20,7 +21,7 @@ public class MenuView extends View implements ViewFactory{
     private Rectangle boundsHighscore;
     private Rectangle boundsSettings;
 
-    public MenuView(MenuController controller) {
+    public MenuView(ChangeViewController controller) {
         super(controller);
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
 

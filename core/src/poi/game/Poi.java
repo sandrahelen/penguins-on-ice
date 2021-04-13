@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+import poi.game.controllers.ChangeViewController;
 import poi.game.controllers.MenuController;
 import poi.game.views.MenuView;
 
@@ -18,7 +19,7 @@ public class Poi extends Game {
 
 	private static final String TAG = Poi.class.getSimpleName();
 	private SpriteBatch spriteBatch;
-	private MenuController controller;
+	private ChangeViewController controller;
 
 	private Leaderboard leaderboard;
 	private Datahandler datahandler;
@@ -33,7 +34,7 @@ public class Poi extends Game {
 	public void create () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		spriteBatch = new SpriteBatch();
-		controller = new MenuController(leaderboard, datahandler);
+		controller = new ChangeViewController(leaderboard, datahandler);
 		// Sett MenuView as first view when opening the app
 		controller.push(new MenuView(controller));
 

@@ -2,14 +2,15 @@ package poi.game.views;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import poi.game.controllers.MenuController;
+
+import poi.game.controllers.ChangeViewController;
 
 public abstract class View {
 
     protected OrthographicCamera cam;
-    protected MenuController controller;
+    protected ChangeViewController controller;
 
-    public View(MenuController controller) {
+    public View(ChangeViewController controller) {
         this.controller = controller;
         cam = new OrthographicCamera();
     }

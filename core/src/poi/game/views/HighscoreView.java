@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Datahandler;
 import poi.game.Poi;
+import poi.game.controllers.ChangeViewController;
 import poi.game.controllers.MenuController;
 import poi.game.models.factories.ViewFactory;
 
@@ -21,7 +22,7 @@ public class HighscoreView extends View implements ViewFactory {
     private BitmapFont text;
     private Datahandler datahandler;
 
-    public HighscoreView (MenuController controller) {
+    public HighscoreView (ChangeViewController controller) {
         super(controller);
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
         titleHighscore = new Texture("general/titleHighscore.png");

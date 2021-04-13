@@ -31,6 +31,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.TimerTask;
 import poi.game.Poi;
 import poi.game.WorldContactListener;
+import poi.game.controllers.ChangeViewController;
 import poi.game.controllers.MenuController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
@@ -71,7 +72,7 @@ public class GameView extends View {
     private boolean isPaused;
 
 
-    public GameView(MenuController controller) {
+    public GameView(ChangeViewController controller) {
         super(controller);
         timeFont = new BitmapFont();
         world = new World(new Vector2(0, 200.0f), true);

@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
+import poi.game.controllers.ChangeViewController;
 import poi.game.controllers.MenuController;
 import poi.game.models.factories.ViewFactory;
 
@@ -22,7 +23,7 @@ public class SettingsView extends View implements ViewFactory {
     private Rectangle boundsResume;
     private GameView gameView;
 
-    public SettingsView (MenuController controller, GameView gameView) {
+    public SettingsView (ChangeViewController controller, GameView gameView) {
         super(controller);
         this.gameView = gameView;
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
