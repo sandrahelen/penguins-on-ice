@@ -39,18 +39,17 @@ public class SettingsView extends View implements ViewFactory {
         boundsResume = new Rectangle(20, 30 - buttonResume.getHeight()/2, buttonResume.getWidth(), buttonResume.getHeight());
     }
 
-    @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
             Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
                 gameView.setIsPaused(false);
-                controller.set(new MenuView(controller));
+                changeViewController.set(new MenuView(changeViewController));
             }
             // Can only resume game if game is already paused
             else if (boundsResume.contains(touchTransformed.x, touchTransformed.y) && gameView.isPaused()) {
                 // Change view to existing gameView
-                controller.set(gameView);
+                changeViewController.set(gameView);
             }
         }
     }

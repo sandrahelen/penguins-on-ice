@@ -36,12 +36,11 @@ public class HighscoreView extends View implements ViewFactory {
         controller.getLeaderboard().setOnValueChangedListener(datahandler);
     }
 
-    @Override
     public void handleInput() {
         if(Gdx.input.justTouched()){
             Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
-                controller.set(new MenuView(controller));
+                changeViewController.set(new MenuView(changeViewController));
             }
         }
     }
@@ -49,7 +48,7 @@ public class HighscoreView extends View implements ViewFactory {
     @Override
     public void update(float dt) {
         handleInput();
-        controller.getLeaderboard().setOnValueChangedListener(datahandler);
+        changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
         //System.out.println("Highscore " + datahandler.getScores());
     }
 
@@ -66,9 +65,9 @@ public class HighscoreView extends View implements ViewFactory {
 
         // Printing out scores from Firebase database on to the scoreboard
         int i = Poi.HEIGHT*3/16;
-        for (String score : controller.getDatahandler().getScores().keySet()) {
+        for (String score : changeViewController.getDatahandler().getScores().keySet()) {
             text.draw(sb, score, Poi.WIDTH/10, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
-            text.draw(sb, String.valueOf(controller.getDatahandler().getScores().get(score)), Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
+            text.draw(sb, String.valueOf(changeViewController.getDatahandler().getScores().get(score)), Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
             i += 20;
         }
         sb.end();

@@ -4,27 +4,21 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
 import poi.game.controllers.ChangeViewController;
-import poi.game.controllers.MenuController;
 import poi.game.views.MenuView;
 
-
 public class Poi extends Game {
+
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 360;
 
 	private static OrthographicCamera camera;
 	private static OrthographicCamera cameraGame;
 
-	private static final String TAG = Poi.class.getSimpleName();
-
 	private SpriteBatch spriteBatch;
-	private ChangeViewController controller;
+	private static ChangeViewController controller;
 
 	private Leaderboard leaderboard;
 	private Datahandler datahandler;
@@ -34,15 +28,16 @@ public class Poi extends Game {
 		datahandler = new Datahandler();
 	}
 
-
 	@Override
 	public void create () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
-		spriteBatch = new SpriteBatch();
-		controller = new ChangeViewController(leaderboard, datahandler);
+
 		camera = new OrthographicCamera(WIDTH, HEIGHT);
 		camera.setToOrtho(false, WIDTH, HEIGHT);
 		cameraGame = new OrthographicCamera(WIDTH, HEIGHT);
+
+		spriteBatch = new SpriteBatch();
+		controller = new ChangeViewController(leaderboard, datahandler);
 		// Sett MenuView as first view when opening the app
 		controller.push(new MenuView(controller));
 
@@ -64,16 +59,16 @@ public class Poi extends Game {
 		super.dispose();
 	}
 
-	public SpriteBatch getSpriteBatch(){
-		return spriteBatch;
-	}
-
 	public static OrthographicCamera getCamera(){
 		return camera;
 	}
 
 	public static OrthographicCamera getCameraGame(){
 		return cameraGame;
+	}
+
+	public static ChangeViewController getController(){
+		return controller;
 	}
 }
 

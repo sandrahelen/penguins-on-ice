@@ -167,8 +167,6 @@ public class GameView extends View {
         sb.end();
     }
 
-
-    @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
             if (boundsBoost.contains(Gdx.input.getX(), Gdx.input.getY())) {
@@ -183,7 +181,7 @@ public class GameView extends View {
             if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 setIsPaused(true);
                 // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
-                controller.set(new SettingsView(controller, this));
+                changeViewController.set(new SettingsView(changeViewController, this));
             }
 
         }

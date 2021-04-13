@@ -59,17 +59,16 @@ public class EndGameView extends View implements ViewFactory {
         controller.getLeaderboard().setOnValueChangedListener(datahandler);
     }
 
-    @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
             Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (boundsSubmit.contains(touchTransformed.x, touchTransformed.y)) {
                 username = textfield.getText();
                 endTime = new Random().nextInt(101);    // Placeholder for time-score, random int between 0-100
-                controller.getLeaderboard().submitScore(username, endTime);     // Submits the score to Firebase database
-                controller.getLeaderboard().setOnValueChangedListener(datahandler);
+                changeViewController.getLeaderboard().submitScore(username, endTime);     // Submits the score to Firebase database
+                changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
                 Gdx.input.setOnscreenKeyboardVisible(false);    // Disable displaying keyboard
-                controller.set(new HighscoreView(controller));
+                changeViewController.set(new HighscoreView(changeViewController));
             }
         }
     }
