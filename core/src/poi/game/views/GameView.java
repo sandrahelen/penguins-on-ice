@@ -170,7 +170,7 @@ public class GameView extends View {
 
         sb.begin();
 
-        sb.draw(pauseController.getPauseComponent().getButtonPause(), camera.position.x - 300, camera.position.y + 200);
+        sb.draw(pauseController.getPauseComponent().getButtonPause(), camera.position.x - 290, camera.position.y + 140);
         //Draw controller player 1
         sb.draw(joystickController1.base, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
         sb.draw(joystickController1.background, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
@@ -222,4 +222,5 @@ public class GameView extends View {
     public void setIsPaused(boolean bool) {
         isPaused = bool;
     }*/
+    public PauseController getPauseController(){return pauseController;}
 }

@@ -16,6 +16,7 @@ public class PauseController {
 
     public void handleInput(MenuController controller, GameView gameView) {
         if (Gdx.input.justTouched()) {
+
             if (pauseComponent.getBoundsPause().contains(Gdx.input.getX(), Gdx.input.getY())) {
                 pauseComponent.setPaused(true);
                 // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed

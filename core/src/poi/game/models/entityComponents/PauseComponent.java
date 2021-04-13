@@ -11,7 +11,7 @@ public class PauseComponent {
 
     public PauseComponent(){
         buttonPause = new Texture("general/buttonPause.png");
-        boundsPause = new Rectangle(20, 30 - buttonPause.getHeight()/2, buttonPause.getWidth(), buttonPause.getHeight());
+        boundsPause = new Rectangle(30, 30 - buttonPause.getHeight()/2, buttonPause.getWidth(), buttonPause.getHeight());
     }
 
     public Rectangle getBoundsPause(){return boundsPause;}
