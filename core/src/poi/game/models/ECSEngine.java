@@ -4,10 +4,13 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import poi.game.controllers.BoostController;
 import poi.game.models.entityComponents.BoostComponent;
@@ -17,9 +20,12 @@ import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.ObstacleComponent;
 import poi.game.models.entityComponents.PlayerComponent;
 import poi.game.models.entityComponents.TextureComponent;
+import poi.game.models.entitySystems.CameraBoundsCollisionSystem;
 import poi.game.models.entitySystems.CameraSystem;
+import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.MovementSystem;
 import poi.game.models.entitySystems.TimerSystem;
+import poi.game.models.factories.ComponentFactory;
 
 public class ECSEngine extends PooledEngine {
     private final BodyDef bodyDef;
@@ -34,7 +40,7 @@ public class ECSEngine extends PooledEngine {
     public static final ComponentMapper<TextureComponent> textureMapper = ComponentMapper.getFor(TextureComponent.class);
 
 
-    public ECSEngine(final World world, final OrthographicCamera orthographicCamera) {
+    public ECSEngine(final World world, final OrthographicCamera orthographicCamera, TiledMap tiledMap) {
         super();
 
         bodyDef = new BodyDef();
@@ -44,9 +50,11 @@ public class ECSEngine extends PooledEngine {
         joystickController1 = new JoystickController(orthographicCamera, 1);
         joystickController2 = new JoystickController(orthographicCamera, 2);
         boostController = new BoostController();
-        addSystem(new MovementSystem(joystickController1, joystickController2, boostController));
+        addSystem(new MovementSystem(orthographicCamera, joystickController1, joystickController2, boostController));
         addSystem(new CameraSystem(orthographicCamera));
         addSystem(new TimerSystem());
+        addSystem(new CameraBoundsCollisionSystem(orthographicCamera));
+        addSystem(new GoalSystem(tiledMap));
 
     }
 

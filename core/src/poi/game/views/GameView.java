@@ -21,7 +21,13 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import poi.game.Map.ObjectCreator;
+import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.TimerTask;
+import poi.game.Poi;
 import poi.game.WorldContactListener;
 import poi.game.controllers.BoostController;
 import poi.game.controllers.PauseController;
@@ -32,6 +38,7 @@ import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.TextureComponent;
+import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.TimerSystem;
 
 
@@ -82,14 +89,13 @@ public class GameView extends View {
         Box2D.init();
 
         //Setup Engine
-        ecsEngine = new ECSEngine(world, camera);
+        assetmanager.finishLoading();
+        ecsEngine = new ECSEngine(world, camera, assetmanager.get("Map/Map1.tmx", TiledMap.class));
         joystickController1 = ecsEngine.getGameController();
         joystickController2 = ecsEngine.getGameController();
         //boostComponent1 = ecsEngine.getBoostContoller1();
         //boostComponent2 = ecsEngine.getBoostContoller2();
         boostController = ecsEngine.getBoostContoller();
-
-
 
         //Create Entities
         ecsEngine.createPlayer(200, 300, world, 1);
@@ -152,8 +158,11 @@ public class GameView extends View {
         world.step(dt, 6, 2);
         boostController.handleInput();
         pauseController.handleInput(controller, this);
-        //handleInput();
+        handleInput();
 
+        if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
+            controller.set(new MenuView(controller));
+        }
     }
 
     @Override
