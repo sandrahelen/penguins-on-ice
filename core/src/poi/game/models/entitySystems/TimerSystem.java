@@ -7,8 +7,9 @@ public class TimerSystem extends IntervalSystem {
     private float elapsedTime;
     private int seconds;
     private int minutes;
-    private int hours;
-    private String time;
+    private String stringTime;
+    private int time;
+
 
 
     public TimerSystem(){
@@ -16,8 +17,7 @@ public class TimerSystem extends IntervalSystem {
         elapsedTime = 0;
         seconds = 0;
         minutes = 0;
-        hours = 0;
-        time = "";
+        stringTime = "";
     }
 
     @Override
@@ -27,27 +27,25 @@ public class TimerSystem extends IntervalSystem {
             while (elapsedTime >= 1) {
                 elapsedTime -= 1;
                 ++seconds;
+                ++time;
                 if (seconds == 60) {
                     seconds = 0;
                     ++minutes;
-                    if (minutes == 60) {
-                        minutes = 0;
-                        ++hours;
-                    }
                 }
             }
         }
-        Gdx.app.log("Time:", getTime());
     }
 
-    public String getTime(){
-        this.time = "";
-        this.time += "H:";
-        this.time += String.valueOf(hours);
-        this.time += " M:";
-        this.time += String.valueOf(minutes);
-        this.time += " S:";
-        this.time += String.valueOf(seconds);
+    public String getStringTime(){
+        this.stringTime = "";
+        this.stringTime += " M:";
+        this.stringTime += String.valueOf(minutes);
+        this.stringTime += " S:";
+        this.stringTime += String.valueOf(seconds);
+        return stringTime;
+    }
+
+    public int getTime(){
         return time;
     }
 
