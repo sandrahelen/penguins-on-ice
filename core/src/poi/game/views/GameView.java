@@ -195,7 +195,8 @@ public class GameView extends View {
         world.step(dt, 6, 2);
         handleInput();
         if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
-            controller.set(new MenuView(controller));
+            //controller.set(new MenuView(controller));
+            controller.set(new EndGameView(controller));
         }
     }
 

@@ -41,6 +41,7 @@ public class MenuView extends View implements ViewFactory{
             // Checks if buttons are pressed before changing view
             if (boundsPlay.contains(touchTransformed.x, touchTransformed.y)) {
                 controller.set(new GameView(controller));
+                //controller.set(new EndGameView(controller));
             }
             else if (boundsHighscore.contains(touchTransformed.x, touchTransformed.y)) {
                 controller.set(new HighscoreView(controller));
