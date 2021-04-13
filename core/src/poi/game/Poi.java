@@ -11,8 +11,8 @@ import poi.game.views.MenuView;
 
 
 public class Poi extends Game {
-	public static final int WIDTH = 360;
-	public static final int HEIGHT = 640;
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 360;
 
 	private static final String TAG = Poi.class.getSimpleName();
 	private SpriteBatch spriteBatch;
