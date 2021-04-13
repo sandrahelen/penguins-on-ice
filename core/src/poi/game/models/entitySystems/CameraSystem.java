@@ -24,7 +24,6 @@ public class CameraSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(final Entity entity, final float deltaTime){
-        //Gdx.app.log("Debug", String.valueOf(ECSEngine.bodyMapper.get(entity).body.getPosition().y));
         if(ECSEngine.playerMapper.get(entity).id == 1) {
             pos1 = ECSEngine.bodyMapper.get(entity).body.getPosition();
         }
@@ -35,7 +34,7 @@ public class CameraSystem extends IteratingSystem {
             if (pos1.y < pos2.y) {
                 camera.position.set(Poi.WIDTH/2, pos1.y, 0);
             }
-            if (pos1.y > pos2.y) {
+            else{
                 camera.position.set(Poi.WIDTH/2,pos2.y, 0);
             }
         }
