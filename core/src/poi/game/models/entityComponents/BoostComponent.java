@@ -26,33 +26,6 @@ public class BoostComponent {
         boostFont = new BitmapFont();
     }
 
-    public void setBoost(boolean boost){this.boost = boost;}
-    public boolean getBoost(){return boost;}
-    public Rectangle getBoundsBoost(){return boundsBoost;}
-
-    public Texture getBoostButton(){return boostButton;}
-
-    public Texture getBoostButtonUnCharged(){return boostButtonUnCharged;}
-
-
-    public BitmapFont getBoostFont() {
-        return boostFont;
-    }
-
-    public boolean getButtonClicked(){return buttonClicked;}
-
-    public void setButtonClicked(boolean buttonClicked){
-        this.buttonClicked = buttonClicked;
-    }
-
-    public float getCharge() {
-        return charge;
-    }
-    public void setCharge(float charge){
-        this.charge = charge;
-    }
-
-
     public void startTimer(){
         charge += Gdx.graphics.getRawDeltaTime();
         if(charge < 100){
@@ -60,6 +33,23 @@ public class BoostComponent {
         }
     }
 
+    public void setBoost(boolean boost){this.boost = boost;}
+    public boolean getBoost(){return boost;}
 
+    public Rectangle getBoundsBoost(){return boundsBoost;}
+
+    public Texture getBoostButton(){return boostButton;}
+
+    public Texture getBoostButtonUnCharged(){return boostButtonUnCharged;}
+
+    public BitmapFont getBoostFont(){return boostFont;}
+
+    public boolean getButtonClicked(){return buttonClicked;}
+
+    public void setButtonClicked(boolean buttonClicked){this.buttonClicked = buttonClicked;}
+
+    public float getCharge(){return charge;}
+
+    public void setCharge(float charge){this.charge = charge;}
 
 }

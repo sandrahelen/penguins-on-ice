@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
 import poi.game.controllers.MenuController;
+import poi.game.controllers.PauseController;
 import poi.game.models.factories.ViewFactory;
 
 public class SettingsView extends View implements ViewFactory {
@@ -21,10 +22,12 @@ public class SettingsView extends View implements ViewFactory {
     private Rectangle boundsMenu;
     private Rectangle boundsResume;
     private GameView gameView;
+    private PauseController pauseController;
 
     public SettingsView (MenuController controller, GameView gameView) {
         super(controller);
         this.gameView = gameView;
+        pauseController = new PauseController();
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
         titleSettings = new Texture("general/titleSettings.png");
         buttonSound = new Texture("general/buttonSound.png");
@@ -42,11 +45,12 @@ public class SettingsView extends View implements ViewFactory {
         if(Gdx.input.justTouched()){
             Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
-                gameView.setIsPaused(false);
+                pauseController.getPauseComponent().setPaused(false);
+                //gameView.setIsPaused(false);
                 controller.set(new MenuView(controller));
             }
             // Can only resume game if game is already paused
-            else if (boundsResume.contains(touchTransformed.x, touchTransformed.y) && gameView.isPaused()) {
+            else if (boundsResume.contains(touchTransformed.x, touchTransformed.y) && pauseController.getPauseComponent().getIsPaused()/*gameView.isPaused()*/) {
                 // Change view to existing gameView
                 controller.set(gameView);
             }
@@ -68,7 +72,7 @@ public class SettingsView extends View implements ViewFactory {
         sb.draw(buttonMenu, Poi.WIDTH/2-buttonMenu.getWidth()/2,Poi.HEIGHT/6);
 
         // Only draw resume button if game is paused
-        if (gameView.isPaused()) {
+        if (pauseController.getPauseComponent().getIsPaused()/*gameView.isPaused()*/) {
             sb.draw(buttonResume, 20,Poi.HEIGHT - 30 - buttonResume.getHeight()/2);
         }
         sb.end();

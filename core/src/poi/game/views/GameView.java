@@ -24,6 +24,7 @@ import poi.game.Map.ObjectCreator;
 
 import poi.game.WorldContactListener;
 import poi.game.controllers.BoostController;
+import poi.game.controllers.PauseController;
 import poi.game.models.entityComponents.BoostComponent;
 import poi.game.controllers.JoystickController;
 import poi.game.controllers.MenuController;
@@ -47,17 +48,16 @@ public class GameView extends View {
     private final Box2DDebugRenderer box2DDebugRenderer;
     public final JoystickController joystickController1;
     public final JoystickController joystickController2;
-    //public final BoostComponent boostComponent1;
-    //public final BoostComponent boostComponent2;
     public final BoostController boostController;
+    public final PauseController pauseController;
     private final AssetManager assetmanager;
     public MapRenderer mapRenderer;
     private ObjectCreator objectCreator;
     private BitmapFont timeFont;
 
-    private Texture buttonPause;
+   /* private Texture buttonPause;
     private Rectangle boundsPause;
-    private boolean isPaused;
+    private boolean isPaused;*/
 
 
     public GameView(MenuController controller) {
@@ -71,12 +71,12 @@ public class GameView extends View {
         assetmanager.load("Map/Map1.tmx", TiledMap.class);
 
 
+        pauseController = new PauseController();
 
-
-        buttonPause = new Texture("general/buttonPause.png");
+        /*buttonPause = new Texture("general/buttonPause.png");
         boundsPause = new Rectangle(20, 30 - buttonPause.getHeight()/2, buttonPause.getWidth(), buttonPause.getHeight());
 
-        isPaused = false;
+        isPaused = false;*/
 
 
         Box2D.init();
@@ -129,7 +129,7 @@ public class GameView extends View {
 
     @Override
     protected void handleInput() {
-        if (Gdx.input.justTouched()) {
+        /*if (Gdx.input.justTouched()) {
             if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 setIsPaused(true);
                 // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
@@ -142,7 +142,7 @@ public class GameView extends View {
                 System.out.println("NOT touched");
             }
 
-       }
+       }*/
     }
 
     @Override
@@ -151,7 +151,8 @@ public class GameView extends View {
         camera.update();
         world.step(dt, 6, 2);
         boostController.handleInput();
-        handleInput();
+        pauseController.handleInput(controller, this);
+        //handleInput();
 
     }
 
@@ -169,7 +170,7 @@ public class GameView extends View {
 
         sb.begin();
 
-        sb.draw(buttonPause, camera.position.x - 300, camera.position.y + 200);
+        sb.draw(pauseController.getPauseComponent().getButtonPause(), camera.position.x - 300, camera.position.y + 200);
         //Draw controller player 1
         sb.draw(joystickController1.base, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
         sb.draw(joystickController1.background, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
@@ -211,14 +212,14 @@ public class GameView extends View {
         /*for (final Entity entity : animatedEntities){
             entity.dispose(); // må lage en dispose funksjon for disse(?)
         }*/
-        buttonPause.dispose();
+        //buttonPause.dispose();
     }
 
-    public boolean isPaused() {
+    /*public boolean isPaused() {
         return isPaused;
     }
 
     public void setIsPaused(boolean bool) {
         isPaused = bool;
-    }
+    }*/
 }
