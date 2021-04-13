@@ -26,7 +26,8 @@ public class SettingsView extends View implements ViewFactory {
     public SettingsView (ChangeViewController controller, GameView gameView) {
         super(controller);
         this.gameView = gameView;
-        cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
+        //cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
+        cam = Poi.getCamera();
         titleSettings = new Texture("general/titleSettings.png");
         buttonSound = new Texture("general/buttonSound.png");
         buttonColor = new Texture("general/buttonColor.png");

@@ -23,8 +23,8 @@ public class MenuView extends View implements ViewFactory{
 
     public MenuView(ChangeViewController controller) {
         super(controller);
-        cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
-
+        //cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
+        cam = Poi.getCamera();
         titlePoI = new Texture("general/titlePoI.png");
         penguin = new Texture("general/pingvin.png");
         buttonPlay = new Texture("general/buttonPlay.png");

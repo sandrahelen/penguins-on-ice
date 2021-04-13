@@ -12,7 +12,7 @@ public abstract class View {
 
     public View(ChangeViewController controller) {
         this.controller = controller;
-        cam = new OrthographicCamera();
+        //cam = new OrthographicCamera();
     }
 
     protected abstract void handleInput();

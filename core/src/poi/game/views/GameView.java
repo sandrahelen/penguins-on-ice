@@ -77,7 +77,8 @@ public class GameView extends View {
         timeFont = new BitmapFont();
         world = new World(new Vector2(0, 200.0f), true);
         world.setContactListener(new WorldContactListener());
-        camera = new OrthographicCamera(WIDTH, HEIGHT);
+        //camera = new OrthographicCamera(WIDTH, HEIGHT);
+        camera = Poi.getCameraGame();
         assetmanager = new AssetManager(new InternalFileHandleResolver());
         assetmanager.setLoader(TiledMap.class, new TmxMapLoader(assetmanager.getFileHandleResolver()));
         assetmanager.load("Map/Map1.tmx", TiledMap.class);

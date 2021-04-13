@@ -33,7 +33,8 @@ public class EndGameView extends View implements ViewFactory {
 
     public EndGameView(ChangeViewController controller) {
         super(controller);
-        cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
+        //cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
+        cam = Poi.getCamera();
         text = new BitmapFont();
         titleEndGame = new Texture("titleEndGame.png");
         textfieldBox = new Texture("textField.png");

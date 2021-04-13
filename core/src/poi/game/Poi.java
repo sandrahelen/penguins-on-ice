@@ -3,6 +3,7 @@ package poi.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapRenderer;
@@ -17,7 +18,11 @@ public class Poi extends Game {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 360;
 
+	private static OrthographicCamera camera;
+	private static OrthographicCamera cameraGame;
+
 	private static final String TAG = Poi.class.getSimpleName();
+
 	private SpriteBatch spriteBatch;
 	private ChangeViewController controller;
 
@@ -35,6 +40,9 @@ public class Poi extends Game {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		spriteBatch = new SpriteBatch();
 		controller = new ChangeViewController(leaderboard, datahandler);
+		camera = new OrthographicCamera(WIDTH, HEIGHT);
+		camera.setToOrtho(false, WIDTH, HEIGHT);
+		cameraGame = new OrthographicCamera(WIDTH, HEIGHT);
 		// Sett MenuView as first view when opening the app
 		controller.push(new MenuView(controller));
 
@@ -58,6 +66,14 @@ public class Poi extends Game {
 
 	public SpriteBatch getSpriteBatch(){
 		return spriteBatch;
+	}
+
+	public static OrthographicCamera getCamera(){
+		return camera;
+	}
+
+	public static OrthographicCamera getCameraGame(){
+		return cameraGame;
 	}
 }
 
