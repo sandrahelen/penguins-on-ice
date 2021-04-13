@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.Random;
 
@@ -26,6 +27,7 @@ public class EndGameView extends View implements ViewFactory {
     private Rectangle boundsTextfield;
     private Rectangle boundsSubmit;
     private TextField textfield;
+    private FitViewport viewport;
     private Stage stage;
     private TextField.TextFieldStyle style;
 
@@ -42,7 +44,9 @@ public class EndGameView extends View implements ViewFactory {
         boundsTextfield = new Rectangle(Poi.WIDTH/2-textfieldBox.getWidth()/2, Poi.HEIGHT/2-20, textfieldBox.getWidth(), textfieldBox.getHeight());
         boundsSubmit = new Rectangle(Poi.WIDTH/2-buttonSubmit.getWidth()/2,Poi.HEIGHT/2-buttonSubmit.getHeight()*3/2, buttonSubmit.getWidth(), buttonSubmit.getHeight());
 
-        stage = new Stage();
+        // Adding a textfield to let user write some text
+        viewport = new FitViewport(Poi.WIDTH, Poi.HEIGHT, cam);
+        stage = new Stage(viewport);
         style = new TextField.TextFieldStyle();
         style.font = text;
         style.fontColor = Color.BLACK;
@@ -66,12 +70,12 @@ public class EndGameView extends View implements ViewFactory {
             Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (boundsTextfield.contains(touchTransformed.x, touchTransformed.y)) {
                 // Display keyboard when click
-                //stage.setKeyboardFocus(textfield);
-                //Gdx.input.setOnscreenKeyboardVisible(true); //Displaying keyboard
-                //Gdx.input.setInputProcessor(stage);
+
+                /* // Not working
                 stage.setKeyboardFocus(textfield);
-                textfield.getOnscreenKeyboard().show(true);
-                //Gdx.input.getInputProcessor();
+                Gdx.input.setOnscreenKeyboardVisible(true);
+                */
+
                 System.out.println("Keyboard?");
             }
             if (boundsSubmit.contains(touchTransformed.x, touchTransformed.y)) {
