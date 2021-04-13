@@ -36,6 +36,7 @@ import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.TextureComponent;
+import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.TimerSystem;
 
 
@@ -102,12 +103,12 @@ public class GameView extends View {
 
         Box2D.init();
         //Setup Engine
-        ecsEngine = new ECSEngine(world, camera);
+        assetmanager.finishLoading();
+        ecsEngine = new ECSEngine(world, camera, assetmanager.get("Map/Map1.tmx", TiledMap.class));
 
         //Create Entities
         ecsEngine.createPlayer(200, 300, world, 1);
         ecsEngine.createPlayer(400, 300, world, 2);
-        assetmanager.finishLoading();
         objectCreator = new ObjectCreator(assetmanager.get("Map/Map1.tmx", TiledMap.class), ecsEngine, world);
 
         //For boxbody testing
@@ -193,7 +194,9 @@ public class GameView extends View {
         camera.update();
         world.step(dt, 6, 2);
         handleInput();
-
+        if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
+            controller.set(new MenuView(controller));
+        }
     }
 
     @Override
