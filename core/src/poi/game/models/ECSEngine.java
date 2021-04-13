@@ -12,6 +12,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import poi.game.Poi;
+import poi.game.controllers.BoostController;
+import poi.game.controllers.JoystickController;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.ObstacleComponent;
@@ -25,6 +27,10 @@ import poi.game.models.factories.ComponentFactory;
 public class ECSEngine extends PooledEngine {
     private final BodyDef bodyDef;
     private final FixtureDef fixtureDef;
+    private final JoystickController joystickController1;
+    private final JoystickController joystickController2;
+    private final BoostController boostController1;
+    private final BoostController boostController2;
 
     //Mappers for components
     public static final ComponentMapper<BodyComponent> bodyMapper = ComponentMapper.getFor(BodyComponent.class);
@@ -39,10 +45,30 @@ public class ECSEngine extends PooledEngine {
         fixtureDef = new FixtureDef();
 
         //Iterating systems
-        addSystem(new MovementSystem());
+        joystickController1 = new JoystickController(orthographicCamera, 1);
+        joystickController2 = new JoystickController(orthographicCamera, 2);
+        boostController1 = new BoostController(250, 390);
+        boostController2 = new BoostController(230, 390);
+        //addSystem(new MovementSystem(joystickController1, joystickController2, boostController));
         addSystem(new CameraSystem(orthographicCamera));
         addSystem(new TimerSystem());
 
+    }
+
+    public JoystickController getGameController() {
+        if (joystickController1.getId() == 1) {
+            return joystickController1;
+        }
+        else {
+            return joystickController2;
+        }
+    }
+
+    public BoostController getBoostContoller1() {
+        return boostController1;
+    }
+    public BoostController getBoostContoller2() {
+        return boostController2;
     }
 
 
@@ -139,6 +165,5 @@ public class ECSEngine extends PooledEngine {
 
         this.addEntity(obstacle);
     }
-
 
 }

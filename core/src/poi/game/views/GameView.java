@@ -31,6 +31,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import java.util.TimerTask;
 import poi.game.Poi;
 import poi.game.WorldContactListener;
+import poi.game.controllers.BoostController;
+import poi.game.controllers.JoystickController;
 import poi.game.controllers.MenuController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
@@ -50,21 +52,18 @@ public class GameView extends View {
     private final OrthographicCamera camera;
     private final GLProfiler profiler;
     private final Box2DDebugRenderer box2DDebugRenderer;
+    public final JoystickController joystickController1;
+    public final JoystickController joystickController2;
+    public final BoostController boostController1;
+    public final BoostController boostController2;
     private final AssetManager assetmanager;
     public MapRenderer mapRenderer;
     private ObjectCreator objectCreator;
     private BitmapFont timeFont;
 
 
-    private Texture boostButton;
-    private Texture boostButtonUnCharged;
-    private Rectangle boundsBoost;
-    private BitmapFont boostFont;
-    //private Timer boostTimer;
-    private float charge = 100;
-    private double period = 0.1;
-    //private final int boostSeconds = 10; //seconds for boost to recharge
-    private boolean buttonClicked = false;
+    private boolean button1Clicked = false;
+    private boolean button2Clicked = false;
 
     private Texture buttonPause;
     private Rectangle boundsPause;
@@ -84,16 +83,6 @@ public class GameView extends View {
 
 
 
-
-        boostButton = new Texture("boost/shadedDark49.png");
-        boostButtonUnCharged = new Texture("boost/transparentDark47.png");
-        //boundsBoost = new Rectangle(camera.position.x-70, camera.position.y-200, boostButton.getWidth(), boostButton.getHeight());
-        boundsBoost = new Rectangle(250, 405 - boostButton.getHeight()/2, boostButton.getWidth(), boostButton.getHeight());
-        boostFont = new BitmapFont();
-        //boostTimer = new Timer();
-
-
-
         buttonPause = new Texture("general/buttonPause.png");
         boundsPause = new Rectangle(20, 30 - buttonPause.getHeight()/2, buttonPause.getWidth(), buttonPause.getHeight());
 
@@ -101,8 +90,14 @@ public class GameView extends View {
 
 
         Box2D.init();
+
         //Setup Engine
         ecsEngine = new ECSEngine(world, camera);
+        joystickController1 = ecsEngine.getGameController();
+        joystickController2 = ecsEngine.getGameController();
+        boostController1 = ecsEngine.getBoostContoller1();
+        boostController2 = ecsEngine.getBoostContoller2();
+
 
         //Create Entities
         ecsEngine.createPlayer(200, 300, world, 1);
@@ -123,27 +118,6 @@ public class GameView extends View {
 
         animatedEntities = ecsEngine.getEntitiesFor(Family.all(AnimationComponent.class, BodyComponent.class).get());
 
-    }
-
-    /*private void startTimer()
-    {
-        secondsLeft = boostSeconds;
-        boostTimer.scheduleAtFixedRate(new TimerTask()
-        {
-            @Override
-            public void run()
-            {
-                if(!gameOver)
-                    secondsLeft--;
-            }
-        }, 0, 1000);
-    }*/
-    private void startTimer(){
-        charge += Gdx.graphics.getRawDeltaTime();
-        if(charge < 100){
-            charge += period;
-            //boostFont.draw(sb, "Seconds left:" + secondsLeft, camera.position.x-30, camera.position.y-180);
-        }
     }
 
     private void boost(){
@@ -169,19 +143,32 @@ public class GameView extends View {
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
-            if (boundsBoost.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                //startTimer();
-                if (charge == 100) {
-                    boost();
-                    buttonClicked = true;
-                    charge = 0;
+            if (boostController1.getBoundsBoost().contains(Gdx.input.getX(), Gdx.input.getY())) {
+                if (boostController1.getCharge() == 100) {
+                    //boost();
+                    boostController1.setButtonClicked(true);
+                    boostController1.setCharge(0);
                 }
-                System.out.println("Button touched");
+                System.out.println("Button1 touched");
+            }
+            if (boostController2.getBoundsBoost().contains(Gdx.input.getX(), Gdx.input.getY())) {
+                if (boostController2.getCharge() == 100) {
+                    //boost();
+                    boostController2.setButtonClicked(true);
+                    boostController2.setCharge(0);
+                }
+                System.out.println("Button2 touched");
             }
             if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
                 setIsPaused(true);
                 // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
                 controller.set(new SettingsView(controller, this));
+            }
+            if (joystickController1.getBounds().contains(Gdx.input.getX(), Gdx.input.getY())) {
+                System.out.println("Joystick touched");
+            }
+            else {
+                System.out.println("NOT touched");
             }
 
         }
@@ -207,24 +194,49 @@ public class GameView extends View {
         mapRenderer.render();
 
 
-        if(buttonClicked){
-            startTimer();
+        /*if(boostController1.getButtonClicked()){
+            boostController1.startTimer();
+        }*/
+        if(boostController1.getCharge() > 99){
+            boostController1.setButtonClicked(false);
+            boostController1.setCharge(100);
         }
-        if(charge > 99){
-            buttonClicked = false;
-            charge = 100;
+        /*if(boostController2.getButtonClicked()){
+            boostController2.startTimer();
+        }*/
+        if(boostController2.getCharge() > 99){
+            boostController2.setButtonClicked(false);
+            boostController2.setCharge(100);
         }
         sb.begin();
         sb.draw(buttonPause, camera.position.x - 300, camera.position.y + 200);
-        if(buttonClicked){
-            sb.draw(boostButtonUnCharged, camera.position.x-70, camera.position.y-200);
+        //Draw controller player 1
+        sb.draw(joystickController1.base, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
+        sb.draw(joystickController1.background, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
+        sb.draw(joystickController1.joystick, camera.position.x - joystickController1.getPosition().x, camera.position.y - joystickController1.getPosition().y, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
+        //Draw controller player 2
+        sb.draw(joystickController2.base, camera.position.x, camera.position.y - 200, joystickController2.joystick.getWidth()/2, joystickController2.joystick.getHeight()/2);
+        sb.draw(joystickController2.background, camera.position.x, camera.position.y - 200, joystickController2.joystick.getWidth()/2, joystickController2.joystick.getHeight()/2);
+        sb.draw(joystickController2.joystick, camera.position.x - joystickController2.getPosition().x, camera.position.y - joystickController2.getPosition().y, 50, 50);
+        if(boostController1.getButtonClicked()){
+            boostController1.startTimer();
+            sb.draw(boostController1.getBoostButton(), camera.position.x-70, camera.position.y-200);
         }
         else{
-            sb.draw(boostButton, camera.position.x-70, camera.position.y-200);
+            sb.draw(boostController1.getBoostButtonUnCharged(), camera.position.x-70, camera.position.y-200);
+        }
+        if(boostController2.getButtonClicked()){
+            boostController2.startTimer();
+            sb.draw(boostController2.getBoostButton(), camera.position.x-50, camera.position.y-200);
+        }
+        else{
+            sb.draw(boostController2.getBoostButtonUnCharged(), camera.position.x-50, camera.position.y-200);
         }
 
-        boostFont.draw(sb, (int)charge + "%", camera.position.x-30, camera.position.y-180);
+        boostController1.getBoostFont().draw(sb, (int)boostController1.getCharge() + "%", camera.position.x-30, camera.position.y-180);
+        boostController2.getBoostFont().draw(sb, (int)boostController2.getCharge() + "%", camera.position.x-50, camera.position.y-180);
         sb.end();
+
         for (final Entity entity : animatedEntities) {
             renderEntity(entity, sb);
         }
@@ -232,7 +244,7 @@ public class GameView extends View {
 
     @Override
     public void dispose() {
-        boostButton.dispose();
+        //boostController1.dispose();
         /*for (final Entity entity : animatedEntities){
             entity.dispose(); // må lage en dispose funksjon for disse(?)
         }*/
