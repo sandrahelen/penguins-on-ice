@@ -24,9 +24,9 @@ public class HighscoreView extends View implements ViewFactory {
     public HighscoreView (MenuController controller) {
         super(controller);
         cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
-        titleHighscore = new Texture("titleHighscore.png");
-        boardHighscore = new Texture("boardHighscore.png");
-        buttonMenu = new Texture("buttonMenu.png");
+        titleHighscore = new Texture("general/titleHighscore.png");
+        boardHighscore = new Texture("general/boardHighscore.png");
+        buttonMenu = new Texture("general/buttonMenu.png");
         boundsMenu = new Rectangle(Poi.WIDTH/2-buttonMenu.getWidth()/2,Poi.HEIGHT/16, buttonMenu.getWidth(), buttonMenu.getHeight());
         text = new BitmapFont();
 
