@@ -27,7 +27,7 @@ public class MovementSystem extends IteratingSystem{
 
 
     public MovementSystem(OrthographicCamera camera) {
-        super(Family.all(PlayerComponent.class, BodyComponent.class));
+        super(Family.all(PlayerComponent.class, BodyComponent.class).get());
         touchPos = new Vector3();
         this.camera = camera;
     }
