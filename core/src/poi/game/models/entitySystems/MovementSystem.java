@@ -16,7 +16,6 @@ import poi.game.controllers.JoystickController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.PlayerComponent;
-import poi.game.views.GameView;
 
 
 public class MovementSystem extends IteratingSystem {
@@ -26,24 +25,32 @@ public class MovementSystem extends IteratingSystem {
     private Vector3 touchPos;
     private final JoystickController joystickController1;
     private final JoystickController joystickController2;
-    //private final BoostController boostController1;
-    //private final BoostController boostController2;
+    private final BoostController boostController;
+
     private Rectangle boundsJoystick;
 
 
-    public MovementSystem(JoystickController joystickController1, JoystickController joystickController2/*, BoostController boostController1, BoostController boostController2*/) {
+    public MovementSystem(JoystickController joystickController1, JoystickController joystickController2, BoostController boostController/*, BoostController boostController2*/) {
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
         xFactor = new Vector2(10, 0);
         touchPos = new Vector3();
         this.joystickController1 = joystickController1;
         this.joystickController2 = joystickController2;
-        //this.boostController1 = boostController1;
-        //this.boostController2 = boostController2;
+        this.boostController = boostController;
+
         boundsJoystick = this.joystickController1.getBounds();
     }
 
+
+
     @Override
     public void processEntity(final Entity entity, final float deltaTime) {
+        if(boostController.getBoostComponent1().getBoost()){
+            System.out.println("Player 1 moves faster");
+        }
+        if(boostController.getBoostComponent2().getBoost()){
+            System.out.println("Player 2 moves faster");
+        }
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
         //bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,bodyComponent.body.getPosition().y+1, 0);
         if (Gdx.input.isTouched()) {
