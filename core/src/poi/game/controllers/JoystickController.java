@@ -25,18 +25,18 @@ public class JoystickController {
         base = new Texture("joystick/base.png");
         joystick = new Texture("joystick/joystick.png");
         setStartPosition();
-        boundsJoystick = new Rectangle(45, 392 - ((joystick.getHeight()/2)/2), joystick.getWidth()/2, joystick.getHeight()/2);
+        boundsJoystick = new Rectangle(50, 400 - ((joystick.getHeight()/2)/2), joystick.getWidth()/2, joystick.getHeight()/2);
     }
 
     private void setStartPosition() {
         if (this.id == 1) {
             startPosX = 275 - this.cam.position.x;
-            startPosY = 175 - this.cam.position.y;
+            startPosY = 300 - this.cam.position.y;
             position = new Vector2(startPosX, startPosY);
         }
         if (this.id == 2) {
-            startPosX = 300 - this.cam.position.x;
-            startPosY = 175 - this.cam.position.y;
+            startPosX = 500 - this.cam.position.x;
+            startPosY = 300 - this.cam.position.y;
             position = new Vector2(startPosX, startPosY);
         }
     }

@@ -136,14 +136,6 @@ public class GameView extends View {
         timeFont.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x+ WIDTH/2-100, camera.position.y+ HEIGHT/2-40);
         bodyComponent.renderPosition.lerp(bodyComponent.body.getPosition(), Gdx.graphics.getDeltaTime());
         sb.draw(textureComponent.setupSprite(), bodyComponent.body.getPosition().x - bodyComponent.width * 0.5f, bodyComponent.body.getPosition().y - bodyComponent.height * 0.5f, bodyComponent.width, bodyComponent.height);
-        //Draw controller player 1
-        sb.draw(joystickController1.base, camera.position.x - 300, camera.position.y - 200, 100, 100);
-        sb.draw(joystickController1.background, camera.position.x - 300, camera.position.y - 200, 95, 95);
-        sb.draw(joystickController1.joystick, camera.position.x - joystickController1.getPosition().x, camera.position.y - joystickController1.getPosition().y, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
-        //Draw controller player 2
-        sb.draw(joystickController2.base, camera.position.x, camera.position.y - 200, 100, 100);
-        sb.draw(joystickController2.background, camera.position.x, camera.position.y - 200, 95, 95);
-        sb.draw(joystickController2.joystick, camera.position.x - joystickController2.getPosition().x, camera.position.y - joystickController2.getPosition().y, 50, 50);
         sb.end();
     }
 
@@ -153,16 +145,16 @@ public class GameView extends View {
         if (Gdx.input.justTouched()) {
             if (boostController1.getBoundsBoost().contains(Gdx.input.getX(), Gdx.input.getY())) {
                 if (boostController1.getCharge() == 100) {
-                    boost();
-                    button1Clicked = true;
+                    //boost();
+                    boostController1.setButtonClicked(true);
                     boostController1.setCharge(0);
                 }
                 System.out.println("Button1 touched");
             }
             if (boostController2.getBoundsBoost().contains(Gdx.input.getX(), Gdx.input.getY())) {
                 if (boostController2.getCharge() == 100) {
-                    boost();
-                    button2Clicked = true;
+                    //boost();
+                    boostController2.setButtonClicked(true);
                     boostController2.setCharge(0);
                 }
                 System.out.println("Button2 touched");
@@ -202,29 +194,39 @@ public class GameView extends View {
         mapRenderer.render();
 
 
-        if(button1Clicked){
+        /*if(boostController1.getButtonClicked()){
             boostController1.startTimer();
-        }
+        }*/
         if(boostController1.getCharge() > 99){
-            button1Clicked = false;
+            boostController1.setButtonClicked(false);
             boostController1.setCharge(100);
         }
-        if(button2Clicked){
+        /*if(boostController2.getButtonClicked()){
             boostController2.startTimer();
-        }
+        }*/
         if(boostController2.getCharge() > 99){
-            button2Clicked = false;
+            boostController2.setButtonClicked(false);
             boostController2.setCharge(100);
         }
         sb.begin();
         sb.draw(buttonPause, camera.position.x - 300, camera.position.y + 200);
-        if(button1Clicked){
+        //Draw controller player 1
+        sb.draw(joystickController1.base, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
+        sb.draw(joystickController1.background, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
+        sb.draw(joystickController1.joystick, camera.position.x - joystickController1.getPosition().x, camera.position.y - joystickController1.getPosition().y, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
+        //Draw controller player 2
+        sb.draw(joystickController2.base, camera.position.x, camera.position.y - 200, joystickController2.joystick.getWidth()/2, joystickController2.joystick.getHeight()/2);
+        sb.draw(joystickController2.background, camera.position.x, camera.position.y - 200, joystickController2.joystick.getWidth()/2, joystickController2.joystick.getHeight()/2);
+        sb.draw(joystickController2.joystick, camera.position.x - joystickController2.getPosition().x, camera.position.y - joystickController2.getPosition().y, 50, 50);
+        if(boostController1.getButtonClicked()){
+            boostController1.startTimer();
             sb.draw(boostController1.getBoostButton(), camera.position.x-70, camera.position.y-200);
         }
         else{
             sb.draw(boostController1.getBoostButtonUnCharged(), camera.position.x-70, camera.position.y-200);
         }
-        if(button2Clicked){
+        if(boostController2.getButtonClicked()){
+            boostController2.startTimer();
             sb.draw(boostController2.getBoostButton(), camera.position.x-50, camera.position.y-200);
         }
         else{

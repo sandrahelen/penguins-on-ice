@@ -15,6 +15,7 @@ public class BoostController {
     private BitmapFont boostFont;
     private float charge = 100;
     private double period = 0.1;
+    private boolean buttonClicked = false;
 
 
     public BoostController(float startPosX, float startPosY) {
@@ -34,6 +35,12 @@ public class BoostController {
 
     public BitmapFont getBoostFont() {
         return boostFont;
+    }
+
+    public boolean getButtonClicked(){return buttonClicked;}
+
+    public void setButtonClicked(boolean buttonClicked){
+        this.buttonClicked = buttonClicked;
     }
 
     public float getCharge() {

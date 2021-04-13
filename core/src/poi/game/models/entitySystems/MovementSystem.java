@@ -26,17 +26,19 @@ public class MovementSystem extends IteratingSystem {
     private Vector3 touchPos;
     private final JoystickController joystickController1;
     private final JoystickController joystickController2;
-    private final BoostController boostController;
+    //private final BoostController boostController1;
+    //private final BoostController boostController2;
     private Rectangle boundsJoystick;
 
 
-    public MovementSystem(JoystickController joystickController1, JoystickController joystickController2, BoostController boostController) {
+    public MovementSystem(JoystickController joystickController1, JoystickController joystickController2/*, BoostController boostController1, BoostController boostController2*/) {
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
         xFactor = new Vector2(10, 0);
         touchPos = new Vector3();
         this.joystickController1 = joystickController1;
         this.joystickController2 = joystickController2;
-        this.boostController = boostController;
+        //this.boostController1 = boostController1;
+        //this.boostController2 = boostController2;
         boundsJoystick = this.joystickController1.getBounds();
     }
 
