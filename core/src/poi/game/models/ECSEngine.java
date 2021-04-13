@@ -39,7 +39,7 @@ public class ECSEngine extends PooledEngine {
         fixtureDef = new FixtureDef();
 
         //Iterating systems
-        addSystem(new MovementSystem());
+        addSystem(new MovementSystem(orthographicCamera));
         addSystem(new CameraSystem(orthographicCamera));
         addSystem(new TimerSystem());
 
