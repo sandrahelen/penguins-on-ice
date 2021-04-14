@@ -1,23 +1,44 @@
 package poi.game.controllers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import poi.game.models.entityComponents.JoystickComponent;
 
 public class JoystickController {
-    private final int MAX_POS = 25;
-    public Texture background;
-    public Texture base;
-    public Texture joystick;
-    public float startPosX;
-    private float startPosY;
-    private Vector2 position;
-    private OrthographicCamera cam;
-    private final int id;
-    private Rectangle boundsJoystick;
+    public JoystickComponent joystick1;
+    public JoystickComponent joystick2;
 
+    public JoystickController() {
+        joystick1 = new JoystickComponent(35, 265);
+        joystick2 = new JoystickComponent(555,265);
+    }
+
+    public void handleInput() {
+        if (Gdx.input.justTouched()) {
+            if (joystick1.getBoundsJoystick().contains(Gdx.input.getX(), Gdx.input.getY())) {
+                System.out.println("Joystick1 touched");
+            }
+            else if (joystick2.getBoundsJoystick().contains(Gdx.input.getX(), Gdx.input.getY())) {
+                System.out.println("Joystick2 touched");
+            }
+            else {
+                System.out.println("Joystick NOT touched");
+            }
+        }
+    }
+
+    public JoystickComponent getJoystick1() {
+        return joystick1;
+    }
+
+    public JoystickComponent getJoystick2() {
+        return joystick2;
+    }
+
+    /*
     public JoystickController(OrthographicCamera cam, int id) {
         this.cam = cam;
         this.id = id;
@@ -64,4 +85,5 @@ public class JoystickController {
             position.x = startPosX + MAX_POS;
         }
     }
+     */
 }

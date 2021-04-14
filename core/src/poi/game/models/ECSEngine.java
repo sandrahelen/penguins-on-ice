@@ -4,16 +4,13 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import poi.game.controllers.BoostController;
-import poi.game.models.entityComponents.BoostComponent;
 import poi.game.controllers.JoystickController;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
@@ -25,13 +22,11 @@ import poi.game.models.entitySystems.CameraSystem;
 import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.MovementSystem;
 import poi.game.models.entitySystems.TimerSystem;
-import poi.game.models.factories.ComponentFactory;
 
 public class ECSEngine extends PooledEngine {
     private final BodyDef bodyDef;
     private final FixtureDef fixtureDef;
-    private final JoystickController joystickController1;
-    private final JoystickController joystickController2;
+    private final JoystickController joystickController;
     private final BoostController boostController;
 
     //Mappers for components
@@ -47,10 +42,9 @@ public class ECSEngine extends PooledEngine {
         fixtureDef = new FixtureDef();
 
         //Iterating systems
-        joystickController1 = new JoystickController(orthographicCamera, 1);
-        joystickController2 = new JoystickController(orthographicCamera, 2);
+        joystickController = new JoystickController();
         boostController = new BoostController();
-        addSystem(new MovementSystem(orthographicCamera, joystickController1, joystickController2, boostController));
+        addSystem(new MovementSystem(orthographicCamera, joystickController, boostController));
         addSystem(new CameraSystem(orthographicCamera));
         addSystem(new TimerSystem());
         addSystem(new CameraBoundsCollisionSystem(orthographicCamera));
@@ -58,13 +52,8 @@ public class ECSEngine extends PooledEngine {
 
     }
 
-    public JoystickController getGameController() {
-        if (joystickController1.getId() == 1) {
-            return joystickController1;
-        }
-        else {
-            return joystickController2;
-        }
+    public JoystickController getJoystickController() {
+        return joystickController;
     }
 
     public BoostController getBoostContoller() {

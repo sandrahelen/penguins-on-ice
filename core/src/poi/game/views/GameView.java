@@ -26,7 +26,6 @@ import poi.game.WorldContactListener;
 import poi.game.controllers.BoostController;
 import poi.game.controllers.PauseController;
 import poi.game.controllers.JoystickController;
-import poi.game.controllers.ChangeViewController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
@@ -45,8 +44,7 @@ public class GameView extends View {
     private final OrthographicCamera camera;
     private final GLProfiler profiler;
     private final Box2DDebugRenderer box2DDebugRenderer;
-    public final JoystickController joystickController1;
-    public final JoystickController joystickController2;
+    public final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
     private final AssetManager assetmanager;
@@ -71,10 +69,7 @@ public class GameView extends View {
         //Setup Engine
         assetmanager.finishLoading();
         ecsEngine = new ECSEngine(world, camera, assetmanager.get("Map/Map1.tmx", TiledMap.class));
-        joystickController1 = ecsEngine.getGameController();
-        joystickController2 = ecsEngine.getGameController();
-        //boostComponent1 = ecsEngine.getBoostContoller1();
-        //boostComponent2 = ecsEngine.getBoostContoller2();
+        joystickController = ecsEngine.getJoystickController();
         boostController = ecsEngine.getBoostContoller();
 
         //Create Entities
@@ -134,6 +129,7 @@ public class GameView extends View {
         ecsEngine.update(dt);
         camera.update();
         world.step(dt, 6, 2);
+        joystickController.handleInput();
         boostController.handleInput();
         pauseController.handleInput( this);
         //handleInput();
@@ -157,13 +153,15 @@ public class GameView extends View {
 
         sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
         //Draw controller player 1
-        sb.draw(joystickController1.base, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
-        sb.draw(joystickController1.background, camera.position.x - 300, camera.position.y - 300, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
-        sb.draw(joystickController1.joystick, camera.position.x - joystickController1.getPosition().x, camera.position.y - joystickController1.getPosition().y, joystickController1.joystick.getWidth()/2, joystickController1.joystick.getHeight()/2);
+        sb.draw(joystickController.getJoystick1().getJoystickBase(), camera.position.x - 300, camera.position.y - 150,
+                (float)joystickController.joystick1.joystickBase.getWidth()/2, (float)joystickController.joystick1.joystickBase.getHeight()/2);
+        sb.draw(joystickController.getJoystick1().getJoystick(), camera.position.x - 285, camera.position.y - 135,
+                (float)joystickController.joystick1.joystick.getWidth()/2, (float)joystickController.joystick1.joystick.getHeight()/2);
         //Draw controller player 2
-        sb.draw(joystickController2.base, camera.position.x, camera.position.y - 200, joystickController2.joystick.getWidth()/2, joystickController2.joystick.getHeight()/2);
-        sb.draw(joystickController2.background, camera.position.x, camera.position.y - 200, joystickController2.joystick.getWidth()/2, joystickController2.joystick.getHeight()/2);
-        sb.draw(joystickController2.joystick, camera.position.x - joystickController2.getPosition().x, camera.position.y - joystickController2.getPosition().y, 50, 50);
+        sb.draw(joystickController.getJoystick2().getJoystickBase(), camera.position.x + 220, camera.position.y - 150,
+                (float)joystickController.joystick2.joystickBase.getWidth()/2, (float)joystickController.joystick2.joystickBase.getHeight()/2);
+        sb.draw(joystickController.getJoystick2().getJoystick(), camera.position.x + 235, camera.position.y - 135,
+                (float)joystickController.joystick2.joystick.getWidth()/2, (float)joystickController.joystick2.joystick.getHeight()/2);
 
         boostController.setValues();
         boostController.startTimer();

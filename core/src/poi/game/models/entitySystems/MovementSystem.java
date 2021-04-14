@@ -1,6 +1,5 @@
 package poi.game.models.entitySystems;
 
-import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -30,13 +29,13 @@ public class MovementSystem extends IteratingSystem{
     private Vector3 touchPos;
     private final OrthographicCamera cam;
     private Map<Integer, Float> touches = new HashMap<>();
-    private final JoystickController joystickController1;
-    private final JoystickController joystickController2;
+    private final JoystickController joystickController;
     private final BoostController boostController;
 
-    private Rectangle boundsJoystick;
+    private Rectangle boundsJoystick1;
+    private Rectangle boundsJoystick2;
 
-    public MovementSystem(OrthographicCamera cam, JoystickController joystickController1, JoystickController joystickController2, BoostController boostController) {
+    public MovementSystem(OrthographicCamera cam, JoystickController joystickController, BoostController boostController) {
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
         xFactor = new Vector2(10, 0);
         touchPos = new Vector3();
@@ -45,11 +44,11 @@ public class MovementSystem extends IteratingSystem{
             touches.put(i, touchPos.x);
             touches.put(i, touchPos.y);
         }
-        this.joystickController1 = joystickController1;
-        this.joystickController2 = joystickController2;
+        this.joystickController = joystickController;
         this.boostController = boostController;
 
-        boundsJoystick = this.joystickController1.getBounds();
+        boundsJoystick1 = this.joystickController.joystick1.getBoundsJoystick();
+        boundsJoystick2 = this.joystickController.joystick2.getBoundsJoystick();
     }
 
 
@@ -119,32 +118,45 @@ public class MovementSystem extends IteratingSystem{
                 Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(i), Gdx.input.getY(i), 0)); // Scaling touches to Android-mode
                 touchPos.set(touchTransformed.x, touchTransformed.y, 0);
                 touches.put(i, touchPos.x);
-                if (touches.get(i) < Poi.WIDTH/2) {     // Beveger pingvin 1 ved trykk på venstre halvdel
-                    if (Poi.WIDTH / 3 > touchPos.x && touchPos.x > 0) {
+
+                // Beveger pingvin 1 ved trykk på venstre halvdel
+                if (boundsJoystick1.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                    joystickController.joystick1.setJoystickTouched(true);
+                    //venstre
+                    if (touchPos.x < joystickController.joystick1.getPosition() + (boundsJoystick1.getWidth()/2)) {
+                        joystickController.joystick1.setMovement(true);
                         if (ECSEngine.playerMapper.get(entity).id == 1) {
                             bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
                         }
                     }
-                    if (Poi.WIDTH / 2 > touchPos.x && touchPos.x > Poi.WIDTH / 3) {
+                    //høyre
+                    if (touchPos.x > joystickController.joystick1.getPosition() + (boundsJoystick1.getWidth()/2) && touchPos.x < Poi.WIDTH / 2) {
+                        joystickController.joystick1.setMovement(false);
                         if (ECSEngine.playerMapper.get(entity).id == 1) {
                             bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
                         }
                     }
                 }
-                if (touches.get(i) > Poi.WIDTH/2) {     // Beveger pingvin 2 ved trykk på høyre halvdel
-                    if (Poi.WIDTH / 2 + Poi.WIDTH / 4 > touchPos.x && touchPos.x > Poi.WIDTH / 2) {
+                // Beveger pingvin 2 ved trykk på høyre halvdel
+                if (boundsJoystick2.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                    joystickController.joystick1.setJoystickTouched(true);
+                    //venstre
+                    if (touchPos.x < joystickController.joystick2.getPosition() + (boundsJoystick2.getWidth()/2) && touchPos.x > Poi.WIDTH / 2) {
+                        joystickController.joystick2.setMovement(true);
                         if (ECSEngine.playerMapper.get(entity).id == 2) {
                             bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
                         }
                     }
-                    if (Poi.WIDTH > touchPos.x && touchPos.x > Poi.WIDTH / 2 + Poi.WIDTH / 4) {
+                    //høyre
+                    if (touchPos.x > joystickController.joystick2.getPosition() + (boundsJoystick2.getWidth()/2)) {
+                        joystickController.joystick2.setMovement(false);
                         if (ECSEngine.playerMapper.get(entity).id == 2) {
                             bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
                         }
                     }
                 }
             }
-            Gdx.app.log("Movement", "Touches: " + touches);
+            //Gdx.app.log("Movement", "Touches: " + touches);
         }
     }
 }
