@@ -21,12 +21,11 @@ public class MenuController {
     private final Rectangle boundsPlay;
     private final Rectangle boundsHighscore;
     private final Rectangle boundsSettings;
-    Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
 
     private ButtonComponent buttonComponent;
 
     public MenuController(){
-        changeViewController = Poi.getController();
+        changeViewController = Poi.getChangeViewController();
         buttonComponent = new ButtonComponent();
         buttonPlay = buttonComponent.getButtonPlay();
         buttonHighscore = buttonComponent.getButtonHighscore();
@@ -44,6 +43,7 @@ public class MenuController {
     public Texture getButtonSettings() { return buttonSettings; }
 
     public void handleInput() {
+        Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         if(Gdx.input.justTouched()){
             // Checks if buttons are pressed before changing view
             if (boundsPlay.contains(touchTransformed.x, touchTransformed.y)) {
@@ -55,9 +55,6 @@ public class MenuController {
             else if (boundsSettings.contains(touchTransformed.x, touchTransformed.y)) {
                 changeViewController.set(new SettingsView(changeViewController, new GameView(changeViewController)));
             }
-        }
-        if (boundsPlay.contains(touchTransformed.x, touchTransformed.y)) {
-            Gdx.app.log("Button", "Play");
         }
     }
 }

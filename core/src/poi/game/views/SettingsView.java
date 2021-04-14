@@ -7,10 +7,13 @@ import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
 import poi.game.controllers.ChangeViewController;
-import poi.game.controllers.MenuController;
+import poi.game.controllers.SettingsController;
 import poi.game.models.factories.ViewFactory;
 
 public class SettingsView extends View implements ViewFactory {
+
+    private SettingsController controller;
+    private GameView gameView;
 
     private Texture titleSettings;
     private Texture buttonSound;
@@ -21,42 +24,23 @@ public class SettingsView extends View implements ViewFactory {
     private Rectangle boundsColor;
     private Rectangle boundsMenu;
     private Rectangle boundsResume;
-    private GameView gameView;
 
-    public SettingsView (ChangeViewController controller, GameView gameView) {
-        super(controller);
+
+    public SettingsView (ChangeViewController changeViewController, GameView gameView) {
+        super(changeViewController);
+        controller = new SettingsController();
         this.gameView = gameView;
-        //cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
-        cam = Poi.getCamera();
         titleSettings = new Texture("general/titleSettings.png");
-        buttonSound = new Texture("general/buttonSound.png");
-        buttonColor = new Texture("general/buttonColor.png");
-        buttonMenu = new Texture("general/buttonMenu.png");
+        buttonSound = controller.getButtonSound();
+        buttonColor = controller.getButtonColor();
+        buttonMenu = controller.getButtonMenu();
         buttonResume = new Texture("general/buttonResume.png");
-        boundsSound = new Rectangle(Poi.WIDTH/2-buttonSound.getWidth()/2, Poi.HEIGHT*3/6, buttonSound.getWidth(), buttonSound.getHeight());
-        boundsColor = new Rectangle(Poi.WIDTH/2-buttonColor.getWidth()/2,Poi.HEIGHT*2/6, buttonColor.getWidth(), buttonColor.getHeight());
-        boundsMenu = new Rectangle(Poi.WIDTH/2-buttonMenu.getWidth()/2,Poi.HEIGHT/6, buttonMenu.getWidth(), buttonMenu.getHeight());
         boundsResume = new Rectangle(20, 30 - buttonResume.getHeight()/2, buttonResume.getWidth(), buttonResume.getHeight());
-    }
-
-    public void handleInput() {
-        if(Gdx.input.justTouched()){
-            Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
-                gameView.setIsPaused(false);
-                changeViewController.set(new MenuView(changeViewController));
-            }
-            // Can only resume game if game is already paused
-            else if (boundsResume.contains(touchTransformed.x, touchTransformed.y) && gameView.isPaused()) {
-                // Change view to existing gameView
-                changeViewController.set(gameView);
-            }
-        }
     }
 
     @Override
     public void update(float dt) {
-        handleInput();
+        controller.handleInput();
     }
 
     @Override
@@ -64,9 +48,9 @@ public class SettingsView extends View implements ViewFactory {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
         sb.draw(titleSettings, Poi.WIDTH/2-titleSettings.getWidth()/2 /*5/16*/, Poi.HEIGHT - titleSettings.getHeight()*3);
-        sb.draw(buttonSound, Poi.WIDTH/2-buttonSound.getWidth()/2, Poi.HEIGHT*3/6);
-        sb.draw(buttonColor, Poi.WIDTH/2-buttonColor.getWidth()/2,Poi.HEIGHT*2/6);
-        sb.draw(buttonMenu, Poi.WIDTH/2-buttonMenu.getWidth()/2,Poi.HEIGHT/6);
+        sb.draw(buttonSound, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);
+        sb.draw(buttonColor, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
+        sb.draw(buttonMenu, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
 
         // Only draw resume button if game is paused
         if (gameView.isPaused()) {

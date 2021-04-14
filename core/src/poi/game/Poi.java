@@ -18,7 +18,7 @@ public class Poi extends Game {
 	private static OrthographicCamera cameraGame;
 
 	private SpriteBatch spriteBatch;
-	private static ChangeViewController controller;
+	private static ChangeViewController changeViewController;
 
 	private Leaderboard leaderboard;
 	private Datahandler datahandler;
@@ -37,9 +37,9 @@ public class Poi extends Game {
 		cameraGame = new OrthographicCamera(WIDTH, HEIGHT);
 
 		spriteBatch = new SpriteBatch();
-		controller = new ChangeViewController(leaderboard, datahandler);
+		changeViewController = new ChangeViewController(leaderboard, datahandler);
 		// Sett MenuView as first view when opening the app
-		controller.push(new MenuView(controller));
+		changeViewController.push(new MenuView(changeViewController));
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database
 		leaderboard.submitScore("R", 25);
@@ -49,8 +49,8 @@ public class Poi extends Game {
 	public void render(){
 		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		controller.update(Gdx.graphics.getDeltaTime());
-		controller.render(spriteBatch);
+		changeViewController.update(Gdx.graphics.getDeltaTime());
+		changeViewController.render(spriteBatch);
 		super.render();
 	}
 
@@ -67,8 +67,8 @@ public class Poi extends Game {
 		return cameraGame;
 	}
 
-	public static ChangeViewController getController(){
-		return controller;
+	public static ChangeViewController getChangeViewController(){
+		return changeViewController;
 	}
 }
 

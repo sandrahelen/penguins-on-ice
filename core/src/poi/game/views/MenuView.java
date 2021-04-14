@@ -1,5 +1,6 @@
 package poi.game.views;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -21,7 +22,6 @@ public class MenuView extends View implements ViewFactory{
     public MenuView(ChangeViewController changeViewController) {
         super(changeViewController);
         controller = new MenuController();
-        cam = Poi.getCamera();
         titlePoI = new Texture("general/titlePoI.png");
         penguin = new Texture("general/pingvin.png");
         buttonPlay = controller.getButtonPlay();
@@ -45,6 +45,7 @@ public class MenuView extends View implements ViewFactory{
         sb.draw(buttonSettings, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
         sb.end();
 
+        //Gdx.app.log("MenuView", "render done");
     }
 
     public void dispose() {
