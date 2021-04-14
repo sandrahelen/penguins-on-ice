@@ -1,55 +1,60 @@
 package poi.game.controllers;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import poi.game.Datahandler;
-import poi.game.Leaderboard;
-import poi.game.views.View;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 
-import java.util.Stack;
+import poi.game.Poi;
+import poi.game.models.entityComponents.ButtonComponent;
+import poi.game.views.GameView;
+import poi.game.views.HighscoreView;
+import poi.game.views.SettingsView;
 
-//Contoller for changing views
 public class MenuController {
 
-    private Stack<View> views;
-    private Leaderboard leaderboard;
-    private Datahandler datahandler;
+    private ChangeViewController changeViewController;
 
-    public MenuController(Leaderboard leaderboard, Datahandler datahandler){
-        views = new Stack<View>();
-        this.leaderboard = leaderboard;
-        this.datahandler = datahandler;
+    private Texture buttonPlay;
+    private Texture buttonHighscore;
+    private Texture buttonSettings;
+    private final Rectangle boundsPlay;
+    private final Rectangle boundsHighscore;
+    private final Rectangle boundsSettings;
+
+    private ButtonComponent buttonComponent;
+
+    public MenuController(){
+        changeViewController = Poi.getChangeViewController();
+        buttonComponent = new ButtonComponent();
+        buttonPlay = buttonComponent.getButtonPlay();
+        buttonHighscore = buttonComponent.getButtonHighscore();
+        buttonSettings = buttonComponent.getButtonSettings();
+        boundsPlay = buttonComponent.getBoundsPlay();
+        boundsHighscore = buttonComponent.getBoundsHighscore();
+        boundsSettings = buttonComponent.getBoundsSettings();
     }
 
-    // Add new view
-    public void push(View view){
-        views.push(view);
-    }
+    public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
+    public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
 
-    // Remove view
-    public void pop(){
-        views.pop().dispose();
-    }
+    public Texture getButtonPlay() { return buttonPlay; }
+    public Texture getButtonHighscore() { return buttonHighscore; }
+    public Texture getButtonSettings() { return buttonSettings; }
 
-    // Change to new view
-    public void set(View view){
-        views.pop().dispose();
-        views.push(view);
-    }
-
-    // Update chosen view
-    public void update(float dt){
-        views.peek().update(dt);
-    }
-
-    // Render chosen view
-    public void render(SpriteBatch sb){
-        views.peek().render(sb);
-    }
-
-    public Leaderboard getLeaderboard() {
-        return leaderboard;
-    }
-    public Datahandler getDatahandler() {
-        return datahandler;
+    public void handleInput() {
+        Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+        if(Gdx.input.justTouched()){
+            // Checks if buttons are pressed before changing view
+            if (boundsPlay.contains(touchTransformed.x, touchTransformed.y)) {
+                changeViewController.set(new GameView());
+            }
+            else if (boundsHighscore.contains(touchTransformed.x, touchTransformed.y)) {
+                changeViewController.set(new HighscoreView());
+            }
+            else if (boundsSettings.contains(touchTransformed.x, touchTransformed.y)) {
+                changeViewController.set(new SettingsView(new GameView()));
+            }
+        }
     }
 }

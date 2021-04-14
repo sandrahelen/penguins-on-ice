@@ -1,4 +1,5 @@
 package poi.game.views;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,12 +9,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-
 import java.util.Random;
 
 import poi.game.Datahandler;
 import poi.game.Poi;
-import poi.game.controllers.MenuController;
 import poi.game.models.factories.ViewFactory;
 
 public class EndGameView extends View implements ViewFactory {
@@ -31,9 +30,9 @@ public class EndGameView extends View implements ViewFactory {
     private int endTime = 0;
     private String username = "";
 
-    public EndGameView(MenuController controller) {
-        super(controller);
-        cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
+    public EndGameView() {
+        super();
+        cam = Poi.getCamera();
         text = new BitmapFont();
         titleEndGame = new Texture("titleEndGame.png");
         textfieldBox = new Texture("textField.png");
@@ -54,21 +53,20 @@ public class EndGameView extends View implements ViewFactory {
         Gdx.input.setInputProcessor(stage);
 
         // Linking to Firebase database
-        datahandler = controller.getDatahandler();
-        controller.getLeaderboard().setOnValueChangedListener(datahandler);
+        datahandler = changeViewController.getDatahandler();
+        changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
     }
 
-    @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
             Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (boundsSubmit.contains(touchTransformed.x, touchTransformed.y)) {
                 username = textfield.getText();
                 endTime = new Random().nextInt(101);    // Placeholder for time-score, random int between 0-100
-                controller.getLeaderboard().submitScore(username, endTime);     // Submits the score to Firebase database
-                controller.getLeaderboard().setOnValueChangedListener(datahandler);
+                changeViewController.getLeaderboard().submitScore(username, endTime);     // Submits the score to Firebase database
+                changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
                 Gdx.input.setOnscreenKeyboardVisible(false);    // Disable displaying keyboard
-                controller.set(new HighscoreView(controller));
+                changeViewController.set(new HighscoreView());
             }
         }
     }
@@ -80,7 +78,6 @@ public class EndGameView extends View implements ViewFactory {
 
     @Override
     public void render(SpriteBatch sb) {
-        //Gdx.app.log("EndGameView", "render");
         sb.begin();
         sb.draw(titleEndGame, Poi.WIDTH/2-titleEndGame.getWidth()/2, Poi.HEIGHT - titleEndGame.getHeight()*3);
         text.draw(sb, "Please enter your name: ", Poi.WIDTH/2-100, Poi.HEIGHT*9/12);
