@@ -25,8 +25,8 @@ public class GameController {
     private ECSEngine ecsEngine;
     private World world;
     private boolean finishLine = false;
-    private int countStart = 100;
-    private double period = 0.1;
+    private int countStart = 250;
+    private double period = 0.01;
     private final OrthographicCamera camera;
     private final AssetManager assetmanager;
     private final JoystickController joystickController;
@@ -72,7 +72,6 @@ public class GameController {
 
         if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
             ecsEngine.getSystem(AnimationSystem.class).setFinish();
-            ecsEngine.getSystem(MovementSystem.class).setFinish();
             ecsEngine.getSystem(TimerSystem.class).setFinish();
             startTimer();
             if(countStart < 1){
