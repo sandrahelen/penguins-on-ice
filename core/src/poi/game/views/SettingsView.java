@@ -40,7 +40,7 @@ public class SettingsView extends View implements ViewFactory {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(titleSettings, Poi.WIDTH/2-titleSettings.getWidth()/2 /*5/16*/, Poi.HEIGHT - titleSettings.getHeight()*3);
+        sb.draw(titleSettings, Poi.WIDTH/2-titleSettings.getWidth()/2, Poi.HEIGHT - titleSettings.getHeight()*3);
         sb.draw(buttonSound, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);
         sb.draw(buttonColor, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
         sb.draw(buttonMenu, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);

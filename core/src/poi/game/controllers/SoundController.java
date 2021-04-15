@@ -10,30 +10,34 @@ public class SoundController {
     long id;
 
     public SoundController() {
-        sound = Gdx.audio.newSound(Gdx.files.internal("soundGame.mp3"));
+        //sound = Gdx.audio.newSound(Gdx.files.internal("soundGame.mp3"));
+        //id = sound.play(1.0f);
 
     }
 
     public void play() {
         if (!isMuted) {
-            id = sound.play(1.0f);
+            //sound.setLooping(id, true);
         }
     }
 
     public void stop() {
         if (!isMuted) {
-            sound.stop(id);
+            //sound.setLooping(id, false);
+            //sound.stop(id);
         }
     }
 
     public void mute() {
         if (isMuted) {
             isMuted = false;
-            sound.play();
+            //sound.setLooping(id, true);
+            //sound.play();
         }
         else {
             isMuted = true;
-            sound.stop();
+            //sound.setLooping(id, false);
+            //sound.stop(id);
         }
     }
 }
