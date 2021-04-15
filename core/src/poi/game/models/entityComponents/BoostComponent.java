@@ -14,7 +14,6 @@ public class BoostComponent {
     private Rectangle boundsBoost;
     private BitmapFont boostFont;
     private float charge = 100;
-    private double period = 0.7;
     private boolean buttonClicked = false;
     private boolean boost = false;
 
@@ -26,14 +25,10 @@ public class BoostComponent {
         boostFont = new BitmapFont();
     }
 
-    public void startTimer(/*float dt*/){
-        /*charge += dt;
+    public void startTimer(float dt){
+        charge += dt;
         if(charge < 100){
-            charge += dt;
-        }*/
-        charge += Gdx.graphics.getDeltaTime();
-        if(charge < 100){
-            charge += period;
+            charge += dt*10;
         }
     }
 

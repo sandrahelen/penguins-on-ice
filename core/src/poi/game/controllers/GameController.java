@@ -67,7 +67,7 @@ public class GameController {
         camera.update();
         world.step(dt, 6, 2);
         joystickController.handleInput();
-        boostController.handleInput();
+        boostController.handleInput(dt);
         pauseController.handleInput(gameView);
 
         if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){

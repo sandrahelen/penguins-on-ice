@@ -17,8 +17,9 @@ public class BoostController {
         boostComponent1 = new BoostComponent(120, 52);
         boostComponent2 = new BoostComponent(480, 52);
     }
-    public void handleInput() {
+    public void handleInput(float dt) {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+        startTimer(dt);
         if (Gdx.input.justTouched()) {
             if (boostComponent1.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
                 if (boostComponent1.getCharge() == 100) {
@@ -64,12 +65,12 @@ public class BoostController {
         }
     }
 
-    public void startTimer(/*float dt*/){
+    public void startTimer(float dt){
         if(boostComponent1.getButtonClicked()){
-            boostComponent1.startTimer(/*dt*/);
+            boostComponent1.startTimer(dt);
         }
         if(boostComponent2.getButtonClicked()){
-            boostComponent2.startTimer(/*dt*/);
+            boostComponent2.startTimer(dt);
         }
     }
 }

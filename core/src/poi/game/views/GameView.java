@@ -150,7 +150,7 @@ public class GameView extends View {
 
 
         boostController.setValues();
-        boostController.startTimer(/*float dt*/);
+        //boostController.startTimer(/*float dt*/);
         //Draw boost button player 1
         if(boostController.getBoostComponent1().getButtonClicked()){
             sb.draw(boostController.getBoostComponent1().getBoostButton(), camera.position.x-200, camera.position.y-130,
