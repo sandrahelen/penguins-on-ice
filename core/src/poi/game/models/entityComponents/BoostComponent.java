@@ -14,7 +14,7 @@ public class BoostComponent {
     private Rectangle boundsBoost;
     private BitmapFont boostFont;
     private float charge = 100;
-    private double period = 0.1;
+    private double period = 0.7;
     private boolean buttonClicked = false;
     private boolean boost = false;
 

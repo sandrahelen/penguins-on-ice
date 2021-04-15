@@ -25,6 +25,7 @@ import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.TextureComponent;
+import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.TimerSystem;
 
 import static poi.game.Poi.HEIGHT;
@@ -46,6 +47,7 @@ public class GameView extends View {
     public MapRenderer mapRenderer;
     //private ObjectCreator objectCreator;
     private BitmapFont timeFont;
+    private BitmapFont timeFontBig;
     private GameController controller;
 
     public GameView() {
@@ -53,6 +55,8 @@ public class GameView extends View {
         controller = new GameController(this);
         world = controller.getWorld();
         timeFont = new BitmapFont();
+        timeFontBig = new BitmapFont();
+        timeFontBig.getData().setScale(2.0f);
         camera = Poi.getCameraGame();
         ecsEngine = controller.getECSEngine();
         assetmanager = Poi.getAssetManager();
@@ -82,7 +86,6 @@ public class GameView extends View {
             box2DDebugRenderer.render(world, camera.combined);
         }
         sb.begin();
-        timeFont.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x+ WIDTH/2-100, camera.position.y+ HEIGHT/2-40);
         bodyComponent.renderPosition.lerp(bodyComponent.body.getPosition(), Gdx.graphics.getDeltaTime());
         sb.draw(textureComponent.setupSprite(), bodyComponent.body.getPosition().x - bodyComponent.width * 0.5f, bodyComponent.body.getPosition().y - bodyComponent.height * 0.5f, bodyComponent.width, bodyComponent.height);
         sb.end();
@@ -148,25 +151,32 @@ public class GameView extends View {
         boostController.startTimer();
         //Draw boost button player 1
         if(boostController.getBoostComponent1().getButtonClicked()){
-            sb.draw(boostController.getBoostComponent1().getBoostButton(), camera.position.x-100, camera.position.y-150,
+            sb.draw(boostController.getBoostComponent1().getBoostButton(), camera.position.x-200, camera.position.y-130,
                     (float)boostController.boostComponent1.getBoostButton().getWidth()/2, (float)boostController.boostComponent1.getBoostButton().getHeight()/2);
         }
         else{
-            sb.draw(boostController.getBoostComponent1().getBoostButtonUnCharged(), camera.position.x-100, camera.position.y-150,
+            sb.draw(boostController.getBoostComponent1().getBoostButtonUnCharged(), camera.position.x-200, camera.position.y-130,
                     (float)boostController.boostComponent1.getBoostButtonUnCharged().getWidth()/2, (float)boostController.boostComponent1.getBoostButtonUnCharged().getHeight()/2);
         }
-        boostController.getBoostComponent1().getBoostFont().draw(sb, (int) boostController.getBoostComponent1().getCharge() + "%", camera.position.x-100, camera.position.y-100);
+        boostController.getBoostComponent1().getBoostFont().draw(sb, (int) boostController.getBoostComponent1().getCharge() + "%", camera.position.x-192, camera.position.y-131);
         //Draw boost button player 2
         if(boostController.getBoostComponent2().getButtonClicked()){
-            sb.draw(boostController.getBoostComponent2().getBoostButton(), camera.position.x, camera.position.y-150,
+            sb.draw(boostController.getBoostComponent2().getBoostButton(), camera.position.x+160, camera.position.y-130,
                     (float)boostController.boostComponent2.getBoostButton().getWidth()/2, (float)boostController.boostComponent2.getBoostButton().getHeight()/2);
         }
         else{
-            sb.draw(boostController.getBoostComponent2().getBoostButtonUnCharged(), camera.position.x, camera.position.y-150,
+            sb.draw(boostController.getBoostComponent2().getBoostButtonUnCharged(), camera.position.x+160, camera.position.y-130,
                     (float)boostController.boostComponent2.getBoostButtonUnCharged().getWidth()/2, (float)boostController.boostComponent2.getBoostButtonUnCharged().getHeight()/2);
         }
-        boostController.getBoostComponent2().getBoostFont().draw(sb, (int) boostController.getBoostComponent2().getCharge() + "%", camera.position.x, camera.position.y-100);
+        boostController.getBoostComponent2().getBoostFont().draw(sb, (int) boostController.getBoostComponent2().getCharge() + "%", camera.position.x+168, camera.position.y-131);
 
+        //Time
+        if(ecsEngine.getSystem(GoalSystem.class).isFinished()){
+            timeFontBig.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x,camera.position.y);
+        }
+        else{
+            timeFont.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x+ WIDTH/2-100, camera.position.y+ HEIGHT/2-40);
+        }
         sb.end();
 
         for (final Entity entity : animatedEntities) {

@@ -14,8 +14,8 @@ public class BoostController {
     public BoostComponent boostComponent2;
 
     public BoostController(){
-        boostComponent1 = new BoostComponent(220, 30);
-        boostComponent2 = new BoostComponent(320, 30);
+        boostComponent1 = new BoostComponent(120, 52);
+        boostComponent2 = new BoostComponent(480, 52);
     }
     public void handleInput() {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
