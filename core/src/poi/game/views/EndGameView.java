@@ -15,6 +15,7 @@ import java.util.Random;
 
 import poi.game.Datahandler;
 import poi.game.Poi;
+import poi.game.controllers.EndGameController;
 import poi.game.models.factories.ViewFactory;
 
 public class EndGameView extends View implements ViewFactory {
@@ -30,20 +31,23 @@ public class EndGameView extends View implements ViewFactory {
     private FitViewport viewport;
     private Stage stage;
     private TextField.TextFieldStyle style;
+    private EndGameController controller;
 
     private int endTime = 0;
     private String username = "";
 
     public EndGameView(int endTime) {
         super();
+        controller = new EndGameController(endTime);
         this.endTime = endTime;
         cam = Poi.getCamera();
         text = new BitmapFont();
-        titleEndGame = new Texture("titleEndGame.png");
-        textfieldBox = new Texture("textField.png");
-        buttonSubmit = new Texture("buttonSubmit.png");
+        titleEndGame = new Texture("general/titleEndGame.png");
+        textfieldBox = new Texture("general/textField.png");
+        //buttonSubmit = new Texture("buttonSubmit.png");
+        buttonSubmit = controller.getButtonSubmit();
         boundsTextfield = new Rectangle(Poi.WIDTH/2-textfieldBox.getWidth()/2, Poi.HEIGHT/2-20, textfieldBox.getWidth(), textfieldBox.getHeight());
-        boundsSubmit = new Rectangle(Poi.WIDTH/2-buttonSubmit.getWidth()/2,Poi.HEIGHT/2-buttonSubmit.getHeight()*3/2, buttonSubmit.getWidth(), buttonSubmit.getHeight());
+        //boundsSubmit = new Rectangle(Poi.WIDTH/2-buttonSubmit.getWidth()/2,Poi.HEIGHT/2-buttonSubmit.getHeight()*3/2, buttonSubmit.getWidth(), buttonSubmit.getHeight());
 
         // Adding a textfield to let user write some text
         viewport = new FitViewport(Poi.WIDTH, Poi.HEIGHT, cam);
@@ -60,45 +64,11 @@ public class EndGameView extends View implements ViewFactory {
         Gdx.input.setOnscreenKeyboardVisible(true); //Displaying keyboard
         Gdx.input.setInputProcessor(stage);
 
-        // Linking to Firebase database
-        datahandler = changeViewController.getDatahandler();
-        changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
-    }
-
-    public void handleInput() {
-        if (Gdx.input.justTouched()) {
-            Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (boundsTextfield.contains(touchTransformed.x, touchTransformed.y)) {
-                // TODO Display keyboard when click
-
-                /* // Not working
-                stage.setKeyboardFocus(textfield);
-                Gdx.input.setOnscreenKeyboardVisible(true);
-                */
-
-                System.out.println("Keyboard?");
-            }
-            if (boundsSubmit.contains(touchTransformed.x, touchTransformed.y)) {
-                //username = textfield.getText();
-                username = "test";
-                //endTime = new Random().nextInt(101);    // Placeholder for time-score, random int between 0-100
-                changeViewController.getLeaderboard().submitScore(username, endTime);     // Submits the score to Firebase database
-                changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
-                Gdx.input.setOnscreenKeyboardVisible(false);    // Disable displaying keyboard
-                changeViewController.set(new HighscoreView());
-            }
-            // Not possible to remove keyboard if no written text
-            /*if (!textfield.getText().isEmpty()) {
-                // Try to unfocus instead? Possibly removing keyboard?
-                Gdx.input.setOnscreenKeyboardVisible(false);
-            }
-             */
-        }
     }
 
     @Override
     public void update(float dt) {
-        handleInput();
+        controller.handleInput();
     }
 
     @Override
