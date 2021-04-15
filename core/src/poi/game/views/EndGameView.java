@@ -34,8 +34,9 @@ public class EndGameView extends View implements ViewFactory {
     private int endTime = 0;
     private String username = "";
 
-    public EndGameView() {
+    public EndGameView(int endTime) {
         super();
+        this.endTime = endTime;
         cam = Poi.getCamera();
         text = new BitmapFont();
         titleEndGame = new Texture("titleEndGame.png");
@@ -78,18 +79,20 @@ public class EndGameView extends View implements ViewFactory {
                 System.out.println("Keyboard?");
             }
             if (boundsSubmit.contains(touchTransformed.x, touchTransformed.y)) {
-                username = textfield.getText();
-                endTime = new Random().nextInt(101);    // Placeholder for time-score, random int between 0-100
+                //username = textfield.getText();
+                username = "test";
+                //endTime = new Random().nextInt(101);    // Placeholder for time-score, random int between 0-100
                 changeViewController.getLeaderboard().submitScore(username, endTime);     // Submits the score to Firebase database
                 changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
                 Gdx.input.setOnscreenKeyboardVisible(false);    // Disable displaying keyboard
                 changeViewController.set(new HighscoreView());
             }
             // Not possible to remove keyboard if no written text
-            if (!textfield.getText().isEmpty()) {
+            /*if (!textfield.getText().isEmpty()) {
                 // Try to unfocus instead? Possibly removing keyboard?
                 Gdx.input.setOnscreenKeyboardVisible(false);
             }
+             */
         }
     }
 
