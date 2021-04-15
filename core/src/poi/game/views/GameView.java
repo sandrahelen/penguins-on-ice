@@ -138,8 +138,8 @@ public class GameView extends View {
         pauseController.handleInput( this);
         //handleInput();
 
-        if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
-            changeViewController.set(new MenuView());
+        if(ecsEngine.getSystem(GoalSystem.class).isFinished()){
+            changeViewController.set(new EndGameView()); // Change to EndGameView when game is finished
         }
     }
 

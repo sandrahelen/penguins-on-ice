@@ -15,35 +15,53 @@ import java.util.Random;
 
 import poi.game.Datahandler;
 import poi.game.Poi;
+import poi.game.controllers.EndGameController;
+import poi.game.models.entityComponents.TextFieldComponent;
 import poi.game.models.factories.ViewFactory;
 
 public class EndGameView extends View implements ViewFactory {
+
+    private EndGameController controller;
 
     private BitmapFont text;
     private Datahandler datahandler;
     private Texture titleEndGame;
     private Texture textfieldBox;
     private Texture buttonSubmit;
+
     private Rectangle boundsTextfield;
     private Rectangle boundsSubmit;
+
+    //private TextFieldComponent textfield;
+    /*
     private TextField textfield;
     private FitViewport viewport;
     private Stage stage;
     private TextField.TextFieldStyle style;
+    */
 
     private int endTime = 0;
     private String username = "";
 
     public EndGameView() {
         super();
+        controller = new EndGameController();
         cam = Poi.getCamera();
+        titleEndGame = new Texture("general/titleEndGame.png");
+        //textfieldBox = new Texture("general/textField.png");
+        textfieldBox = controller.getTextfield().getTextBox();
+        //buttonSubmit = new Texture("general/buttonSubmit.png");
+        buttonSubmit = controller.getButtonSubmit();
         text = new BitmapFont();
-        titleEndGame = new Texture("titleEndGame.png");
-        textfieldBox = new Texture("textField.png");
-        buttonSubmit = new Texture("buttonSubmit.png");
-        boundsTextfield = new Rectangle(Poi.WIDTH/2-textfieldBox.getWidth()/2, Poi.HEIGHT/2-20, textfieldBox.getWidth(), textfieldBox.getHeight());
-        boundsSubmit = new Rectangle(Poi.WIDTH/2-buttonSubmit.getWidth()/2,Poi.HEIGHT/2-buttonSubmit.getHeight()*3/2, buttonSubmit.getWidth(), buttonSubmit.getHeight());
 
+        //boundsTextfield = new Rectangle(Poi.WIDTH/2-textfieldBox.getWidth()/2, Poi.HEIGHT/2-20, textfieldBox.getWidth(), textfieldBox.getHeight());
+        boundsTextfield = controller.getTextfield().getBoundsTextBox();
+        //boundsSubmit = new Rectangle(Poi.WIDTH/2-buttonSubmit.getWidth()/2,Poi.HEIGHT/2-buttonSubmit.getHeight()*3/2, buttonSubmit.getWidth(), buttonSubmit.getHeight());
+        boundsSubmit = controller.getBoundsSubmit();
+
+        //textfield = new TextFieldComponent(Poi.WIDTH/2-textfieldBox.getWidth()/2+20, Poi.HEIGHT/2);
+
+        /*
         // Adding a textfield to let user write some text
         viewport = new FitViewport(Poi.WIDTH, Poi.HEIGHT, cam);
         stage = new Stage(viewport);
@@ -58,12 +76,12 @@ public class EndGameView extends View implements ViewFactory {
 
         Gdx.input.setOnscreenKeyboardVisible(true); //Displaying keyboard
         Gdx.input.setInputProcessor(stage);
-
+        */
         // Linking to Firebase database
         datahandler = changeViewController.getDatahandler();
         changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
     }
-
+    /*
     public void handleInput() {
         if (Gdx.input.justTouched()) {
             Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -74,7 +92,7 @@ public class EndGameView extends View implements ViewFactory {
                 stage.setKeyboardFocus(textfield);
                 Gdx.input.setOnscreenKeyboardVisible(true);
                 */
-
+/*
                 System.out.println("Keyboard?");
             }
             if (boundsSubmit.contains(touchTransformed.x, touchTransformed.y)) {
@@ -92,10 +110,11 @@ public class EndGameView extends View implements ViewFactory {
             }
         }
     }
-
+    */
     @Override
     public void update(float dt) {
-        handleInput();
+        controller.handleInput(username, endTime, datahandler);
+        //handleInput();
     }
 
     @Override
@@ -105,19 +124,22 @@ public class EndGameView extends View implements ViewFactory {
         sb.begin();
         sb.draw(titleEndGame, Poi.WIDTH/2-titleEndGame.getWidth()/2, Poi.HEIGHT - titleEndGame.getHeight()*2);
         text.draw(sb, "Please enter your name: ", Poi.WIDTH/2-100, Poi.HEIGHT*9/12);
+        //sb.draw(textfieldBox, Poi.WIDTH/2-textfieldBox.getWidth()/2, Poi.HEIGHT/2-20 /*textfieldBox.getHeight()/2*/);
         sb.draw(textfieldBox, Poi.WIDTH/2-textfieldBox.getWidth()/2, Poi.HEIGHT/2-20 /*textfieldBox.getHeight()/2*/);
         sb.draw(buttonSubmit, Poi.WIDTH/2-buttonSubmit.getWidth()/2,Poi.HEIGHT/2-buttonSubmit.getHeight()*3/2);
         sb.end();
 
-        stage.draw();
-        stage.act();
+        //stage.draw();
+        //stage.act();
+        controller.drawTextField();
     }
 
     public void dispose() {
         text.dispose();
         titleEndGame.dispose();
         buttonSubmit.dispose();
-        stage.clear();
+        //stage.clear();
+        controller.disposeTextField();
     }
 
     // To save the endTime from GameView?
