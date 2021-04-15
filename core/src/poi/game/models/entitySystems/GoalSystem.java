@@ -33,7 +33,7 @@ public class GoalSystem extends IteratingSystem {
         final MapLayer goalLayer = tiledMap.getLayers().get("Goal");
         for(MapObject object : goalLayer.getObjects()) {
             final Rectangle goal = ((RectangleMapObject) object).getRectangle();
-            if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > 100/*goal.y*/) {
+            if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > goal.y) {
                 reachedFinish = true;
             }
         }
