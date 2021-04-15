@@ -23,10 +23,7 @@ import poi.game.Map.ObjectCreator;
 
 import poi.game.Poi;
 import poi.game.WorldContactListener;
-import poi.game.controllers.BoostController;
-import poi.game.controllers.PauseController;
-import poi.game.controllers.JoystickController;
-import poi.game.controllers.ChangeViewController;
+import poi.game.controllers.*;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
@@ -42,6 +39,7 @@ public class GameView extends View {
     private ECSEngine ecsEngine;
     private World world;
     private final ImmutableArray<Entity> animatedEntities;
+
     private final OrthographicCamera camera;
     private final GLProfiler profiler;
     private final Box2DDebugRenderer box2DDebugRenderer;
@@ -51,37 +49,22 @@ public class GameView extends View {
     public final PauseController pauseController;
     private final AssetManager assetmanager;
     public MapRenderer mapRenderer;
-    private ObjectCreator objectCreator;
+    //private ObjectCreator objectCreator;
     private BitmapFont timeFont;
+    private GameController controller;
 
     public GameView() {
         super();
+        controller = new GameController(this);
+        world = controller.getWorld();
         timeFont = new BitmapFont();
-        world = new World(new Vector2(0, 20.0f), true);
-        world.setContactListener(new WorldContactListener());
         camera = Poi.getCameraGame();
-        assetmanager = new AssetManager(new InternalFileHandleResolver());
-        assetmanager.setLoader(TiledMap.class, new TmxMapLoader(assetmanager.getFileHandleResolver()));
-        assetmanager.load("Map/Map1.tmx", TiledMap.class);
-
-        pauseController = new PauseController();
-
-        Box2D.init();
-
-        //Setup Engine
-        assetmanager.finishLoading();
-        ecsEngine = new ECSEngine(world, camera, assetmanager.get("Map/Map1.tmx", TiledMap.class));
-        joystickController1 = ecsEngine.getGameController();
-        joystickController2 = ecsEngine.getGameController();
-        //boostComponent1 = ecsEngine.getBoostContoller1();
-        //boostComponent2 = ecsEngine.getBoostContoller2();
-        boostController = ecsEngine.getBoostContoller();
-
-        //Create Entities
-        ecsEngine.createPlayer(200, 300, world, 1);
-        ecsEngine.createPlayer(400, 300, world, 2);
-        assetmanager.finishLoading();
-        objectCreator = new ObjectCreator(assetmanager.get("Map/Map1.tmx", TiledMap.class), ecsEngine, world);
+        ecsEngine = controller.getECSEngine();
+        assetmanager = Poi.getAssetManager();
+        joystickController1 = controller.getJoystickController1();
+        joystickController2 = controller.getJoystickController2();
+        boostController = controller.getBoostController();
+        pauseController = controller.getPauseController();
 
         //For boxbody testing
         profiler = new GLProfiler(Gdx.graphics);
@@ -92,7 +75,6 @@ public class GameView extends View {
         } else {
             box2DDebugRenderer = null;
         }
-
 
         animatedEntities = ecsEngine.getEntitiesFor(Family.all(AnimationComponent.class, BodyComponent.class).get());
 
@@ -112,35 +94,9 @@ public class GameView extends View {
         sb.end();
     }
 
-    protected void handleInput() {
-        /*if (Gdx.input.justTouched()) {
-            if (boundsPause.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                setIsPaused(true);
-                // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
-                changeViewController.set(new SettingsView(changeViewController, this));
-            }
-            if (joystickController1.getBounds().contains(Gdx.input.getX(), Gdx.input.getY())) {
-                System.out.println("Joystick touched");
-            }
-            else {
-                System.out.println("NOT touched");
-            }
-
-       }*/
-    }
-
     @Override
     public void update(float dt){
-        ecsEngine.update(dt);
-        camera.update();
-        world.step(dt, 6, 2);
-        boostController.handleInput();
-        pauseController.handleInput( this);
-        //handleInput();
-
-        if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
-            changeViewController.set(new MenuView());
-        }
+        controller.update(dt);
     }
 
     @Override
@@ -204,12 +160,5 @@ public class GameView extends View {
         //buttonPause.dispose();
     }
 
-    /*public boolean isPaused() {
-        return isPaused;
-    }
-
-    public void setIsPaused(boolean bool) {
-        isPaused = bool;
-    }*/
-    public PauseController getPauseController(){return pauseController;}
+    public PauseController getPauseController() {return pauseController;}
 }
