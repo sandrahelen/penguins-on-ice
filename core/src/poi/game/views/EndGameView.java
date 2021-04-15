@@ -69,7 +69,7 @@ public class EndGameView extends View implements ViewFactory {
         if (Gdx.input.justTouched()) {
             Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (boundsTextfield.contains(touchTransformed.x, touchTransformed.y)) {
-                // Display keyboard when click
+                // TODO Display keyboard when click
 
                 /* // Not working
                 stage.setKeyboardFocus(textfield);
@@ -88,6 +88,7 @@ public class EndGameView extends View implements ViewFactory {
             }
             // Not possible to remove keyboard if no written text
             if (!textfield.getText().isEmpty()) {
+                // Try to unfocus instead? Possibly removing keyboard?
                 Gdx.input.setOnscreenKeyboardVisible(false);
             }
         }
