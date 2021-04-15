@@ -13,12 +13,12 @@ public class EndGameController {
 
     private ChangeViewController changeViewController;
     private ButtonComponent buttonComponent;
-    private Datahandler datahandler;
     private Texture buttonSubmit;
     private Rectangle boundsSubmit;
-
     private String username = "";
     private int endTime = 0;
+    Datahandler datahandler;
+    SoundController soundController;
 
     public EndGameController(int endTime) {
         changeViewController = Poi.getChangeViewController();
@@ -30,6 +30,8 @@ public class EndGameController {
         // Linking to Firebase database
         datahandler = changeViewController.getDatahandler();
         changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
+        soundController = Poi.getSoundController();
+        soundController.stop();
     }
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
     public int getButtonHeight() { return buttonComponent.getButtonHeight(); }

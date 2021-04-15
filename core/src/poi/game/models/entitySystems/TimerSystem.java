@@ -9,6 +9,7 @@ public class TimerSystem extends IntervalSystem {
     private int minutes;
     private String stringTime;
     private int time;
+    private boolean finish = false;
 
 
 
@@ -22,18 +23,24 @@ public class TimerSystem extends IntervalSystem {
 
     @Override
     protected void updateInterval() {
-        elapsedTime += getInterval();
-        if (elapsedTime >= 1) {
-            while (elapsedTime >= 1) {
-                elapsedTime -= 1;
-                ++seconds;
-                ++time;
-                if (seconds == 60) {
-                    seconds = 0;
-                    ++minutes;
+        if(!finish) {
+            elapsedTime += getInterval();
+            if (elapsedTime >= 1) {
+                while (elapsedTime >= 1) {
+                    elapsedTime -= 1;
+                    ++seconds;
+                    ++time;
+                    if (seconds == 60) {
+                        seconds = 0;
+                        ++minutes;
+                    }
                 }
             }
         }
+    }
+
+    public void setFinish(){
+        this.finish = true;
     }
 
     public String getStringTime(){

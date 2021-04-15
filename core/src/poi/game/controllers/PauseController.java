@@ -13,7 +13,7 @@ public class PauseController {
 
     private PauseComponent pauseComponent;
     private ChangeViewController changeViewController;
-    Texture buttonPause;
+    private Texture buttonPause;
 
     public  PauseController(){
 
