@@ -66,7 +66,7 @@ public class GameView extends View {
 
         //For boxbody testing
         profiler = new GLProfiler(Gdx.graphics);
-        profiler.enable();
+        profiler.disable();
         if (profiler.isEnabled()) {
             box2DDebugRenderer = new Box2DDebugRenderer();
 
