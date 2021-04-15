@@ -37,6 +37,11 @@ public class ColorGameController {
             texturesP1.add("players/grønn-skli.png");
             texturesP1.add("players/grønn-finish.png");
         }
+        else if (colorP1 == 3) {
+            texturesP1.add("players/lilla-bak.png");
+            texturesP1.add("players/lilla-skli.png");
+            texturesP1.add("players/lilla-finish.png");
+        }
         return texturesP1;
     }
 
@@ -61,6 +66,12 @@ public class ColorGameController {
             texturesP2.add("players/grønn-bak.png");
             texturesP2.add("players/grønn-skli.png");
             texturesP2.add("players/grønn-finish.png");
+        }
+        // Purple selected
+        else if (colorP2 == 3) {
+            texturesP2.add("players/lilla-bak.png");
+            texturesP2.add("players/lilla-skli.png");
+            texturesP2.add("players/lilla-finish.png");
         }
         return texturesP2;
     }

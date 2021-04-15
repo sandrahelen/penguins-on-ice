@@ -12,6 +12,7 @@ public class ColorView extends View implements ViewFactory {
     private Texture buttonPenguinBlack;
     private Texture buttonPenguinPink;
     private Texture buttonPenguinGreen;
+    private Texture buttonPenguinPurp;
     private Texture buttonBack;
 
     public ColorView (GameView gameView){
@@ -20,6 +21,7 @@ public class ColorView extends View implements ViewFactory {
         buttonPenguinBlack = controller.getButtonPenguinBlack();
         buttonPenguinPink = controller.getButtonPenguinPink();
         buttonPenguinGreen = controller.getButtonPenguinGreen();
+        buttonPenguinPurp = controller.getButtonPenguinPurp();
         buttonBack = controller.getButtonBack();
     }
 
@@ -35,9 +37,11 @@ public class ColorView extends View implements ViewFactory {
         sb.draw(buttonPenguinBlack, Poi.WIDTH/6, Poi.HEIGHT*6/9);
         sb.draw(buttonPenguinPink, Poi.WIDTH*2/6, Poi.HEIGHT*6/9);
         sb.draw(buttonPenguinGreen, Poi.WIDTH/6, Poi.HEIGHT*4/9);
+        sb.draw(buttonPenguinPurp, Poi.WIDTH*2/6, Poi.HEIGHT*4/9);
         sb.draw(buttonPenguinBlack, Poi.WIDTH*4/6, Poi.HEIGHT*6/9);
         sb.draw(buttonPenguinPink, Poi.WIDTH*5/6, Poi.HEIGHT*6/9);
         sb.draw(buttonPenguinGreen, Poi.WIDTH*4/6, Poi.HEIGHT*4/9);
+        sb.draw(buttonPenguinPurp, Poi.WIDTH*5/6, Poi.HEIGHT*4/9);
         sb.draw(buttonBack, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
         sb.end();
     }
