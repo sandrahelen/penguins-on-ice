@@ -94,6 +94,7 @@ public class GameView extends View {
     @Override
     public void update(float dt){
         controller.update(dt);
+
     }
 
     @Override
@@ -107,8 +108,8 @@ public class GameView extends View {
         mapRenderer.render();
 
         sb.begin();
-        //Draw controller player 1
         sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
+        //Draw controller player 1
         sb.draw(joystickController.getJoystick1().getJoystickBase(), camera.position.x - 300, camera.position.y - 150,
                 (float)joystickController.joystick1.joystickBase.getWidth()/2,
                 (float)joystickController.joystick1.joystickBase.getHeight()/2);
@@ -147,8 +148,9 @@ public class GameView extends View {
                     (float)joystickController.joystick2.joystick.getHeight()/2);
         }
 
+
         boostController.setValues();
-        boostController.startTimer();
+        boostController.startTimer(/*float dt*/);
         //Draw boost button player 1
         if(boostController.getBoostComponent1().getButtonClicked()){
             sb.draw(boostController.getBoostComponent1().getBoostButton(), camera.position.x-200, camera.position.y-130,
@@ -172,7 +174,7 @@ public class GameView extends View {
 
         //Time
         if(ecsEngine.getSystem(GoalSystem.class).isFinished()){
-            timeFontBig.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x,camera.position.y);
+            timeFontBig.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x-70,camera.position.y);
         }
         else{
             timeFont.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x+ WIDTH/2-100, camera.position.y+ HEIGHT/2-40);
