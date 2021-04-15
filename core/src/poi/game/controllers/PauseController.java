@@ -13,13 +13,15 @@ public class PauseController {
 
     private PauseComponent pauseComponent;
     private ChangeViewController changeViewController;
-    Texture buttonPause;
+    private Texture buttonPause;
+    private SoundController soundController;
 
     public  PauseController(){
 
         pauseComponent = new PauseComponent();
         changeViewController = Poi.getChangeViewController();
         buttonPause = pauseComponent.getButtonPause();
+        soundController = Poi.getSoundController();
     }
 
     public void handleInput(GameView gameView) {
@@ -27,6 +29,7 @@ public class PauseController {
         if (Gdx.input.justTouched()) {
             if (pauseComponent.getBoundsPause().contains(touchTransformed.x, touchTransformed.y)) {
                 pauseComponent.setPaused(true);
+                soundController.stop();
                 // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
                 changeViewController.set(new SettingsView(gameView));
             }

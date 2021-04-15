@@ -33,6 +33,7 @@ public class GameController {
     public final BoostController boostController;
     public final PauseController pauseController;
     private final ObjectCreator objectCreator;
+    private final SoundController soundController;
 
     public GameController(GameView gameView) {
         changeViewController = Poi.getChangeViewController();
@@ -56,8 +57,9 @@ public class GameController {
         assetmanager.finishLoading();
         objectCreator = new ObjectCreator(assetmanager.get("Map/Map1.tmx", TiledMap.class), ecsEngine, world);
 
-        Sound sound = Gdx.audio.newSound(Gdx.files.internal("soundGame.mp3"));
-        sound.play(1.0f);
+        soundController = Poi.getSoundController();
+        soundController.play();
+
     }
 
     public void update(float dt){
@@ -89,5 +91,6 @@ public class GameController {
     public BoostController getBoostController() {return boostController;}
     public PauseController getPauseController() {return pauseController;}
     public ECSEngine getECSEngine() {return ecsEngine;}
+    public SoundController getSoundController() {return soundController;}
 
 }
