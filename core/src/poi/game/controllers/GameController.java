@@ -21,6 +21,8 @@ import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entitySystems.AnimationSystem;
 import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.MovementSystem;
+import poi.game.models.entitySystems.TimerSystem;
+import poi.game.views.EndGameView;
 import poi.game.views.GameView;
 import poi.game.views.MenuView;
 
@@ -38,8 +40,7 @@ public class GameController {
     //private final Box2DDebugRenderer box2DDebugRenderer;
     private final OrthographicCamera camera;
     private final AssetManager assetmanager;
-    private final JoystickController joystickController1;
-    private final JoystickController joystickController2;
+    private final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
     private final ObjectCreator objectCreator;
@@ -56,8 +57,7 @@ public class GameController {
         //Setup Engine
         assetmanager.finishLoading();
         ecsEngine = new ECSEngine(world, camera, assetmanager.get("Map/Map1.tmx", TiledMap.class));
-        joystickController1 = ecsEngine.getGameController();
-        joystickController2 = ecsEngine.getGameController();
+        joystickController = ecsEngine.getJoystickController();
         boostController = ecsEngine.getBoostContoller();
         pauseController = new PauseController();
 
@@ -73,6 +73,7 @@ public class GameController {
         ecsEngine.update(dt);
         camera.update();
         world.step(dt, 6, 2);
+        joystickController.handleInput();
         boostController.handleInput();
         pauseController.handleInput(gameView);
 
@@ -81,7 +82,7 @@ public class GameController {
             ecsEngine.getSystem(MovementSystem.class).setFinishAnimation();
             startTimer();
             if(countStart < 1){
-                changeViewController.set(new MenuView());
+                changeViewController.set(new EndGameView(ecsEngine.getSystem(TimerSystem.class).getTime()));
             }
 
         }
@@ -93,8 +94,7 @@ public class GameController {
         }
     }
     public World getWorld() {return world;}
-    public JoystickController getJoystickController1() {return joystickController1;}
-    public JoystickController getJoystickController2() {return joystickController2;}
+    public JoystickController getJoystickController() {return joystickController;}
     public BoostController getBoostController() {return boostController;}
     public PauseController getPauseController() {return pauseController;}
     public ECSEngine getECSEngine() {return ecsEngine;}
