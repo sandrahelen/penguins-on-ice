@@ -1,7 +1,9 @@
 package poi.game.controllers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector3;
 
+import poi.game.Poi;
 import poi.game.models.entityComponents.BoostComponent;
 import poi.game.views.SettingsView;
 
@@ -12,12 +14,13 @@ public class BoostController {
     public BoostComponent boostComponent2;
 
     public BoostController(){
-        boostComponent1 = new BoostComponent(220, 200);
-        boostComponent2 = new BoostComponent(320, 200);
+        boostComponent1 = new BoostComponent(220, 30);
+        boostComponent2 = new BoostComponent(320, 30);
     }
     public void handleInput() {
+        Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         if (Gdx.input.justTouched()) {
-            if (boostComponent1.getBoundsBoost().contains(Gdx.input.getX(), Gdx.input.getY())) {
+            if (boostComponent1.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
                 if (boostComponent1.getCharge() == 100) {
                     boostComponent1.setButtonClicked(true);
                     boostComponent1.setCharge(0);
@@ -25,7 +28,7 @@ public class BoostController {
                 }
                 System.out.println("Button1 touched");
             }
-            if (boostComponent2.getBoundsBoost().contains(Gdx.input.getX(), Gdx.input.getY())) {
+            if (boostComponent2.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
                 if (boostComponent2.getCharge() == 100) {
                     boostComponent2.setButtonClicked(true);
                     boostComponent2.setCharge(0);

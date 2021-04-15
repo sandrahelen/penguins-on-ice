@@ -58,7 +58,7 @@ public class MovementSystem extends IteratingSystem{
     public void processEntity(final Entity entity, final float deltaTime) {
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
         final Vector2 center = bodyComponent.body.getWorldCenter();
-        Gdx.app.log("Speed", String.valueOf(bodyComponent.body.getLinearVelocity().y));
+        //Gdx.app.log("Speed", String.valueOf(bodyComponent.body.getLinearVelocity().y));
         //Air resistance
         if(bodyComponent.body.getLinearVelocity().y > 90){
             bodyComponent.body.applyLinearImpulse(0, -1.5f*bodyComponent.body.getLinearVelocity().y, center.x, center.y, false);
