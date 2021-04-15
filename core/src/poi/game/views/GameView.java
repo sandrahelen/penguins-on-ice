@@ -154,14 +154,42 @@ public class GameView extends View {
         sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
         //Draw controller player 1
         sb.draw(joystickController.getJoystick1().getJoystickBase(), camera.position.x - 300, camera.position.y - 150,
-                (float)joystickController.joystick1.joystickBase.getWidth()/2, (float)joystickController.joystick1.joystickBase.getHeight()/2);
-        sb.draw(joystickController.getJoystick1().getJoystick(), camera.position.x - 285, camera.position.y - 135,
-                (float)joystickController.joystick1.joystick.getWidth()/2, (float)joystickController.joystick1.joystick.getHeight()/2);
+                (float)joystickController.joystick1.joystickBase.getWidth()/2,
+                (float)joystickController.joystick1.joystickBase.getHeight()/2);
+        if (joystickController.joystick1.getJoystickTouched() && joystickController.joystick1.getMoveLeft()) {
+            sb.draw(joystickController.getJoystick1().getJoystick(), camera.position.x - 300, camera.position.y - 135,
+                    (float)joystickController.joystick1.joystick.getWidth()/2,
+                    (float)joystickController.joystick1.joystick.getHeight()/2);
+        }
+        else if (joystickController.joystick1.getJoystickTouched() && !joystickController.joystick1.getMoveLeft()) {
+            sb.draw(joystickController.getJoystick1().getJoystick(), camera.position.x - 270, camera.position.y - 135,
+                    (float)joystickController.joystick1.joystick.getWidth()/2,
+                    (float)joystickController.joystick1.joystick.getHeight()/2);
+        }
+        else {
+            sb.draw(joystickController.getJoystick1().getJoystick(), camera.position.x - 285, camera.position.y - 135,
+                    (float)joystickController.joystick1.joystick.getWidth()/2,
+                    (float)joystickController.joystick1.joystick.getHeight()/2);
+        }
         //Draw controller player 2
         sb.draw(joystickController.getJoystick2().getJoystickBase(), camera.position.x + 220, camera.position.y - 150,
-                (float)joystickController.joystick2.joystickBase.getWidth()/2, (float)joystickController.joystick2.joystickBase.getHeight()/2);
-        sb.draw(joystickController.getJoystick2().getJoystick(), camera.position.x + 235, camera.position.y - 135,
-                (float)joystickController.joystick2.joystick.getWidth()/2, (float)joystickController.joystick2.joystick.getHeight()/2);
+                (float)joystickController.joystick2.joystickBase.getWidth()/2,
+                (float)joystickController.joystick2.joystickBase.getHeight()/2);
+        if (joystickController.joystick2.getJoystickTouched() && joystickController.joystick2.getMoveLeft()) {
+            sb.draw(joystickController.getJoystick2().getJoystick(), camera.position.x + 220, camera.position.y - 135,
+                    (float)joystickController.joystick2.joystick.getWidth()/2,
+                    (float)joystickController.joystick2.joystick.getHeight()/2);
+        }
+        else if (joystickController.joystick2.getJoystickTouched() && !joystickController.joystick2.getMoveLeft()) {
+            sb.draw(joystickController.getJoystick2().getJoystick(), camera.position.x + 250, camera.position.y - 135,
+                    (float)joystickController.joystick2.joystick.getWidth()/2,
+                    (float)joystickController.joystick2.joystick.getHeight()/2);
+        }
+        else {
+            sb.draw(joystickController.getJoystick2().getJoystick(), camera.position.x + 235, camera.position.y - 135,
+                    (float)joystickController.joystick2.joystick.getWidth()/2,
+                    (float)joystickController.joystick2.joystick.getHeight()/2);
+        }
 
         boostController.setValues();
         boostController.startTimer();

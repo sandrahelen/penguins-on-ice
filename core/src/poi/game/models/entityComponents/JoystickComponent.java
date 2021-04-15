@@ -16,7 +16,7 @@ public class JoystickComponent {
     public JoystickComponent(float startPosX, float startPosY) {
         joystickBase = new Texture("joystick/base.png");
         joystick = new Texture("joystick/joystick.png");
-        boundsJoystick = new Rectangle(startPosX, startPosY, (float) joystick.getWidth()/2, (float) joystick.getHeight()/2);
+        boundsJoystick = new Rectangle(startPosX - 15, startPosY, (float) joystickBase.getWidth()/2, (float) joystick.getHeight()/2);
         posX = startPosX;
     }
 
@@ -40,7 +40,7 @@ public class JoystickComponent {
         this.joystickTouched = joystickTouched;
     }
 
-    public void setMovement(boolean moveLeft) {
+    public void setMoveLeft(boolean moveLeft) {
         this.moveLeft = moveLeft;
     }
 
@@ -48,7 +48,7 @@ public class JoystickComponent {
         return this.joystickTouched;
     }
 
-    public boolean getMovement() {
+    public boolean getMoveLeft() {
         return this.moveLeft;
     }
 }
