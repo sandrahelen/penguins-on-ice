@@ -29,9 +29,11 @@ public class SoundController {
     public void mute() {
         if (isMuted) {
             isMuted = false;
+            sound.play();
         }
         else {
             isMuted = true;
+            sound.stop();
         }
     }
 }

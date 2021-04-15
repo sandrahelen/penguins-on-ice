@@ -54,8 +54,11 @@ public class SettingsController {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         if(Gdx.input.justTouched()){
             // Checks if buttons are pressed before changing view
-            if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
-                //gameView.getPauseController().getPauseComponent().setPaused(false);
+            if (boundsSound.contains(touchTransformed.x, touchTransformed.y)) {
+                soundController.mute();
+            }
+            else if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
+                soundController.stop();
                 changeViewController.set(new MenuView());
             }
             // Can only resume game if game is already paused
