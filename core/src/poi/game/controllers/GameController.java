@@ -19,6 +19,8 @@ import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entitySystems.GoalSystem;
+import poi.game.models.entitySystems.TimerSystem;
+import poi.game.views.EndGameView;
 import poi.game.views.GameView;
 import poi.game.views.MenuView;
 
@@ -69,8 +71,8 @@ public class GameController {
         boostController.handleInput();
         pauseController.handleInput(gameView);
 
-        if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
-            changeViewController.set(new MenuView());
+        if(ecsEngine.getSystem(GoalSystem.class).isFinished()){
+            changeViewController.set(new EndGameView(ecsEngine.getSystem(TimerSystem.class).getTime()));
         }
     }
     public World getWorld() {return world;}
