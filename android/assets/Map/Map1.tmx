@@ -4,7 +4,7 @@
  <tileset firstgid="2" source="FinishLine.tsx"/>
  <layer id="1" name="Rutelag 1" width="20" height="230">
   <data encoding="base64" compression="zlib">
-   eJztw4EJAAAIA6C1/4/ujQgFm6SeOaqqqqqqqqqqqqqqqqqqqqqqvrgZ9hJd
+   eJztzzERADAIBLCn/kWjgI0rS4YISCUp4Iu37PoDAAAAAAAAAAAAAAAAAAAAAMwaqD0SDQ==
   </data>
  </layer>
  <objectgroup id="2" name="Obstacles">
@@ -83,11 +83,6 @@
   <object id="119" x="115.152" y="515.152"/>
   <object id="120" x="481.818" y="957.576"/>
   <object id="121" x="493.939" y="545.455"/>
-  <object id="122" x="493.939" y="366.667"/>
-  <object id="123" x="218.182" y="293.939"/>
-  <object id="124" x="166.667" y="190.909"/>
-  <object id="125" x="439.394" y="151.515"/>
-  <object id="126" x="427.273" y="293.939"/>
   <object id="127" x="115.152" y="4069.7"/>
   <object id="128" x="342.424" y="4033.33" width="3.0303"/>
   <object id="129" x="557.576" y="3930.3"/>
@@ -106,6 +101,6 @@
   <object id="142" x="384.848" y="6036.36"/>
  </objectgroup>
  <objectgroup id="3" name="Goal">
-  <object id="144" x="-18.1818" y="63.6364" width="678.788" height="36.3636"/>
+  <object id="144" x="-15.5151" y="300.97" width="678.788" height="36.3636"/>
  </objectgroup>
 </map>
