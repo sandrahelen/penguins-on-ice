@@ -22,7 +22,7 @@ public class BoostComponent {
     public BoostComponent(float startPosX, float startPosY) {
         boostButton = new Texture("boost/transparentDark47.png");
         boostButtonUnCharged = new Texture("boost/shadedDark49.png");
-        boundsBoost = new Rectangle(startPosX, startPosY, boostButton.getWidth(), boostButton.getHeight());
+        boundsBoost = new Rectangle(startPosX, startPosY, boostButton.getWidth()/2, boostButton.getHeight()/2);
         boostFont = new BitmapFont();
     }
 

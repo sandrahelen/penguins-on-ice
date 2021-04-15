@@ -2,10 +2,14 @@ package poi.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import poi.game.controllers.ChangeViewController;
 import poi.game.views.MenuView;
 
@@ -22,6 +26,8 @@ public class Poi extends Game {
 
 	private Leaderboard leaderboard;
 	private Datahandler datahandler;
+
+	private static AssetManager assetmanager;
 
 	public Poi(Leaderboard leaderboard) {
 		this.leaderboard = leaderboard;
@@ -43,6 +49,9 @@ public class Poi extends Game {
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database
 		leaderboard.submitScore("R", 25);
+
+		assetmanager = new AssetManager(new InternalFileHandleResolver());
+		assetmanager.setLoader(TiledMap.class, new TmxMapLoader(assetmanager.getFileHandleResolver()));
 	}
 
 	@Override
@@ -70,5 +79,7 @@ public class Poi extends Game {
 	public static ChangeViewController getChangeViewController(){
 		return changeViewController;
 	}
+
+	public static AssetManager getAssetManager(){return assetmanager;}
 }
 
