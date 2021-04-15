@@ -23,7 +23,8 @@ public class EndGameController {
     public EndGameController() {
         changeViewController = Poi.getChangeViewController();
         buttonComponent = new ButtonComponent();
-        textfield = new TextFieldComponent(Poi.WIDTH/2-textfield.getTextBox().getWidth()/2+20, Poi.HEIGHT/2);
+        textfield = new TextFieldComponent();
+        textfield.setPosition(Poi.WIDTH/2-textfield.getTextBox().getWidth()/2+20, Poi.HEIGHT/2);
         buttonSubmit = buttonComponent.getButtonSubmit();
         boundsSubmit = buttonComponent.getBoundsSubmit();
     }

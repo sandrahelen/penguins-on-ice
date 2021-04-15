@@ -23,11 +23,14 @@ public class TextFieldComponent {
     private Texture textBox;
     private Stage stage;
 
-    public TextFieldComponent(float pos1, float pos2) {
+    private float pos1;
+    private float pos2;
+
+    public TextFieldComponent() {
         cam = Poi.getCamera();
         font = new BitmapFont();
         textBox = new Texture("general/textField.png");
-        boundsTextBox = new Rectangle(pos1-20, pos2-20, textBox.getWidth(), textBox.getHeight());
+        //boundsTextBox = new Rectangle(pos1-20, pos2-20, textBox.getWidth(), textBox.getHeight());
         //Poi.WIDTH/2-textfieldBox.getWidth()/2, Poi.HEIGHT/2-20
         //Poi.WIDTH/2-textfieldBox.getWidth()/2+20, Poi.HEIGHT/2 ok
 
@@ -56,6 +59,9 @@ public class TextFieldComponent {
     }
     public Rectangle getBoundsTextBox() {
         return boundsTextBox;
+    }
+    public void setPosition(float pos1, float pos2) {
+        boundsTextBox = new Rectangle(pos1-20, pos2-20, textBox.getWidth(), textBox.getHeight());
     }
 
     public void draw() {
