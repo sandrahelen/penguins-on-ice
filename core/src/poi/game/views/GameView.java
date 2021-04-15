@@ -104,8 +104,8 @@ public class GameView extends View {
         mapRenderer.render();
 
         sb.begin();
-        //Draw controller player 1
         sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
+        //Draw controller player 1
         sb.draw(joystickController.getJoystick1().getJoystickBase(), camera.position.x - 300, camera.position.y - 150,
                 (float)joystickController.joystick1.joystickBase.getWidth()/2,
                 (float)joystickController.joystick1.joystickBase.getHeight()/2);
