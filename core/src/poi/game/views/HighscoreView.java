@@ -1,5 +1,6 @@
 package poi.game.views;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -32,6 +33,8 @@ public class HighscoreView extends View implements ViewFactory {
         boardHighscore = new Texture("general/boardHighscore.png");
         buttonMenu = new Texture("general/buttonMenu.png");
         text = new BitmapFont();
+        text.setColor(Color.BLACK);
+        //text.set
 
         datahandler = changeViewController.getDatahandler();
         changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
@@ -51,15 +54,15 @@ public class HighscoreView extends View implements ViewFactory {
         sb.draw(titleHighscore, Poi.WIDTH/2-titleHighscore.getWidth()/2, Poi.HEIGHT - titleHighscore.getHeight()*2);
         sb.draw(boardHighscore, Poi.WIDTH/2-boardHighscore.getWidth()/2/*/10*/,Poi.HEIGHT*3/16);
         sb.draw(buttonMenu, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/16);
-        text.draw(sb, "Name", Poi.WIDTH/10, Poi.HEIGHT-Poi.HEIGHT*3/16);
-        text.draw(sb, "Time", Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16);
+        text.draw(sb, "NAME", Poi.WIDTH/3, Poi.HEIGHT-Poi.HEIGHT*4/16);
+        text.draw(sb, "TIME", Poi.WIDTH/3+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*4/16);
 
         // Printing out scores from Firebase database on to the scoreboard
-        int i = Poi.HEIGHT*3/16;
+        int i = 20;
         for (String score : changeViewController.getDatahandler().getScores().keySet()) {
-            text.draw(sb, score, Poi.WIDTH/10, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
-            text.draw(sb, String.valueOf(changeViewController.getDatahandler().getScores().get(score)), Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
-            i += 20;
+            text.draw(sb, score, Poi.WIDTH/3, Poi.HEIGHT-Poi.HEIGHT*5/16-i);
+            text.draw(sb, String.valueOf(changeViewController.getDatahandler().getScores().get(score)), Poi.WIDTH/3+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*5/16-i);
+            i += 25;
         }
         sb.end();
     }

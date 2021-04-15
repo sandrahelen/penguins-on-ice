@@ -26,6 +26,7 @@ public class SettingsController {
     private GameView gameView;
 
     private ButtonComponent buttonComponent;
+    SoundController soundController;
 
     public SettingsController(GameView gameView){
         this.gameView = gameView;
@@ -39,6 +40,7 @@ public class SettingsController {
         boundsMenu = buttonComponent.getBoundsMenu();
         buttonResume = new Texture("general/buttonResume.png");
         boundsResume = new Rectangle(30, Poi.HEIGHT - 30 - buttonResume.getHeight()/2, buttonResume.getWidth(), buttonResume.getHeight());
+        soundController = Poi.getSoundController();
     }
 
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
@@ -52,12 +54,16 @@ public class SettingsController {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         if(Gdx.input.justTouched()){
             // Checks if buttons are pressed before changing view
-            if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
-                //gameView.getPauseController().getPauseComponent().setPaused(false);
+            if (boundsSound.contains(touchTransformed.x, touchTransformed.y)) {
+                soundController.mute();
+            }
+            else if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
+                soundController.stop();
                 changeViewController.set(new MenuView());
             }
             // Can only resume game if game is already paused
             else if (boundsResume.contains(touchTransformed.x, touchTransformed.y) && gameView.getPauseController().getIsPaused()) {
+                soundController.play();
                 // Change view to existing gameView
                 changeViewController.set(gameView);
             }

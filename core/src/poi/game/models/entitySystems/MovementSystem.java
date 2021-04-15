@@ -1,9 +1,11 @@
 package poi.game.models.entitySystems;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
@@ -12,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import java.util.HashMap;
 import java.util.Map;
 
+import poi.game.Poi;
 import poi.game.controllers.BoostController;
 import poi.game.controllers.JoystickController;
 import poi.game.models.ECSEngine;
@@ -25,6 +28,7 @@ public class MovementSystem extends IteratingSystem{
     private Map<Integer, Float> touches = new HashMap<>();
     private final JoystickController joystickController;
     private final BoostController boostController;
+    private boolean finish = false;
 
     public MovementSystem(OrthographicCamera cam, JoystickController joystickController, BoostController boostController) {
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
@@ -106,6 +110,9 @@ public class MovementSystem extends IteratingSystem{
             }
             //Gdx.app.log("Movement", "Touches: " + touches.get(0));
         }
+    }
+    public void setFinish(){
+        this.finish = true;
     }
 }
 
