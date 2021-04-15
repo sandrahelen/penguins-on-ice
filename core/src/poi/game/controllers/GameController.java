@@ -38,8 +38,7 @@ public class GameController {
     //private final Box2DDebugRenderer box2DDebugRenderer;
     private final OrthographicCamera camera;
     private final AssetManager assetmanager;
-    private final JoystickController joystickController1;
-    private final JoystickController joystickController2;
+    private final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
     private final ObjectCreator objectCreator;
@@ -56,8 +55,7 @@ public class GameController {
         //Setup Engine
         assetmanager.finishLoading();
         ecsEngine = new ECSEngine(world, camera, assetmanager.get("Map/Map1.tmx", TiledMap.class));
-        joystickController1 = ecsEngine.getGameController();
-        joystickController2 = ecsEngine.getGameController();
+        joystickController = ecsEngine.getJoystickController();
         boostController = ecsEngine.getBoostContoller();
         pauseController = new PauseController();
 
@@ -73,6 +71,7 @@ public class GameController {
         ecsEngine.update(dt);
         camera.update();
         world.step(dt, 6, 2);
+        joystickController.handleInput();
         boostController.handleInput();
         pauseController.handleInput(gameView);
 
@@ -93,8 +92,7 @@ public class GameController {
         }
     }
     public World getWorld() {return world;}
-    public JoystickController getJoystickController1() {return joystickController1;}
-    public JoystickController getJoystickController2() {return joystickController2;}
+    public JoystickController getJoystickController() {return joystickController;}
     public BoostController getBoostController() {return boostController;}
     public PauseController getPauseController() {return pauseController;}
     public ECSEngine getECSEngine() {return ecsEngine;}

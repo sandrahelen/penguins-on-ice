@@ -1,67 +1,78 @@
 package poi.game.controllers;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector3;
+import poi.game.Poi;
+import poi.game.models.entityComponents.JoystickComponent;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class JoystickController {
-    private final int MAX_POS = 25;
-    public Texture background;
-    public Texture base;
-    public Texture joystick;
-    public float startPosX;
-    private float startPosY;
-    private Vector2 position;
-    private OrthographicCamera cam;
-    private final int id;
-    private Rectangle boundsJoystick;
+    public JoystickComponent joystick1;
+    public JoystickComponent joystick2;
+    private Vector3 touchPos;
+    private Map<Integer, Float> touches = new HashMap<>();
 
-    public JoystickController(OrthographicCamera cam, int id) {
-        this.cam = cam;
-        this.id = id;
-        background = new Texture("joystick/background.png");
-        base = new Texture("joystick/base.png");
-        joystick = new Texture("joystick/joystick.png");
-        setStartPosition();
-        boundsJoystick = new Rectangle(50, 400 - ((joystick.getHeight()/2)/2), joystick.getWidth()/2, joystick.getHeight()/2);
-    }
+    public JoystickController() {
+        touchPos = new Vector3();
+        joystick1 = new JoystickComponent(35, 45);
+        joystick2 = new JoystickComponent(555,45);
 
-    private void setStartPosition() {
-        if (this.id == 1) {
-            startPosX = 275 - this.cam.position.x;
-            startPosY = 300 - this.cam.position.y;
-            position = new Vector2(startPosX, startPosY);
-        }
-        if (this.id == 2) {
-            startPosX = 500 - this.cam.position.x;
-            startPosY = 300 - this.cam.position.y;
-            position = new Vector2(startPosX, startPosY);
+        // Adding possible fingers to Hashmap
+        for (int i=0; i<5; i++) {
+            touches.put(i, touchPos.x);
+            touches.put(i, touchPos.y);
         }
     }
 
-    public Rectangle getBounds() {
-        return boundsJoystick;
+    public void handleInput(){
+        // Joysticks are not touched
+        joystick1.setJoystickTouched(false);
+        joystick2.setJoystickTouched(false);
+
+        for (int i = 0; i < 5; i++) {
+            if (Gdx.input.isTouched(i)) {
+                Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+                touchPos.set(touchTransformed.x, touchTransformed.y, 0);
+
+                // Joystick1 is touched
+                if (joystick1.getBoundsJoystick().contains(touchPos.x, touchPos.y)) {
+                    joystick1.setJoystickTouched(true);
+
+                    // Move joystick1 left
+                    if (touchPos.x < joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 2)) {
+                        joystick1.setMoveLeft(true);
+                    }
+                    // Move joystick1 right
+                    else if (touchPos.x > joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 2)) {
+                        joystick1.setMoveLeft(false);
+                    }
+                }
+                // Joystick2 is touched
+                else if (joystick2.getBoundsJoystick().contains(touchPos.x, touchPos.y)) {
+                    joystick2.setJoystickTouched(true);
+
+                    // Move joystick2 left
+                    if (touchPos.x < joystick2.getPosition() + (joystick2.getBoundsJoystick().getWidth() / 2)) {
+                        joystick2.setMoveLeft(true);
+                    }
+                    // Move joystick2 right
+                    else if (touchPos.x > joystick2.getPosition() + (joystick2.getBoundsJoystick().getWidth() / 2)) {
+                        joystick2.setMoveLeft(false);
+                    }
+                }
+            }
+        }
     }
 
-    public Vector2 getPosition() {
-        return position;
+
+
+    public JoystickComponent getJoystick1() {
+        return joystick1;
     }
 
-    public int getId() {
-        return this.id;
-    }
-
-    public void setPosition(int movement) {
-        if (movement == 0) {
-            position.x = startPosX;
-        }
-        if (movement == 1) {
-            position.x = startPosX - MAX_POS;
-        }
-        if (movement == 2) {
-            position.x = startPosX + MAX_POS;
-        }
+    public JoystickComponent getJoystick2() {
+        return joystick2;
     }
 }

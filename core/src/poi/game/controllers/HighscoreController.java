@@ -16,12 +16,10 @@ public class HighscoreController {
 
     private Texture buttonMenu;
     private final Rectangle boundsMenu;
-    private GameView gameView;
 
     private ButtonComponent buttonComponent;
 
     public HighscoreController(){
-        this.gameView = gameView;
         changeViewController = Poi.getChangeViewController();
         buttonComponent = new ButtonComponent();
         buttonMenu = buttonComponent.getButtonMenu();
