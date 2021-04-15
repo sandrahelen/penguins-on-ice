@@ -155,7 +155,7 @@ public class GameView extends View {
             sb.draw(boostController.getBoostComponent1().getBoostButtonUnCharged(), camera.position.x-200, camera.position.y-130,
                     (float)boostController.boostComponent1.getBoostButtonUnCharged().getWidth()/2, (float)boostController.boostComponent1.getBoostButtonUnCharged().getHeight()/2);
         }
-        boostController.getBoostComponent1().getBoostFont().draw(sb, (int) boostController.getBoostComponent1().getCharge() + "%", camera.position.x-100, camera.position.y-100);
+        boostController.getBoostComponent1().getBoostFont().draw(sb, (int) boostController.getBoostComponent1().getCharge() + "%", camera.position.x-192, camera.position.y-131);
         //Draw boost button player 2
         if(boostController.getBoostComponent2().getButtonClicked()){
             sb.draw(boostController.getBoostComponent2().getBoostButton(), camera.position.x+160, camera.position.y-130,
@@ -165,7 +165,7 @@ public class GameView extends View {
             sb.draw(boostController.getBoostComponent2().getBoostButtonUnCharged(), camera.position.x+160, camera.position.y-130,
                     (float)boostController.boostComponent2.getBoostButtonUnCharged().getWidth()/2, (float)boostController.boostComponent2.getBoostButtonUnCharged().getHeight()/2);
         }
-        boostController.getBoostComponent2().getBoostFont().draw(sb, (int) boostController.getBoostComponent2().getCharge() + "%", camera.position.x, camera.position.y-100);
+        boostController.getBoostComponent2().getBoostFont().draw(sb, (int) boostController.getBoostComponent2().getCharge() + "%", camera.position.x+168, camera.position.y-131);
 
         sb.end();
 
