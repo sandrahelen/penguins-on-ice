@@ -20,6 +20,7 @@ import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entitySystems.AnimationSystem;
 import poi.game.models.entitySystems.GoalSystem;
+import poi.game.models.entitySystems.MovementSystem;
 import poi.game.models.entitySystems.TimerSystem;
 import poi.game.views.EndGameView;
 import poi.game.models.entitySystems.MovementSystem;

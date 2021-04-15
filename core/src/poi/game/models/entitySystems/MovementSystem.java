@@ -23,18 +23,12 @@ import poi.game.models.entityComponents.PlayerComponent;
 
 
 public class MovementSystem extends IteratingSystem{
-    public static int touch = 0;
-    private int touchP1 = 0;
-    private int touchP2 = 0;
-    private Vector2 xFactor;
     private Vector3 touchPos;
     private final OrthographicCamera cam;
     private Map<Integer, Float> touches = new HashMap<>();
     private final JoystickController joystickController;
     private final BoostController boostController;
-
     private boolean finish = false;
-    private Rectangle boundsJoystick;
 
     public MovementSystem(OrthographicCamera cam, JoystickController joystickController, BoostController boostController) {
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
@@ -77,60 +71,6 @@ public class MovementSystem extends IteratingSystem{
         // Max five finger touch simultaneously
         for (int i=0; i<=5; i++) {
             if (Gdx.input.isTouched(i)) {
-                if (boundsJoystick.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                    System.out.println("Joystick touched");
-                } else {
-                    //System.out.println("NOT touched");
-                }
-                touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-                if (Poi.WIDTH / 3 > touchPos.x && touchPos.x > 0) {
-                    //Plaayer 1 moves left
-                    if (ECSEngine.playerMapper.get(entity).id == 1) {
-                        touchP2 = 2;
-                        joystickController.setPosition(touchP2);
-                        bodyComponent.body.setLinearVelocity(-100, bodyComponent.body.getLinearVelocity().y);
-                    }
-                }
-                //Player 1 moves right
-                if (Poi.WIDTH / 2 > touchPos.x && touchPos.x > Poi.WIDTH / 3) {
-                    if (ECSEngine.playerMapper.get(entity).id == 1) {
-                        touchP1 = 1;
-                        joystickController.setPosition(touchP1);
-                        bodyComponent.body.setLinearVelocity(100, bodyComponent.body.getLinearVelocity().y);
-                    }
-                }
-                if (Poi.WIDTH / 2 + Poi.WIDTH / 4 > touchPos.x && touchPos.x > Poi.WIDTH / 2) {
-                    if (ECSEngine.playerMapper.get(entity).id == 2) {
-                        touchP2 = 2;
-                        joystickController.setPosition(touchP2);
-                        bodyComponent.body.setLinearVelocity(-100, bodyComponent.body.getLinearVelocity().y);
-                    }
-                }
-                if (Poi.WIDTH > touchPos.x && touchPos.x > Poi.WIDTH / 2 + Poi.WIDTH / 4) {
-                    if (ECSEngine.playerMapper.get(entity).id == 2) {
-                        touchP2 = 1;
-                        joystickController.setPosition(touchP2);
-                        bodyComponent.body.setLinearVelocity(100, bodyComponent.body.getLinearVelocity().y);
-                    }
-                }
-                /*
-            else {
-                //Player moves forward only
-                if (ECSEngine.playerMapper.get(entity).id == 1) {
-                    touchP1 = 0;
-                    gameController1.setPosition(touchP1);
-                }
-                if (ECSEngine.playerMapper.get(entity).id == 2) {
-                    touchP2 = 0;
-                    gameController2.setPosition(touchP2);
-                }
-
-            }
-            */
-                if(finish){
-                    //set speed to zero
-                    //bodyComponent.body.setTransform();
-                }
                 Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(i), Gdx.input.getY(i), 0)); // Scaling touches to Android-mode
                 touchPos.set(touchTransformed.x, touchTransformed.y, 0);
                 touches.put(i, touchPos.x);
