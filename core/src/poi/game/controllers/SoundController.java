@@ -5,13 +5,23 @@ import com.badlogic.gdx.audio.Sound;
 
 public class SoundController {
 
-    Sound sound;
+    private Sound sound;
+    private Sound collision;
     Boolean isMuted = false;
     long id;
 
     public SoundController() {
         sound = Gdx.audio.newSound(Gdx.files.internal("soundGame.mp3"));
+        collision = Gdx.audio.newSound(Gdx.files.internal("collision.mp3"));
+    }
 
+    public void playCollisionSound(boolean isPlaying) {
+        if (isPlaying) {
+            collision.play();
+        }
+        else {
+            collision.stop();
+        }
     }
 
     public void play() {
