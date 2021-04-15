@@ -79,8 +79,9 @@ public class GameController {
         pauseController.handleInput(gameView);
 
         if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
-            ecsEngine.getSystem(AnimationSystem.class).setFinishAnimation();
-            ecsEngine.getSystem(MovementSystem.class).setFinishAnimation();
+            ecsEngine.getSystem(AnimationSystem.class).setFinish();
+            ecsEngine.getSystem(MovementSystem.class).setFinish();
+            ecsEngine.getSystem(TimerSystem.class).setFinish();
             startTimer();
             if(countStart < 1){
                 changeViewController.set(new EndGameView(ecsEngine.getSystem(TimerSystem.class).getTime()));

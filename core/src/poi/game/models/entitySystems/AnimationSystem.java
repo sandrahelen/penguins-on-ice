@@ -61,7 +61,7 @@ public class AnimationSystem extends IteratingSystem {
         }
 
     }
-    public void setFinishAnimation(){
+    public void setFinish(){
         this.finish = true;
 
     }

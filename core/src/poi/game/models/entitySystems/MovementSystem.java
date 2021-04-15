@@ -111,9 +111,8 @@ public class MovementSystem extends IteratingSystem{
             //Gdx.app.log("Movement", "Touches: " + touches.get(0));
         }
     }
-    public void setFinishAnimation(){
+    public void setFinish(){
         this.finish = true;
-
     }
 }
 
