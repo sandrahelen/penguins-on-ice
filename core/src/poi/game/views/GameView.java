@@ -57,7 +57,7 @@ public class GameView extends View {
     public GameView() {
         super();
         timeFont = new BitmapFont();
-        world = new World(new Vector2(0, 200.0f), true);
+        world = new World(new Vector2(0, 20.0f), true);
         world.setContactListener(new WorldContactListener());
         camera = Poi.getCameraGame();
         assetmanager = new AssetManager(new InternalFileHandleResolver());

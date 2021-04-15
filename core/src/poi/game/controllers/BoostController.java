@@ -45,10 +45,10 @@ public class BoostController {
     }
 
     public void setValues(){
-        if (boostComponent1.getCharge() > 10){
+        if (boostComponent1.getCharge() > 20){
             boostComponent1.setBoost(false);
         }
-        if (boostComponent2.getCharge() > 10){
+        if (boostComponent2.getCharge() > 20){
             boostComponent2.setBoost(false);
         }
         if(boostComponent1.getCharge() > 99){
