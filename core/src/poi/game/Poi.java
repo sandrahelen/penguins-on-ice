@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import poi.game.controllers.ChangeViewController;
+import poi.game.controllers.SoundController;
 import poi.game.views.MenuView;
 
 public class Poi extends Game {
@@ -28,6 +29,8 @@ public class Poi extends Game {
 	private Datahandler datahandler;
 
 	private static AssetManager assetmanager;
+
+	private static SoundController soundController;
 
 	public Poi(Leaderboard leaderboard) {
 		this.leaderboard = leaderboard;
@@ -52,6 +55,9 @@ public class Poi extends Game {
 
 		assetmanager = new AssetManager(new InternalFileHandleResolver());
 		assetmanager.setLoader(TiledMap.class, new TmxMapLoader(assetmanager.getFileHandleResolver()));
+
+		soundController = new SoundController();
+
 	}
 
 	@Override
@@ -81,5 +87,7 @@ public class Poi extends Game {
 	}
 
 	public static AssetManager getAssetManager(){return assetmanager;}
+
+	public static SoundController getSoundController(){return soundController;}
 }
 

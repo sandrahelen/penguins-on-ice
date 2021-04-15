@@ -1,31 +1,22 @@
 package poi.game.controllers;
-
-import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import poi.game.Map.ObjectCreator;
 import poi.game.Poi;
 import poi.game.WorldContactListener;
 import poi.game.models.ECSEngine;
-import poi.game.models.entityComponents.AnimationComponent;
-import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entitySystems.AnimationSystem;
 import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.MovementSystem;
 import poi.game.models.entitySystems.TimerSystem;
 import poi.game.views.EndGameView;
-import poi.game.models.entitySystems.MovementSystem;
 import poi.game.views.GameView;
-import poi.game.views.MenuView;
 
 public class GameController {
 
@@ -36,15 +27,13 @@ public class GameController {
     private boolean finishLine = false;
     private int countStart = 100;
     private double period = 0.1;
-
-    //private final GLProfiler profiler;
-    //private final Box2DDebugRenderer box2DDebugRenderer;
     private final OrthographicCamera camera;
     private final AssetManager assetmanager;
     private final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
     private final ObjectCreator objectCreator;
+    private final SoundController soundController;
 
     public GameController(GameView gameView) {
         changeViewController = Poi.getChangeViewController();
@@ -67,6 +56,9 @@ public class GameController {
         ecsEngine.createPlayer(400, 300, world, 2);
         assetmanager.finishLoading();
         objectCreator = new ObjectCreator(assetmanager.get("Map/Map1.tmx", TiledMap.class), ecsEngine, world);
+
+        soundController = Poi.getSoundController();
+        soundController.play();
 
     }
 
@@ -100,5 +92,6 @@ public class GameController {
     public BoostController getBoostController() {return boostController;}
     public PauseController getPauseController() {return pauseController;}
     public ECSEngine getECSEngine() {return ecsEngine;}
+    public SoundController getSoundController() {return soundController;}
 
 }
