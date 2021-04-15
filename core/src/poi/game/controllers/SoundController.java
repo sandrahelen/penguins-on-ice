@@ -7,7 +7,7 @@ public class SoundController {
 
     private Sound sound;
     private Sound collision;
-    Boolean isMuted = false;
+    private Boolean isMuted = false;
     long id;
 
     public SoundController() {
@@ -26,7 +26,7 @@ public class SoundController {
 
     public void play() {
         if (!isMuted) {
-            id = sound.play(1.0f);
+            id = sound.loop(1.0f);
         }
     }
 
