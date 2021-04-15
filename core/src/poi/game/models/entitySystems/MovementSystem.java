@@ -34,6 +34,7 @@ public class MovementSystem extends IteratingSystem{
     private final JoystickController joystickController2;
     private final BoostController boostController;
 
+    private boolean finish = false;
     private Rectangle boundsJoystick;
 
     public MovementSystem(OrthographicCamera cam, JoystickController joystickController1, JoystickController joystickController2, BoostController boostController) {
@@ -127,6 +128,10 @@ public class MovementSystem extends IteratingSystem{
 
             }
             */
+                if(finish){
+                    //set speed to zero
+                    //bodyComponent.body.setTransform();
+                }
                 Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(i), Gdx.input.getY(i), 0)); // Scaling touches to Android-mode
                 touchPos.set(touchTransformed.x, touchTransformed.y, 0);
                 touches.put(i, touchPos.x);
@@ -157,6 +162,10 @@ public class MovementSystem extends IteratingSystem{
             }
             //Gdx.app.log("Movement", "Touches: " + touches);
         }
+    }
+    public void setFinishAnimation(){
+        this.finish = true;
+
     }
 }
 

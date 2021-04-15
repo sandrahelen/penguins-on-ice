@@ -18,7 +18,9 @@ import poi.game.WorldContactListener;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
+import poi.game.models.entitySystems.AnimationSystem;
 import poi.game.models.entitySystems.GoalSystem;
+import poi.game.models.entitySystems.MovementSystem;
 import poi.game.views.GameView;
 import poi.game.views.MenuView;
 
@@ -28,6 +30,10 @@ public class GameController {
     private GameView gameView;
     private ECSEngine ecsEngine;
     private World world;
+    private boolean finishLine = false;
+    private int countStart = 100;
+    private double period = 0.1;
+
     //private final GLProfiler profiler;
     //private final Box2DDebugRenderer box2DDebugRenderer;
     private final OrthographicCamera camera;
@@ -71,7 +77,19 @@ public class GameController {
         pauseController.handleInput(gameView);
 
         if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
-            changeViewController.set(new MenuView());
+            ecsEngine.getSystem(AnimationSystem.class).setFinishAnimation();
+            ecsEngine.getSystem(MovementSystem.class).setFinishAnimation();
+            startTimer();
+            if(countStart < 1){
+                changeViewController.set(new MenuView());
+            }
+
+        }
+    }
+    public void startTimer(){
+        countStart += Gdx.graphics.getRawDeltaTime();
+        if(countStart > 0){
+            countStart -= period;
         }
     }
     public World getWorld() {return world;}

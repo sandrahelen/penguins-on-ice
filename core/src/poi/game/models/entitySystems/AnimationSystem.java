@@ -8,7 +8,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import java.rmi.activation.ActivationGroup;
+
+//import javax.swing.text.html.parser.Entity;
+
 import poi.game.controllers.BoostController;
+import poi.game.controllers.GameController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.PlayerComponent;
@@ -18,6 +23,9 @@ import poi.game.models.entityComponents.TextureComponent;
 public class AnimationSystem extends IteratingSystem {
     private float stateTime = 0f;
     private BoostController boostController;
+    private boolean finish = false;
+
+
 
     public AnimationSystem(BoostController boostController){
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
@@ -27,34 +35,35 @@ public class AnimationSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
         final TextureComponent textureComponent = ECSEngine.textureMapper.get(entity);
         if(boostController.getBoostComponent1().getBoost()){
-            System.out.println("Nå skal animasjon kjøre");
             if (ECSEngine.playerMapper.get(entity).id == 1) {
                 textureComponent.textureAnimation = textureComponent.animate("players/p1-skli-bak.png", 1,3);
-
-                //bodyComponent.body.setTransform(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y+0.7f,0);
             }
         }
         if(!boostController.getBoostComponent1().getBoost()){
             if (ECSEngine.playerMapper.get(entity).id == 1) {
                 textureComponent.textureAnimation = textureComponent.animate("players/p1-bak.png", 1,3);
-                //bodyComponent.body.setTransform(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y+0.7f,0);
             }
         }
         if(boostController.getBoostComponent2().getBoost()){
             if (ECSEngine.playerMapper.get(entity).id == 2) {
                 textureComponent.textureAnimation = textureComponent.animate("players/p1-skli-bak.png", 1,3);
-                //bodyComponent.body.setTransform(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y+0.7f,0);
-            }
+           }
         }
         if(!boostController.getBoostComponent2().getBoost()){
             if (ECSEngine.playerMapper.get(entity).id == 2) {
                 textureComponent.textureAnimation = textureComponent.animate("players/p1-bak.png", 1,3);
-                //bodyComponent.body.setTransform(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y+0.7f,0);
-            }
+           }
         }
+        if (finish){
+            textureComponent.textureAnimation = textureComponent.animate("players/p1-finish.png", 6, 3);
+        }
+
+    }
+    public void setFinishAnimation(){
+        this.finish = true;
+
     }
     public void setStateTime(float time) {
         stateTime += time;

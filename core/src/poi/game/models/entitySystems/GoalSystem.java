@@ -13,10 +13,14 @@ import com.badlogic.gdx.math.Rectangle;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.PlayerComponent;
+import poi.game.models.entityComponents.TextureComponent;
 
 public class GoalSystem extends IteratingSystem {
 
+    private boolean reachedFinish1;
+    private boolean reachedFinish2;
     private boolean reachedFinish;
+
 
     private final TiledMap tiledMap;
 
@@ -30,15 +34,33 @@ public class GoalSystem extends IteratingSystem {
 
     @Override
     public void processEntity(final Entity entity, final float deltaTime) {
+        final TextureComponent textureComponent = ECSEngine.textureMapper.get(entity);
         final MapLayer goalLayer = tiledMap.getLayers().get("Goal");
         for(MapObject object : goalLayer.getObjects()) {
             final Rectangle goal = ((RectangleMapObject) object).getRectangle();
-            if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > goal.y) {
-                reachedFinish = true;
+            if (ECSEngine.playerMapper.get(entity).id == 1) {
+                if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > 600 /*goal.y*/) {
+                    reachedFinish1 = true;
+                    setReachedFinish();
+                }
+            }
+            if (ECSEngine.playerMapper.get(entity).id == 2) {
+                if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > 600 /*goal.y*/) {
+                    reachedFinish2 = true;
+                    setReachedFinish();
+                }
+            }
+            if(reachedFinish1){
+                textureComponent.textureAnimation = textureComponent.animate("players/p1-finish.png", 6, 3);
             }
         }
     }
 
+    private void setReachedFinish(){
+        if(reachedFinish1 && reachedFinish2){
+            reachedFinish = true;
+        }
+    }
     public boolean isFinished(){
         return reachedFinish;
     }

@@ -27,7 +27,7 @@ public class BoostComponent {
     }
 
     public void startTimer(){
-        charge += Gdx.graphics.getRawDeltaTime();
+        charge += Gdx.graphics.getDeltaTime();
         if(charge < 100){
             charge += period;
         }
