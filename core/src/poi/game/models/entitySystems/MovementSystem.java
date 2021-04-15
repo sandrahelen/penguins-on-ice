@@ -87,7 +87,7 @@ public class MovementSystem extends IteratingSystem{
                     //Plaayer 1 moves left
                     if (ECSEngine.playerMapper.get(entity).id == 1) {
                         touchP2 = 2;
-                        joystickController1.setPosition(touchP2);
+                        joystickController.setPosition(touchP2);
                         bodyComponent.body.setLinearVelocity(-100, bodyComponent.body.getLinearVelocity().y);
                     }
                 }
@@ -95,21 +95,21 @@ public class MovementSystem extends IteratingSystem{
                 if (Poi.WIDTH / 2 > touchPos.x && touchPos.x > Poi.WIDTH / 3) {
                     if (ECSEngine.playerMapper.get(entity).id == 1) {
                         touchP1 = 1;
-                        joystickController1.setPosition(touchP1);
+                        joystickController.setPosition(touchP1);
                         bodyComponent.body.setLinearVelocity(100, bodyComponent.body.getLinearVelocity().y);
                     }
                 }
                 if (Poi.WIDTH / 2 + Poi.WIDTH / 4 > touchPos.x && touchPos.x > Poi.WIDTH / 2) {
                     if (ECSEngine.playerMapper.get(entity).id == 2) {
                         touchP2 = 2;
-                        joystickController2.setPosition(touchP2);
+                        joystickController.setPosition(touchP2);
                         bodyComponent.body.setLinearVelocity(-100, bodyComponent.body.getLinearVelocity().y);
                     }
                 }
                 if (Poi.WIDTH > touchPos.x && touchPos.x > Poi.WIDTH / 2 + Poi.WIDTH / 4) {
                     if (ECSEngine.playerMapper.get(entity).id == 2) {
                         touchP2 = 1;
-                        joystickController2.setPosition(touchP2);
+                        joystickController.setPosition(touchP2);
                         bodyComponent.body.setLinearVelocity(100, bodyComponent.body.getLinearVelocity().y);
                     }
                 }
