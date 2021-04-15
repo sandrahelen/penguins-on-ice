@@ -21,6 +21,7 @@ import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.ObstacleComponent;
 import poi.game.models.entityComponents.PlayerComponent;
 import poi.game.models.entityComponents.TextureComponent;
+import poi.game.models.entitySystems.AnimationSystem;
 import poi.game.models.entitySystems.CameraBoundsCollisionSystem;
 import poi.game.models.entitySystems.CameraSystem;
 import poi.game.models.entitySystems.GoalSystem;
@@ -56,6 +57,7 @@ public class ECSEngine extends PooledEngine {
         addSystem(new TimerSystem());
         addSystem(new CameraBoundsCollisionSystem(orthographicCamera));
         addSystem(new GoalSystem(tiledMap));
+        addSystem(new AnimationSystem(boostController));
 
     }
 
@@ -114,7 +116,7 @@ public class ECSEngine extends PooledEngine {
         playerComponent.id = id;
         player.add(playerComponent);
 
-        final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
+        TextureComponent textureComponent = this.createComponent(TextureComponent.class);
         //Animation walk
         textureComponent.textureAnimation = textureComponent.animate("players/p1-bak.png", 1,3);
         //Animation for boost
