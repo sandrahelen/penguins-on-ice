@@ -32,16 +32,16 @@ public class ColorController {
     private SoundController soundController;
     private ArrayList<String> texturesP1;
     private ArrayList<String> texturesP2;
-    private int colorP1 = 0;
-    private int colorP2 = 0;
+    public static int colorP1 = 0;
+    public static int colorP2 = 0;
 
     public ColorController(GameView gameView) {
         this.gameView = gameView;
         texturesP1 = new ArrayList<String>();
         changeViewController = Poi.getChangeViewController();
-        buttonPenguinBlack = new Texture("general/pingvin.png");
-        buttonPenguinPink = new Texture("general/pingvin.png");
-        buttonPenguinGreen = new Texture("general/pingvin.png");
+        buttonPenguinBlack = new Texture("general/svart-pingvin.png");
+        buttonPenguinPink = new Texture("general/rosa-pingvin.png");
+        buttonPenguinGreen = new Texture("general/grønn-pingvin.png");
         boundsPenguinBlack1 = new Rectangle(Poi.WIDTH / 6, Poi.HEIGHT *6/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
         boundsPenguinPink1 = new Rectangle(Poi.WIDTH *2/6, Poi.HEIGHT *6/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
         boundsPenguinGreen1 = new Rectangle(Poi.WIDTH / 6, Poi.HEIGHT *4/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
@@ -90,49 +90,4 @@ public class ColorController {
             }
         }
     }
-
-    public ArrayList<String> getColorP1() {
-        // Black selected
-        if (colorP1 == 0) {
-            texturesP1.add("players/p1-bak.png");
-            texturesP1.add("players/p1-skli-bak.png");
-            texturesP1.add("players/p1-finish.png");
-        }
-        // Pink selected
-        else if (colorP1 == 1) {
-            texturesP1.add("players/p1-bak.png");
-            texturesP1.add("players/p1-skli-bak.png");
-            texturesP1.add("players/p1-finish.png");
-        }
-        // Green selected
-        else if (colorP1 == 2) {
-            texturesP1.add("players/p1-bak.png");
-            texturesP1.add("players/p1-skli-bak.png");
-            texturesP1.add("players/p1-finish.png");
-        }
-        return texturesP1;
-    }
-
-    public ArrayList<String> getColorP2() {
-        // Black selected
-        if (colorP2 == 0) {
-            texturesP2.add("players/p1-bak.png");
-            texturesP2.add("players/p1-skli-bak.png");
-            texturesP2.add("players/p1-finish.png");
-        }
-        // Pink selected
-        else if (colorP2 == 1) {
-            texturesP1.add("players/p1-bak.png");
-            texturesP1.add("players/p1-skli-bak.png");
-            texturesP1.add("players/p1-finish.png");
-        }
-        // Green selected
-        else if (colorP2 == 2) {
-            texturesP1.add("players/p1-bak.png");
-            texturesP1.add("players/p1-skli-bak.png");
-            texturesP1.add("players/p1-finish.png");
-        }
-        return texturesP2;
-    }
-
 }

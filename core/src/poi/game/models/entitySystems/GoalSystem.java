@@ -51,7 +51,7 @@ public class GoalSystem extends IteratingSystem {
                 }
             }
             if(reachedFinish1){
-                textureComponent.textureAnimation = textureComponent.animate("players/p1-finish.png", 6, 3);
+                //textureComponent.textureAnimation = textureComponent.animate("players/p1-finish.png", 6, 3);
             }
         }
     }
