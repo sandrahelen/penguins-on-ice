@@ -33,8 +33,7 @@ public class CameraBoundsCollisionSystem extends IteratingSystem {
             bodyComponent.body.applyLinearImpulse(-70, 0, center.x, center.y, true);
         }
         if (bodyComponent.body.getPosition().y > camera.position.y+Poi.HEIGHT/2) {
-            bodyComponent.body.setLinearVelocity(bodyComponent.body.getLinearVelocity().x, -50);
-            bodyComponent.body.applyLinearImpulse(0, -70, center.x, center.y, true);
+            bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,camera.position.y+Poi.HEIGHT/2,0);
         }
     }
 

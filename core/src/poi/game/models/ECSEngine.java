@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -12,7 +13,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
-import poi.game.Poi;
+import poi.game.controllers.BoostController;
+import poi.game.models.entityComponents.BoostComponent;
+import poi.game.controllers.JoystickController;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.ObstacleComponent;
@@ -28,6 +31,9 @@ import poi.game.models.factories.ComponentFactory;
 public class ECSEngine extends PooledEngine {
     private final BodyDef bodyDef;
     private final FixtureDef fixtureDef;
+    private final JoystickController joystickController1;
+    private final JoystickController joystickController2;
+    private final BoostController boostController;
 
     //Mappers for components
     public static final ComponentMapper<BodyComponent> bodyMapper = ComponentMapper.getFor(BodyComponent.class);
@@ -42,13 +48,30 @@ public class ECSEngine extends PooledEngine {
         fixtureDef = new FixtureDef();
 
         //Iterating systems
-        addSystem(new MovementSystem(orthographicCamera));
+        joystickController1 = new JoystickController(orthographicCamera, 1);
+        joystickController2 = new JoystickController(orthographicCamera, 2);
+        boostController = new BoostController();
+        addSystem(new MovementSystem(orthographicCamera, joystickController1, joystickController2, boostController));
         addSystem(new CameraSystem(orthographicCamera));
         addSystem(new TimerSystem());
         addSystem(new CameraBoundsCollisionSystem(orthographicCamera));
         addSystem(new GoalSystem(tiledMap));
 
     }
+
+    public JoystickController getGameController() {
+        if (joystickController1.getId() == 1) {
+            return joystickController1;
+        }
+        else {
+            return joystickController2;
+        }
+    }
+
+    public BoostController getBoostContoller() {
+        return boostController;
+    }
+
 
 
     public void createPlayer(int posX, int posY, World world, int id){
@@ -61,6 +84,7 @@ public class ECSEngine extends PooledEngine {
         bodyDef.gravityScale = 1;
         bodyDef.fixedRotation = true;
         bodyDef.position.set(posX,posY);
+
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body.body = world.createBody(bodyDef);
@@ -144,6 +168,5 @@ public class ECSEngine extends PooledEngine {
 
         this.addEntity(obstacle);
     }
-
 
 }

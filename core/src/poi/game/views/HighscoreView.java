@@ -8,65 +8,57 @@ import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Datahandler;
 import poi.game.Poi;
+import poi.game.controllers.ChangeViewController;
+import poi.game.controllers.HighscoreController;
 import poi.game.controllers.MenuController;
 import poi.game.models.factories.ViewFactory;
 
 
 public class HighscoreView extends View implements ViewFactory {
 
+    HighscoreController controller;
+
     private Texture titleHighscore;
     private Texture boardHighscore;
     private Texture buttonMenu;
-    private Rectangle boundsMenu;
     private BitmapFont text;
     private Datahandler datahandler;
 
-    public HighscoreView (MenuController controller) {
-        super(controller);
-        cam.setToOrtho(false, Poi.WIDTH, Poi.HEIGHT);
+    public HighscoreView () {
+        super();
+        controller = new HighscoreController();
+        cam = Poi.getCamera();
         titleHighscore = new Texture("general/titleHighscore.png");
         boardHighscore = new Texture("general/boardHighscore.png");
         buttonMenu = new Texture("general/buttonMenu.png");
-        boundsMenu = new Rectangle(Poi.WIDTH/2-buttonMenu.getWidth()/2,Poi.HEIGHT/16, buttonMenu.getWidth(), buttonMenu.getHeight());
         text = new BitmapFont();
 
-        datahandler = controller.getDatahandler();
-        controller.getLeaderboard().setOnValueChangedListener(datahandler);
-    }
-
-    @Override
-    public void handleInput() {
-        if(Gdx.input.justTouched()){
-            Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
-                controller.set(new MenuView(controller));
-            }
-        }
+        datahandler = changeViewController.getDatahandler();
+        changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
     }
 
     @Override
     public void update(float dt) {
-        handleInput();
-        controller.getLeaderboard().setOnValueChangedListener(datahandler);
+        controller.handleInput();
+        changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
         //System.out.println("Highscore " + datahandler.getScores());
     }
 
     @Override
     public void render(SpriteBatch sb) {
-        //Gdx.app.log("Highscore", "render");
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
         sb.draw(titleHighscore, Poi.WIDTH/2-titleHighscore.getWidth()/2, Poi.HEIGHT - titleHighscore.getHeight()*2);
         sb.draw(boardHighscore, Poi.WIDTH/2-boardHighscore.getWidth()/2/*/10*/,Poi.HEIGHT*3/16);
-        sb.draw(buttonMenu, Poi.WIDTH/2-buttonMenu.getWidth()/2,Poi.HEIGHT/16);
+        sb.draw(buttonMenu, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/16);
         text.draw(sb, "Name", Poi.WIDTH/10, Poi.HEIGHT-Poi.HEIGHT*3/16);
         text.draw(sb, "Time", Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16);
 
         // Printing out scores from Firebase database on to the scoreboard
         int i = Poi.HEIGHT*3/16;
-        for (String score : controller.getDatahandler().getScores().keySet()) {
+        for (String score : changeViewController.getDatahandler().getScores().keySet()) {
             text.draw(sb, score, Poi.WIDTH/10, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
-            text.draw(sb, String.valueOf(controller.getDatahandler().getScores().get(score)), Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
+            text.draw(sb, String.valueOf(changeViewController.getDatahandler().getScores().get(score)), Poi.WIDTH/10+Poi.WIDTH/5, Poi.HEIGHT-Poi.HEIGHT*3/16-i);
             i += 20;
         }
         sb.end();

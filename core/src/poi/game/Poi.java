@@ -3,21 +3,22 @@ package poi.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-import poi.game.controllers.MenuController;
+import poi.game.controllers.ChangeViewController;
 import poi.game.views.MenuView;
 
-
 public class Poi extends Game {
+
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 360;
 
+	private static OrthographicCamera camera;
+	private static OrthographicCamera cameraGame;
+
 	private SpriteBatch spriteBatch;
-	private MenuController controller;
+	private static ChangeViewController changeViewController;
 
 	private Leaderboard leaderboard;
 	private Datahandler datahandler;
@@ -27,14 +28,18 @@ public class Poi extends Game {
 		datahandler = new Datahandler();
 	}
 
-
 	@Override
 	public void create () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
+
+		camera = new OrthographicCamera(WIDTH, HEIGHT);
+		camera.setToOrtho(false, WIDTH, HEIGHT);
+		cameraGame = new OrthographicCamera(WIDTH, HEIGHT);
+
 		spriteBatch = new SpriteBatch();
-		controller = new MenuController(leaderboard, datahandler);
+		changeViewController = new ChangeViewController(leaderboard, datahandler);
 		// Sett MenuView as first view when opening the app
-		controller.push(new MenuView(controller));
+		changeViewController.push(new MenuView());
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database
 		leaderboard.submitScore("R", 25);
@@ -44,8 +49,8 @@ public class Poi extends Game {
 	public void render(){
 		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		controller.update(Gdx.graphics.getDeltaTime());
-		controller.render(spriteBatch);
+		changeViewController.update(Gdx.graphics.getDeltaTime());
+		changeViewController.render(spriteBatch);
 		super.render();
 	}
 
@@ -54,8 +59,16 @@ public class Poi extends Game {
 		super.dispose();
 	}
 
-	public SpriteBatch getSpriteBatch(){
-		return spriteBatch;
+	public static OrthographicCamera getCamera(){
+		return camera;
+	}
+
+	public static OrthographicCamera getCameraGame(){
+		return cameraGame;
+	}
+
+	public static ChangeViewController getChangeViewController(){
+		return changeViewController;
 	}
 }
 
