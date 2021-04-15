@@ -64,12 +64,12 @@ public class BoostController {
         }
     }
 
-    public void startTimer(){
+    public void startTimer(/*float dt*/){
         if(boostComponent1.getButtonClicked()){
-            boostComponent1.startTimer();
+            boostComponent1.startTimer(/*dt*/);
         }
         if(boostComponent2.getButtonClicked()){
-            boostComponent2.startTimer();
+            boostComponent2.startTimer(/*dt*/);
         }
     }
 }

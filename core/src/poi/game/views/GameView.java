@@ -94,6 +94,7 @@ public class GameView extends View {
     @Override
     public void update(float dt){
         controller.update(dt);
+
     }
 
     @Override
@@ -147,8 +148,9 @@ public class GameView extends View {
                     (float)joystickController.joystick2.joystick.getHeight()/2);
         }
 
+
         boostController.setValues();
-        boostController.startTimer();
+        boostController.startTimer(/*float dt*/);
         //Draw boost button player 1
         if(boostController.getBoostComponent1().getButtonClicked()){
             sb.draw(boostController.getBoostComponent1().getBoostButton(), camera.position.x-200, camera.position.y-130,

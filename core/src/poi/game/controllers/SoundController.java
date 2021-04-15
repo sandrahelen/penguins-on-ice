@@ -12,7 +12,7 @@ public class SoundController {
 
     public SoundController() {
         sound = Gdx.audio.newSound(Gdx.files.internal("soundGame.mp3"));
-        collision = Gdx.audio.newSound(Gdx.files.internal("collision.mp3"));
+        collision = Gdx.audio.newSound(Gdx.files.internal("collision.wav"));
     }
 
     public void playCollisionSound(boolean isPlaying) {

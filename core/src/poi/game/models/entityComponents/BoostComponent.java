@@ -26,7 +26,11 @@ public class BoostComponent {
         boostFont = new BitmapFont();
     }
 
-    public void startTimer(){
+    public void startTimer(/*float dt*/){
+        /*charge += dt;
+        if(charge < 100){
+            charge += dt;
+        }*/
         charge += Gdx.graphics.getDeltaTime();
         if(charge < 100){
             charge += period;
