@@ -174,7 +174,7 @@ public class GameView extends View {
 
         //Time
         if(ecsEngine.getSystem(GoalSystem.class).isFinished()){
-            timeFontBig.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x,camera.position.y);
+            timeFontBig.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x-70,camera.position.y);
         }
         else{
             timeFont.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x+ WIDTH/2-100, camera.position.y+ HEIGHT/2-40);
