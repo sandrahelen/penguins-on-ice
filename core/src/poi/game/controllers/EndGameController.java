@@ -35,12 +35,13 @@ public class EndGameController {
 
     public Texture getButtonSubmit() { return buttonSubmit; }
 
-    public void handleInput() {
+    public void handleInput(String input) {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         if(Gdx.input.justTouched()){
             if (boundsSubmit.contains(touchTransformed.x, touchTransformed.y)) {
                 //username = textfield.getText();
-                username = "test";
+                //username = "test";
+                username = input;
                 //endTime = new Random().nextInt(101);    // Placeholder for time-score, random int between 0-100
                 changeViewController.getLeaderboard().submitScore(username, endTime);     // Submits the score to Firebase database
                 changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);

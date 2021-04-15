@@ -34,7 +34,6 @@ public class EndGameView extends View implements ViewFactory {
     private EndGameController controller;
 
     private int endTime = 0;
-    private String username = "";
 
     public EndGameView(int endTime) {
         super();
@@ -68,7 +67,7 @@ public class EndGameView extends View implements ViewFactory {
 
     @Override
     public void update(float dt) {
-        controller.handleInput();
+        controller.handleInput(textfield.getText());
     }
 
     @Override

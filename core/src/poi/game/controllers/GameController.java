@@ -20,6 +20,8 @@ import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entitySystems.AnimationSystem;
 import poi.game.models.entitySystems.GoalSystem;
+import poi.game.models.entitySystems.TimerSystem;
+import poi.game.views.EndGameView;
 import poi.game.models.entitySystems.MovementSystem;
 import poi.game.views.GameView;
 import poi.game.views.MenuView;
@@ -80,7 +82,7 @@ public class GameController {
             ecsEngine.getSystem(MovementSystem.class).setFinishAnimation();
             startTimer();
             if(countStart < 1){
-                changeViewController.set(new MenuView());
+                changeViewController.set(new EndGameView(ecsEngine.getSystem(TimerSystem.class).getTime()));
             }
 
         }
