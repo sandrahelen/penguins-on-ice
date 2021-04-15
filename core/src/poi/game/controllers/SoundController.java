@@ -39,7 +39,7 @@ public class SoundController {
     public void mute() {
         if (isMuted) {
             isMuted = false;
-            sound.play();
+            sound.loop();
         }
         else {
             isMuted = true;
