@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,24 +12,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import poi.game.Map.ObjectCreator;
 
 import poi.game.Poi;
-import poi.game.WorldContactListener;
 import poi.game.controllers.BoostController;
+import poi.game.controllers.GameController;
 import poi.game.controllers.PauseController;
 import poi.game.controllers.JoystickController;
 import poi.game.models.ECSEngine;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.TextureComponent;
-import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.TimerSystem;
 
 import static poi.game.Poi.HEIGHT;
@@ -97,7 +91,6 @@ public class GameView extends View {
     @Override
     public void update(float dt){
         controller.update(dt);
-        //joystickController.handleInput();
     }
 
     @Override
@@ -111,9 +104,8 @@ public class GameView extends View {
         mapRenderer.render();
 
         sb.begin();
-
-        sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
         //Draw controller player 1
+        sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
         sb.draw(joystickController.getJoystick1().getJoystickBase(), camera.position.x - 300, camera.position.y - 150,
                 (float)joystickController.joystick1.joystickBase.getWidth()/2,
                 (float)joystickController.joystick1.joystickBase.getHeight()/2);
