@@ -106,12 +106,7 @@ public class GameView extends View {
         sb.begin();
         //Draw pausebutton
         sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
-<<<<<<< HEAD
         //Draw joystick-controller player 1
-=======
-
-        //Draw controller player 1
->>>>>>> 008a0dcfa6a5ef6a3f7ebf13f3345328eda8778a
         sb.draw(joystickController.getJoystick1().getJoystickBase(), camera.position.x - 300, camera.position.y - 150,
                 (float)joystickController.joystick1.joystickBase.getWidth()/2,
                 (float)joystickController.joystick1.joystickBase.getHeight()/2);

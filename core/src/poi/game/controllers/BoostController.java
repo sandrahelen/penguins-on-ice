@@ -44,22 +44,12 @@ public class BoostController {
                     }
                     System.out.println("Button1 touched");
                 }
-<<<<<<< HEAD
                 if (boostComponent2.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
                     if (boostComponent2.getCharge() == 100) {
                         boostComponent2.setButtonClicked(true);
                         boostComponent2.setCharge(0);
                         boostComponent2.setBoost(true);
                     }
-                    System.out.println("Button2 touched");
-=======
-            }
-            if (boostComponent2.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
-                if (boostComponent2.getCharge() == 100) {
-                    boostComponent2.setButtonClicked(true);
-                    boostComponent2.setCharge(0);
-                    boostComponent2.setBoost(true);
->>>>>>> 008a0dcfa6a5ef6a3f7ebf13f3345328eda8778a
                 }
             }
         }

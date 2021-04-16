@@ -27,11 +27,7 @@ public class SoundController {
 
     public void play() {
         if (!isMuted) {
-<<<<<<< HEAD
-            id = sound.loop(0.2f);
-=======
             sound.resume(id);
->>>>>>> 008a0dcfa6a5ef6a3f7ebf13f3345328eda8778a
         }
     }
 
