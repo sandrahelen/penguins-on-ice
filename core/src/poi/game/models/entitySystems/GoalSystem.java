@@ -52,9 +52,9 @@ public class GoalSystem extends IteratingSystem {
                     setReachedFinish();
                 }
             }
-            if(reachedFinish1){
-                textureComponent.textureAnimation = textureComponent.animate("players/p1-finish.png", 6, 3);
-            }
+            //if(reachedFinish1){
+                //textureComponent.textureAnimation = textureComponent.animate("players/p1-finish.png", 6, 3);
+            //}
         }
     }
 
