@@ -16,6 +16,7 @@ public class MenuView extends View implements ViewFactory{
     private Texture buttonPlay;
     private Texture buttonHighscore;
     private Texture buttonSettings;
+    private Texture buttonHelp;
 
     public MenuView() {
         super();
@@ -51,6 +52,7 @@ public class MenuView extends View implements ViewFactory{
         buttonPlay = controller.getButtonPlay();
         buttonHighscore = controller.getButtonHighscore();
         buttonSettings = controller.getButtonSettings();
+        buttonHelp = controller.getButtonHelp();
     }
 
     @Override
@@ -68,6 +70,7 @@ public class MenuView extends View implements ViewFactory{
         sb.draw(buttonPlay, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);
         sb.draw(buttonHighscore, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
         sb.draw(buttonSettings, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
+        sb.draw(buttonHelp, Poi.WIDTH - 20, Poi.HEIGHT - buttonHelp.getHeight() - 20);
         sb.end();
     }
 
@@ -76,5 +79,6 @@ public class MenuView extends View implements ViewFactory{
         buttonPlay.dispose();
         buttonHighscore.dispose();
         buttonSettings.dispose();
+        buttonHelp.dispose();
     }
 }

@@ -18,9 +18,11 @@ public class MenuController {
     private Texture buttonPlay;
     private Texture buttonHighscore;
     private Texture buttonSettings;
+    private Texture buttonHelp;
     private final Rectangle boundsPlay;
     private final Rectangle boundsHighscore;
     private final Rectangle boundsSettings;
+    private final Rectangle boundsHelp;
 
     private ButtonComponent buttonComponent;
 
@@ -30,9 +32,11 @@ public class MenuController {
         buttonPlay = buttonComponent.getButtonPlay();
         buttonHighscore = buttonComponent.getButtonHighscore();
         buttonSettings = buttonComponent.getButtonSettings();
+        buttonHelp = buttonComponent.getButtonHelp();
         boundsPlay = buttonComponent.getBoundsPlay();
         boundsHighscore = buttonComponent.getBoundsHighscore();
         boundsSettings = buttonComponent.getBoundsSettings();
+        boundsHelp = buttonComponent.getBoundsHelp();
     }
 
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
@@ -54,6 +58,9 @@ public class MenuController {
             }
             else if (boundsSettings.contains(touchTransformed.x, touchTransformed.y)) {
                 changeViewController.set(new SettingsView(new GameView()));
+            }
+            else if (boundsHelp.contains(touchTransformed.x, touchTransformed.y)) {
+                changeViewController.set(new HelpView());
             }
         }
     }
