@@ -25,8 +25,8 @@ public class GameController {
     private ECSEngine ecsEngine;
     private World world;
     private boolean finishLine = false;
-    private int countStart = 100;
-    private double period = 0.1;
+    private int countStart = 250;
+    //private double period = 0.01;
     private final OrthographicCamera camera;
     private final AssetManager assetmanager;
     private final JoystickController joystickController;
@@ -67,23 +67,24 @@ public class GameController {
         camera.update();
         world.step(dt, 6, 2);
         joystickController.handleInput();
-        boostController.handleInput();
+        boostController.handleInput(dt);
         pauseController.handleInput(gameView);
 
         if(ecsEngine.getSystem(GoalSystem.class).isFinished() == true){
-            ecsEngine.getSystem(AnimationSystem.class).setFinishAnimation();
-            ecsEngine.getSystem(MovementSystem.class).setFinishAnimation();
-            startTimer();
+            ecsEngine.getSystem(AnimationSystem.class).setFinish();
+            ecsEngine.getSystem(TimerSystem.class).setFinish();
+            startTimer(dt);
             if(countStart < 1){
                 changeViewController.set(new EndGameView(ecsEngine.getSystem(TimerSystem.class).getTime()));
             }
 
         }
+
     }
-    public void startTimer(){
-        countStart += Gdx.graphics.getRawDeltaTime();
+    public void startTimer(float dt){
+        countStart += dt;
         if(countStart > 0){
-            countStart -= period;
+            countStart -= dt;
         }
     }
     public World getWorld() {return world;}

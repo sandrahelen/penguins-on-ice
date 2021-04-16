@@ -9,13 +9,16 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import javax.swing.text.html.parser.Entity;
 
+import poi.game.controllers.SoundController;
+
 public class WorldContactListener implements ContactListener {
+    SoundController soundController;
+
 
     @Override
     public void beginContact(final Contact contact) {
-
-
-        //Gdx.app.log("Debug", "Player collides with gameObj");
+        soundController = Poi.getSoundController();
+        soundController.playCollisionSound(true);
     }
 
     @Override

@@ -39,14 +39,16 @@ public class GoalSystem extends IteratingSystem {
         for(MapObject object : goalLayer.getObjects()) {
             final Rectangle goal = ((RectangleMapObject) object).getRectangle();
             if (ECSEngine.playerMapper.get(entity).id == 1) {
-                if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > 600 /*goal.y*/) {
+                if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > goal.y) {
                     reachedFinish1 = true;
+                    ECSEngine.bodyMapper.get(entity).body.setLinearVelocity(0,0);
                     setReachedFinish();
                 }
             }
             if (ECSEngine.playerMapper.get(entity).id == 2) {
-                if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > 600 /*goal.y*/) {
+                if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > goal.y) {
                     reachedFinish2 = true;
+                    ECSEngine.bodyMapper.get(entity).body.setLinearVelocity(0,0);
                     setReachedFinish();
                 }
             }

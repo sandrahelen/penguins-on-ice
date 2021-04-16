@@ -30,7 +30,12 @@ public class Poi extends Game {
 
 	private static AssetManager assetmanager;
 
+
+	private static final float FIXED_TIME_STEP = 1/60f;
+	private float accumulator;
+
 	private static SoundController soundController;
+
 
 	public Poi(Leaderboard leaderboard) {
 		this.leaderboard = leaderboard;
@@ -39,6 +44,8 @@ public class Poi extends Game {
 
 	@Override
 	public void create () {
+		accumulator = 0;
+
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 
 		camera = new OrthographicCamera(WIDTH, HEIGHT);
@@ -62,9 +69,13 @@ public class Poi extends Game {
 
 	@Override
 	public void render(){
+		accumulator += Math.min(0.25f,Gdx.graphics.getDeltaTime());
+		while(accumulator >= FIXED_TIME_STEP){
+			changeViewController.update(FIXED_TIME_STEP);
+			accumulator -= FIXED_TIME_STEP;
+		}
 		Gdx.gl.glClearColor(225/255f, 251/255f, 249/255f, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		changeViewController.update(Gdx.graphics.getDeltaTime());
 		changeViewController.render(spriteBatch);
 		super.render();
 	}

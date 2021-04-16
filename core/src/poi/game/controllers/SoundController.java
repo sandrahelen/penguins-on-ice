@@ -5,19 +5,28 @@ import com.badlogic.gdx.audio.Sound;
 
 public class SoundController {
 
-    Sound sound;
-    Boolean isMuted = false;
+    private Sound sound;
+    private Sound collision;
+    private Boolean isMuted = false;
     long id;
 
     public SoundController() {
-        //sound = Gdx.audio.newSound(Gdx.files.internal("soundGame.mp3"));
-        //id = sound.play(1.0f);
+        sound = Gdx.audio.newSound(Gdx.files.internal("Main Theme ACNH.mp3"));
+        collision = Gdx.audio.newSound(Gdx.files.internal("collision.wav"));
+    }
 
+    public void playCollisionSound(boolean isPlaying) {
+        if (isPlaying) {
+            collision.play();
+        }
+        else {
+            collision.stop();
+        }
     }
 
     public void play() {
         if (!isMuted) {
-            //sound.setLooping(id, true);
+            id = sound.loop(1.0f);
         }
     }
 
@@ -31,8 +40,7 @@ public class SoundController {
     public void mute() {
         if (isMuted) {
             isMuted = false;
-            //sound.setLooping(id, true);
-            //sound.play();
+            sound.loop();
         }
         else {
             isMuted = true;

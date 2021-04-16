@@ -28,7 +28,6 @@ public class MovementSystem extends IteratingSystem{
     private Map<Integer, Float> touches = new HashMap<>();
     private final JoystickController joystickController;
     private final BoostController boostController;
-    private boolean finish = false;
 
     public MovementSystem(OrthographicCamera cam, JoystickController joystickController, BoostController boostController) {
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
@@ -110,10 +109,6 @@ public class MovementSystem extends IteratingSystem{
             }
             //Gdx.app.log("Movement", "Touches: " + touches.get(0));
         }
-    }
-    public void setFinishAnimation(){
-        this.finish = true;
-
     }
 }
 
