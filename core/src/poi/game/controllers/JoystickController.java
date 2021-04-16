@@ -36,17 +36,27 @@ public class JoystickController {
                 Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
                 touchPos.set(touchTransformed.x, touchTransformed.y, 0);
 
+                System.out.println("TOUCH: " + touchPos.x);
+                //System.out.println("WIDTH: " + (joystick1.getBoundsJoystick().getWidth() / 4));
+                System.out.println("<--: " + (joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 5)));
+                System.out.println("-->: " + (joystick1.getPosition() + 2*(joystick1.getBoundsJoystick().getWidth() / 5)));
+
                 // Joystick1 is touched
                 if (joystick1.getBoundsJoystick().contains(touchPos.x, touchPos.y)) {
                     joystick1.setJoystickTouched(true);
 
                     // Move joystick1 left
-                    if (touchPos.x < joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 2)) {
+                    if (touchPos.x < (joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 5))) {
                         joystick1.setMoveLeft(true);
                     }
                     // Move joystick1 right
-                    else if (touchPos.x > joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 2)) {
+                    else if (touchPos.x > (joystick1.getPosition() + 2*(joystick1.getBoundsJoystick().getWidth() / 5))) {
                         joystick1.setMoveLeft(false);
+                    }
+                    // Move joystick1 middle
+                    else if (touchPos.x >= (joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 5))
+                            && touchPos.x <= (joystick1.getPosition() + 2*(joystick1.getBoundsJoystick().getWidth() / 5))) {
+                        joystick1.setJoystickTouched(false);
                     }
                 }
                 // Joystick2 is touched
@@ -54,12 +64,17 @@ public class JoystickController {
                     joystick2.setJoystickTouched(true);
 
                     // Move joystick2 left
-                    if (touchPos.x < joystick2.getPosition() + (joystick2.getBoundsJoystick().getWidth() / 2)) {
+                    if (touchPos.x < (joystick2.getPosition() + (joystick2.getBoundsJoystick().getWidth() / 5))) {
                         joystick2.setMoveLeft(true);
                     }
                     // Move joystick2 right
-                    else if (touchPos.x > joystick2.getPosition() + (joystick2.getBoundsJoystick().getWidth() / 2)) {
+                    else if (touchPos.x > (joystick2.getPosition() + 2*(joystick2.getBoundsJoystick().getWidth() / 5))) {
                         joystick2.setMoveLeft(false);
+                    }
+                    // Move joystick2 middle
+                    else if (touchPos.x >= (joystick2.getPosition() + (joystick2.getBoundsJoystick().getWidth() / 5))
+                            && touchPos.x <= (joystick2.getPosition() + 2*(joystick2.getBoundsJoystick().getWidth() / 5))) {
+                        joystick2.setJoystickTouched(false);
                     }
                 }
             }
