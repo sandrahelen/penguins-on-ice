@@ -32,6 +32,7 @@ public class ColorController {
     private ButtonComponent buttonComponent;
     private Texture buttonBack;
     private Rectangle boundsBack;
+    private Texture selected;
     private SoundController soundController;
     public static int colorP1 = 0;
     public static int colorP2 = 0;
@@ -54,6 +55,7 @@ public class ColorController {
         buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = buttonComponent.getBoundsBack();
+        selected = new Texture("general/selected.png");
         soundController = Poi.getSoundController();
     }
 
@@ -65,6 +67,7 @@ public class ColorController {
     public Texture getButtonPenguinGreen() { return buttonPenguinGreen; }
     public Texture getButtonPenguinPurp() { return  buttonPenguinPurp; }
     public Texture getButtonBack() { return buttonBack; }
+    public Texture getSelected() { return selected; }
 
     public void handleInput() {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -99,5 +102,12 @@ public class ColorController {
                 changeViewController.set(new SettingsView(gameView));
             }
         }
+    }
+
+    public static int getColorP1() {
+        return colorP1;
+    }
+    public static int getColorP2() {
+        return colorP2;
     }
 }

@@ -12,6 +12,7 @@ public class SoundController {
 
     public SoundController() {
         sound = Gdx.audio.newSound(Gdx.files.internal("Main Theme ACNH.mp3"));
+        id = sound.loop(1.0f);
         collision = Gdx.audio.newSound(Gdx.files.internal("collision.wav"));
     }
 
@@ -26,26 +27,28 @@ public class SoundController {
 
     public void play() {
         if (!isMuted) {
+<<<<<<< HEAD
             id = sound.loop(0.2f);
+=======
+            sound.resume(id);
+>>>>>>> 008a0dcfa6a5ef6a3f7ebf13f3345328eda8778a
         }
     }
 
     public void stop() {
         if (!isMuted) {
-            //sound.setLooping(id, false);
-            //sound.stop(id);
+            sound.pause(id);
         }
     }
 
     public void mute() {
         if (isMuted) {
             isMuted = false;
-            sound.loop();
+            sound.resume(id);
         }
         else {
             isMuted = true;
-            //sound.setLooping(id, false);
-            //sound.stop(id);
+            sound.pause(id);
         }
     }
 }

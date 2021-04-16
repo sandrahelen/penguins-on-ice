@@ -41,7 +41,5 @@ public class CameraSystem extends IteratingSystem {
         else{
             camera.position.set(Poi.WIDTH/2, pos1.y+Poi.HEIGHT/4, 0);
         }
-        }
-
-
     }
+}

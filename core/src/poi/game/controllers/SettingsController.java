@@ -58,12 +58,10 @@ public class SettingsController {
             if (boundsSound.contains(touchTransformed.x, touchTransformed.y)) {
                 soundController.mute();
             }
-            else if (boundsColor.contains(touchTransformed.x, touchTransformed.y)) {
-                soundController.stop();
+            else if (boundsColor.contains(touchTransformed.x, touchTransformed.y) && !gameView.getPauseController().getIsPaused()) {
                 changeViewController.set(new ColorView(gameView));
             }
             else if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
-                soundController.stop();
                 changeViewController.set(new MenuView());
             }
             // Can only resume game if game is already paused
