@@ -26,7 +26,7 @@ public class SoundController {
 
     public void play() {
         if (!isMuted) {
-            id = sound.loop(1.0f);
+            id = sound.loop(0.2f);
         }
     }
 

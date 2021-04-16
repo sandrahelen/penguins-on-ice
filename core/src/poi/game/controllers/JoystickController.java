@@ -33,8 +33,9 @@ public class JoystickController {
 
         for (int i = 0; i < 5; i++) {
             if (Gdx.input.isTouched(i)) {
-                Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+                Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(i), Gdx.input.getY(i), 0));
                 touchPos.set(touchTransformed.x, touchTransformed.y, 0);
+                touches.put(i, touchPos.x);
 
                 // Joystick1 is touched
                 if (joystick1.getBoundsJoystick().contains(touchPos.x, touchPos.y)) {
@@ -63,6 +64,7 @@ public class JoystickController {
                     }
                 }
             }
+            Gdx.app.log("Joystick", touches.toString());
         }
     }
 

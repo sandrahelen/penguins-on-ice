@@ -23,26 +23,16 @@ import poi.game.models.entityComponents.PlayerComponent;
 
 
 public class MovementSystem extends IteratingSystem{
-    private Vector3 touchPos;
     private final OrthographicCamera cam;
-    private Map<Integer, Float> touches = new HashMap<>();
     private final JoystickController joystickController;
     private final BoostController boostController;
 
     public MovementSystem(OrthographicCamera cam, JoystickController joystickController, BoostController boostController) {
         super(Family.all(PlayerComponent.class, BodyComponent.class).get());
-        touchPos = new Vector3();
         this.cam = cam;
-
-        // Adding possible fingers to Hashmap
-        for (int i=0; i<5; i++) {
-            touches.put(i, touchPos.x);
-            touches.put(i, touchPos.y);
-        }
         this.joystickController = joystickController;
         this.boostController = boostController;
     }
-
 
 
     @Override
@@ -55,59 +45,52 @@ public class MovementSystem extends IteratingSystem{
         if(bodyComponent.body.getLinearVelocity().y > 90){
             bodyComponent.body.applyLinearImpulse(0, -1.5f*bodyComponent.body.getLinearVelocity().y, center.x, center.y, false);
         }
+        // Boost for player 1
         if(boostController.getBoostComponent1().getBoost()){
             if (ECSEngine.playerMapper.get(entity).id == 1) {
                 bodyComponent.body.applyLinearImpulse(0, 2000, center.x, center.y, false);
                 bodyComponent.body.setTransform(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y+0.7f,0);
             }
         }
+        // Boost for player 2
         if(boostController.getBoostComponent2().getBoost()){
             if (ECSEngine.playerMapper.get(entity).id == 2) {
                 bodyComponent.body.applyLinearImpulse(0, 2000, center.x, center.y, true);
                 bodyComponent.body.setTransform(bodyComponent.body.getPosition().x, bodyComponent.body.getPosition().y+0.7f,0);
             }
         }
-        // Max five finger touch simultaneously
-        for (int i=0; i<=5; i++) {
-            if (Gdx.input.isTouched(i)) {
-                Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(i), Gdx.input.getY(i), 0)); // Scaling touches to Android-mode
-                touchPos.set(touchTransformed.x, touchTransformed.y, 0);
-                touches.put(i, touchPos.x);
 
-                // Movement with joystick 1
-                if (joystickController.joystick1.getJoystickTouched()) {
-                    // Penguin goes left
-                    if (joystickController.joystick1.getMoveLeft()) {
-                        if (ECSEngine.playerMapper.get(entity).id == 1) {
-                            bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
-                        }
-                    }
-                    // Penguin goes right
-                    if (!joystickController.joystick1.getMoveLeft()) {
-                        if (ECSEngine.playerMapper.get(entity).id == 1) {
-                            bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
-                        }
-                    }
-                }
-                // Movement with joystick 2
-                if (joystickController.joystick2.getJoystickTouched()) {
-                    // Penguin goes left
-                    if (joystickController.joystick2.getMoveLeft()) {
-                        joystickController.joystick2.setMoveLeft(true);
-                        if (ECSEngine.playerMapper.get(entity).id == 2) {
-                            bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
-                        }
-                    }
-                    // Penguin goes right
-                    if (!joystickController.joystick2.getMoveLeft()) {
-                        joystickController.joystick2.setMoveLeft(false);
-                        if (ECSEngine.playerMapper.get(entity).id == 2) {
-                            bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
-                        }
-                    }
+        // Movement with joystick 1
+        if (joystickController.joystick1.getJoystickTouched()) {
+            // Penguin goes left
+            if (joystickController.joystick1.getMoveLeft()) {
+                if (ECSEngine.playerMapper.get(entity).id == 1) {
+                    bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
                 }
             }
-            //Gdx.app.log("Movement", "Touches: " + touches.get(0));
+            // Penguin goes right
+            if (!joystickController.joystick1.getMoveLeft()) {
+                if (ECSEngine.playerMapper.get(entity).id == 1) {
+                    bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
+                }
+            }
+        }
+        // Movement with joystick 2
+        if (joystickController.joystick2.getJoystickTouched()) {
+            // Penguin goes left
+            if (joystickController.joystick2.getMoveLeft()) {
+                joystickController.joystick2.setMoveLeft(true);
+                if (ECSEngine.playerMapper.get(entity).id == 2) {
+                    bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
+                }
+            }
+            // Penguin goes right
+            if (!joystickController.joystick2.getMoveLeft()) {
+                joystickController.joystick2.setMoveLeft(false);
+                if (ECSEngine.playerMapper.get(entity).id == 2) {
+                    bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
+                }
+            }
         }
     }
 }

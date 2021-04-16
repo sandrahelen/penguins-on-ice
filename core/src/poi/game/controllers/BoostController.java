@@ -3,6 +3,9 @@ package poi.game.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import poi.game.Poi;
 import poi.game.models.entityComponents.BoostComponent;
 import poi.game.views.SettingsView;
@@ -10,32 +13,45 @@ import poi.game.views.SettingsView;
 
 public class BoostController {
 
-    public BoostComponent boostComponent1;
-    public BoostComponent boostComponent2;
+    private BoostComponent boostComponent1;
+    private BoostComponent boostComponent2;
+
+    private Vector3 touchPos;
+    private Map<Integer, Float> touches = new HashMap<>();
 
     public BoostController(){
-        boostComponent1 = new BoostComponent(120, 52);
-        boostComponent2 = new BoostComponent(480, 52);
+        boostComponent1 = new BoostComponent(Poi.WIDTH/2-280, Poi.HEIGHT/2-50);
+        boostComponent2 = new BoostComponent(Poi.WIDTH/2+240, Poi.HEIGHT/2-50);
+        touchPos = new Vector3();
+
+        // Adding possible fingers to Hashmap
+        for (int i=0; i<5; i++) {
+            touches.put(i, touchPos.x);
+            touches.put(i, touchPos.y);
+        }
     }
     public void handleInput(float dt) {
-        Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         startTimer(dt);
-        if (Gdx.input.justTouched()) {
-            if (boostComponent1.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
-                if (boostComponent1.getCharge() == 100) {
-                    boostComponent1.setButtonClicked(true);
-                    boostComponent1.setCharge(0);
-                    boostComponent1.setBoost(true);
+        for (int i=0; i<5; i++) {
+            if (Gdx.input.isTouched(i)) {
+                Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(i), Gdx.input.getY(i), 0));
+                touches.put(i, touchTransformed.x);
+                if (boostComponent1.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
+                    if (boostComponent1.getCharge() == 100) {
+                        boostComponent1.setButtonClicked(true);
+                        boostComponent1.setCharge(0);
+                        boostComponent1.setBoost(true);
+                    }
+                    System.out.println("Button1 touched");
                 }
-                System.out.println("Button1 touched");
-            }
-            if (boostComponent2.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
-                if (boostComponent2.getCharge() == 100) {
-                    boostComponent2.setButtonClicked(true);
-                    boostComponent2.setCharge(0);
-                    boostComponent2.setBoost(true);
+                if (boostComponent2.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
+                    if (boostComponent2.getCharge() == 100) {
+                        boostComponent2.setButtonClicked(true);
+                        boostComponent2.setCharge(0);
+                        boostComponent2.setBoost(true);
+                    }
+                    System.out.println("Button2 touched");
                 }
-                System.out.println("Button2 touched");
             }
         }
     }
