@@ -70,7 +70,7 @@ public class MenuView extends View implements ViewFactory{
         sb.draw(buttonPlay, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);
         sb.draw(buttonHighscore, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
         sb.draw(buttonSettings, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
-        sb.draw(buttonHelp, Poi.WIDTH - 20, Poi.HEIGHT - buttonHelp.getHeight() - 20);
+        sb.draw(buttonHelp, Poi.WIDTH - buttonHelp.getWidth() - 20, Poi.HEIGHT - buttonHelp.getHeight() - 20);
         sb.end();
     }
 

@@ -2,10 +2,12 @@ package poi.game.controllers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import poi.game.Poi;
 import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.GameView;
+import poi.game.views.MenuView;
 import poi.game.views.SettingsView;
 
 import java.awt.*;

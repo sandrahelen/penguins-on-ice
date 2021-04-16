@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import poi.game.Poi;
 import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.GameView;
+import poi.game.views.HelpView;
 import poi.game.views.HighscoreView;
 import poi.game.views.SettingsView;
 
@@ -45,6 +46,7 @@ public class MenuController {
     public Texture getButtonPlay() { return buttonPlay; }
     public Texture getButtonHighscore() { return buttonHighscore; }
     public Texture getButtonSettings() { return buttonSettings; }
+    public Texture getButtonHelp() { return buttonHelp; }
 
     public void handleInput() {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
