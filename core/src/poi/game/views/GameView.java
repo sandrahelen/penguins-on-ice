@@ -15,7 +15,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-
 import poi.game.Poi;
 import poi.game.controllers.BoostController;
 import poi.game.controllers.GameController;
@@ -36,7 +35,6 @@ public class GameView extends View {
     private ECSEngine ecsEngine;
     private World world;
     private final ImmutableArray<Entity> animatedEntities;
-
     private final OrthographicCamera camera;
     private final GLProfiler profiler;
     private final Box2DDebugRenderer box2DDebugRenderer;
@@ -106,6 +104,7 @@ public class GameView extends View {
         sb.begin();
         //Draw pausebutton
         sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
+
         //Draw joystick-controller player 1
         sb.draw(joystickController.getJoystick1().getJoystickBase(), camera.position.x - 300, camera.position.y - 150,
                 (float)joystickController.joystick1.joystickBase.getWidth()/2,
@@ -173,7 +172,7 @@ public class GameView extends View {
         }
         boostController.getBoostComponent2().getBoostFont().draw(sb, (int) boostController.getBoostComponent2().getCharge() + "%", camera.position.x+195, camera.position.y-30);
 
-        //Time
+        //Draw time
         if(ecsEngine.getSystem(GoalSystem.class).isFinished()){
             timeFontBig.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x-70,camera.position.y);
         }

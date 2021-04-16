@@ -30,7 +30,6 @@ public class ColorView extends View implements ViewFactory {
         buttonPenguinPurp = controller.getButtonPenguinPurp();
         buttonBack = controller.getButtonBack();
         selected = controller.getSelected();
-
     }
 
     @Override
@@ -41,6 +40,7 @@ public class ColorView extends View implements ViewFactory {
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
+
         sb.begin();
         text.draw(sb, "Player 1", Poi.WIDTH*9/40, Poi.HEIGHT-Poi.HEIGHT/8);
         text.draw(sb, "Player 2", Poi.WIDTH*29/40, Poi.HEIGHT-Poi.HEIGHT/8);
@@ -77,7 +77,6 @@ public class ColorView extends View implements ViewFactory {
         sb.draw(buttonPenguinGreen, Poi.WIDTH*4/6, Poi.HEIGHT*4/9);
         sb.draw(buttonPenguinPurp, Poi.WIDTH*5/6, Poi.HEIGHT*4/9);
         sb.draw(buttonBack, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
-
         sb.end();
     }
 

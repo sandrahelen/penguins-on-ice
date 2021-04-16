@@ -1,8 +1,6 @@
 package poi.game.views;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import poi.game.controllers.ColorController;
 import poi.game.controllers.MenuController;
 import poi.game.Poi;
@@ -65,7 +63,6 @@ public class MenuView extends View implements ViewFactory{
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
         sb.draw(titlePoI, 20+Poi.WIDTH/4, Poi.HEIGHT - titlePoI.getHeight()*2);
-        //sb.draw(penguin, Poi.WIDTH/8, Poi.HEIGHT/2);
         sb.draw(penguin1, Poi.WIDTH/4-70, Poi.HEIGHT/3, penguin1.getWidth()*4, penguin1.getHeight()*4);
         sb.draw(penguin2, Poi.WIDTH-160, Poi.HEIGHT/3, penguin2.getWidth()*4, penguin2.getHeight()*4);
         sb.draw(buttonPlay, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);

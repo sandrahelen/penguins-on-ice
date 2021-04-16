@@ -1,17 +1,11 @@
 package poi.game.views;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector3;
-
 import poi.game.Datahandler;
 import poi.game.Poi;
-import poi.game.controllers.ChangeViewController;
 import poi.game.controllers.HighscoreController;
-import poi.game.controllers.MenuController;
 import poi.game.models.factories.ViewFactory;
 
 
@@ -34,7 +28,6 @@ public class HighscoreView extends View implements ViewFactory {
         buttonMenu = new Texture("general/buttonMenu.png");
         text = new BitmapFont();
         text.setColor(Color.BLACK);
-        //text.set
 
         datahandler = changeViewController.getDatahandler();
         changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);

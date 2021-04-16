@@ -9,8 +9,6 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-
-import poi.game.Datahandler;
 import poi.game.Poi;
 import poi.game.controllers.EndGameController;
 import poi.game.models.factories.ViewFactory;
@@ -18,19 +16,16 @@ import poi.game.models.factories.ViewFactory;
 public class EndGameView extends View implements ViewFactory {
 
     private BitmapFont font;
-    private Datahandler datahandler;
     private Texture titleEndGame;
     private Texture textfieldBox;
     private Texture buttonSubmit;
     private Rectangle boundsTextfield;
-    private Rectangle boundsSubmit;
     private TextField textfield;
     private FitViewport viewport;
     private Stage stage;
     private TextField.TextFieldStyle style;
     private EndGameController controller;
-
-    private int endTime = 0;
+    private int endTime;
 
     public EndGameView(int endTime) {
         super();
@@ -41,10 +36,8 @@ public class EndGameView extends View implements ViewFactory {
         font.setColor(Color.BLACK);
         titleEndGame = new Texture("general/titleEndGame.png");
         textfieldBox = new Texture("general/textField.png");
-        //buttonSubmit = new Texture("buttonSubmit.png");
         buttonSubmit = controller.getButtonSubmit();
         boundsTextfield = new Rectangle(Poi.WIDTH/2-textfieldBox.getWidth()/2, Poi.HEIGHT/2-20, textfieldBox.getWidth(), textfieldBox.getHeight());
-        //boundsSubmit = new Rectangle(Poi.WIDTH/2-buttonSubmit.getWidth()/2,Poi.HEIGHT/2-buttonSubmit.getHeight()*3/2, buttonSubmit.getWidth(), buttonSubmit.getHeight());
 
         // Adding a textfield to let user write some text
         viewport = new FitViewport(Poi.WIDTH, Poi.HEIGHT, cam);

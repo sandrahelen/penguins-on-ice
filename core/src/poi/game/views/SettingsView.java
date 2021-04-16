@@ -1,10 +1,7 @@
 package poi.game.views;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import poi.game.Poi;
-import poi.game.controllers.PauseController;
-import poi.game.controllers.ChangeViewController;
 import poi.game.controllers.SettingsController;
 import poi.game.models.factories.ViewFactory;
 
@@ -43,6 +40,7 @@ public class SettingsView extends View implements ViewFactory {
         sb.draw(titleSettings, Poi.WIDTH/2-titleSettings.getWidth()/2, Poi.HEIGHT - titleSettings.getHeight()*3);
         sb.draw(buttonSound, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);
         sb.draw(buttonMenu, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
+
         // Only draw resume button if game is paused
         if (gameView.getPauseController().getPauseComponent().getIsPaused()) {
             sb.draw(buttonResume, 30,Poi.HEIGHT - 30 - buttonResume.getHeight()/2);
