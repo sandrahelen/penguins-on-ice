@@ -12,7 +12,7 @@ public class SoundController {
 
     public SoundController() {
         sound = Gdx.audio.newSound(Gdx.files.internal("Main Theme ACNH.mp3"));
-        id = sound.play(1.0f);
+        id = sound.loop(1.0f);
         collision = Gdx.audio.newSound(Gdx.files.internal("collision.wav"));
     }
 
