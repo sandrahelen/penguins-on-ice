@@ -3,8 +3,13 @@ package poi.game.models;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
@@ -32,6 +37,8 @@ public class ECSEngine extends PooledEngine {
     private final JoystickController joystickController;
     private final BoostController boostController;
     private final ColorGameController colorGameController;
+    private final TiledMap tiledMap;
+    private final World world;
 
     //Mappers for components
     public static final ComponentMapper<BodyComponent> bodyMapper = ComponentMapper.getFor(BodyComponent.class);
@@ -44,6 +51,9 @@ public class ECSEngine extends PooledEngine {
 
         bodyDef = new BodyDef();
         fixtureDef = new FixtureDef();
+
+        this.tiledMap = tiledMap;
+        this.world = world;
 
         //Iterating systems
         joystickController = new JoystickController();
@@ -71,8 +81,7 @@ public class ECSEngine extends PooledEngine {
     }
 
 
-
-    public void createPlayer(int posX, int posY, World world, int id){
+    public void createPlayer(int posX, int posY, World world, int id) {
         Entity player = this.createEntity();
 
         //Body component
@@ -81,11 +90,10 @@ public class ECSEngine extends PooledEngine {
         body.height = 32;
         bodyDef.gravityScale = 1;
         bodyDef.fixedRotation = true;
-        bodyDef.position.set(posX,posY);
+        bodyDef.position.set(posX, posY);
 
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         body.body = world.createBody(bodyDef);
-
 
 
         //fixtures
@@ -102,7 +110,6 @@ public class ECSEngine extends PooledEngine {
         player.add(body);
 
 
-
         //Add components to entity
         final AnimationComponent animationComponent = this.createComponent(AnimationComponent.class);
         player.add(animationComponent);
@@ -113,7 +120,7 @@ public class ECSEngine extends PooledEngine {
 
         TextureComponent textureComponent = this.createComponent(TextureComponent.class);
         //Animation walk
-        textureComponent.textureAnimation = textureComponent.animate("players/svart-bak.png", 1,3);
+        textureComponent.textureAnimation = textureComponent.animate("players/svart-bak.png", 1, 3);
         //Animation for boost
         //textureComponent.textureAnimation = textureComponent.animate("players/p1-skli-bak.png", 1,3);
         //Animation for finishline
@@ -141,7 +148,6 @@ public class ECSEngine extends PooledEngine {
         body.body.setUserData(obstacle);
 
 
-
         fixtureDef.filter.categoryBits = 2;
         fixtureDef.filter.maskBits = 1;
         final PolygonShape polygonShape = new PolygonShape();
@@ -156,7 +162,7 @@ public class ECSEngine extends PooledEngine {
         final AnimationComponent animationComponent = this.createComponent(AnimationComponent.class);
         obstacle.add(animationComponent);
 
-        final ObstacleComponent obstacleComponent= this.createComponent(ObstacleComponent.class);
+        final ObstacleComponent obstacleComponent = this.createComponent(ObstacleComponent.class);
         obstacle.add(obstacleComponent);
 
         final TextureComponent textureComponent = this.createComponent(TextureComponent.class);
@@ -166,4 +172,16 @@ public class ECSEngine extends PooledEngine {
         this.addEntity(obstacle);
     }
 
+    public void spawnGameObjects() {
+        final MapLayer objectsLayer = tiledMap.getLayers().get("Obstacles");
+        if (objectsLayer == null) {
+            Gdx.app.log("Empty", "No obstacles in layer");
+        } else {
+            for (MapObject object : objectsLayer.getObjects()) {
+                final Rectangle iceBlock = ((RectangleMapObject) object).getRectangle();
+                createObstacle((int) iceBlock.x, (int) iceBlock.y, world);
+            }
+        }
+
+    }
 }
