@@ -26,14 +26,12 @@ public class GameController {
     private World world;
     private boolean finishLine = false;
     private int countStart = 250;
-    //private double period = 0.01;
     private final OrthographicCamera camera;
     private final AssetManager assetmanager;
     private final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
     private final ObjectCreator objectCreator;
-    private final SoundController soundController;
 
     public GameController(GameView gameView) {
         changeViewController = Poi.getChangeViewController();
@@ -56,9 +54,6 @@ public class GameController {
         ecsEngine.createPlayer(400, 300, world, 2);
         assetmanager.finishLoading();
         objectCreator = new ObjectCreator(assetmanager.get("Map/Map1.tmx", TiledMap.class), ecsEngine, world);
-
-        soundController = Poi.getSoundController();
-        soundController.play();
 
     }
 
@@ -92,6 +87,5 @@ public class GameController {
     public BoostController getBoostController() {return boostController;}
     public PauseController getPauseController() {return pauseController;}
     public ECSEngine getECSEngine() {return ecsEngine;}
-    public SoundController getSoundController() {return soundController;}
 
 }

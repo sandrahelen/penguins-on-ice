@@ -33,7 +33,6 @@ public class ColorController {
     private Texture buttonBack;
     private Rectangle boundsBack;
     private Texture selected;
-    private SoundController soundController;
     public static int colorP1 = 0;
     public static int colorP2 = 0;
 
@@ -56,7 +55,6 @@ public class ColorController {
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = buttonComponent.getBoundsBack();
         selected = new Texture("general/selected.png");
-        soundController = Poi.getSoundController();
     }
 
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
@@ -98,7 +96,6 @@ public class ColorController {
                 colorP2 = 3;
             }
             else if (boundsBack.contains(touchTransformed.x, touchTransformed.y)) {
-                soundController.play();
                 changeViewController.set(new SettingsView(gameView));
             }
         }

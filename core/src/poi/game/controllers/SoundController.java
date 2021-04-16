@@ -8,7 +8,7 @@ public class SoundController {
     private Sound sound;
     private Sound collision;
     private Boolean isMuted = false;
-    //long id;
+    long id;
 
     public SoundController() {
         sound = Gdx.audio.newSound(Gdx.files.internal("game.mp3"));
@@ -25,7 +25,7 @@ public class SoundController {
     }
 
     public void startGameSound() {
-        sound.loop(1.0f);
+        id = sound.play(1.0f);
     }
     /*
     public void play() {
@@ -35,22 +35,24 @@ public class SoundController {
         }
     }
     */
-    public void stop() {
+    /*public void stop() {
         if (!isMuted) {
             sound.stop();
             Gdx.app.log("Stop", "ok");
         }
-    }
+    }*/
 
     public void mute() {
         if (isMuted) {
             isMuted = false;
-            sound.loop();
+            //sound.loop();
+            sound.setLooping(id, true);
             Gdx.app.log("Mute", "resume");
         }
         else {
             isMuted = true;
-            sound.stop();
+            //sound.stop();
+            sound.setLooping(id, false);
             Gdx.app.log("Mute", "pause");
         }
     }
