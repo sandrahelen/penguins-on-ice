@@ -27,7 +27,6 @@ public class BoostController {
                     boostComponent1.setCharge(0);
                     boostComponent1.setBoost(true);
                 }
-                System.out.println("Button1 touched");
             }
             if (boostComponent2.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
                 if (boostComponent2.getCharge() == 100) {
@@ -35,7 +34,6 @@ public class BoostController {
                     boostComponent2.setCharge(0);
                     boostComponent2.setBoost(true);
                 }
-                System.out.println("Button2 touched");
             }
         }
     }

@@ -7,8 +7,7 @@ import poi.game.Leaderboard;
 public class DesktopLeaderboard implements Leaderboard {
 
     public void submitScore(String user, int score) {
-        Gdx.app.log("DesktopLeaderboard", "would have submitted score for user " + user + ": " + score);
-    }
+        }
     @Override
     public void FirstFireBaseTest() {
 
@@ -16,6 +15,6 @@ public class DesktopLeaderboard implements Leaderboard {
 
     @Override
     public void setOnValueChangedListener(Datahandler data) {
-        Gdx.app.log("DesktopLauncher", "would have read from database");
+        //Gdx.app.log("DesktopLauncher", "would have read from database");
     }
 }
