@@ -64,7 +64,7 @@ public class Poi extends Game {
 		assetmanager.setLoader(TiledMap.class, new TmxMapLoader(assetmanager.getFileHandleResolver()));
 
 		soundController = new SoundController();
-		soundController.play();
+		soundController.startGameSound();
 	}
 
 	@Override
