@@ -23,7 +23,7 @@ public class MenuView extends View implements ViewFactory{
         super();
         controller = new MenuController();
         titlePoI = new Texture("general/titlePoI.png");
-        penguin = new Texture("general/pingvin.png");
+        penguin = new Texture("general/svart-pingvin.png");
         buttonPlay = controller.getButtonPlay();
         buttonHighscore = controller.getButtonHighscore();
         buttonSettings = controller.getButtonSettings();

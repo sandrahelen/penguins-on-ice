@@ -32,7 +32,8 @@ public class SoundController {
 
     public void stop() {
         if (!isMuted) {
-            sound.stop(id);
+            //sound.setLooping(id, false);
+            //sound.stop(id);
         }
     }
 
@@ -43,7 +44,8 @@ public class SoundController {
         }
         else {
             isMuted = true;
-            sound.stop();
+            //sound.setLooping(id, false);
+            //sound.stop(id);
         }
     }
 }

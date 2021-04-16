@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import poi.game.controllers.BoostController;
+import poi.game.controllers.ColorGameController;
 import poi.game.controllers.JoystickController;
 import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
@@ -30,6 +31,7 @@ public class ECSEngine extends PooledEngine {
     private final FixtureDef fixtureDef;
     private final JoystickController joystickController;
     private final BoostController boostController;
+    private final ColorGameController colorGameController;
 
     //Mappers for components
     public static final ComponentMapper<BodyComponent> bodyMapper = ComponentMapper.getFor(BodyComponent.class);
@@ -46,12 +48,13 @@ public class ECSEngine extends PooledEngine {
         //Iterating systems
         joystickController = new JoystickController();
         boostController = new BoostController();
+        colorGameController = new ColorGameController();
         addSystem(new MovementSystem(orthographicCamera, joystickController, boostController));
         addSystem(new CameraSystem(orthographicCamera));
         addSystem(new TimerSystem());
         addSystem(new CameraBoundsCollisionSystem(orthographicCamera));
         addSystem(new GoalSystem(tiledMap));
-        addSystem(new AnimationSystem(boostController));
+        addSystem(new AnimationSystem(boostController, colorGameController));
 
     }
 
@@ -61,6 +64,10 @@ public class ECSEngine extends PooledEngine {
 
     public BoostController getBoostContoller() {
         return boostController;
+    }
+
+    public ColorGameController getColorGameController() {
+        return colorGameController;
     }
 
 
@@ -106,7 +113,7 @@ public class ECSEngine extends PooledEngine {
 
         TextureComponent textureComponent = this.createComponent(TextureComponent.class);
         //Animation walk
-        textureComponent.textureAnimation = textureComponent.animate("players/p1-bak.png", 1,3);
+        textureComponent.textureAnimation = textureComponent.animate("players/svart-bak.png", 1,3);
         //Animation for boost
         //textureComponent.textureAnimation = textureComponent.animate("players/p1-skli-bak.png", 1,3);
         //Animation for finishline

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
 import poi.game.models.entityComponents.ButtonComponent;
+import poi.game.views.ColorView;
 import poi.game.views.GameView;
 import poi.game.views.MenuView;
 
@@ -56,6 +57,10 @@ public class SettingsController {
             // Checks if buttons are pressed before changing view
             if (boundsSound.contains(touchTransformed.x, touchTransformed.y)) {
                 soundController.mute();
+            }
+            else if (boundsColor.contains(touchTransformed.x, touchTransformed.y)) {
+                soundController.stop();
+                changeViewController.set(new ColorView(gameView));
             }
             else if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
                 soundController.stop();

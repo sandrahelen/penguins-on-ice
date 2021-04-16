@@ -31,23 +31,6 @@ public class SettingsView extends View implements ViewFactory {
         buttonResume = new Texture("general/buttonResume.png");
     }
 
-    /*@Override
-    public void handleInput() {
-        if(Gdx.input.justTouched()){
-            Vector3 touchTransformed = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-            if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
-                gameView.getPauseController().getPauseComponent().setPaused(false);
-                controller.set(new MenuView(controller));
-            }
-            // Can only resume game if game is already paused
-            else if (boundsResume.contains(touchTransformed.x, touchTransformed.y) && gameView.getPauseController().getPauseComponent().getIsPaused()) {
-                // Change view to existing gameView
-                controller.set(gameView);
-            }
-        }
-    }*/
-
-
     @Override
     public void update(float dt) {
         controller.handleInput();
@@ -57,7 +40,7 @@ public class SettingsView extends View implements ViewFactory {
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(titleSettings, Poi.WIDTH/2-titleSettings.getWidth()/2 /*5/16*/, Poi.HEIGHT - titleSettings.getHeight()*3);
+        sb.draw(titleSettings, Poi.WIDTH/2-titleSettings.getWidth()/2, Poi.HEIGHT - titleSettings.getHeight()*3);
         sb.draw(buttonSound, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);
         sb.draw(buttonColor, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
         sb.draw(buttonMenu, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
