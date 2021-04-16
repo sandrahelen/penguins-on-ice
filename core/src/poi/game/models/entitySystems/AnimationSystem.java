@@ -66,6 +66,7 @@ public class AnimationSystem extends IteratingSystem {
                 textureComponent.textureAnimation = textureComponent.animate(texturesP2.get(0)/*"players/p1-bak.png"*/, 1,3);
            }
         }
+
         if (finish){
             if (ECSEngine.playerMapper.get(entity).id == 1) {
                 textureComponent.textureAnimation = textureComponent.animate(texturesP1.get(2)/*"players/p1-finish.png"*/, 8, 3);
