@@ -4,17 +4,9 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector3;
 
-
-import java.util.HashMap;
-import java.util.Map;
-
-import poi.game.Poi;
 import poi.game.controllers.BoostController;
 import poi.game.controllers.JoystickController;
 import poi.game.models.ECSEngine;

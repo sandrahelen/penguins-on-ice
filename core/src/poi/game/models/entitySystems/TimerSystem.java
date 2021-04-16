@@ -11,8 +11,6 @@ public class TimerSystem extends IntervalSystem {
     private int time;
     private boolean finish = false;
 
-
-
     public TimerSystem(){
         super(Gdx.graphics.getDeltaTime());
         elapsedTime = 0;
