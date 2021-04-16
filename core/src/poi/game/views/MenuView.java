@@ -40,8 +40,8 @@ public class MenuView extends View implements ViewFactory{
         sb.begin();
         sb.draw(titlePoI, 20+Poi.WIDTH/4, Poi.HEIGHT - titlePoI.getHeight()*2);
         //sb.draw(penguin, Poi.WIDTH/8, Poi.HEIGHT/2);
-        sb.draw(penguin, Poi.WIDTH/4-100, Poi.HEIGHT/3, penguin.getWidth()*4, penguin.getHeight()*4);
-        sb.draw(penguin, Poi.WIDTH-200, Poi.HEIGHT/3, penguin.getWidth()*4, penguin.getHeight()*4);
+        sb.draw(penguin, Poi.WIDTH/4-70, Poi.HEIGHT/3, penguin.getWidth()*4, penguin.getHeight()*4);
+        sb.draw(penguin, Poi.WIDTH-160, Poi.HEIGHT/3, penguin.getWidth()*4, penguin.getHeight()*4);
         sb.draw(buttonPlay, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);
         sb.draw(buttonHighscore, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
         sb.draw(buttonSettings, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
