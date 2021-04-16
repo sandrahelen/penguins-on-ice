@@ -33,8 +33,6 @@ public class SoundController {
 
     public void stop() {
         if (!isMuted) {
-            //sound.setLooping(id, false);
-            //sound.stop(id);
             sound.pause(id);
         }
     }
