@@ -58,7 +58,7 @@ public class SettingsController {
             if (boundsSound.contains(touchTransformed.x, touchTransformed.y)) {
                 soundController.mute();
             }
-            else if (boundsColor.contains(touchTransformed.x, touchTransformed.y)) {
+            else if (boundsColor.contains(touchTransformed.x, touchTransformed.y) && !gameView.getPauseController().getIsPaused()) {
                 //soundController.stop();
                 changeViewController.set(new ColorView(gameView));
             }

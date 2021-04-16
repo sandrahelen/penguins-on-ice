@@ -42,11 +42,14 @@ public class SettingsView extends View implements ViewFactory {
         sb.begin();
         sb.draw(titleSettings, Poi.WIDTH/2-titleSettings.getWidth()/2, Poi.HEIGHT - titleSettings.getHeight()*3);
         sb.draw(buttonSound, Poi.WIDTH/2-controller.getButtonWidth()/2, Poi.HEIGHT*3/6);
-        sb.draw(buttonColor, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
+
         sb.draw(buttonMenu, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
         // Only draw resume button if game is paused
         if (gameView.getPauseController().getPauseComponent().getIsPaused()) {
             sb.draw(buttonResume, 30,Poi.HEIGHT - 30 - buttonResume.getHeight()/2);
+        }
+        else {
+            sb.draw(buttonColor, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
         }
         sb.end();
     }
