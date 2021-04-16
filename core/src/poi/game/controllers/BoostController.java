@@ -19,6 +19,8 @@ public class BoostController {
     private Vector3 touchPos;
     private Map<Integer, Float> touches = new HashMap<>();
 
+    private SoundController soundController;
+
     public BoostController(){
         boostComponent1 = new BoostComponent(Poi.WIDTH/2-280, Poi.HEIGHT/2-50);
         boostComponent2 = new BoostComponent(Poi.WIDTH/2+240, Poi.HEIGHT/2-50);
@@ -29,6 +31,7 @@ public class BoostController {
             touches.put(i, touchPos.x);
             touches.put(i, touchPos.y);
         }
+        soundController = Poi.getSoundController();
     }
     public void handleInput(float dt) {
         startTimer(dt);
@@ -42,7 +45,7 @@ public class BoostController {
                         boostComponent1.setCharge(0);
                         boostComponent1.setBoost(true);
                     }
-                    System.out.println("Button1 touched");
+                    soundController.playBoostSound(true);
                 }
                 if (boostComponent2.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
                     if (boostComponent2.getCharge() == 100) {
@@ -50,6 +53,7 @@ public class BoostController {
                         boostComponent2.setCharge(0);
                         boostComponent2.setBoost(true);
                     }
+                    soundController.playBoostSound(true);
                 }
             }
         }
