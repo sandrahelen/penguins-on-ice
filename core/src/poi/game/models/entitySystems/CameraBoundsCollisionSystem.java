@@ -24,16 +24,16 @@ public class CameraBoundsCollisionSystem extends IteratingSystem {
     public void processEntity(final Entity entity, final float deltaTime) {
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
         final Vector2 center = bodyComponent.body.getWorldCenter();
-        if (bodyComponent.body.getPosition().x < 0) {
+        if (bodyComponent.body.getPosition().x < 10) {
             bodyComponent.body.setLinearVelocity(50, bodyComponent.body.getLinearVelocity().y);
             bodyComponent.body.applyLinearImpulse(70, 0, center.x, center.y, true);
         }
-        if (bodyComponent.body.getPosition().x > Poi.WIDTH) {
+        if (bodyComponent.body.getPosition().x > Poi.WIDTH - 10) {
             bodyComponent.body.setLinearVelocity(-50, bodyComponent.body.getLinearVelocity().y);
             bodyComponent.body.applyLinearImpulse(-70, 0, center.x, center.y, true);
         }
-        if (bodyComponent.body.getPosition().y > camera.position.y+Poi.HEIGHT/2) {
-            bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,camera.position.y+Poi.HEIGHT/2,0);
+        if (bodyComponent.body.getPosition().y > camera.position.y + Poi.HEIGHT/2 - 15) {
+            bodyComponent.body.setTransform(bodyComponent.body.getPosition().x,camera.position.y + Poi.HEIGHT/2 - 15,0);
         }
     }
 
