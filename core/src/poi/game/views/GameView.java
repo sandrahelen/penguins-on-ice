@@ -45,7 +45,6 @@ public class GameView extends View {
     public final PauseController pauseController;
     private final AssetManager assetmanager;
     public MapRenderer mapRenderer;
-    //private ObjectCreator objectCreator;
     private BitmapFont timeFont;
     private BitmapFont timeFontBig;
     private GameController controller;
@@ -73,11 +72,9 @@ public class GameView extends View {
         } else {
             box2DDebugRenderer = null;
         }
-
         animatedEntities = ecsEngine.getEntitiesFor(Family.all(AnimationComponent.class, BodyComponent.class).get());
 
     }
-
 
     private void renderEntity(Entity entity, SpriteBatch sb) {
         final BodyComponent bodyComponent = ECSEngine.bodyMapper.get(entity);
@@ -94,7 +91,6 @@ public class GameView extends View {
     @Override
     public void update(float dt){
         controller.update(dt);
-
     }
 
     @Override
@@ -108,7 +104,9 @@ public class GameView extends View {
         mapRenderer.render();
 
         sb.begin();
+        //Draw pausebutton
         sb.draw(pauseController.getButtonPause(), camera.position.x - 290, camera.position.y + 140);
+
         //Draw controller player 1
         sb.draw(joystickController.getJoystick1().getJoystickBase(), camera.position.x - 300, camera.position.y - 150,
                 (float)joystickController.joystick1.joystickBase.getWidth()/2,
@@ -148,9 +146,8 @@ public class GameView extends View {
                     (float)joystickController.joystick2.joystick.getHeight()/2);
         }
 
-
+        //Boost controllers
         boostController.setValues();
-        //boostController.startTimer(/*float dt*/);
         //Draw boost button player 1
         if(boostController.getBoostComponent1().getButtonClicked()){
             sb.draw(boostController.getBoostComponent1().getBoostButton(), camera.position.x-200, camera.position.y-130,
@@ -188,11 +185,19 @@ public class GameView extends View {
 
     @Override
     public void dispose() {
-        //boostController1.dispose();
-        /*for (final Entity entity : animatedEntities){
-            entity.dispose(); // må lage en dispose funksjon for disse(?)
-        }*/
-        //buttonPause.dispose();
+        /*timeFont.dispose();
+        timeFontBig.dispose();
+        pauseController.getButtonPause().dispose();
+        joystickController.getJoystick1().getJoystickBase().dispose();
+        joystickController.getJoystick1().getJoystick().dispose();
+        joystickController.getJoystick2().getJoystickBase().dispose();
+        joystickController.getJoystick2().getJoystick().dispose();
+        boostController.boostComponent1.getBoostButton().dispose();
+        boostController.boostComponent1.getBoostButtonUnCharged().dispose();
+        boostController.boostComponent1.getBoostFont().dispose();
+        boostController.boostComponent2.getBoostButton().dispose();
+        boostController.boostComponent2.getBoostButtonUnCharged().dispose();
+        boostController.boostComponent2.getBoostFont().dispose();*/
     }
 
     public PauseController getPauseController() {return pauseController;}
