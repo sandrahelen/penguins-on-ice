@@ -19,10 +19,12 @@ public class SettingsController {
     private Texture buttonSound;
     private Texture buttonColor;
     private Texture buttonMenu;
+    private Texture buttonQuit;
     private Texture buttonResume;
     private final Rectangle boundsSound;
     private final Rectangle boundsColor;
     private final Rectangle boundsMenu;
+    private final Rectangle boundsQuit;
     private final Rectangle boundsResume;
 
     private GameView gameView;
@@ -37,9 +39,11 @@ public class SettingsController {
         buttonSound = buttonComponent.getButtonSound();
         buttonColor = buttonComponent.getButtonColor();
         buttonMenu = buttonComponent.getButtonMenu();
+        buttonQuit = buttonComponent.getButtonQuit();
         boundsSound = buttonComponent.getBoundsSound();
         boundsColor = buttonComponent.getBoundsColor();
         boundsMenu = buttonComponent.getBoundsMenu();
+        boundsQuit = buttonComponent.getBoundsQuit();
         buttonResume = new Texture("general/buttonResume.png");
         boundsResume = new Rectangle(30, Poi.HEIGHT - 30 - buttonResume.getHeight()/2, buttonResume.getWidth(), buttonResume.getHeight());
         soundController = Poi.getSoundController();
@@ -51,6 +55,7 @@ public class SettingsController {
     public Texture getButtonSound() { return buttonSound; }
     public Texture getButtonColor() { return buttonColor; }
     public Texture getButtonMenu() { return buttonMenu; }
+    public Texture getButtonQuit() { return buttonQuit; }
 
     public void handleInput() {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));

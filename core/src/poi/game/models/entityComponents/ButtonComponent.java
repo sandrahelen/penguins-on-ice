@@ -17,6 +17,7 @@ public class ButtonComponent {
     private Texture buttonBack;
     private Texture buttonNext;
     private Texture buttonHelp;
+    private Texture buttonQuit;
     private Rectangle boundsPlay;
     private Rectangle boundsHighscore;
     private Rectangle boundsSettings;
@@ -26,6 +27,7 @@ public class ButtonComponent {
     private Rectangle boundsSubmit;
     private Rectangle boundsBack;
     private Rectangle boundsHelp;
+    private Rectangle boundsQuit;
 
     public ButtonComponent() {
         buttonPlay = new Texture("general/buttonPlay.png");
@@ -38,6 +40,7 @@ public class ButtonComponent {
         buttonBack = new Texture("general/buttonBack.png");
         buttonNext = new Texture("general/buttonNext.png");
         buttonHelp = new Texture("general/buttonHelp.png");
+        buttonQuit = new Texture("general/buttonQuit.png");
 
         boundsPlay = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 3 / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsHighscore = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 2 / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
@@ -48,6 +51,7 @@ public class ButtonComponent {
         boundsSubmit = new Rectangle(Poi.WIDTH / 2 - buttonSubmit.getWidth() / 2, Poi.HEIGHT / 2 - buttonSubmit.getHeight() * 3 / 2, buttonSubmit.getWidth(), buttonPlay.getHeight());
         boundsBack = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsHelp = new Rectangle(Poi.WIDTH - buttonHelp.getWidth() - 20, Poi.HEIGHT - buttonHelp.getHeight() - 20, buttonHelp.getWidth(), buttonHelp.getHeight());
+        boundsQuit = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
     }
 
     public int getButtonWidth() { return buttonPlay.getWidth(); }
@@ -63,6 +67,7 @@ public class ButtonComponent {
     public Texture getButtonBack() { return buttonBack; }
     public Texture getButtonNext() { return buttonNext; }
     public Texture getButtonHelp() { return buttonHelp; }
+    public Texture getButtonQuit() { return buttonQuit; }
 
     public Rectangle getBoundsPlay() { return boundsPlay; }
     public Rectangle getBoundsHighscore() { return boundsHighscore; }
@@ -73,5 +78,6 @@ public class ButtonComponent {
     public Rectangle getBoundsSubmit() { return boundsSubmit; }
     public Rectangle getBoundsBack() { return boundsBack; }
     public Rectangle getBoundsHelp() { return boundsHelp; }
+    public Rectangle getBoundsQuit() { return boundsQuit; }
 
 }
