@@ -39,22 +39,22 @@ public class ColorController {
     public ColorController(GameView gameView) {
         this.gameView = gameView;
         changeViewController = Poi.getChangeViewController();
+        selected = new Texture("general/selected.png");
         buttonPenguinBlack = new Texture("general/svart-pingvin.png");
         buttonPenguinPink = new Texture("general/rosa-pingvin.png");
         buttonPenguinGreen = new Texture("general/grønn-pingvin.png");
         buttonPenguinPurp = new Texture("general/lilla-pingvin.png");
-        boundsPenguinBlack1 = new Rectangle(Poi.WIDTH / 6, Poi.HEIGHT *6/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
-        boundsPenguinPink1 = new Rectangle(Poi.WIDTH *2/6, Poi.HEIGHT *6/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
-        boundsPenguinGreen1 = new Rectangle(Poi.WIDTH / 6, Poi.HEIGHT *4/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
-        boundsPenguinPurp1 = new Rectangle(Poi.WIDTH *2/6, Poi.HEIGHT *4/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
-        boundsPenguinBlack2 = new Rectangle(Poi.WIDTH *4/6, Poi.HEIGHT *6/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
-        boundsPenguinPink2 = new Rectangle(Poi.WIDTH *5/6, Poi.HEIGHT *6/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
-        boundsPenguinGreen2 = new Rectangle(Poi.WIDTH *4/6, Poi.HEIGHT *4/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
-        boundsPenguinPurp2 = new Rectangle(Poi.WIDTH *5/6, Poi.HEIGHT *4/9, buttonPenguinBlack.getWidth(), buttonPenguinBlack.getHeight());
+        boundsPenguinBlack1 = new Rectangle(Poi.WIDTH/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        boundsPenguinPink1 = new Rectangle(Poi.WIDTH*2/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        boundsPenguinGreen1 = new Rectangle(Poi.WIDTH/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        boundsPenguinPurp1 = new Rectangle(Poi.WIDTH*2/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        boundsPenguinBlack2 = new Rectangle(Poi.WIDTH*4/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        boundsPenguinPink2 = new Rectangle(Poi.WIDTH*5/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        boundsPenguinGreen2 = new Rectangle(Poi.WIDTH*4/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        boundsPenguinPurp2 = new Rectangle(Poi.WIDTH*5/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
         buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = buttonComponent.getBoundsBack();
-        selected = new Texture("general/selected.png");
         soundController = Poi.getSoundController();
     }
 
