@@ -37,10 +37,10 @@ public class JoystickController {
                 touchPos.set(touchTransformed.x, touchTransformed.y, 0);
                 touches.put(i, touchPos.x);
 
-                System.out.println("TOUCH: " + touchPos.x);
+                //System.out.println("TOUCH: " + touchPos.x);
                 //System.out.println("WIDTH: " + (joystick1.getBoundsJoystick().getWidth() / 4));
-                System.out.println("<--: " + (joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 5)));
-                System.out.println("-->: " + (joystick1.getPosition() + 2*(joystick1.getBoundsJoystick().getWidth() / 5)));
+                //System.out.println("<--: " + (joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 5)));
+                //System.out.println("-->: " + (joystick1.getPosition() + 2*(joystick1.getBoundsJoystick().getWidth() / 5)));
 
                 // Joystick1 is touched
                 if (joystick1.getBoundsJoystick().contains(touchPos.x, touchPos.y)) {
