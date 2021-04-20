@@ -79,7 +79,6 @@ public class JoystickController {
                     }
                 }
             }
-            Gdx.app.log("Joystick", touches.toString());
         }
     }
 
