@@ -14,6 +14,7 @@ import java.awt.*;
 
 public class HelpController {
 
+    private boolean inGame;
     private ChangeViewController changeViewController;
     private ButtonComponent buttonComponent;
     private Texture buttonBack;
@@ -26,7 +27,8 @@ public class HelpController {
     private Texture screenshotGoal;
     private int guideNum;
 
-    public HelpController() {
+    public HelpController(boolean inGame) {
+        this.inGame = inGame;
         changeViewController = Poi.getChangeViewController();
         buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
@@ -97,7 +99,14 @@ public class HelpController {
             }
             else if (boundsNext.contains(touchTransformed.x, touchTransformed.y) && getGuideNum() == 3) {
                 setNextGuideNum();
-                changeViewController.set(new MenuView());
+                if (Poi.getTutorial() && inGame) {
+                    Poi.setTutorial();
+                    changeViewController.set(new GameView());
+                }
+                else {
+                    Poi.setTutorial();
+                    changeViewController.set(new MenuView());
+                }
             }
         }
     }

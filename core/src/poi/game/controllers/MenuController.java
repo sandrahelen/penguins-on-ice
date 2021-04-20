@@ -53,7 +53,12 @@ public class MenuController {
         if(Gdx.input.justTouched()){
             // Checks if buttons are pressed before changing view
             if (boundsPlay.contains(touchTransformed.x, touchTransformed.y)) {
-                changeViewController.set(new GameView());
+                if (Poi.getTutorial()) {
+                    changeViewController.set(new HelpView(true));
+                }
+                else {
+                    changeViewController.set(new GameView());
+                }
             }
             else if (boundsHighscore.contains(touchTransformed.x, touchTransformed.y)) {
                 changeViewController.set(new HighscoreView());
@@ -62,7 +67,7 @@ public class MenuController {
                 changeViewController.set(new SettingsView(new GameView()));
             }
             else if (boundsHelp.contains(touchTransformed.x, touchTransformed.y)) {
-                changeViewController.set(new HelpView());
+                changeViewController.set(new HelpView(false));
             }
         }
     }

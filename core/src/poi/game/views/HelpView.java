@@ -20,9 +20,9 @@ public class HelpView extends View implements ViewFactory {
     private Texture screenshotController;
     private Texture screenshotGoal;
 
-    public HelpView (){
+    public HelpView (boolean inGame){
         super();
-        controller = new HelpController();
+        controller = new HelpController(inGame);
         text = new BitmapFont();
         text.setColor(Color.BLACK);
         buttonBack = controller.getButtonBack();
@@ -67,7 +67,9 @@ public class HelpView extends View implements ViewFactory {
             text.draw(sb, "Cooperate together to reach", Poi.WIDTH/48, Poi.HEIGHT-Poi.HEIGHT/6);
             text.draw(sb, "the finish line.", Poi.WIDTH/48, Poi.HEIGHT-Poi.HEIGHT*6/24);
         }
-        sb.draw(buttonBack, Poi.WIDTH/4-controller.getButtonWidth()/2,Poi.HEIGHT/16);
+        if (!(Poi.getTutorial() && controller.getGuideNum() == 1)) {
+            sb.draw(buttonBack, Poi.WIDTH / 4 - controller.getButtonWidth() / 2, Poi.HEIGHT / 16);
+        }
         sb.draw(buttonNext, Poi.WIDTH*3/4-controller.getButtonWidth()/2,Poi.HEIGHT/16);
         sb.end();
     }
