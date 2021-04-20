@@ -1,7 +1,74 @@
 # Poi
+![screenshotGame, Game](android/assets/screenshot/screenshotGame.png)
 
-## Structure of the code ##
-The code structure is based on the MVC as well as the ECS patterns. There are three folders; `models`, `controllers` and `view` which contain all the appropriate classes for these. The `models` folder also contains a folder called `entityComponents`, and a folder called `entitySystems`, as well as the `ECSEngine`-file, following the ECS pattern. The folder `database` contains classes for sending data to the database.
+## Relevant repository structure (core/src/com/poi/game) ##
+   
+    ├── controllers                                 # controller folder in MVC
+    │   ├── BoostController.java
+    │   ├── ChangeViewController.java
+    │   ├── ColorController.java
+    │   ├── ColorGameController.java
+    │   ├── EndGameController.java
+    │   ├── GameController.java
+    │   ├── HelpController.java
+    │   ├── HighscoreController.java
+    │   ├── JoystickController.java
+    │   ├── MenuController.java
+    │   ├── PauseController.java
+    │   └── SettingsController.java
+    ├── models                                       # models folder in MVC                    
+    │   ├── entityComponents                         # entityComponents folder for ECS pattern
+    │   │   ├── AnimationComponent.java
+    │   │   ├── BodyComponent.java
+    │   │   ├── BoostComponent.java
+    │   │   ├── ButtonComponent.java
+    │   │   ├── JoystickComponent.java
+    │   │   ├── ObstacleComponent.java
+    │   │   ├── PauseComponent.java
+    │   │   ├── PlayerComponent.java
+    │   │   └── TextureComponent.java
+    │   ├── entitySystems                           # entitySystems folder for ECS pattern
+    │   │   ├── AnimationSystem.java
+    │   │   ├── CameraBoundsCollisionSystem.java
+    │   │   ├── CameraSystem.java
+    │   │   ├── GoalSystem.java
+    │   │   ├── MovementSystem.java
+    │   │   └── TimerSystem.java
+    │   ├── factories
+    │   │   └── ViewFactory.java                    # factory for views in views folder
+    │   └── ECSEngine.java                          # ECSEngine for ECS pattern
+    ├── views                                       # views folder in MVC
+    │   ├── ColorView.java
+    │   ├── EndGameView.java
+    │   ├── GameView.java
+    │   ├── HelpView.java
+    │   ├── HighscoreView.java
+    │   ├── MenuView.java
+    │   ├── SettingsView.java
+    │   └── View.java                               # template for views
+    ├── CoreLeaderboard.java
+    ├── Datahandler.java
+    ├── Leaderboard.java
+    ├── Poi.java
+    ├── SoundManager.java
+    └── WorldContactListener.java
+
+Assets for the game are found at android/assets
 
 ## How to compile/run the project ##
-Clone the project into Android Studio and connect your android device. Make sure you are in the folder named `project`, then hit the play button in Android Studio and the game will open up on your phone.
+
+### Equipment
+<ul>
+<li>Android Studio or other IDE for Android development</li>
+<li>Emulator or Android device</li>
+</ul>
+
+### Installion
+<ol>
+<li>Clone the repository by running the following command in your terminal: </li>
+    
+    git clone https://gitlab.stud.idi.ntnu.no/proark/project.git
+    
+<li>Open the project folder in Android Studio</li>
+<li>Run the android project on the emulator or on your Android device</li>
+</ol>
