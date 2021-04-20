@@ -35,6 +35,7 @@ public class Poi extends Game {
 
 	private static SoundManager soundController;
 
+	private static boolean tutorial = true;
 
 	public Poi(Leaderboard leaderboard) {
 		this.leaderboard = leaderboard;
@@ -99,5 +100,13 @@ public class Poi extends Game {
 	public static AssetManager getAssetManager(){return assetmanager;}
 
 	public static SoundManager getSoundController(){return soundController;}
+
+	public static boolean getTutorial() {
+		return tutorial;
+	}
+
+	public static void setTutorial() {
+		tutorial = false;
+	}
 }
 
