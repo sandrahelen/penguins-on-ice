@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 
 import poi.game.Poi;
+import poi.game.SoundManager;
 import poi.game.WorldContactListener;
 import poi.game.models.ECSEngine;
 import poi.game.models.entitySystems.AnimationSystem;
@@ -29,7 +30,7 @@ public class GameController {
     private final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
-    private final SoundController soundController;
+    private final SoundManager soundController;
 
     public GameController(GameView gameView) {
         changeViewController = Poi.getChangeViewController();
@@ -54,8 +55,6 @@ public class GameController {
         ecsEngine.spawnGameObjects();
 
         soundController = Poi.getSoundController();
-        soundController.play();
-
     }
 
     public void update(float dt){
@@ -88,6 +87,6 @@ public class GameController {
     public BoostController getBoostController() {return boostController;}
     public PauseController getPauseController() {return pauseController;}
     public ECSEngine getECSEngine() {return ecsEngine;}
-    public SoundController getSoundController() {return soundController;}
+    public SoundManager getSoundController() {return soundController;}
 
 }

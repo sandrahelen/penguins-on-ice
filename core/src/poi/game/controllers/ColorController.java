@@ -6,11 +6,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
+import poi.game.SoundManager;
 import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.GameView;
 import poi.game.views.SettingsView;
-
-import java.util.ArrayList;
 
 
 public class ColorController {
@@ -33,7 +32,7 @@ public class ColorController {
     private Texture buttonBack;
     private Rectangle boundsBack;
     private Texture selected;
-    private SoundController soundController;
+    private SoundManager soundController;
     public static int colorP1 = 0;
     public static int colorP2 = 0;
 
@@ -98,7 +97,6 @@ public class ColorController {
                 colorP2 = 3;
             }
             else if (boundsBack.contains(touchTransformed.x, touchTransformed.y)) {
-                soundController.play();
                 changeViewController.set(new SettingsView(gameView));
             }
         }

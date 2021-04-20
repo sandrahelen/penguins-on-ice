@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
+import poi.game.SoundManager;
 import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.ColorView;
 import poi.game.views.GameView;
@@ -27,7 +28,7 @@ public class SettingsController {
     private GameView gameView;
 
     private ButtonComponent buttonComponent;
-    SoundController soundController;
+    SoundManager soundController;
 
     public SettingsController(GameView gameView){
         this.gameView = gameView;
@@ -66,7 +67,7 @@ public class SettingsController {
             }
             // Can only resume game if game is already paused
             else if (boundsResume.contains(touchTransformed.x, touchTransformed.y) && gameView.getPauseController().getIsPaused()) {
-                soundController.play();
+                //soundController.play();
                 // Change view to existing gameView
                 changeViewController.set(gameView);
             }
