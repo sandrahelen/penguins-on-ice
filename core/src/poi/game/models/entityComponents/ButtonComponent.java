@@ -15,6 +15,7 @@ public class ButtonComponent {
     private Texture buttonColor;
     private Texture buttonSubmit;
     private Texture buttonBack;
+    private Texture buttonNext;
     private Texture buttonHelp;
     private Rectangle boundsPlay;
     private Rectangle boundsHighscore;
@@ -35,6 +36,7 @@ public class ButtonComponent {
         buttonColor = new Texture("general/buttonColor.png");
         buttonSubmit = new Texture("general/buttonSubmit.png");
         buttonBack = new Texture("general/buttonBack.png");
+        buttonNext = new Texture("general/buttonNext.png");
         buttonHelp = new Texture("general/buttonHelp.png");
 
         boundsPlay = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 3 / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
@@ -59,6 +61,7 @@ public class ButtonComponent {
     public Texture getButtonColor() { return buttonColor; }
     public Texture getButtonSubmit() { return buttonSubmit; }
     public Texture getButtonBack() { return buttonBack; }
+    public Texture getButtonNext() { return buttonNext; }
     public Texture getButtonHelp() { return buttonHelp; }
 
     public Rectangle getBoundsPlay() { return boundsPlay; }
