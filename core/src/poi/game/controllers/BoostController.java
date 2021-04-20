@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import poi.game.Poi;
+import poi.game.SoundManager;
 import poi.game.models.entityComponents.BoostComponent;
-import poi.game.views.SettingsView;
 
 
 public class BoostController {
@@ -19,7 +19,7 @@ public class BoostController {
     private Vector3 touchPos;
     private Map<Integer, Float> touches = new HashMap<>();
 
-    private SoundController soundController;
+    private SoundManager soundController;
 
     public BoostController(){
         boostComponent1 = new BoostComponent(Poi.WIDTH/2-280, Poi.HEIGHT/2-50);
@@ -44,16 +44,16 @@ public class BoostController {
                         boostComponent1.setButtonClicked(true);
                         boostComponent1.setCharge(0);
                         boostComponent1.setBoost(true);
+                        soundController.playBoostSound();
                     }
-                    soundController.playBoostSound(true);
                 }
                 if (boostComponent2.getBoundsBoost().contains(touchTransformed.x, touchTransformed.y)) {
                     if (boostComponent2.getCharge() == 100) {
                         boostComponent2.setButtonClicked(true);
                         boostComponent2.setCharge(0);
                         boostComponent2.setBoost(true);
+                        soundController.playBoostSound();
                     }
-                    soundController.playBoostSound(true);
                 }
             }
         }

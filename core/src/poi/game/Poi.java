@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import poi.game.controllers.ChangeViewController;
-import poi.game.controllers.SoundController;
 import poi.game.views.MenuView;
 
 public class Poi extends Game {
@@ -34,7 +33,7 @@ public class Poi extends Game {
 	private static final float FIXED_TIME_STEP = 1/60f;
 	private float accumulator;
 
-	private static SoundController soundController;
+	private static SoundManager soundController;
 
 
 	public Poi(Leaderboard leaderboard) {
@@ -58,13 +57,13 @@ public class Poi extends Game {
 		changeViewController.push(new MenuView());
 
 		leaderboard.FirstFireBaseTest();	// Testing Firebase database
-		leaderboard.submitScore("R", 25);
+		//leaderboard.submitScore("R", 25);	// Try to submit score
 
 		assetmanager = new AssetManager(new InternalFileHandleResolver());
 		assetmanager.setLoader(TiledMap.class, new TmxMapLoader(assetmanager.getFileHandleResolver()));
 
-		soundController = new SoundController();
-
+		soundController = new SoundManager();
+		soundController.play();
 	}
 
 	@Override
@@ -99,6 +98,6 @@ public class Poi extends Game {
 
 	public static AssetManager getAssetManager(){return assetmanager;}
 
-	public static SoundController getSoundController(){return soundController;}
+	public static SoundManager getSoundController(){return soundController;}
 }
 

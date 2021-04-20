@@ -1,16 +1,11 @@
 package poi.game;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
-
-import poi.game.controllers.SoundController;
-import poi.game.models.entityComponents.PlayerComponent;
-import poi.game.models.entityComponents.TextureComponent;
 
 public class WorldContactListener implements ContactListener {
 
@@ -45,7 +40,8 @@ public class WorldContactListener implements ContactListener {
             return;
         }
         if(obstacle != null && player !=null){
-            Poi.getSoundController().playCollisionSound(true);
+            //Poi.getSoundController().playCollisionSound(true);
+            Poi.getSoundController().playCollisionSound();
         }
     }
 
