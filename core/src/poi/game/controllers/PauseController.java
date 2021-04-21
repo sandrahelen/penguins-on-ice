@@ -9,6 +9,7 @@ import poi.game.models.entityComponents.PauseComponent;
 import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 
+// Controller to pause the game
 public class PauseController {
 
     private PauseComponent pauseComponent;

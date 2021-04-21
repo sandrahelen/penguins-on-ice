@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -31,6 +30,7 @@ import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.MovementSystem;
 import poi.game.models.entitySystems.TimerSystem;
 
+// ECS Engine for Entity-Component-System pattern together  with folders entityComponent and entitySystems
 public class ECSEngine extends PooledEngine {
     private final BodyDef bodyDef;
     private final FixtureDef fixtureDef;

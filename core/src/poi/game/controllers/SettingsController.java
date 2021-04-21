@@ -12,6 +12,7 @@ import poi.game.views.ColorView;
 import poi.game.views.GameView;
 import poi.game.views.MenuView;
 
+// Controller for SettingsView
 public class SettingsController {
 
     private ChangeViewController changeViewController;
@@ -72,7 +73,6 @@ public class SettingsController {
             }
             // Can only resume game if game is already paused
             else if (boundsResume.contains(touchTransformed.x, touchTransformed.y) && gameView.getPauseController().getIsPaused()) {
-                //soundController.play();
                 // Change view to existing gameView
                 changeViewController.set(gameView);
             }

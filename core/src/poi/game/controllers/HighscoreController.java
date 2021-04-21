@@ -7,9 +7,9 @@ import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
 import poi.game.models.entityComponents.ButtonComponent;
-import poi.game.views.GameView;
 import poi.game.views.MenuView;
 
+// Controller for highscore
 public class HighscoreController {
 
     private ChangeViewController changeViewController;

@@ -1,18 +1,19 @@
 package poi.game.views;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import poi.game.Datahandler;
+
 import poi.game.Poi;
 import poi.game.controllers.HighscoreController;
 import poi.game.models.factories.ViewFactory;
 
-
+// View for highscore borad 
 public class HighscoreView extends View implements ViewFactory {
 
     HighscoreController controller;
-
     private Texture titleHighscore;
     private Texture boardHighscore;
     private Texture buttonMenu;

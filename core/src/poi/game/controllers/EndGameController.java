@@ -5,11 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import poi.game.Datahandler;
+
 import poi.game.Poi;
 import poi.game.SoundManager;
 import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.HighscoreView;
 
+// Controller for EndGameView
 public class EndGameController {
 
     private ChangeViewController changeViewController;

@@ -8,6 +8,7 @@ import poi.game.models.entityComponents.JoystickComponent;
 import java.util.HashMap;
 import java.util.Map;
 
+// Controller for joystick in game
 public class JoystickController {
     public JoystickComponent joystick1;
     public JoystickComponent joystick2;
@@ -36,11 +37,6 @@ public class JoystickController {
                 Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(i), Gdx.input.getY(i), 0));
                 touchPos.set(touchTransformed.x, touchTransformed.y, 0);
                 touches.put(i, touchPos.x);
-
-                //System.out.println("TOUCH: " + touchPos.x);
-                //System.out.println("WIDTH: " + (joystick1.getBoundsJoystick().getWidth() / 4));
-                //System.out.println("<--: " + (joystick1.getPosition() + (joystick1.getBoundsJoystick().getWidth() / 5)));
-                //System.out.println("-->: " + (joystick1.getPosition() + 2*(joystick1.getBoundsJoystick().getWidth() / 5)));
 
                 // Joystick1 is touched
                 if (joystick1.getBoundsJoystick().contains(touchPos.x, touchPos.y)) {

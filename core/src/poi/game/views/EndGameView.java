@@ -9,12 +9,16 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
 import poi.game.Poi;
 import poi.game.controllers.EndGameController;
 import poi.game.models.factories.ViewFactory;
 
+// View after penguins have reached the finish line and the score is registered
 public class EndGameView extends View implements ViewFactory {
 
+    private EndGameController controller;
+    private int endTime;
     private BitmapFont font;
     private Texture titleEndGame;
     private Texture textfieldBox;
@@ -24,8 +28,6 @@ public class EndGameView extends View implements ViewFactory {
     private FitViewport viewport;
     private Stage stage;
     private TextField.TextFieldStyle style;
-    private EndGameController controller;
-    private int endTime;
 
     public EndGameView(int endTime) {
         super();

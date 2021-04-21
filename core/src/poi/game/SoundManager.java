@@ -1,11 +1,10 @@
 package poi.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import poi.game.Poi;
 
+// Manager for sound inn app
 public class SoundManager {
 
     private Music sound;
@@ -16,12 +15,9 @@ public class SoundManager {
 
     public SoundManager() {
         sound = Gdx.audio.newMusic(Gdx.files.internal("Main Theme ACNH.mp3"));
-        //id = sound.loop(1.0f);
         collision = Gdx.audio.newSound(Gdx.files.internal("collision.wav"));
         boost = Gdx.audio.newSound(Gdx.files.internal("boost.wav"));
     }
-
-    //public void setMute(boolean)
 
     public void playCollisionSound() {
         if (!isMuted) {

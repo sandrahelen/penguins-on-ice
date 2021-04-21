@@ -1,15 +1,17 @@
 package poi.game.views;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import poi.game.controllers.ColorController;
 import poi.game.controllers.MenuController;
+
 import poi.game.Poi;
 import poi.game.models.factories.ViewFactory;
 
+// View for menu
 public class MenuView extends View implements ViewFactory{
 
     private MenuController controller;
-
     private Texture titlePoI;
     private Texture penguin1;
     private Texture penguin2;

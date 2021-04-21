@@ -4,10 +4,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import poi.game.Poi;
 import poi.game.controllers.ColorController;
 import poi.game.models.factories.ViewFactory;
 
+// View for change penguin color
 public class ColorView extends View implements ViewFactory {
 
     private ColorController controller;
@@ -44,6 +46,7 @@ public class ColorView extends View implements ViewFactory {
         sb.begin();
         text.draw(sb, "Player 1", Poi.WIDTH*9/40, Poi.HEIGHT-Poi.HEIGHT/8);
         text.draw(sb, "Player 2", Poi.WIDTH*29/40, Poi.HEIGHT-Poi.HEIGHT/8);
+        // Draw background to the chosen penguin color
         if (controller.getColorP1() == 0) {
             sb.draw(selected, Poi.WIDTH/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5);
         }

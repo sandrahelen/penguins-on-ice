@@ -12,6 +12,7 @@ import poi.game.views.HelpView;
 import poi.game.views.HighscoreView;
 import poi.game.views.SettingsView;
 
+// Controller for MenuView
 public class MenuController {
 
     private ChangeViewController changeViewController;

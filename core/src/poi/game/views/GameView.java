@@ -15,6 +15,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+
 import poi.game.Poi;
 import poi.game.controllers.BoostController;
 import poi.game.controllers.GameController;
@@ -26,26 +27,28 @@ import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.TextureComponent;
 import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.TimerSystem;
+import poi.game.models.factories.ViewFactory;
 
 import static poi.game.Poi.HEIGHT;
 import static poi.game.Poi.WIDTH;
 
-public class GameView extends View {
+// View for game
+public class GameView extends View implements ViewFactory {
 
-    private ECSEngine ecsEngine;
+    private GameController controller;
     private World world;
-    private final ImmutableArray<Entity> animatedEntities;
+    private BitmapFont timeFont;
+    private BitmapFont timeFontBig;
     private final OrthographicCamera camera;
-    private final GLProfiler profiler;
-    private final Box2DDebugRenderer box2DDebugRenderer;
+    private ECSEngine ecsEngine;
+    private final AssetManager assetmanager;
     public final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
-    private final AssetManager assetmanager;
+    private final GLProfiler profiler;
+    private final Box2DDebugRenderer box2DDebugRenderer;
+    private final ImmutableArray<Entity> animatedEntities;
     public MapRenderer mapRenderer;
-    private BitmapFont timeFont;
-    private BitmapFont timeFontBig;
-    private GameController controller;
 
     public GameView() {
         super();
@@ -55,7 +58,7 @@ public class GameView extends View {
         timeFontBig = new BitmapFont();
         timeFontBig.getData().setScale(2.0f);
         camera = Poi.getCameraGame();
-        ecsEngine = controller.getECSEngine();
+        ecsEngine = controller.getECSEngine();  // ECS pattern
         assetmanager = Poi.getAssetManager();
         joystickController = controller.getJoystickController();
         boostController = controller.getBoostController();

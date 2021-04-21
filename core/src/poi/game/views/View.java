@@ -1,9 +1,12 @@
 package poi.game.views;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import poi.game.Poi;
 import poi.game.controllers.ChangeViewController;
 
+// Template for all views
 public abstract class View {
 
     protected OrthographicCamera cam;

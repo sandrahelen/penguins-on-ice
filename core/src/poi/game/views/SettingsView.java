@@ -1,15 +1,17 @@
 package poi.game.views;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import poi.game.Poi;
 import poi.game.controllers.SettingsController;
 import poi.game.models.factories.ViewFactory;
 
+// View for settings
 public class SettingsView extends View implements ViewFactory {
 
     private SettingsController controller;
     private GameView gameView;
-
     private Texture titleSettings;
     private Texture buttonSound;
     private Texture buttonColor;

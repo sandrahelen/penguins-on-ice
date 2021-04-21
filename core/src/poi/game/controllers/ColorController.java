@@ -11,7 +11,7 @@ import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 
-
+// Controller for ColorView
 public class ColorController {
 
     private GameView gameView;

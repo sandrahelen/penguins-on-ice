@@ -8,6 +8,7 @@ import poi.game.Datahandler;
 import poi.game.Leaderboard;
 import poi.game.views.View;
 
+// Controller for changing views
 public class ChangeViewController {
 
     private Stack<View> views;

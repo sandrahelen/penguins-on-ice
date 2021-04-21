@@ -9,6 +9,7 @@ import poi.game.Poi;
 import poi.game.controllers.HelpController;
 import poi.game.models.factories.ViewFactory;
 
+// View for tutorial
 public class HelpView extends View implements ViewFactory {
 
     private HelpController controller;

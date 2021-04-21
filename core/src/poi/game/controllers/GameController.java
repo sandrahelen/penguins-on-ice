@@ -1,4 +1,5 @@
 package poi.game.controllers;
+
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -16,6 +17,7 @@ import poi.game.models.entitySystems.TimerSystem;
 import poi.game.views.EndGameView;
 import poi.game.views.GameView;
 
+// Controller for game
 public class GameController {
 
     private ChangeViewController changeViewController;

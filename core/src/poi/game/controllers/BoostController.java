@@ -10,7 +10,7 @@ import poi.game.Poi;
 import poi.game.SoundManager;
 import poi.game.models.entityComponents.BoostComponent;
 
-
+// Controller for boost in game
 public class BoostController {
 
     private BoostComponent boostComponent1;
