@@ -32,7 +32,7 @@ public class AndroidLeaderboard implements Leaderboard {
     @Override
     public void FirstFireBaseTest() {   // Testing that Firebase database is working
         if(myRef != null){
-            myRef.setValue("Hello, World!");
+            myRef.setValue("Hello, Poi!");
         }
         else{
             System.out.println("Databasereference was not set -> therefore could not write to DB");
