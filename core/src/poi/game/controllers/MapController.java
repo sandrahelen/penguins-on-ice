@@ -31,12 +31,14 @@ public class MapController {
         buttonMap1 = new Texture("general/Map1.png");
         buttonMap2 = new Texture("general/Map2.png");
         selected = new Texture("general/selectedMap.png");
-        boundsMap1 = new Rectangle(Poi.WIDTH/4 - selected.getWidth()/3, Poi.HEIGHT-Poi.HEIGHT/3 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        boundsMap2 = new Rectangle(Poi.WIDTH/4 - selected.getWidth()/3, Poi.HEIGHT/3 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        boundsMap1 = new Rectangle(Poi.WIDTH*3/16, Poi.HEIGHT*4/9, selected.getWidth(), selected.getHeight());
+        boundsMap2 = new Rectangle(Poi.WIDTH*9/16, Poi.HEIGHT*4/9, selected.getWidth(), selected.getHeight());
         buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = buttonComponent.getBoundsBack();
     }
+    public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
+    public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
 
     public Texture getButtonMap1() { return buttonMap1; }
     public Texture getButtonMap2() { return buttonMap2; }

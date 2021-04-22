@@ -44,18 +44,19 @@ public class MapChangerView extends View implements ViewFactory {
         sb.setProjectionMatrix(cam.combined);
 
         sb.begin();
-        text.draw(sb, "Map1", Poi.WIDTH/2, Poi.HEIGHT-Poi.HEIGHT/3);
-        text.draw(sb, "Map2", Poi.WIDTH/2, Poi.HEIGHT/3);
+        text.draw(sb, "Map 1", Poi.WIDTH*11/40, Poi.HEIGHT-Poi.HEIGHT/8);
+        text.draw(sb, "Map 2", Poi.WIDTH*26/40, Poi.HEIGHT-Poi.HEIGHT/8);
         if(Poi.getMapLocation() == "Map/Map1.tmx"){
-            sb.draw(selected, Poi.WIDTH/4 - selected.getWidth()/10, Poi.HEIGHT-Poi.HEIGHT/3 - selected.getHeight()/2);
+            sb.draw(selected, Poi.WIDTH*3/16 - selected.getWidth()/10, Poi.HEIGHT*4/9 - selected.getWidth()/10);
         }
-        if(Poi.getMapLocation() == "Map/Map2.tmx"){
-            sb.draw(selected, Poi.WIDTH/4 - selected.getWidth()/10, Poi.HEIGHT/3 - selected.getHeight()/2);
+        if(Poi.getMapLocation() == "Map/Map2.tmx") {
+            sb.draw(selected, Poi.WIDTH*9/16 - selected.getWidth()/10, Poi.HEIGHT *4/9 - selected.getHeight()/9);
         }
 
+        sb.draw(buttonMap1, Poi.WIDTH*3/16, Poi.HEIGHT*4/9);
+        sb.draw(buttonMap2, Poi.WIDTH*9/16, Poi.HEIGHT*4/9);
 
-        sb.draw(buttonMap1, Poi.WIDTH/4, Poi.HEIGHT-Poi.HEIGHT/2);
-        sb.draw(buttonMap2, Poi.WIDTH/4, Poi.HEIGHT/6);
+        sb.draw(buttonBack, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
 
         sb.end();
         }

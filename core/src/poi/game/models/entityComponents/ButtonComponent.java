@@ -48,10 +48,10 @@ public class ButtonComponent {
         boundsPlay = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 3 / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsHighscore = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 2 / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsSettings = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
-        boundsMenu = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT*1/20, buttonPlay.getWidth(), buttonPlay.getHeight());
-        boundsSound = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 3 / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
-        boundsColor = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 2 / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
-        boundsMap = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT*1/6+10, buttonPlay.getWidth(), buttonPlay.getHeight());
+        boundsMenu = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT*1/16, buttonPlay.getWidth(), buttonPlay.getHeight());
+        boundsSound = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 10 / 16, buttonPlay.getWidth(), buttonPlay.getHeight());
+        boundsColor = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT * 7 / 16, buttonPlay.getWidth(), buttonPlay.getHeight());
+        boundsMap = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT*4/16, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsSubmit = new Rectangle(Poi.WIDTH / 2 - buttonSubmit.getWidth() / 2, Poi.HEIGHT / 2 - buttonSubmit.getHeight() * 3 / 2, buttonSubmit.getWidth(), buttonPlay.getHeight());
         boundsBack = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsHelp = new Rectangle(Poi.WIDTH - buttonHelp.getWidth() - 20, Poi.HEIGHT - buttonHelp.getHeight() - 20, buttonHelp.getWidth(), buttonHelp.getHeight());
