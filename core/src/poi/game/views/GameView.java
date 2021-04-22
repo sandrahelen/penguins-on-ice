@@ -100,7 +100,7 @@ public class GameView extends View implements ViewFactory {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sb.setProjectionMatrix(camera.combined);
         assetmanager.finishLoading();
-        mapRenderer = new OrthogonalTiledMapRenderer(assetmanager.get("Map/Map1.tmx", TiledMap.class), 1f, sb);
+        mapRenderer = new OrthogonalTiledMapRenderer(assetmanager.get(Poi.getMapLocation(), TiledMap.class), 1f, sb);
         mapRenderer.setView(camera);
         mapRenderer.render();
 

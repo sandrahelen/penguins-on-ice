@@ -41,11 +41,11 @@ public class GameController {
         world.setContactListener(new WorldContactListener());
         camera = Poi.getCameraGame();
         assetmanager = Poi.getAssetManager();
-        assetmanager.load("Map/Map1.tmx", TiledMap.class);
+        assetmanager.load(Poi.getMapLocation(), TiledMap.class);
         Box2D.init();
         //Setup Engine
         assetmanager.finishLoading();
-        ecsEngine = new ECSEngine(world, camera, assetmanager.get("Map/Map1.tmx", TiledMap.class));
+        ecsEngine = new ECSEngine(world, camera, assetmanager.get(Poi.getMapLocation(), TiledMap.class));
         joystickController = ecsEngine.getJoystickController();
         boostController = ecsEngine.getBoostContoller();
         pauseController = new PauseController();
