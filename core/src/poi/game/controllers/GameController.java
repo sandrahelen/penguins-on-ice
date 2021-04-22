@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 
+import poi.game.Factory;
 import poi.game.Poi;
 import poi.game.SoundManager;
 import poi.game.WorldContactListener;
@@ -31,6 +32,7 @@ public class GameController extends Controller {
     private final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
+    private final Factory factory;
 
     public GameController(GameView gameView) {
         this.gameView = gameView;
@@ -42,16 +44,17 @@ public class GameController extends Controller {
         Box2D.init();
         //Setup Engine
         assetmanager.finishLoading();
-        ecsEngine = new ECSEngine(world, camera, assetmanager.get(Poi.getMapLocation(), TiledMap.class));
+        ecsEngine = new ECSEngine(camera, assetmanager.get(Poi.getMapLocation(), TiledMap.class));
+        factory = new Factory(ecsEngine, assetmanager.get(Poi.getMapLocation(),TiledMap.class), world);
         joystickController = ecsEngine.getJoystickController();
         boostController = ecsEngine.getBoostContoller();
         pauseController = new PauseController();
 
         //Create Entities
-        ecsEngine.createPlayer(200, 300, world, 1);
-        ecsEngine.createPlayer(400, 300, world, 2);
+        factory.createPlayer(200, 300, 1);
+        factory.createPlayer(400, 300, 2);
         assetmanager.finishLoading();
-        ecsEngine.spawnGameObjects();
+        factory.spawnGameObjects();
     }
 
     public void update(float dt){
