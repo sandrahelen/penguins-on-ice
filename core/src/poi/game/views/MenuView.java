@@ -26,29 +26,29 @@ public class MenuView extends View implements ViewFactory{
         titlePoI = new Texture("general/titlePoI.png");
         // Penguin 1
         if (ColorController.colorP1 == 0) {
-            penguin1 = new Texture("general/svart-pingvin.png");
+            penguin1 = new Texture("penguin/svart-pingvin.png");
         }
         else if (ColorController.colorP1 == 1) {
-            penguin1 = new Texture("general/rosa-pingvin.png");
+            penguin1 = new Texture("penguin/rosa-pingvin.png");
         }
         else if (ColorController.colorP1 == 2) {
-            penguin1 = new Texture("general/grønn-pingvin.png");
+            penguin1 = new Texture("penguin/grønn-pingvin.png");
         }
         else if (ColorController.colorP1 == 3) {
-            penguin1 = new Texture("general/lilla-pingvin.png");
+            penguin1 = new Texture("penguin/lilla-pingvin.png");
         }
         // Penguin 2
         if (ColorController.colorP2 == 0) {
-            penguin2 = new Texture("general/svart-pingvin.png");
+            penguin2 = new Texture("penguin/svart-pingvin.png");
         }
         else if (ColorController.colorP2 == 1) {
-            penguin2 = new Texture("general/rosa-pingvin.png");
+            penguin2 = new Texture("penguin/rosa-pingvin.png");
         }
         else if (ColorController.colorP2 == 2) {
-            penguin2 = new Texture("general/grønn-pingvin.png");
+            penguin2 = new Texture("penguin/grønn-pingvin.png");
         }
         else if (ColorController.colorP2 == 3) {
-            penguin2 = new Texture("general/lilla-pingvin.png");
+            penguin2 = new Texture("penguin/lilla-pingvin.png");
         }
 
         buttonPlay = controller.getButtonPlay();

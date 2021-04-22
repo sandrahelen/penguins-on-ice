@@ -11,15 +11,19 @@ import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 
+import java.util.ArrayList;
+
 // Controller for ColorView
 public class ColorController {
 
     private GameView gameView;
     private ChangeViewController changeViewController;
-    private Texture buttonPenguinBlack;
-    private Texture buttonPenguinPink;
-    private Texture buttonPenguinGreen;
-    private Texture buttonPenguinPurp;
+
+    private Rectangle boundsPenguinDef1;
+    private Rectangle boundsPenguinDef2;
+    private Rectangle boundsPenguinNew1;
+    private Rectangle boundsPenguinNew2;
+
     private Rectangle boundsPenguinBlack1;
     private Rectangle boundsPenguinPink1;
     private Rectangle boundsPenguinGreen1;
@@ -31,47 +35,93 @@ public class ColorController {
     private ButtonComponent buttonComponent;
     private Texture buttonBack;
     private Rectangle boundsBack;
-    private Texture selected;
+    private Texture selectedColor;
+    private Texture selectedPenguin;
     private SoundManager soundController;
     public static int colorP1 = 0;
     public static int colorP2 = 0;
+    public static int penguinTypeP1 = 0;
+    public static int penguinTypeP2 = 0;
+
+    private ArrayList<ArrayList<Texture>> penguinColors = new ArrayList<>();
+    private ArrayList<Texture> penguinTypes = new ArrayList<>();
+    private ArrayList<Texture> colorType0 = new ArrayList<>();
+    private ArrayList<Texture> colorType1 = new ArrayList<>();
 
     public ColorController(GameView gameView) {
         this.gameView = gameView;
         changeViewController = Poi.getChangeViewController();
-        selected = new Texture("general/selected.png");
-        buttonPenguinBlack = new Texture("general/svart-pingvin.png");
-        buttonPenguinPink = new Texture("general/rosa-pingvin.png");
-        buttonPenguinGreen = new Texture("general/grønn-pingvin.png");
-        buttonPenguinPurp = new Texture("general/lilla-pingvin.png");
-        boundsPenguinBlack1 = new Rectangle(Poi.WIDTH/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        boundsPenguinPink1 = new Rectangle(Poi.WIDTH*2/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        boundsPenguinGreen1 = new Rectangle(Poi.WIDTH/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        boundsPenguinPurp1 = new Rectangle(Poi.WIDTH*2/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        boundsPenguinBlack2 = new Rectangle(Poi.WIDTH*4/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        boundsPenguinPink2 = new Rectangle(Poi.WIDTH*5/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        boundsPenguinGreen2 = new Rectangle(Poi.WIDTH*4/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        boundsPenguinPurp2 = new Rectangle(Poi.WIDTH*5/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
+        selectedColor = new Texture("general/selected.png");
+        selectedPenguin = new Texture("general/selected.png");
+        setTextures();
+
+        boundsPenguinDef1 = new Rectangle(Poi.WIDTH/6 - selectedPenguin.getWidth()/3,
+                Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        boundsPenguinNew1 = new Rectangle(Poi.WIDTH*(2)/6 - selectedPenguin.getWidth()/3,
+                Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        boundsPenguinDef2 = new Rectangle(Poi.WIDTH*4/6 - selectedPenguin.getWidth()/3,
+                Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        boundsPenguinNew2 = new Rectangle(Poi.WIDTH*(5)/6 - selectedPenguin.getWidth()/3,
+                Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+
+        boundsPenguinBlack1 = new Rectangle(Poi.WIDTH/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinPink1 = new Rectangle(Poi.WIDTH*2/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinGreen1 = new Rectangle(Poi.WIDTH/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinPurp1 = new Rectangle(Poi.WIDTH*2/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinBlack2 = new Rectangle(Poi.WIDTH*4/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinPink2 = new Rectangle(Poi.WIDTH*5/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinGreen2 = new Rectangle(Poi.WIDTH*4/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinPurp2 = new Rectangle(Poi.WIDTH*5/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+
         buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = buttonComponent.getBoundsBack();
         soundController = Poi.getSoundController();
     }
 
-    public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
+    private void setTextures() {
+        penguinTypes.add(new Texture("penguin/svart-pingvin.png"));
+        penguinTypes.add(new Texture("penguin/ny-pingvin-svart.png"));
+
+        colorType0.add(new Texture("penguin/svart-pingvin.png"));
+        colorType0.add(new Texture("penguin/rosa-pingvin.png"));
+        colorType0.add(new Texture("penguin/grønn-pingvin.png"));
+        colorType0.add(new Texture("penguin/lilla-pingvin.png"));
+        colorType1.add(new Texture("penguin/ny-pingvin-svart.png"));
+        colorType1.add(new Texture("penguin/ny-pingvin-rosa.png"));
+        colorType1.add(new Texture("penguin/ny-pingvin-grønn.png"));
+        colorType1.add(new Texture("penguin/ny-pingvin-lilla.png"));
+
+        penguinColors.add(colorType0);
+        penguinColors.add(colorType1);
+    }
+
+    public int getButtonWidth() {return buttonComponent.getButtonWidth(); }
     public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
 
-    public Texture getButtonPenguinBlack() { return buttonPenguinBlack; }
-    public Texture getButtonPenguinPink() { return buttonPenguinPink; }
-    public Texture getButtonPenguinGreen() { return buttonPenguinGreen; }
-    public Texture getButtonPenguinPurp() { return  buttonPenguinPurp; }
+
+    public ArrayList<ArrayList<Texture>> getButtonPenguin() { return penguinColors; }
+    public ArrayList<Texture> getButtonPenguinType() { return penguinTypes; }
     public Texture getButtonBack() { return buttonBack; }
-    public Texture getSelected() { return selected; }
+    public Texture getSelectedColor() { return selectedColor; }
+    public Texture getSelectedPenguin() { return selectedPenguin; }
 
     public void handleInput() {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         if(Gdx.input.justTouched()){
             // Checks if buttons are pressed before changing view
+            if (boundsPenguinDef1.contains(touchTransformed.x, touchTransformed.y)) {
+                penguinTypeP1 = 0;
+            }
+            else if (boundsPenguinNew1.contains(touchTransformed.x, touchTransformed.y)) {
+                penguinTypeP1 = 1;
+            }
+            if (boundsPenguinDef2.contains(touchTransformed.x, touchTransformed.y)) {
+                penguinTypeP2 = 0;
+            }
+            else if (boundsPenguinNew2.contains(touchTransformed.x, touchTransformed.y)) {
+                penguinTypeP2 = 1;
+            }
             if (boundsPenguinBlack1.contains(touchTransformed.x, touchTransformed.y)) {
                 colorP1 = 0;
             }
