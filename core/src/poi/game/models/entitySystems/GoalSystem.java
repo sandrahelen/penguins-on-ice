@@ -3,6 +3,7 @@ package poi.game.models.entitySystems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -31,20 +32,25 @@ public class GoalSystem extends IteratingSystem {
     public void processEntity(final Entity entity, final float deltaTime) {
         final TextureComponent textureComponent = ECSEngine.textureMapper.get(entity);
         final MapLayer goalLayer = tiledMap.getLayers().get("Goal");
-        for(MapObject object : goalLayer.getObjects()) {
-            final Rectangle goal = ((RectangleMapObject) object).getRectangle();
-            if (ECSEngine.playerMapper.get(entity).id == 1) {
-                if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > goal.y) {
-                    reachedFinish1 = true;
-                    ECSEngine.bodyMapper.get(entity).body.setLinearVelocity(0,0);
-                    setReachedFinish();
+        if(goalLayer == null){
+            Gdx.app.log("Empty", "No goal in layer");
+        }
+        else {
+            for (MapObject object : goalLayer.getObjects()) {
+                final Rectangle goal = ((RectangleMapObject) object).getRectangle();
+                if (ECSEngine.playerMapper.get(entity).id == 1) {
+                    if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > goal.y) {
+                        reachedFinish1 = true;
+                        ECSEngine.bodyMapper.get(entity).body.setLinearVelocity(0, 0);
+                        setReachedFinish();
+                    }
                 }
-            }
-            if (ECSEngine.playerMapper.get(entity).id == 2) {
-                if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > goal.y) {
-                    reachedFinish2 = true;
-                    ECSEngine.bodyMapper.get(entity).body.setLinearVelocity(0,0);
-                    setReachedFinish();
+                if (ECSEngine.playerMapper.get(entity).id == 2) {
+                    if (ECSEngine.bodyMapper.get(entity).body.getPosition().y > goal.y) {
+                        reachedFinish2 = true;
+                        ECSEngine.bodyMapper.get(entity).body.setLinearVelocity(0, 0);
+                        setReachedFinish();
+                    }
                 }
             }
         }
