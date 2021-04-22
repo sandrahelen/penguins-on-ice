@@ -10,6 +10,7 @@ import poi.game.SoundManager;
 import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.ColorView;
 import poi.game.views.GameView;
+import poi.game.views.MapChangerView;
 import poi.game.views.MenuView;
 
 // Controller for SettingsView
@@ -19,11 +20,13 @@ public class SettingsController {
 
     private Texture buttonSound;
     private Texture buttonColor;
+    private Texture buttonMap;
     private Texture buttonMenu;
     private Texture buttonQuit;
     private Texture buttonResume;
     private final Rectangle boundsSound;
     private final Rectangle boundsColor;
+    private final Rectangle boundsMap;
     private final Rectangle boundsMenu;
     private final Rectangle boundsQuit;
     private final Rectangle boundsResume;
@@ -39,10 +42,12 @@ public class SettingsController {
         buttonComponent = new ButtonComponent();
         buttonSound = buttonComponent.getButtonSound();
         buttonColor = buttonComponent.getButtonColor();
+        buttonMap = buttonComponent.getButtonMap();
         buttonMenu = buttonComponent.getButtonMenu();
         buttonQuit = buttonComponent.getButtonQuit();
         boundsSound = buttonComponent.getBoundsSound();
         boundsColor = buttonComponent.getBoundsColor();
+        boundsMap = buttonComponent.getBoundsMap();
         boundsMenu = buttonComponent.getBoundsMenu();
         boundsQuit = buttonComponent.getBoundsQuit();
         buttonResume = new Texture("general/buttonResume.png");
@@ -55,6 +60,7 @@ public class SettingsController {
 
     public Texture getButtonSound() { return buttonSound; }
     public Texture getButtonColor() { return buttonColor; }
+    public Texture getButtonMap() { return buttonMap; }
     public Texture getButtonMenu() { return buttonMenu; }
     public Texture getButtonQuit() { return buttonQuit; }
 
@@ -67,6 +73,9 @@ public class SettingsController {
             }
             else if (boundsColor.contains(touchTransformed.x, touchTransformed.y) && !gameView.getPauseController().getIsPaused()) {
                 changeViewController.set(new ColorView(gameView));
+            }
+            else if (boundsMap.contains(touchTransformed.x, touchTransformed.y) && !gameView.getPauseController().getIsPaused()) {
+                changeViewController.set(new MapChangerView(gameView));
             }
             else if (boundsMenu.contains(touchTransformed.x, touchTransformed.y)) {
                 changeViewController.set(new MenuView());

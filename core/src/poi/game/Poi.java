@@ -34,6 +34,7 @@ public class Poi extends Game {
 	private float accumulator;
 
 	private static SoundManager soundController;
+	private static String mapLocation;
 
 	private static boolean tutorial = true;
 
@@ -63,6 +64,8 @@ public class Poi extends Game {
 		assetmanager = new AssetManager(new InternalFileHandleResolver());
 		assetmanager.setLoader(TiledMap.class, new TmxMapLoader(assetmanager.getFileHandleResolver()));
 
+		mapLocation = "Map/Map1.tmx";
+
 		soundController = new SoundManager();
 		soundController.play();
 	}
@@ -88,6 +91,12 @@ public class Poi extends Game {
 	public static OrthographicCamera getCamera(){
 		return camera;
 	}
+
+	public static String getMapLocation(){
+		return mapLocation;
+	}
+
+	public static void setMapLocation(String setMap){ mapLocation = setMap; }
 
 	public static OrthographicCamera getCameraGame(){
 		return cameraGame;

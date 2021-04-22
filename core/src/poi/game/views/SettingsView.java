@@ -15,6 +15,7 @@ public class SettingsView extends View implements ViewFactory {
     private Texture titleSettings;
     private Texture buttonSound;
     private Texture buttonColor;
+    private Texture buttonMap;
     private Texture buttonMenu;
     private Texture buttonQuit;
     private Texture buttonResume;
@@ -27,6 +28,7 @@ public class SettingsView extends View implements ViewFactory {
         titleSettings = new Texture("general/titleSettings.png");
         buttonSound = controller.getButtonSound();
         buttonColor = controller.getButtonColor();
+        buttonMap = controller.getButtonMap();
         buttonMenu = controller.getButtonMenu();
         buttonQuit = controller.getButtonQuit();
         buttonResume = new Texture("general/buttonResume.png");
@@ -52,7 +54,8 @@ public class SettingsView extends View implements ViewFactory {
         }
         else {
             sb.draw(buttonColor, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*2/6);
-            sb.draw(buttonMenu, (int)(Poi.WIDTH/2-(controller.getButtonWidth() + 0.1)/2),Poi.HEIGHT/6);
+            sb.draw(buttonMap, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*1/6+10);
+            sb.draw(buttonMenu, (int)(Poi.WIDTH/2-(controller.getButtonWidth() + 0.1)/2),Poi.HEIGHT*1/20);
         }
         sb.end();
     }
