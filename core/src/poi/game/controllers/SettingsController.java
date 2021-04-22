@@ -45,7 +45,7 @@ public class SettingsController extends Controller {
         boundsColor = buttonComponent.getBoundsColor();
         boundsMap = buttonComponent.getBoundsMap();
         boundsMenu = buttonComponent.getBoundsMenu();
-        boundsQuit = buttonComponent.getBoundsQuit();
+        boundsQuit = buttonComponent.getBoundsMenu();
         buttonResume = new Texture("general/buttonResume.png");
         boundsResume = new Rectangle(30, Poi.HEIGHT - 30 - buttonResume.getHeight()/2, buttonResume.getWidth(), buttonResume.getHeight());
     }

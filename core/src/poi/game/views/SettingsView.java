@@ -49,7 +49,7 @@ public class SettingsView extends View {
         // Only draw resume button if game is paused
         if (gameView.getPauseController().getPauseComponent().getIsPaused()) {
             sb.draw(buttonResume, 30,Poi.HEIGHT - 30 - buttonResume.getHeight()/2);
-            sb.draw(buttonQuit, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
+            sb.draw(buttonQuit, (int)(Poi.WIDTH/2-(controller.getButtonWidth() + 0.1)/2),Poi.HEIGHT*1/16);
         }
         else {
             sb.draw(buttonColor, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT*7/16);

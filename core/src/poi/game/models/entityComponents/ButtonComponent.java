@@ -55,8 +55,7 @@ public class ButtonComponent {
         boundsSubmit = new Rectangle(Poi.WIDTH / 2 - buttonSubmit.getWidth() / 2, Poi.HEIGHT / 2 - buttonSubmit.getHeight() * 3 / 2, buttonSubmit.getWidth(), buttonPlay.getHeight());
         boundsBack = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
         boundsHelp = new Rectangle(Poi.WIDTH - buttonHelp.getWidth() - 20, Poi.HEIGHT - buttonHelp.getHeight() - 20, buttonHelp.getWidth(), buttonHelp.getHeight());
-        boundsQuit = new Rectangle(Poi.WIDTH / 2 - buttonPlay.getWidth() / 2, Poi.HEIGHT / 6, buttonPlay.getWidth(), buttonPlay.getHeight());
-    }
+       }
 
     public int getButtonWidth() { return buttonPlay.getWidth(); }
     public int getButtonHeight() { return buttonPlay.getHeight(); }
@@ -84,6 +83,5 @@ public class ButtonComponent {
     public Rectangle getBoundsSubmit() { return boundsSubmit; }
     public Rectangle getBoundsBack() { return boundsBack; }
     public Rectangle getBoundsHelp() { return boundsHelp; }
-    public Rectangle getBoundsQuit() { return boundsQuit; }
 
 }
