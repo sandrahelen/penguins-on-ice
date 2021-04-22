@@ -19,9 +19,11 @@ public class EndGameController extends Controller {
     private String username = "";
     private int endTime = 0;
     Datahandler datahandler;
+    private ButtonComponent buttonComponent;
 
     public EndGameController(int endTime) {
         this.endTime = endTime;
+        buttonComponent = new ButtonComponent();
         buttonSubmit = buttonComponent.getButtonSubmit();
         boundsSubmit = buttonComponent.getBoundsSubmit();
 

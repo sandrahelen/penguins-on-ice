@@ -27,6 +27,7 @@ public class SettingsController extends Controller {
     private final Rectangle boundsMap;
     private final Rectangle boundsMenu;
     private final Rectangle boundsResume;
+    private ButtonComponent buttonComponent;
 
     private GameView gameView;
 

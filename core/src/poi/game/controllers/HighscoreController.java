@@ -14,8 +14,10 @@ public class HighscoreController extends Controller {
 
     private Texture buttonMenu;
     private final Rectangle boundsMenu;
+    private ButtonComponent buttonComponent;
 
     public HighscoreController(){
+        buttonComponent = new ButtonComponent();
         buttonMenu = buttonComponent.getButtonMenu();
         boundsMenu = buttonComponent.getBoundsMenu();
     }

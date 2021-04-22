@@ -23,9 +23,11 @@ public class HelpController extends Controller {
     private Texture screenshotController;
     private Texture screenshotGoal;
     private int guideNum;
+    private ButtonComponent buttonComponent;
 
     public HelpController(boolean inGame) {
         this.inGame = inGame;
+        buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = new Rectangle(Poi.WIDTH / 4 - buttonBack.getWidth() / 2, Poi.HEIGHT / 16, buttonBack.getWidth(), buttonBack.getHeight());
         buttonNext = buttonComponent.getButtonNext();
