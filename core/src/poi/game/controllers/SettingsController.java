@@ -26,12 +26,10 @@ public class SettingsController extends Controller {
     private final Rectangle boundsColor;
     private final Rectangle boundsMap;
     private final Rectangle boundsMenu;
-    private final Rectangle boundsQuit;
     private final Rectangle boundsResume;
 
     private GameView gameView;
 
-    private ButtonComponent buttonComponent;
 
     public SettingsController(GameView gameView){
         this.gameView = gameView;
@@ -45,7 +43,6 @@ public class SettingsController extends Controller {
         boundsColor = buttonComponent.getBoundsColor();
         boundsMap = buttonComponent.getBoundsMap();
         boundsMenu = buttonComponent.getBoundsMenu();
-        boundsQuit = buttonComponent.getBoundsMenu();
         buttonResume = new Texture("general/buttonResume.png");
         boundsResume = new Rectangle(30, Poi.HEIGHT - 30 - buttonResume.getHeight()/2, buttonResume.getWidth(), buttonResume.getHeight());
     }

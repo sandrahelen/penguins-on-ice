@@ -18,7 +18,6 @@ public class MapController extends Controller {
     private Texture selected;
     private Rectangle boundsMap1;
     private Rectangle boundsMap2;
-    private ButtonComponent buttonComponent;
     private Texture buttonBack;
     private Rectangle boundsBack;
     public String mapLocation;
@@ -31,7 +30,6 @@ public class MapController extends Controller {
         selected = new Texture("general/selectedMap.png");
         boundsMap1 = new Rectangle(Poi.WIDTH*3/16, Poi.HEIGHT*4/9, selected.getWidth(), selected.getHeight());
         boundsMap2 = new Rectangle(Poi.WIDTH*9/16, Poi.HEIGHT*4/9, selected.getWidth(), selected.getHeight());
-        buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = buttonComponent.getBoundsBack();
     }

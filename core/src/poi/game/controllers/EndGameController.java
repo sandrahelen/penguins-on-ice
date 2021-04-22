@@ -14,7 +14,6 @@ import poi.game.views.HighscoreView;
 // Controller for EndGameView
 public class EndGameController extends Controller {
 
-    private ButtonComponent buttonComponent;
     private Texture buttonSubmit;
     private Rectangle boundsSubmit;
     private String username = "";
@@ -23,7 +22,6 @@ public class EndGameController extends Controller {
 
     public EndGameController(int endTime) {
         this.endTime = endTime;
-        buttonComponent = new ButtonComponent();
         buttonSubmit = buttonComponent.getButtonSubmit();
         boundsSubmit = buttonComponent.getBoundsSubmit();
 

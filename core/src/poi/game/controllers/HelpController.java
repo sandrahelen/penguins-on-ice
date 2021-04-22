@@ -14,7 +14,6 @@ import poi.game.views.MenuView;
 public class HelpController extends Controller {
 
     private boolean inGame;
-    private ButtonComponent buttonComponent;
     private Texture buttonBack;
     private Rectangle boundsBack;
     private Texture buttonNext;
@@ -27,7 +26,6 @@ public class HelpController extends Controller {
 
     public HelpController(boolean inGame) {
         this.inGame = inGame;
-        buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = new Rectangle(Poi.WIDTH / 4 - buttonBack.getWidth() / 2, Poi.HEIGHT / 16, buttonBack.getWidth(), buttonBack.getHeight());
         buttonNext = buttonComponent.getButtonNext();

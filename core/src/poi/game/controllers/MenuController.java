@@ -24,10 +24,7 @@ public class MenuController extends Controller {
     private final Rectangle boundsSettings;
     private final Rectangle boundsHelp;
 
-    private ButtonComponent buttonComponent;
-
     public MenuController(){
-        buttonComponent = new ButtonComponent();
         buttonPlay = buttonComponent.getButtonPlay();
         buttonHighscore = buttonComponent.getButtonHighscore();
         buttonSettings = buttonComponent.getButtonSettings();

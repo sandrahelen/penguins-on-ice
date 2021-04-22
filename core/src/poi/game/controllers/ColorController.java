@@ -28,7 +28,6 @@ public class ColorController extends Controller {
     private Rectangle boundsPenguinPink2;
     private Rectangle boundsPenguinGreen2;
     private Rectangle boundsPenguinPurp2;
-    private ButtonComponent buttonComponent;
     private Texture buttonBack;
     private Rectangle boundsBack;
     private Texture selected;
@@ -37,7 +36,6 @@ public class ColorController extends Controller {
 
     public ColorController(GameView gameView) {
         this.gameView = gameView;
-        changeViewController = Poi.getChangeViewController();
         selected = new Texture("general/selected.png");
         buttonPenguinBlack = new Texture("general/svart-pingvin.png");
         buttonPenguinPink = new Texture("general/rosa-pingvin.png");
@@ -51,7 +49,6 @@ public class ColorController extends Controller {
         boundsPenguinPink2 = new Rectangle(Poi.WIDTH*5/6 - selected.getWidth()/3, Poi.HEIGHT*6/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
         boundsPenguinGreen2 = new Rectangle(Poi.WIDTH*4/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
         boundsPenguinPurp2 = new Rectangle(Poi.WIDTH*5/6 - selected.getWidth()/3, Poi.HEIGHT*4/9 - selected.getHeight()/5, selected.getWidth(), selected.getHeight());
-        buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = buttonComponent.getBoundsBack();
     }
