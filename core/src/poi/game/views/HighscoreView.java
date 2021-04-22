@@ -8,10 +8,9 @@ import poi.game.Datahandler;
 
 import poi.game.Poi;
 import poi.game.controllers.HighscoreController;
-import poi.game.models.factories.ViewFactory;
 
 // View for highscore borad 
-public class HighscoreView extends View implements ViewFactory {
+public class HighscoreView extends View {
 
     HighscoreController controller;
     private Texture titleHighscore;

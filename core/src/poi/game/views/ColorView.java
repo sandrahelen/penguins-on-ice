@@ -7,10 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import poi.game.Poi;
 import poi.game.controllers.ColorController;
-import poi.game.models.factories.ViewFactory;
 
 // View for change penguin color
-public class ColorView extends View implements ViewFactory {
+public class ColorView extends View {
 
     private ColorController controller;
     private BitmapFont text;

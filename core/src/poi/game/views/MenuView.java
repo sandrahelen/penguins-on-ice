@@ -6,10 +6,9 @@ import poi.game.controllers.ColorController;
 import poi.game.controllers.MenuController;
 
 import poi.game.Poi;
-import poi.game.models.factories.ViewFactory;
 
 // View for menu
-public class MenuView extends View implements ViewFactory{
+public class MenuView extends View {
 
     private MenuController controller;
     private Texture titlePoI;

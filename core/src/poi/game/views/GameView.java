@@ -27,13 +27,12 @@ import poi.game.models.entityComponents.BodyComponent;
 import poi.game.models.entityComponents.TextureComponent;
 import poi.game.models.entitySystems.GoalSystem;
 import poi.game.models.entitySystems.TimerSystem;
-import poi.game.models.factories.ViewFactory;
 
 import static poi.game.Poi.HEIGHT;
 import static poi.game.Poi.WIDTH;
 
 // View for game
-public class GameView extends View implements ViewFactory {
+public class GameView extends View {
 
     private GameController controller;
     private World world;

@@ -6,11 +6,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import poi.game.Poi;
-import poi.game.controllers.ColorController;
 import poi.game.controllers.MapController;
-import poi.game.models.factories.ViewFactory;
 
-public class MapChangerView extends View implements ViewFactory {
+public class MapChangerView extends View {
 
     private MapController controller;
     private BitmapFont text;

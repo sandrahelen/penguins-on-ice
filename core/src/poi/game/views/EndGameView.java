@@ -12,10 +12,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import poi.game.Poi;
 import poi.game.controllers.EndGameController;
-import poi.game.models.factories.ViewFactory;
 
 // View after penguins have reached the finish line and the score is registered
-public class EndGameView extends View implements ViewFactory {
+public class EndGameView extends View {
 
     private EndGameController controller;
     private int endTime;
