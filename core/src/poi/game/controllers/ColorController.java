@@ -12,7 +12,7 @@ import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 
 // Controller for ColorView
-public class ColorController {
+public class ColorController extends Controller {
 
     private GameView gameView;
     private ChangeViewController changeViewController;
@@ -32,7 +32,6 @@ public class ColorController {
     private Texture buttonBack;
     private Rectangle boundsBack;
     private Texture selected;
-    private SoundManager soundController;
     public static int colorP1 = 0;
     public static int colorP2 = 0;
 
@@ -55,7 +54,6 @@ public class ColorController {
         buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
         boundsBack = buttonComponent.getBoundsBack();
-        soundController = Poi.getSoundController();
     }
 
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }

@@ -18,9 +18,8 @@ import poi.game.views.EndGameView;
 import poi.game.views.GameView;
 
 // Controller for game
-public class GameController {
+public class GameController extends Controller {
 
-    private ChangeViewController changeViewController;
     private GameView gameView;
     private ECSEngine ecsEngine;
     private World world;
@@ -32,10 +31,8 @@ public class GameController {
     private final JoystickController joystickController;
     public final BoostController boostController;
     public final PauseController pauseController;
-    private final SoundManager soundController;
 
     public GameController(GameView gameView) {
-        changeViewController = Poi.getChangeViewController();
         this.gameView = gameView;
         world = new World(new Vector2(0, 20.0f), true);
         world.setContactListener(new WorldContactListener());
@@ -55,8 +52,6 @@ public class GameController {
         ecsEngine.createPlayer(400, 300, world, 2);
         assetmanager.finishLoading();
         ecsEngine.spawnGameObjects();
-
-        soundController = Poi.getSoundController();
     }
 
     public void update(float dt){

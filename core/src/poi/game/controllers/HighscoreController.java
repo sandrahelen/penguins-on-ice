@@ -10,9 +10,7 @@ import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.MenuView;
 
 // Controller for highscore
-public class HighscoreController {
-
-    private ChangeViewController changeViewController;
+public class HighscoreController extends Controller {
 
     private Texture buttonMenu;
     private final Rectangle boundsMenu;
@@ -20,7 +18,6 @@ public class HighscoreController {
     private ButtonComponent buttonComponent;
 
     public HighscoreController(){
-        changeViewController = Poi.getChangeViewController();
         buttonComponent = new ButtonComponent();
         buttonMenu = buttonComponent.getButtonMenu();
         boundsMenu = buttonComponent.getBoundsMenu();

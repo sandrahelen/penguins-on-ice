@@ -11,7 +11,7 @@ import poi.game.SoundManager;
 import poi.game.models.entityComponents.BoostComponent;
 
 // Controller for boost in game
-public class BoostController {
+public class BoostController extends Controller {
 
     private BoostComponent boostComponent1;
     private BoostComponent boostComponent2;
@@ -33,6 +33,7 @@ public class BoostController {
         }
         soundController = Poi.getSoundController();
     }
+
     public void handleInput(float dt) {
         startTimer(dt);
         for (int i=0; i<5; i++) {

@@ -14,9 +14,7 @@ import poi.game.views.MapChangerView;
 import poi.game.views.MenuView;
 
 // Controller for SettingsView
-public class SettingsController {
-
-    private ChangeViewController changeViewController;
+public class SettingsController extends Controller {
 
     private Texture buttonSound;
     private Texture buttonColor;
@@ -34,11 +32,9 @@ public class SettingsController {
     private GameView gameView;
 
     private ButtonComponent buttonComponent;
-    SoundManager soundController;
 
     public SettingsController(GameView gameView){
         this.gameView = gameView;
-        changeViewController = Poi.getChangeViewController();
         buttonComponent = new ButtonComponent();
         buttonSound = buttonComponent.getButtonSound();
         buttonColor = buttonComponent.getButtonColor();
@@ -52,7 +48,6 @@ public class SettingsController {
         boundsQuit = buttonComponent.getBoundsQuit();
         buttonResume = new Texture("general/buttonResume.png");
         boundsResume = new Rectangle(30, Poi.HEIGHT - 30 - buttonResume.getHeight()/2, buttonResume.getWidth(), buttonResume.getHeight());
-        soundController = Poi.getSoundController();
     }
 
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }

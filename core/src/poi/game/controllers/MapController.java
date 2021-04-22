@@ -10,10 +10,9 @@ import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 
-public class MapController {
+public class MapController extends Controller {
 
     private GameView gameView;
-    private ChangeViewController changeViewController;
     private Texture buttonMap1;
     private Texture buttonMap2;
     private Texture selected;
@@ -27,7 +26,6 @@ public class MapController {
 
     public MapController(GameView gameView) {
         this.gameView = gameView;
-        changeViewController = Poi.getChangeViewController();
         buttonMap1 = new Texture("general/Map1.png");
         buttonMap2 = new Texture("general/Map2.png");
         selected = new Texture("general/selectedMap.png");

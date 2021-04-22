@@ -13,9 +13,7 @@ import poi.game.views.HighscoreView;
 import poi.game.views.SettingsView;
 
 // Controller for MenuView
-public class MenuController {
-
-    private ChangeViewController changeViewController;
+public class MenuController extends Controller {
 
     private Texture buttonPlay;
     private Texture buttonHighscore;
@@ -29,7 +27,6 @@ public class MenuController {
     private ButtonComponent buttonComponent;
 
     public MenuController(){
-        changeViewController = Poi.getChangeViewController();
         buttonComponent = new ButtonComponent();
         buttonPlay = buttonComponent.getButtonPlay();
         buttonHighscore = buttonComponent.getButtonHighscore();

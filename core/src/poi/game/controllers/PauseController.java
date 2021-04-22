@@ -10,16 +10,13 @@ import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 
 // Controller to pause the game
-public class PauseController {
+public class PauseController extends Controller{
 
     private PauseComponent pauseComponent;
-    private ChangeViewController changeViewController;
     private Texture buttonPause;
 
     public  PauseController(){
-
         pauseComponent = new PauseComponent();
-        changeViewController = Poi.getChangeViewController();
         buttonPause = pauseComponent.getButtonPause();
     }
 

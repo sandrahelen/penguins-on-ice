@@ -12,19 +12,16 @@ import poi.game.models.entityComponents.ButtonComponent;
 import poi.game.views.HighscoreView;
 
 // Controller for EndGameView
-public class EndGameController {
+public class EndGameController extends Controller {
 
-    private ChangeViewController changeViewController;
     private ButtonComponent buttonComponent;
     private Texture buttonSubmit;
     private Rectangle boundsSubmit;
     private String username = "";
     private int endTime = 0;
     Datahandler datahandler;
-    SoundManager soundController;
 
     public EndGameController(int endTime) {
-        changeViewController = Poi.getChangeViewController();
         this.endTime = endTime;
         buttonComponent = new ButtonComponent();
         buttonSubmit = buttonComponent.getButtonSubmit();
@@ -33,7 +30,6 @@ public class EndGameController {
         // Linking to Firebase database
         datahandler = changeViewController.getDatahandler();
         changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
-        soundController = Poi.getSoundController();
         soundController.stop();
     }
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
