@@ -57,11 +57,11 @@ public class ColorController {
 
         boundsPenguinDef1 = new Rectangle(Poi.WIDTH/6 - selectedPenguin.getWidth()/3,
                 Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
-        boundsPenguinNew1 = new Rectangle(Poi.WIDTH*(2)/6 - selectedPenguin.getWidth()/3,
+        boundsPenguinNew1 = new Rectangle(Poi.WIDTH*((float)1.5)/6 - selectedPenguin.getWidth()/3,
                 Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
-        boundsPenguinDef2 = new Rectangle(Poi.WIDTH*4/6 - selectedPenguin.getWidth()/3,
+        boundsPenguinDef2 = new Rectangle(Poi.WIDTH*((float)4.5)/6 - selectedPenguin.getWidth()/3,
                 Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
-        boundsPenguinNew2 = new Rectangle(Poi.WIDTH*(5)/6 - selectedPenguin.getWidth()/3,
+        boundsPenguinNew2 = new Rectangle(Poi.WIDTH*5/6 - selectedPenguin.getWidth()/3,
                 Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
 
         boundsPenguinBlack1 = new Rectangle(Poi.WIDTH/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());

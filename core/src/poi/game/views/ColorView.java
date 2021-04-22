@@ -53,15 +53,15 @@ public class ColorView extends View implements ViewFactory {
                     Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
         }
         else if (controller.penguinTypeP1 == 1) {
-            sb.draw(selectedPenguin, Poi.WIDTH*(2)/6 - selectedPenguin.getWidth()/3,
+            sb.draw(selectedPenguin, Poi.WIDTH*((float)1.5)/6 - selectedPenguin.getWidth()/3,
                     Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
         }
         if (controller.penguinTypeP2 == 0) {
-            sb.draw(selectedPenguin, Poi.WIDTH*4/6 - selectedPenguin.getWidth()/3,
+            sb.draw(selectedPenguin, Poi.WIDTH*((float)4.5)/6 - selectedPenguin.getWidth()/3,
                     Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
         }
         else if (controller.penguinTypeP2 == 1) {
-            sb.draw(selectedPenguin, Poi.WIDTH*(5)/6 - selectedPenguin.getWidth()/3,
+            sb.draw(selectedPenguin, Poi.WIDTH*5/6 - selectedPenguin.getWidth()/3,
                     Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
         }
         if (controller.getColorP1() == 0) {
@@ -96,7 +96,7 @@ public class ColorView extends View implements ViewFactory {
         sb.draw(penguinColors.get(controller.penguinTypeP1).get(3), Poi.WIDTH*2/6, Poi.HEIGHT*4/9);
 
         sb.draw(penguinTypes.get(0),Poi.WIDTH/6, Poi.HEIGHT/9);
-        sb.draw(penguinTypes.get(1),Poi.WIDTH*(2)/6, Poi.HEIGHT*1/9);
+        sb.draw(penguinTypes.get(1),Poi.WIDTH*((float)1.5)/6, Poi.HEIGHT*1/9);
 
         // Player 2
         sb.draw(penguinColors.get(controller.penguinTypeP2).get(0), Poi.WIDTH*4/6, Poi.HEIGHT*6/9);
@@ -104,8 +104,8 @@ public class ColorView extends View implements ViewFactory {
         sb.draw(penguinColors.get(controller.penguinTypeP2).get(2), Poi.WIDTH*4/6, Poi.HEIGHT*4/9);
         sb.draw(penguinColors.get(controller.penguinTypeP2).get(3), Poi.WIDTH*5/6, Poi.HEIGHT*4/9);
 
-        sb.draw(penguinTypes.get(0),Poi.WIDTH*4/6, Poi.HEIGHT*1/9);
-        sb.draw(penguinTypes.get(1),Poi.WIDTH*(5)/6, Poi.HEIGHT*1/9);
+        sb.draw(penguinTypes.get(0),Poi.WIDTH*((float)4.5)/6, Poi.HEIGHT*1/9);
+        sb.draw(penguinTypes.get(1),Poi.WIDTH*5/6, Poi.HEIGHT*1/9);
 
         sb.draw(buttonBack, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
         sb.end();
