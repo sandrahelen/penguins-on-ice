@@ -7,6 +7,5 @@ public class AnimationComponent implements Component, Pool.Poolable{
 
     @Override
     public void reset(){
-
     }
 }

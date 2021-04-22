@@ -191,19 +191,6 @@ public class GameView extends View {
 
     @Override
     public void dispose() {
-        /*timeFont.dispose();
-        timeFontBig.dispose();
-        pauseController.getButtonPause().dispose();
-        joystickController.getJoystick1().getJoystickBase().dispose();
-        joystickController.getJoystick1().getJoystick().dispose();
-        joystickController.getJoystick2().getJoystickBase().dispose();
-        joystickController.getJoystick2().getJoystick().dispose();
-        boostController.boostComponent1.getBoostButton().dispose();
-        boostController.boostComponent1.getBoostButtonUnCharged().dispose();
-        boostController.boostComponent1.getBoostFont().dispose();
-        boostController.boostComponent2.getBoostButton().dispose();
-        boostController.boostComponent2.getBoostButtonUnCharged().dispose();
-        boostController.boostComponent2.getBoostFont().dispose();*/
     }
 
     public PauseController getPauseController() {return pauseController;}

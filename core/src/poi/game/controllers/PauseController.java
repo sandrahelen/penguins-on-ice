@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
-import poi.game.models.entityComponents.PauseComponent;
+import poi.game.models.PauseComponent;
 import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 
@@ -28,7 +28,6 @@ public class PauseController extends Controller{
                 // Change view to SettingsView with this (existing gameView) because then the player do not need to start new game if resumed
                 changeViewController.set(new SettingsView(gameView));
             }
-
         }
     }
 
@@ -39,4 +38,5 @@ public class PauseController extends Controller{
     public boolean getIsPaused() {
         return pauseComponent.getIsPaused();
     }
+
 }

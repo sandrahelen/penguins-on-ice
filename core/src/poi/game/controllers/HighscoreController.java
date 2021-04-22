@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
-import poi.game.models.entityComponents.ButtonComponent;
+import poi.game.models.ButtonComponent;
 import poi.game.views.MenuView;
 
 // Controller for highscore
@@ -35,5 +35,4 @@ public class HighscoreController extends Controller {
             }
         }
     }
-
 }

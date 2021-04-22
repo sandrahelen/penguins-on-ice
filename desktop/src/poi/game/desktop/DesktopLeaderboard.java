@@ -1,8 +1,7 @@
 package poi.game.desktop;
-import com.badlogic.gdx.Gdx;
 
-import poi.game.Datahandler;
-import poi.game.Leaderboard;
+import poi.game.models.ClientServer.Datahandler;
+import poi.game.models.ClientServer.Leaderboard;
 
 public class DesktopLeaderboard implements Leaderboard {
 

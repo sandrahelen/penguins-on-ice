@@ -2,7 +2,6 @@ package poi.game.controllers;
 
 import poi.game.Poi;
 import poi.game.SoundManager;
-import poi.game.models.entityComponents.ButtonComponent;
 
 public abstract class Controller {
 

@@ -6,8 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
-import poi.game.SoundManager;
-import poi.game.models.entityComponents.ButtonComponent;
+import poi.game.models.ButtonComponent;
 import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 

@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import poi.game.Datahandler;
+import poi.game.models.ClientServer.Datahandler;
 
 import poi.game.Poi;
 import poi.game.controllers.HighscoreController;
@@ -37,7 +37,6 @@ public class HighscoreView extends View {
     public void update(float dt) {
         controller.handleInput();
         changeViewController.getLeaderboard().setOnValueChangedListener(datahandler);
-        //System.out.println("Highscore " + datahandler.getScores());
     }
 
     @Override

@@ -30,7 +30,6 @@ public class AnimationSystem extends IteratingSystem {
         texturesP2 = this.colorGameController.getColorP2();
     }
 
-
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         final TextureComponent textureComponent = ECSEngine.textureMapper.get(entity);

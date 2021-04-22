@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import poi.game.controllers.ChangeViewController;
+import poi.game.models.ClientServer.Datahandler;
+import poi.game.models.ClientServer.Leaderboard;
 import poi.game.views.MenuView;
 
 public class Poi extends Game {

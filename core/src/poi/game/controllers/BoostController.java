@@ -8,7 +8,7 @@ import java.util.Map;
 
 import poi.game.Poi;
 import poi.game.SoundManager;
-import poi.game.models.entityComponents.BoostComponent;
+import poi.game.models.BoostComponent;
 
 // Controller for boost in game
 public class BoostController extends Controller {

@@ -3,24 +3,13 @@ package poi.game.models;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 
 import poi.game.controllers.BoostController;
 import poi.game.controllers.ColorGameController;
 import poi.game.controllers.JoystickController;
-import poi.game.models.entityComponents.AnimationComponent;
 import poi.game.models.entityComponents.BodyComponent;
-import poi.game.models.entityComponents.ObstacleComponent;
 import poi.game.models.entityComponents.PlayerComponent;
 import poi.game.models.entityComponents.TextureComponent;
 import poi.game.models.entitySystems.AnimationSystem;
@@ -45,7 +34,6 @@ public class ECSEngine extends PooledEngine {
 
     public ECSEngine(final OrthographicCamera orthographicCamera, TiledMap tiledMap) {
         super();
-
         this.tiledMap = tiledMap;
 
         //Iterating systems

@@ -26,7 +26,6 @@ public class GameController extends Controller {
     private World world;
     private boolean finishLine = false;
     private int countStart = 250;
-    //private double period = 0.01;
     private final OrthographicCamera camera;
     private final AssetManager assetmanager;
     private final JoystickController joystickController;
@@ -42,6 +41,7 @@ public class GameController extends Controller {
         assetmanager = Poi.getAssetManager();
         assetmanager.load(Poi.getMapLocation(), TiledMap.class);
         Box2D.init();
+
         //Setup Engine
         assetmanager.finishLoading();
         ecsEngine = new ECSEngine(camera, assetmanager.get(Poi.getMapLocation(), TiledMap.class));
@@ -72,16 +72,16 @@ public class GameController extends Controller {
             if(countStart < 1){
                 changeViewController.set(new EndGameView(ecsEngine.getSystem(TimerSystem.class).getTime()));
             }
-
         }
-
     }
+
     public void startTimer(float dt){
         countStart += dt;
         if(countStart > 0){
             countStart -= dt;
         }
     }
+
     public World getWorld() {return world;}
     public JoystickController getJoystickController() {return joystickController;}
     public BoostController getBoostController() {return boostController;}

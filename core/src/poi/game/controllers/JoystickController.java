@@ -3,7 +3,7 @@ package poi.game.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import poi.game.Poi;
-import poi.game.models.entityComponents.JoystickComponent;
+import poi.game.models.JoystickComponent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,12 +79,11 @@ public class JoystickController {
     }
 
 
-
     public JoystickComponent getJoystick1() {
         return joystick1;
     }
-
     public JoystickComponent getJoystick2() {
         return joystick2;
     }
+
 }
