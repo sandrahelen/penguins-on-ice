@@ -57,6 +57,32 @@ public class MenuView extends View {
                 penguin1 = new Texture("penguin/ny-pingvin-lilla.png");
             }
         }
+        if (ColorController.penguinTypeP1 == 2) {
+            if (ColorController.colorP1 == 0) {
+                penguin1 = new Texture("penguin/svart-type3.png");
+            } else if (ColorController.colorP1 == 1) {
+                penguin1 = new Texture("penguin/rosa-type3.png");
+            } else if (ColorController.colorP1 == 2) {
+                penguin1 = new Texture("penguin/grønn-type3.png");
+            } else if (ColorController.colorP1 == 3) {
+                penguin1 = new Texture("penguin/lilla-type3.png");
+            } else if (ColorController.colorP1 == 4) {
+                penguin1 = new Texture("penguin/grå-type3.png");
+            }
+        }
+        if (ColorController.penguinTypeP1 == 3) {
+            if (ColorController.colorP1 == 0) {
+                penguin1 = new Texture("penguin/svart-type4.png");
+            } else if (ColorController.colorP1 == 1) {
+                penguin1 = new Texture("penguin/rosa-type4.png");
+            } else if (ColorController.colorP1 == 2) {
+                penguin1 = new Texture("penguin/grønn-type4.png");
+            } else if (ColorController.colorP1 == 3) {
+                penguin1 = new Texture("penguin/lilla-type4.png");
+            } else if (ColorController.colorP1 == 4) {
+                penguin1 = new Texture("penguin/grå-type4.png");
+            }
+        }
     }
 
     private void setPenguin2() {
@@ -80,6 +106,32 @@ public class MenuView extends View {
                 penguin2 = new Texture("penguin/ny-pingvin-grønn.png");
             } else if (ColorController.colorP2 == 3) {
                 penguin2 = new Texture("penguin/ny-pingvin-lilla.png");
+            }
+        }
+        if (ColorController.penguinTypeP2 == 2) {
+            if (ColorController.colorP2 == 0) {
+                penguin2 = new Texture("penguin/svart-type3.png");
+            } else if (ColorController.colorP2 == 1) {
+                penguin2 = new Texture("penguin/rosa-type3.png");
+            } else if (ColorController.colorP2 == 2) {
+                penguin2 = new Texture("penguin/grønn-type3.png");
+            } else if (ColorController.colorP2 == 3) {
+                penguin2 = new Texture("penguin/lilla-type3.png");
+            } else if (ColorController.colorP2 == 4) {
+                penguin2 = new Texture("penguin/grå-type3.png");
+            }
+        }
+        if (ColorController.penguinTypeP2 == 3) {
+            if (ColorController.colorP2 == 0) {
+                penguin2 = new Texture("penguin/svart-type4.png");
+            } else if (ColorController.colorP2 == 1) {
+                penguin2 = new Texture("penguin/rosa-type4.png");
+            } else if (ColorController.colorP2 == 2) {
+                penguin2 = new Texture("penguin/grønn-type4.png");
+            } else if (ColorController.colorP2 == 3) {
+                penguin2 = new Texture("penguin/lilla-type4.png");
+            } else if (ColorController.colorP2 == 4) {
+                penguin2 = new Texture("penguin/grå-type4.png");
             }
         }
     }

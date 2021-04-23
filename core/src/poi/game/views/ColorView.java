@@ -55,12 +55,28 @@ public class ColorView extends View {
             sb.draw(selectedPenguin, Poi.WIDTH*((float)1.75)/10 - selectedPenguin.getWidth()/3,
                     Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
         }
+        else if (controller.penguinTypeP1 == 2) {
+            sb.draw(selectedPenguin, Poi.WIDTH*((float)2.5)/10 - selectedPenguin.getWidth()/3,
+                    Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        }
+        else if (controller.penguinTypeP1 == 3) {
+            sb.draw(selectedPenguin, Poi.WIDTH*((float)3.25)/10 - selectedPenguin.getWidth()/3,
+                    Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        }
         if (controller.penguinTypeP2 == 0) {
             sb.draw(selectedPenguin, Poi.WIDTH*4/6 - selectedPenguin.getWidth()/3,
                     Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
         }
         else if (controller.penguinTypeP2 == 1) {
             sb.draw(selectedPenguin, Poi.WIDTH*((float)4.45)/6 - selectedPenguin.getWidth()/3,
+                    Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        }
+        else if (controller.penguinTypeP2 == 2) {
+            sb.draw(selectedPenguin, Poi.WIDTH*((float)4.9)/6 - selectedPenguin.getWidth()/3,
+                    Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        }
+        else if (controller.penguinTypeP2 == 3) {
+            sb.draw(selectedPenguin, Poi.WIDTH*((float)5.35)/6 - selectedPenguin.getWidth()/3,
                     Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
         }
         if (controller.getColorP1() == 0) {
@@ -75,6 +91,9 @@ public class ColorView extends View {
         else if (controller.getColorP1() == 3) {
             sb.draw(selectedColor, Poi.WIDTH*2/10 - selectedColor.getWidth()/3, Poi.HEIGHT*4/10 - selectedColor.getHeight()/5);
         }
+        else if (controller.getColorP1() == 4) {
+            sb.draw(selectedColor, Poi.WIDTH*3/10 - selectedColor.getWidth()/3, Poi.HEIGHT*11/20 - selectedColor.getHeight()/5);
+        }
         if (controller.getColorP2() == 0) {
             sb.draw(selectedColor, Poi.WIDTH*4/6 - selectedColor.getWidth()/3, Poi.HEIGHT*11/20 - selectedColor.getHeight()/5);
         }
@@ -87,24 +106,37 @@ public class ColorView extends View {
         else if (controller.getColorP2() == 3) {
             sb.draw(selectedColor, Poi.WIDTH*((float)4.65)/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/10 - selectedColor.getHeight()/5);
         }
+        else if (controller.getColorP2() == 4) {
+            sb.draw(selectedColor, Poi.WIDTH*((float)5.3)/6 - selectedColor.getWidth()/3, Poi.HEIGHT*11/20 - selectedColor.getHeight()/5);
+        }
 
         // Player 1
         sb.draw(penguinColors.get(controller.penguinTypeP1).get(0), Poi.WIDTH/10, Poi.HEIGHT*11/20);
         sb.draw(penguinColors.get(controller.penguinTypeP1).get(1), Poi.WIDTH*2/10, Poi.HEIGHT*11/20);
         sb.draw(penguinColors.get(controller.penguinTypeP1).get(2), Poi.WIDTH/10, Poi.HEIGHT*4/10);
         sb.draw(penguinColors.get(controller.penguinTypeP1).get(3), Poi.WIDTH*2/10, Poi.HEIGHT*4/10);
+        if (penguinColors.get(controller.penguinTypeP1).size() >= 5) {
+            sb.draw(penguinColors.get(controller.penguinTypeP1).get(4), Poi.WIDTH*3/10, Poi.HEIGHT*11/20);
+        }
 
         sb.draw(penguinTypes.get(0),Poi.WIDTH/10, Poi.HEIGHT-Poi.HEIGHT/6);
         sb.draw(penguinTypes.get(1),Poi.WIDTH*((float)1.75)/10, Poi.HEIGHT-Poi.HEIGHT/6);
+        sb.draw(penguinTypes.get(2),Poi.WIDTH*((float)2.5)/10, Poi.HEIGHT-Poi.HEIGHT/6);
+        sb.draw(penguinTypes.get(3),Poi.WIDTH*((float)3.25)/10, Poi.HEIGHT-Poi.HEIGHT/6);
 
         // Player 2
         sb.draw(penguinColors.get(controller.penguinTypeP2).get(0), Poi.WIDTH*4/6, Poi.HEIGHT*11/20);
         sb.draw(penguinColors.get(controller.penguinTypeP2).get(1), Poi.WIDTH*((float)4.65)/6, Poi.HEIGHT*11/20);
         sb.draw(penguinColors.get(controller.penguinTypeP2).get(2), Poi.WIDTH*4/6, Poi.HEIGHT*4/10);
         sb.draw(penguinColors.get(controller.penguinTypeP2).get(3), Poi.WIDTH*((float)4.65)/6, Poi.HEIGHT*4/10);
+        if (penguinColors.get(controller.penguinTypeP2).size() >= 5) {
+            sb.draw(penguinColors.get(controller.penguinTypeP2).get(4), Poi.WIDTH*((float)5.3)/6, Poi.HEIGHT*11/20);
+        }
 
         sb.draw(penguinTypes.get(0),Poi.WIDTH*4/6, Poi.HEIGHT-Poi.HEIGHT/6);
         sb.draw(penguinTypes.get(1),Poi.WIDTH*((float)4.45)/6, Poi.HEIGHT-Poi.HEIGHT/6);
+        sb.draw(penguinTypes.get(2),Poi.WIDTH*((float)4.9)/6, Poi.HEIGHT-Poi.HEIGHT/6);
+        sb.draw(penguinTypes.get(3),Poi.WIDTH*((float)5.35)/6, Poi.HEIGHT-Poi.HEIGHT/6);
 
         sb.draw(buttonBack, Poi.WIDTH/2-controller.getButtonWidth()/2,Poi.HEIGHT/6);
         sb.end();
