@@ -55,23 +55,23 @@ public class ColorController {
         selectedPenguin = new Texture("general/selected.png");
         setTextures();
 
-        boundsPenguinDef1 = new Rectangle(Poi.WIDTH/6 - selectedPenguin.getWidth()/3,
-                Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
-        boundsPenguinNew1 = new Rectangle(Poi.WIDTH*((float)1.5)/6 - selectedPenguin.getWidth()/3,
-                Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
-        boundsPenguinDef2 = new Rectangle(Poi.WIDTH*((float)4.5)/6 - selectedPenguin.getWidth()/3,
-                Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
-        boundsPenguinNew2 = new Rectangle(Poi.WIDTH*5/6 - selectedPenguin.getWidth()/3,
-                Poi.HEIGHT*1/9 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        boundsPenguinDef1 = new Rectangle(Poi.WIDTH/10 - selectedPenguin.getWidth()/3,
+                Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        boundsPenguinNew1 = new Rectangle(Poi.WIDTH*((float)1.75)/10 - selectedPenguin.getWidth()/3,
+                Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        boundsPenguinDef2 = new Rectangle(Poi.WIDTH*4/6 - selectedPenguin.getWidth()/3,
+                Poi.HEIGHT-Poi.HEIGHT/6 - selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
+        boundsPenguinNew2 = new Rectangle(Poi.WIDTH*((float)4.45)/6 - selectedPenguin.getWidth()/3,
+                Poi.HEIGHT-Poi.HEIGHT/6- selectedPenguin.getHeight()/5, selectedPenguin.getWidth(), selectedPenguin.getHeight());
 
-        boundsPenguinBlack1 = new Rectangle(Poi.WIDTH/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
-        boundsPenguinPink1 = new Rectangle(Poi.WIDTH*2/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
-        boundsPenguinGreen1 = new Rectangle(Poi.WIDTH/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
-        boundsPenguinPurp1 = new Rectangle(Poi.WIDTH*2/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
-        boundsPenguinBlack2 = new Rectangle(Poi.WIDTH*4/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
-        boundsPenguinPink2 = new Rectangle(Poi.WIDTH*5/6 - selectedColor.getWidth()/3, Poi.HEIGHT*6/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
-        boundsPenguinGreen2 = new Rectangle(Poi.WIDTH*4/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
-        boundsPenguinPurp2 = new Rectangle(Poi.WIDTH*5/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/9 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinBlack1 = new Rectangle(Poi.WIDTH/10 - selectedColor.getWidth()/3, Poi.HEIGHT*11/20 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinPink1 = new Rectangle(Poi.WIDTH*2/10 - selectedColor.getWidth()/3, Poi.HEIGHT*11/20 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinGreen1 = new Rectangle(Poi.WIDTH/10 - selectedColor.getWidth()/3, Poi.HEIGHT*4/10 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinPurp1 = new Rectangle(Poi.WIDTH*2/10 - selectedColor.getWidth()/3, Poi.HEIGHT*4/10 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinBlack2 = new Rectangle(Poi.WIDTH*4/6 - selectedColor.getWidth()/3, Poi.HEIGHT*11/20 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinPink2 = new Rectangle(Poi.WIDTH*((float)4.65)/6 - selectedColor.getWidth()/3, Poi.HEIGHT*11/20 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinGreen2 = new Rectangle(Poi.WIDTH*4/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/10 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
+        boundsPenguinPurp2 = new Rectangle(Poi.WIDTH*((float)4.65)/6 - selectedColor.getWidth()/3, Poi.HEIGHT*4/10 - selectedColor.getHeight()/5, selectedColor.getWidth(), selectedColor.getHeight());
 
         buttonComponent = new ButtonComponent();
         buttonBack = buttonComponent.getButtonBack();
