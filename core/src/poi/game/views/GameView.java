@@ -180,7 +180,7 @@ public class GameView extends View {
         }
         else{
             timeFont.draw(sb, ecsEngine.getSystem(TimerSystem.class).getStringTime(), camera.position.x+ WIDTH/2-100, camera.position.y+ HEIGHT/2-40);
-            timeFont.draw(sb, String.valueOf(Gdx.graphics.getFramesPerSecond()), camera.position.x, camera.position.y+ HEIGHT/2-40);
+            //timeFont.draw(sb, String.valueOf(Gdx.graphics.getFramesPerSecond()), camera.position.x, camera.position.y+ HEIGHT/2-40);
         }
         sb.end();
 

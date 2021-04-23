@@ -48,7 +48,7 @@ public class EndGameView extends View {
         style.fontColor = Color.BLACK;
 
         textfield = new TextField("", style);
-        textfield.setPosition(Poi.WIDTH/2-textfieldBox.getWidth()/2+20, Poi.HEIGHT/2);  // Remember to update, if updating Textfield-texture's positions
+        textfield.setPosition(Poi.WIDTH/2-textfieldBox.getWidth()/2+20, Poi.HEIGHT/2+20);  // Remember to update, if updating Textfield-texture's positions
         stage.addActor(textfield);
         stage.setKeyboardFocus(textfield);
 
