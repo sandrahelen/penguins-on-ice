@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import poi.game.models.ClientServer.Datahandler;
+import poi.game.models.clientServer.Datahandler;
 
 import poi.game.Poi;
-import poi.game.models.ButtonComponent;
+import poi.game.models.buttons.ButtonComponent;
 import poi.game.views.HighscoreView;
 
 // Controller for EndGameView

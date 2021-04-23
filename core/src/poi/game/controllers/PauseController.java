@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 
 import poi.game.Poi;
-import poi.game.models.PauseComponent;
+import poi.game.models.buttons.PauseComponent;
 import poi.game.views.GameView;
 import poi.game.views.SettingsView;
 

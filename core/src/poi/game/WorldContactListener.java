@@ -40,7 +40,7 @@ public class WorldContactListener implements ContactListener {
             return;
         }
         if(obstacle != null && player !=null){
-            Poi.getSoundController().playCollisionSound();
+            Poi.getSoundManager().playCollisionSound();
         }
     }
 

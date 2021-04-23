@@ -1,4 +1,4 @@
-package poi.game.models.ClientServer;
+package poi.game.models.clientServer;
 
 import java.util.Collections;
 import java.util.Comparator;

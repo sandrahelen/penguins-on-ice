@@ -11,8 +11,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import poi.game.controllers.ChangeViewController;
-import poi.game.models.ClientServer.Datahandler;
-import poi.game.models.ClientServer.Leaderboard;
+import poi.game.models.clientServer.Datahandler;
+import poi.game.models.clientServer.Leaderboard;
 import poi.game.views.MenuView;
 
 public class Poi extends Game {
@@ -35,7 +35,7 @@ public class Poi extends Game {
 	private static final float FIXED_TIME_STEP = 1/60f;
 	private float accumulator;
 
-	private static SoundManager soundController;
+	private static SoundManager soundManager;
 	private static String mapLocation;
 
 	private static boolean tutorial = true;
@@ -68,8 +68,8 @@ public class Poi extends Game {
 
 		mapLocation = "Map/Map1.tmx";
 
-		soundController = new SoundManager();
-		soundController.play();
+		soundManager = SoundManager.getInstance();
+		soundManager.play();
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class Poi extends Game {
 
 	public static AssetManager getAssetManager(){return assetmanager;}
 
-	public static SoundManager getSoundController(){return soundController;}
+	public static SoundManager getSoundManager(){return soundManager;}
 
 	public static boolean getTutorial() {
 		return tutorial;

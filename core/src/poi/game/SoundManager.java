@@ -13,10 +13,16 @@ public class SoundManager {
     private Boolean isMuted = false;
     private long id;
 
-    public SoundManager() {
+    private static final SoundManager soundManager = new SoundManager();
+
+    private SoundManager() {
         sound = Gdx.audio.newMusic(Gdx.files.internal("audio/Main Theme ACNH.mp3"));
         collision = Gdx.audio.newSound(Gdx.files.internal("audio/collision.wav"));
         boost = Gdx.audio.newSound(Gdx.files.internal("audio/boost.wav"));
+    }
+
+    public static SoundManager getInstance(){
+        return soundManager;
     }
 
     public void playCollisionSound() {

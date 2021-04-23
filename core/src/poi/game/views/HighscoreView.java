@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import poi.game.models.ClientServer.Datahandler;
+import poi.game.models.clientServer.Datahandler;
 
 import poi.game.Poi;
 import poi.game.controllers.HighscoreController;

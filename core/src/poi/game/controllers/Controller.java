@@ -10,7 +10,7 @@ public abstract class Controller {
 
     public Controller() {
         this.changeViewController = Poi.getChangeViewController();
-        this.soundController = Poi.getSoundController();
+        this.soundController = Poi.getSoundManager();
     }
 
 }

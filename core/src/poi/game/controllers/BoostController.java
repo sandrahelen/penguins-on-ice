@@ -8,7 +8,7 @@ import java.util.Map;
 
 import poi.game.Poi;
 import poi.game.SoundManager;
-import poi.game.models.BoostComponent;
+import poi.game.models.buttons.BoostComponent;
 
 // Controller for boost in game
 public class BoostController extends Controller {
@@ -31,7 +31,7 @@ public class BoostController extends Controller {
             touches.put(i, touchPos.x);
             touches.put(i, touchPos.y);
         }
-        soundController = Poi.getSoundController();
+        soundController = Poi.getSoundManager();
     }
 
     public void handleInput(float dt) {

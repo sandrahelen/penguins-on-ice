@@ -1,4 +1,4 @@
-package poi.game.models;
+package poi.game.models.buttons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

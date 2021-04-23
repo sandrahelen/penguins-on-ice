@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Stack;
 
-import poi.game.models.ClientServer.Datahandler;
-import poi.game.models.ClientServer.Leaderboard;
+import poi.game.models.clientServer.Datahandler;
+import poi.game.models.clientServer.Leaderboard;
 import poi.game.views.View;
 
 // Controller for changing views

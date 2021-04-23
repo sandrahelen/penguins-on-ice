@@ -11,8 +11,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import poi.game.models.ClientServer.Datahandler;
-import poi.game.models.ClientServer.Leaderboard;
+import poi.game.models.clientServer.Datahandler;
+import poi.game.models.clientServer.Leaderboard;
 
 public class AndroidLeaderboard implements Leaderboard {
 

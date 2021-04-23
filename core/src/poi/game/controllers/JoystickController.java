@@ -3,7 +3,7 @@ package poi.game.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import poi.game.Poi;
-import poi.game.models.JoystickComponent;
+import poi.game.models.buttons.JoystickComponent;
 
 import java.util.HashMap;
 import java.util.Map;

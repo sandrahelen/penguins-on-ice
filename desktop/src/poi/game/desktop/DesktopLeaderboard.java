@@ -1,7 +1,7 @@
 package poi.game.desktop;
 
-import poi.game.models.ClientServer.Datahandler;
-import poi.game.models.ClientServer.Leaderboard;
+import poi.game.models.clientServer.Datahandler;
+import poi.game.models.clientServer.Leaderboard;
 
 public class DesktopLeaderboard implements Leaderboard {
 

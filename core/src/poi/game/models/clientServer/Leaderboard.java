@@ -1,4 +1,4 @@
-package poi.game.models.ClientServer;
+package poi.game.models.clientServer;
 
 public interface Leaderboard {
     public void submitScore(String user, int score);
