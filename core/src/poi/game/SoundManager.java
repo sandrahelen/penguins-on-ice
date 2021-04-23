@@ -14,9 +14,9 @@ public class SoundManager {
     private long id;
 
     public SoundManager() {
-        sound = Gdx.audio.newMusic(Gdx.files.internal("Main Theme ACNH.mp3"));
-        collision = Gdx.audio.newSound(Gdx.files.internal("collision.wav"));
-        boost = Gdx.audio.newSound(Gdx.files.internal("boost.wav"));
+        sound = Gdx.audio.newMusic(Gdx.files.internal("audio/Main Theme ACNH.mp3"));
+        collision = Gdx.audio.newSound(Gdx.files.internal("audio/collision.wav"));
+        boost = Gdx.audio.newSound(Gdx.files.internal("audio/boost.wav"));
     }
 
     public void playCollisionSound() {

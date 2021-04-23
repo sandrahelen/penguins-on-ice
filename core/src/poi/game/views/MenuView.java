@@ -24,36 +24,64 @@ public class MenuView extends View {
         controller = new MenuController();
         titlePoI = new Texture("general/titlePoI.png");
         // Penguin 1
-        if (ColorController.colorP1 == 0) {
-            penguin1 = new Texture("general/svart-pingvin.png");
-        }
-        else if (ColorController.colorP1 == 1) {
-            penguin1 = new Texture("general/rosa-pingvin.png");
-        }
-        else if (ColorController.colorP1 == 2) {
-            penguin1 = new Texture("general/grønn-pingvin.png");
-        }
-        else if (ColorController.colorP1 == 3) {
-            penguin1 = new Texture("general/lilla-pingvin.png");
-        }
+        setPenguin1();
         // Penguin 2
-        if (ColorController.colorP2 == 0) {
-            penguin2 = new Texture("general/svart-pingvin.png");
-        }
-        else if (ColorController.colorP2 == 1) {
-            penguin2 = new Texture("general/rosa-pingvin.png");
-        }
-        else if (ColorController.colorP2 == 2) {
-            penguin2 = new Texture("general/grønn-pingvin.png");
-        }
-        else if (ColorController.colorP2 == 3) {
-            penguin2 = new Texture("general/lilla-pingvin.png");
-        }
+        setPenguin2();
 
         buttonPlay = controller.getButtonPlay();
         buttonHighscore = controller.getButtonHighscore();
         buttonSettings = controller.getButtonSettings();
         buttonHelp = controller.getButtonHelp();
+    }
+
+    private void setPenguin1() {
+        if (ColorController.penguinTypeP1 == 0) {
+            if (ColorController.colorP1 == 0) {
+                penguin1 = new Texture("penguin/svart-pingvin.png");
+            } else if (ColorController.colorP1 == 1) {
+                penguin1 = new Texture("penguin/rosa-pingvin.png");
+            } else if (ColorController.colorP1 == 2) {
+                penguin1 = new Texture("penguin/grønn-pingvin.png");
+            } else if (ColorController.colorP1 == 3) {
+                penguin1 = new Texture("penguin/lilla-pingvin.png");
+            }
+        }
+        else if (ColorController.penguinTypeP1 == 1) {
+            if (ColorController.colorP1 == 0) {
+                penguin1 = new Texture("penguin/ny-pingvin-svart.png");
+            } else if (ColorController.colorP1 == 1) {
+                penguin1 = new Texture("penguin/ny-pingvin-rosa.png");
+            } else if (ColorController.colorP1 == 2) {
+                penguin1 = new Texture("penguin/ny-pingvin-grønn.png");
+            } else if (ColorController.colorP1 == 3) {
+                penguin1 = new Texture("penguin/ny-pingvin-lilla.png");
+            }
+        }
+    }
+
+    private void setPenguin2() {
+        if (ColorController.penguinTypeP2 == 0) {
+            if (ColorController.colorP2 == 0) {
+                penguin2 = new Texture("penguin/svart-pingvin.png");
+            } else if (ColorController.colorP2 == 1) {
+                penguin2 = new Texture("penguin/rosa-pingvin.png");
+            } else if (ColorController.colorP2 == 2) {
+                penguin2 = new Texture("penguin/grønn-pingvin.png");
+            } else if (ColorController.colorP2 == 3) {
+                penguin2 = new Texture("penguin/lilla-pingvin.png");
+            }
+        }
+        if (ColorController.penguinTypeP2 == 1) {
+            if (ColorController.colorP2 == 0) {
+                penguin2 = new Texture("penguin/ny-pingvin-svart.png");
+            } else if (ColorController.colorP2 == 1) {
+                penguin2 = new Texture("penguin/ny-pingvin-rosa.png");
+            } else if (ColorController.colorP2 == 2) {
+                penguin2 = new Texture("penguin/ny-pingvin-grønn.png");
+            } else if (ColorController.colorP2 == 3) {
+                penguin2 = new Texture("penguin/ny-pingvin-lilla.png");
+            }
+        }
     }
 
     @Override

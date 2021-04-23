@@ -60,7 +60,7 @@ public class Poi extends Game {
 		// Sett MenuView as first view when opening the app
 		changeViewController.push(new MenuView());
 
-		leaderboard.FirstFireBaseTest();	// Testing Firebase database
+		//leaderboard.FirstFireBaseTest();	// Testing Firebase database
 		//leaderboard.submitScore("R", 25);	// Try to submit score
 
 		assetmanager = new AssetManager(new InternalFileHandleResolver());
