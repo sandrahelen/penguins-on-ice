@@ -75,6 +75,70 @@ public class ColorGameController {
                 texturesP1.add("players/ny-finish-lilla.png");
             }
         }
+        if (typeP1 == 2) {
+            // Black selected
+            if (colorP1 == 0) {
+                texturesP1.add("players/type3-bak.png");
+                texturesP1.add("players/type3-skli.png");
+                texturesP1.add("players/type3-finish.png");
+            }
+            // Pink selected
+            else if (colorP1 == 1) {
+                texturesP1.add("players/rosa-type3-bak.png");
+                texturesP1.add("players/rosa-type3-skli.png");
+                texturesP1.add("players/rosa-type3-finish.png");
+            }
+            // Green selected
+            else if (colorP1 == 2) {
+                texturesP1.add("players/grønn-type3-bak.png");
+                texturesP1.add("players/grønn-type3-skli.png");
+                texturesP1.add("players/grønn-type3-finish.png");
+            }
+            // Purple selected
+            else if (colorP1 == 3) {
+                texturesP1.add("players/lilla-type3-bak.png");
+                texturesP1.add("players/lilla-type3-skli.png");
+                texturesP1.add("players/lilla-type3-finish.png");
+            }
+            // Grey selected
+            else if (colorP1 == 4) {
+                texturesP1.add("players/grå-type3-bak.png");
+                texturesP1.add("players/grå-type3-skli.png");
+                texturesP1.add("players/grå-type3-finish.png");
+            }
+        }
+        if (typeP1 == 3) {
+            // Black selected
+            if (colorP1 == 0) {
+                texturesP1.add("players/type4-bak.png");
+                texturesP1.add("players/type4-skli.png");
+                texturesP1.add("players/type4-finish.png");
+            }
+            // Pink selected
+            else if (colorP1 == 1) {
+                texturesP1.add("players/rosa-type4-bak.png");
+                texturesP1.add("players/rosa-type4-skli.png");
+                texturesP1.add("players/rosa-type4-finish.png");
+            }
+            // Green selected
+            else if (colorP1 == 2) {
+                texturesP1.add("players/grønn-type4-bak.png");
+                texturesP1.add("players/grønn-type4-skli.png");
+                texturesP1.add("players/grønn-type4-finish.png");
+            }
+            //Purple selected
+            else if (colorP1 == 3) {
+                texturesP1.add("players/lilla-type4-bak.png");
+                texturesP1.add("players/lilla-type4-skli.png");
+                texturesP1.add("players/lilla-type4-finish.png");
+            }
+            // Grey selected
+            else if (colorP1 == 4) {
+                texturesP1.add("players/grå-type4-bak.png");
+                texturesP1.add("players/grå-type4-skli.png");
+                texturesP1.add("players/grå-type4-finish.png");
+            }
+        }
         return texturesP1;
     }
 
@@ -132,6 +196,70 @@ public class ColorGameController {
                 texturesP2.add("players/ny-bak-lilla.png");
                 texturesP2.add("players/ny-skli-lilla.png");
                 texturesP2.add("players/ny-finish-lilla.png");
+            }
+        }
+        if (typeP2 == 2) {
+            // Black selected
+            if (colorP2 == 0) {
+                texturesP2.add("players/type3-bak.png");
+                texturesP2.add("players/type3-skli.png");
+                texturesP2.add("players/type3-finish.png");
+            }
+            // Pink selected
+            else if (colorP2 == 1) {
+                texturesP2.add("players/rosa-type3-bak.png");
+                texturesP2.add("players/rosa-type3-skli.png");
+                texturesP2.add("players/rosa-type3-finish.png");
+            }
+            // Green selected
+            else if (colorP2 == 2) {
+                texturesP2.add("players/grønn-type3-bak.png");
+                texturesP2.add("players/grønn-type3-skli.png");
+                texturesP2.add("players/grønn-type3-finish.png");
+            }
+            // Purple selected
+            else if (colorP2 == 3) {
+                texturesP2.add("players/lilla-type3-bak.png");
+                texturesP2.add("players/lilla-type3-skli.png");
+                texturesP2.add("players/lilla-type3-finish.png");
+            }
+            // Grey selected
+            else if (colorP2 == 4) {
+                texturesP2.add("players/grå-type3-bak.png");
+                texturesP2.add("players/grå-type3-skli.png");
+                texturesP2.add("players/grå-type3-finish.png");
+            }
+        }
+        if (typeP2 == 3) {
+            // Black selected
+            if (colorP2 == 0) {
+                texturesP2.add("players/type4-bak.png");
+                texturesP2.add("players/type4-skli.png");
+                texturesP2.add("players/type4-finish.png");
+            }
+            // Pink selected
+            else if (colorP2 == 1) {
+                texturesP2.add("players/rosa-type4-bak.png");
+                texturesP2.add("players/rosa-type4-skli.png");
+                texturesP2.add("players/rosa-type4-finish.png");
+            }
+            // Green selected
+            else if (colorP2 == 2) {
+                texturesP2.add("players/grønn-type4-bak.png");
+                texturesP2.add("players/grønn-type4-skli.png");
+                texturesP2.add("players/grønn-type4-finish.png");
+            }
+            // Purple selected
+            else if (colorP2 == 3) {
+                texturesP2.add("players/lilla-type4-bak.png");
+                texturesP2.add("players/lilla-type4-skli.png");
+                texturesP2.add("players/lilla-type4-finish.png");
+            }
+            // Grey selected
+            else if (colorP2 == 4) {
+                texturesP2.add("players/grå-type4-bak.png");
+                texturesP2.add("players/grå-type4-skli.png");
+                texturesP2.add("players/grå-type4-finish.png");
             }
         }
         return texturesP2;
