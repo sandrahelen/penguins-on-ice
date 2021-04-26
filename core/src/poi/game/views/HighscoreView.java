@@ -25,7 +25,7 @@ public class HighscoreView extends View {
         cam = Poi.getCamera();
         titleHighscore = new Texture("general/titleHighscore.png");
         boardHighscore = new Texture("general/boardHighscore.png");
-        buttonMenu = new Texture("general/buttonMenu.png");
+        buttonMenu = controller.getButtonMenu();
         text = new BitmapFont();
         text.setColor(Color.BLACK);
 

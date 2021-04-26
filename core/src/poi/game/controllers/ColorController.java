@@ -124,8 +124,6 @@ public class ColorController extends Controller {
     }
 
     public int getButtonWidth() {return buttonComponent.getButtonWidth(); }
-    public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
-
 
     public ArrayList<ArrayList<Texture>> getButtonPenguin() { return penguinColors; }
     public ArrayList<Texture> getButtonPenguinType() { return penguinTypes; }

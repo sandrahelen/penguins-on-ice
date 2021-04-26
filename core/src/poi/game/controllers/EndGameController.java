@@ -32,7 +32,6 @@ public class EndGameController extends Controller {
         soundController.stop();
     }
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
-    public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
 
     public Texture getButtonSubmit() { return buttonSubmit; }
 

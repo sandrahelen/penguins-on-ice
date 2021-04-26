@@ -23,7 +23,6 @@ public class HighscoreController extends Controller {
     }
 
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
-    public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
 
     public Texture getButtonMenu() { return buttonMenu; }
 

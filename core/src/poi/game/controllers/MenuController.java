@@ -38,7 +38,6 @@ public class MenuController extends Controller {
     }
 
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
-    public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
 
     public Texture getButtonPlay() { return buttonPlay; }
     public Texture getButtonHighscore() { return buttonHighscore; }

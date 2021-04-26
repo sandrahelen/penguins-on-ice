@@ -87,6 +87,5 @@ public class GameController extends Controller {
     public BoostController getBoostController() {return boostController;}
     public PauseController getPauseController() {return pauseController;}
     public ECSEngine getECSEngine() {return ecsEngine;}
-    public SoundManager getSoundController() {return soundController;}
 
 }

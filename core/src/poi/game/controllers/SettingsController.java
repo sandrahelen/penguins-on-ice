@@ -48,7 +48,6 @@ public class SettingsController extends Controller {
     }
 
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
-    public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
 
     public Texture getButtonSound() { return buttonSound; }
     public Texture getButtonColor() { return buttonColor; }

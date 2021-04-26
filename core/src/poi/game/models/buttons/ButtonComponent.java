@@ -58,7 +58,6 @@ public class ButtonComponent {
        }
 
     public int getButtonWidth() { return buttonPlay.getWidth(); }
-    public int getButtonHeight() { return buttonPlay.getHeight(); }
 
     public Texture getButtonPlay() { return buttonPlay; }
     public Texture getButtonHighscore() { return buttonHighscore; }

@@ -36,13 +36,11 @@ public class MapController extends Controller {
         boundsBack = buttonComponent.getBoundsBack();
     }
     public int getButtonWidth() { return buttonComponent.getButtonWidth(); }
-    public int getButtonHeight() { return buttonComponent.getButtonHeight(); }
 
     public Texture getButtonMap1() { return buttonMap1; }
     public Texture getButtonMap2() { return buttonMap2; }
     public Texture getButtonBack() { return buttonBack; }
     public Texture getSelected() { return selected; }
-    public String getMapLocation() { return mapLocation; }
 
     public void handleInput() {
         Vector3 touchTransformed = Poi.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));

@@ -26,11 +26,6 @@ public class ChangeViewController {
         views.push(view);
     }
 
-    // Remove view
-    public void pop(){
-        views.pop().dispose();
-    }
-
     // Change to new view
     public void set(View view){
         views.pop().dispose();
