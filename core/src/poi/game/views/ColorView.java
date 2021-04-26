@@ -142,6 +142,7 @@ public class ColorView extends View {
         sb.end();
     }
 
+    @Override
     public void dispose() {
         for (int i = 0; i < penguinTypes.size(); i++) {
             penguinTypes.get(i).dispose();

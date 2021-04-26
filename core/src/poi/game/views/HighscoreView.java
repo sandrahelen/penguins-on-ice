@@ -12,7 +12,7 @@ import poi.game.controllers.HighscoreController;
 // View for highscore borad 
 public class HighscoreView extends View {
 
-    HighscoreController controller;
+    private HighscoreController controller;
     private Texture titleHighscore;
     private Texture boardHighscore;
     private Texture buttonMenu;

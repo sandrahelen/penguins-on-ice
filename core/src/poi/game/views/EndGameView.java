@@ -76,6 +76,7 @@ public class EndGameView extends View {
         stage.act();
     }
 
+    @Override
     public void dispose() {
         font.dispose();
         titleEndGame.dispose();
