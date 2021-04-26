@@ -33,6 +33,7 @@ public class MapChangerView extends View {
         controller.handleInput();
     }
 
+    @Override
     public void dispose() {
 
     }

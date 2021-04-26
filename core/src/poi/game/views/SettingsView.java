@@ -59,6 +59,7 @@ public class SettingsView extends View {
         sb.end();
     }
 
+    @Override
     public void dispose() {
         titleSettings.dispose();
         buttonSound.dispose();

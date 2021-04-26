@@ -155,6 +155,7 @@ public class MenuView extends View {
         sb.end();
     }
 
+    @Override
     public void dispose() {
         titlePoI.dispose();
         buttonPlay.dispose();

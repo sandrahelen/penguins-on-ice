@@ -74,6 +74,7 @@ public class HelpView extends View{
         sb.end();
     }
 
+    @Override
     public void dispose() {
         buttonBack.dispose();
         buttonNext.dispose();
