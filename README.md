@@ -15,14 +15,21 @@
     │   ├── JoystickController.java
     │   ├── MenuController.java
     │   ├── PauseController.java
-    │   └── SettingsController.java
-    ├── models                                       # models folder in MVC                    
+    │   ├── SettingsController.java
+    │   └── Controller.java                          # template for controllers
+    ├── models                                       # models folder in MVC  
+    │   ├── buttons 
+    │   │   ├── BoostComponent.java
+    │   │   ├── ButtonComponent.java
+    │   │   ├── JoystickComponent.java 
+    │   │   └── PauseComponent.java                                               
+    │   ├── clientServer 
+    │   │   ├── CoreLeaderboard.java
+    │   │   ├── Datahandler.java 
+    │   │   └── Leaderboard.java 
     │   ├── entityComponents                         # entityComponents folder for ECS pattern
     │   │   ├── AnimationComponent.java
     │   │   ├── BodyComponent.java
-    │   │   ├── BoostComponent.java
-    │   │   ├── ButtonComponent.java
-    │   │   ├── JoystickComponent.java
     │   │   ├── ObstacleComponent.java
     │   │   ├── PauseComponent.java
     │   │   ├── PlayerComponent.java
@@ -34,8 +41,6 @@
     │   │   ├── GoalSystem.java
     │   │   ├── MovementSystem.java
     │   │   └── TimerSystem.java
-    │   ├── factories
-    │   │   └── ViewFactory.java                    # factory for views in views folder
     │   └── ECSEngine.java                          # ECSEngine for ECS pattern
     ├── views                                       # views folder in MVC
     │   ├── ColorView.java
@@ -46,9 +51,7 @@
     │   ├── MenuView.java
     │   ├── SettingsView.java
     │   └── View.java                               # template for views
-    ├── CoreLeaderboard.java
-    ├── Datahandler.java
-    ├── Leaderboard.java
+    ├── Factory.java
     ├── Poi.java
     ├── SoundManager.java
     └── WorldContactListener.java
